@@ -6,7 +6,7 @@
             <container-type> <content-type>
             <article> <section> <paragraph>
             <strong> <emphase> <deleted> <inserted> <mark>
-            <link> <text-list> <linefeed> <image> <figure>
+            <hyperlink> <text-list> <linefeed> <image> <figure>
             <code> <preformatted>
             ; Getters
             contents title author date to ordered? caption alt source
