@@ -52,24 +52,10 @@
     (next-method)
   ))
 
-;; Header as independent block
-(define-method (article->sxml-html (cnt <header>))
-  (list
-    'header
-    (attributes-of cnt)
-    (next-method)))
-
 ;; Header as contained block
 (define-method (article->sxml-html (cnt <header>) (section-level <integer>))
   (list
     'header
-    (attributes-of cnt)
-    (next-method)))
-
-;; Footer as independent block
-(define-method (article->sxml-html (cnt <footer>))
-  (list
-    'footer
     (attributes-of cnt)
     (next-method)))
 
