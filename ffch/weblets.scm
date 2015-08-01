@@ -9,6 +9,7 @@
   #:use-module (web uri)
   #:export (weblet webcontainer
             add-weblet run-webcontainer
+            add-redirections
            )
 )
 
@@ -113,3 +114,17 @@
             ))))
     (run-server handler 'http `(#:port ,(server-port wcontainer)))
   ))
+
+;; Redirections : special weblets redirecting requests to elsewhere
+(define-method (add-redirections (wcontainer <webcontainer>) (redirs <pair>))
+  (map
+    (lambda (x)
+      (add-weblet wcontainer (car x)
+        (weblet ((error-code 301)
+                 (content-type "text/plain;charset=UTF-8")
+                 (location (cdr x)))
+          ((path query port)
+           (display "Moved to: " port)(display (cdr x) port)
+           (newline port))
+        )))
+    redirs))
