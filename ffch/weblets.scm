@@ -1,4 +1,4 @@
-;; Webcontents
+;; Weblets
 (define-module (ffch weblets)
   #:version (0 0 1)
   #:use-module (oop goops)
@@ -64,7 +64,7 @@
   (make <webcontainer> #:server-port port))
 
 ;; Add weblet to webcontainer
-(define-method (add-weblet (wcontainer <webcontainer>) (page <string>) (wlet <weblet>))
+(define-method (add-weblet (wcontainer <webcontainer>) (page <pair>) (wlet <weblet>))
   (hash-set! (weblets wcontainer) page wlet))
 
 ;; Helper for transforming the query into a map
@@ -89,9 +89,9 @@
             (let* ((uri (request-uri request))
                    (path (split-and-decode-uri-path (uri-path uri)))
                    (query (split-and-decode-uri-query (uri-query uri)))
-                   (page (if (null? path) "" (car path)))
+                   (page (if (null? path) (list "") path))
                    (wlet (hash-ref (weblets wcontainer) page))
-                   (wlet404 (hash-ref (weblets wcontainer) "404"))
+                   (wlet404 (hash-ref (weblets wcontainer) (list "404")))
                    (real-wlet (if wlet wlet wlet404))
                   )
               (if real-wlet
