@@ -6,26 +6,8 @@
   #:export (article->sxml-html)
 )
 
-;; Contains only one method article->sxml-html defined for every datatype that make sense in the article structure.
+;; The only method exported is article->sxml-html, defined for every article datatype and in two variants
 
-;; Article method
-(define-method (article->sxml-html (art <article>))
-  (list 'article
-    (if (title art) (list 'h1 (title art)) "")
-    (next-method)
-    (if (or (author art) (date art))
-      (list 'footer
-        (if (author art)
-            (author art)
-            "")
-        (if (and (author art) (date art))
-            " - "
-            "")
-        (if (date art)
-            (date art)
-            "")
-      ))
-  ))
 
 ;; Generic methods
 (define-method (article->sxml-html (cnt <container-type>))
@@ -36,6 +18,68 @@
       (article->sxml-html x section-level))
     (contents cnt)))
 
+;; Elements of the attributes list of a container
+(define-method (attributes-of (cnt <content-type>))
+  (if (or (style-class cnt) (id cnt))
+    (filter identity
+      (list
+        '@
+        (if (style-class cnt)
+            (list 'class (style-class cnt))
+            #f)
+        (if (id cnt)
+            (list 'id (id cnt))
+            #f)
+      ))
+    ""))
+
+;; Article
+(define-method (article->sxml-html (art <article>))
+  (list 'article
+    (if (title art) (list 'h1 (title art)) "")
+    (if (or (author art) (date art))
+      (list 'div (list '@ (list 'class "author-date"))
+        (if (author art)
+            (list 'span (list '@ (list 'class "author")) (author art))
+            "")
+        (if (and (author art) (date art))
+            " - "
+            "")
+        (if (date art)
+            (list 'time (date art))
+            "")
+      ))
+    (next-method)
+  ))
+
+;; Header as independent block
+(define-method (article->sxml-html (cnt <header>))
+  (list
+    'header
+    (attributes-of cnt)
+    (next-method)))
+
+;; Header as contained block
+(define-method (article->sxml-html (cnt <header>) (section-level <integer>))
+  (list
+    'header
+    (attributes-of cnt)
+    (next-method)))
+
+;; Footer as independent block
+(define-method (article->sxml-html (cnt <footer>))
+  (list
+    'footer
+    (attributes-of cnt)
+    (next-method)))
+
+;; Footer as contained block
+(define-method (article->sxml-html (cnt <footer>) (section-level <integer>))
+  (list
+    'footer
+    (attributes-of cnt)
+    (next-method)))
+
 ;; Terminals
 (define-method (article->sxml-html (cnt <string>) (section-level <integer>))
   cnt)
@@ -44,7 +88,9 @@
 
 ;; Section
 (define-method (article->sxml-html (cnt <section>) (section-level <integer>))
-  (list 'section
+  (list
+    'section
+    (attributes-of cnt)
     (if (title cnt)
       (list
         (cond
@@ -62,42 +108,75 @@
 
 ;; Paragraph
 (define-method (article->sxml-html (cnt <paragraph>) (section-level <integer>))
-  (list 'p
+  (list
+    'p
+    (attributes-of cnt)
     (next-method)))
 
 ;; Strong
 (define-method (article->sxml-html (cnt <strong>) (section-level <integer>))
-  (list 'strong
+  (list
+    'strong
+    (attributes-of cnt)
     (next-method)))
 
 ;; Emphase
 (define-method (article->sxml-html (cnt <emphase>) (section-level <integer>))
-  (list 'em
+  (list
+    'em
+    (attributes-of cnt)
     (next-method)))
 
 ;; Deleted
 (define-method (article->sxml-html (cnt <deleted>) (section-level <integer>))
-  (list 'del
+  (list
+    'del
+    (attributes-of cnt)
     (next-method)))
 
 ;; Inserted
 (define-method (article->sxml-html (cnt <inserted>) (section-level <integer>))
-  (list 'ins
+  (list
+    'ins
+    (attributes-of cnt)
     (next-method)))
 
 ;; Mark
 (define-method (article->sxml-html (cnt <mark>) (section-level <integer>))
-  (list 'mark
+  (list
+    'mark
+    (attributes-of cnt)
     (next-method)))
 
 ;; Hyperlink
+(define-method (attributes-of (cnt <hyperlink>))
+  (if (or (style-class cnt) (id cnt) (to cnt))
+    (filter identity
+      (list
+        '@
+        (if (style-class cnt)
+            (list 'class (style-class cnt))
+            #f)
+        (if (id cnt)
+            (list 'id (id cnt))
+            #f)
+        (if (to cnt)
+            (list 'href (to cnt))
+            #f)
+      ))
+    ""))
+
 (define-method (article->sxml-html (cnt <hyperlink>) (section-level <integer>))
-  (list 'a (if (to cnt) (list '@ (list 'href (to cnt))) "")
+  (list
+    'a
+    (attributes-of cnt)
     (next-method)))
 
 ;; Text lists
 (define-method (article->sxml-html (cnt <text-list>) (section-level <integer>))
-  (list (if (ordered? cnt) 'ol 'ul)
+  (list
+    (if (ordered? cnt) 'ol 'ul)
+    (attributes-of cnt)
     (map
       (lambda (x)
         (list 'li
@@ -107,7 +186,9 @@
 
 ;; Figure
 (define-method (article->sxml-html (cnt <figure>) (section-level <integer>))
-  (list 'figure
+  (list
+    'figure
+    (attributes-of cnt)
     (next-method)
     (if (caption cnt)
         (list 'figcaption (caption cnt))
@@ -115,12 +196,16 @@
 
 ;; Code
 (define-method (article->sxml-html (cnt <code>) (section-level <integer>))
-  (list 'code
+  (list
+    'code
+    (attributes-of cnt)
     (next-method)))
 
 ;; Preformatted
 (define-method (article->sxml-html (cnt <preformatted>) (section-level <integer>))
-  (list 'pre
+  (list
+    'pre
+    (attributes-of cnt)
     (next-method)))
 
 ;; Linefeed
@@ -128,8 +213,25 @@
   (list 'br))
 
 ;; Image
+(define-method (attributes-of (cnt <image>))
+  (if (or (style-class cnt) (id cnt) (alt cnt) (source cnt))
+    (filter identity
+      (list
+        '@
+        (if (style-class cnt)
+            (list 'class (style-class cnt))
+            #f)
+        (if (id cnt)
+            (list 'id (id cnt))
+            #f)
+        (if (alt cnt)
+            (list 'alt (alt cnt))
+            #f)
+        (if (source cnt)
+            (list 'src (source cnt))
+            #f)
+      ))
+    ""))
+
 (define-method (article->sxml-html (cnt <image>) (section-level <integer>))
-  (list 'img
-    (list '@
-      (list 'alt (if (alt cnt) (alt cnt) ""))
-      (list 'src (source cnt)))))
+  (list 'img (attributes-of cnt)))
