@@ -4,14 +4,16 @@
   #:use-module (oop goops)
   #:export (; Types
             <container-type> <content-type>
-            <article> <section> <paragraph>
+            <article> <header> <footer>
+            <section> <paragraph>
             <strong> <emphase> <deleted> <inserted> <mark>
             <hyperlink> <text-list> <linefeed> <image> <figure>
             <code> <preformatted>
             ; Getters
-            contents title author date to ordered? caption alt source
+            id style-class contents title author date to ordered? caption alt source
             ; Construction macros and functions
-            article section paragraph
+            article header footer
+            section paragraph
             strong emphase deleted inserted mark
             hyperlink text-list linefeed image figure
             code preformatted
@@ -27,13 +29,21 @@
   (contents #:getter contents #:init-keyword #:contents #:init-form (list)))
 
 ;; Generic content
-(define-class <content-type> (<object>))
+(define-class <content-type> (<object>)
+  (id #:getter id #:init-keyword #:id #:init-form #f)
+  (style-class #:getter style-class #:init-keyword #:style-class #:init-form #f))
 
 ;; Article : the document with all data
 (define-class <article> (<container-type>)
   (title #:getter title #:init-keyword #:title #:init-form #f)
   (author #:getter author #:init-keyword #:author #:init-form #f)
   (date #:getter date #:init-keyword #:date #:init-form #f))
+
+;; Header : something coming first of before an article
+(define-class <header> (<container-type> <content-type>))
+
+;; Footer : something coming last or after an article
+(define-class <footer> (<container-type> <content-type>))
 
 ;; Section : a part of the article with a title
 (define-class <section> (<container-type> <content-type>)
@@ -109,6 +119,8 @@
         ))))))
 
 (container-type-constructor article <article>)
+(container-type-constructor header <header>)
+(container-type-constructor footer <footer>)
 (container-type-constructor section <section>)
 (container-type-constructor paragraph <paragraph>)
 (container-type-constructor strong <strong>)
