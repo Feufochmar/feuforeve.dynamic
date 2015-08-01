@@ -198,6 +198,16 @@
       )
     )))
 
+;; Flag generator: Svg flag
+(add-weblet wcontainer (list "FlagGenerator" "RawFlag")
+  (weblet ((error-code 200)
+           (content-type "image/svg+xml;charset=UTF-8"))
+    ((path query port)
+
+     (newline port)
+    )
+  ))
+
 ;; Flag generator: about
 (add-weblet wcontainer (list "FlagGenerator" "about")
   (templated-weblet
