@@ -2,6 +2,8 @@
   #:use-module (ffch article)
   #:use-module (ffch weblets)
   #:use-module (ffch webtemplates)
+  #:use-module (arnytron arnytron)
+  #:use-module (ice-9 regex)
   #:duplicates (merge-generics)
 )
 
@@ -10,6 +12,9 @@
 
 ;; Initialize the random number generator
 (set! *random-state* (random-state-from-platform))
+
+;; ArnYtron3000 generator
+(define ArnYtron3000 (arnytron))
 
 ;; Webcontainer dispatching pages
 (define wcontainer (webcontainer 8080))
@@ -28,11 +33,11 @@
           (hyperlink ((to "/FloraCharacterGenerator/pick...")) "Pick a species")(linefeed)
           (hyperlink ((to "/FloraCharacterGenerator/about")) "Infos")
         )
-        (section ((style-class "menubar-item")(title "ArnyTron3000"))
-          (hyperlink ((to "/ArnyTron3000")) "ArnyTron3000")(linefeed)
-          (hyperlink ((to "/ArnyTron3000/brut")) "Plain text output")(linefeed)
-          (hyperlink ((to "/ArnyTron3000/json")) "Json output")(linefeed)
-          (hyperlink ((to "/ArnyTron3000/about")) "Infos")(linefeed)
+        (section ((style-class "menubar-item")(title "ArnYtron3000"))
+          (hyperlink ((to "/ArnYtron3000")) "ArnYtron3000")(linefeed)
+          (hyperlink ((to "/ArnYtron3000/brut")) "Plain text output")(linefeed)
+          (hyperlink ((to "/ArnYtron3000/json")) "Json output")(linefeed)
+          (hyperlink ((to "/ArnYtron3000/about")) "Infos")(linefeed)
         )
         (section ((style-class "menubar-item")(title "Flag generator"))
           (hyperlink ((to "/FlagGenerator")) "FlagGenerator")(linefeed)
@@ -150,7 +155,11 @@
     (lambda (query)
       (article ((title "ArnYtron3000")(author "feuforeve.fr"))
         (paragraph
-          "Soon..."
+          "Aujourd'hui, ArnYtron3000 vous salue par ces mots :" (linefeed)
+          (strong (generate-citation ArnYtron3000))
+        )
+        (paragraph
+          (hyperlink ((to "/ArnYtron3000")) "Une autre !")
         )
       )
     )))
@@ -160,7 +169,7 @@
   (weblet ((error-code 200)
            (content-type "text/plain;charset=UTF-8"))
     ((path query port)
-     (display "Soon..." port)(newline port)
+     (display (generate-citation ArnYtron3000) port)(newline port)
      )
   ))
 
@@ -169,7 +178,10 @@
   (weblet ((error-code 200)
            (content-type "application/json;charset=UTF-8"))
     ((path query port)
-     (format port "{ \"greeting\": \"~a\" }" "Soon...")
+     (let* ((raw (generate-citation ArnYtron3000))
+            (pass-1 (regexp-substitute/global #f "\\\\" raw 'pre "\\\\" 'post))
+            (pass-2 (regexp-substitute/global #f "\"" pass-1 'pre "\\\"" 'post)))
+       (format port "{ \"greeting\": \"~a\" }" pass-2))
      (newline port)
     )
   ))
@@ -179,9 +191,42 @@
   (templated-weblet
     feuforeve-template
     (lambda (query)
-      (article ((title "About ArnYtron3000")(author "Feufochmar")(date "2015-08-02"))
+      (article ((title "À propos d'ArnYtron3000")(author "Feufochmar")(date "2015-08-02"))
         (paragraph
-          "Soon..."
+          "ArnYtron3000, un générateur " (deleted "d'insultes")
+          " de salutations se basant sur les légendaires salutations "
+          "postées par " (hyperlink ((to "")) "ArnY") " sur le canal IRC #linux de "
+          (hyperlink ((to "https://www.rezosup.org/")) "RezoSup") ". "
+        )
+        (paragraph
+          "ArnYtron3000 sait aussi ressortir "
+          (hyperlink ((to "/ArnYtron3000/vraie"))
+          " des vraies citations") "."
+        )
+      )
+    )))
+
+;; Vrai citation d'ArnY
+(add-weblet wcontainer (list "ArnYtron3000" "vraie")
+  (templated-weblet
+    feuforeve-template
+    (lambda (query)
+      (let ((real-quote (pick-citation ArnYtron3000)))
+        (article ((title (string-join (list "Le " (date real-quote) ", ArnY a salué #linux en disant...") ""))
+                  (author "ArnY")(date (date real-quote)))
+          (section
+            (paragraph
+              (strong (citation real-quote))
+            )
+          )
+          (if (not (null? (reactions real-quote)))
+            (section ((title "Réactions")) (map (lambda (x) (list x (linefeed))) (reactions real-quote)))
+            "")
+          (section
+            (paragraph
+              (hyperlink ((to "/ArnYtron3000/vraie")) "Une autre !")
+            )
+          )
         )
       )
     )))
