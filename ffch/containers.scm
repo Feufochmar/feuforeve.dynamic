@@ -37,3 +37,20 @@
           (make type #:contents (list elem* ---))
          )
         ))))))
+
+;; Generic macro to build content types
+(define-syntax content-type-constructor
+  (syntax-rules ()
+   ((_ identifier type)
+    (define-syntax identifier
+      (with-ellipsis ---
+        (syntax-rules ()
+          ((_ (slot value) ---)
+           (let ((result (make type)))
+             (begin
+               (slot-set! result (quote slot) value) ---
+             )
+             result
+           )
+          )
+        ))))))
