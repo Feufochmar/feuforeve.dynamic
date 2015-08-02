@@ -2,15 +2,15 @@
 (define-module (ffch article)
   #:version (0 0 1)
   #:use-module (oop goops)
+  #:use-module (ffch containers)
   #:export (; Types
-            <container-type> <content-type>
             <article> <header> <footer>
             <section> <paragraph>
             <strong> <emphase> <deleted> <inserted> <mark>
             <hyperlink> <text-list> <linefeed> <image> <figure>
             <code> <preformatted>
             ; Getters
-            id style-class contents title author date to ordered? caption alt source
+            title author date to ordered? caption alt source
             ; Construction macros and functions
             article header footer
             section paragraph
@@ -18,20 +18,14 @@
             hyperlink text-list linefeed image figure
             code preformatted
            )
+  #:re-export (<container-type> <content-type>
+               id style-class contents
+              )
 )
 
 ;; Classes for generating rich-text documents
 ;; See the modules article-export-*** for output formats
 ;; See also doc for html : <article>, <section>
-
-;; Generic container. Contains a list of elements
-(define-class <container-type> (<object>)
-  (contents #:getter contents #:init-keyword #:contents #:init-form (list)))
-
-;; Generic content
-(define-class <content-type> (<object>)
-  (id #:getter id #:init-keyword #:id #:init-form #f)
-  (style-class #:getter style-class #:init-keyword #:style-class #:init-form #f))
 
 ;; Article : the document with all data
 (define-class <article> (<container-type>)
@@ -99,25 +93,6 @@
 
 ;;;;
 ;; Constructor functions and macros
-(define-syntax container-type-constructor
-  (syntax-rules ()
-   ((_ identifier type)
-    (define-syntax identifier
-      (with-ellipsis ---
-        (syntax-rules ()
-         ((_ ((param value) ---) elem* ---)
-          (let ((result (make type #:contents (list elem* ---))))
-            (begin
-              (slot-set! result (quote param) value) ---
-            )
-            result
-          )
-         )
-         ((_ elem* ---)
-          (make type #:contents (list elem* ---))
-         )
-        ))))))
-
 (container-type-constructor article <article>)
 (container-type-constructor header <header>)
 (container-type-constructor footer <footer>)
