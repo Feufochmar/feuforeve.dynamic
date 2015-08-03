@@ -4,8 +4,8 @@
   #:use-module (oop goops)
   #:use-module (ffch colors)
   #:use-module (ffch containers)
-  #:export (shape-style fill-color stoke-color stroke-width
-            point x y
+  #:export (<shape-style> shape-style fill-color stroke-color stroke-width
+            <point> point x y
             <vector-image> vector-image width height
             <area> area transforms
             <translation> translation translation-vector
@@ -24,7 +24,7 @@
 ;; Style of shapes
 (define-class <shape-style> (<object>)
   (fill-color #:getter fill-color #:init-keyword #:fill-color #:init-value #f)
-  (stoke-color #:getter stroke-color #:init-keyword #:stroke-color #:init-value #f)
+  (stroke-color #:getter stroke-color #:init-keyword #:stroke-color #:init-value #f)
   (stroke-width #:getter stroke-width #:init-keyword #:stroke-width #:init-value #f)
 )
 
@@ -81,7 +81,7 @@
 
 ;;;;
 ;; Translation
-(define-class <translation> (<tranform-type>)
+(define-class <translation> (<transform-type>)
   (translation-vector #:getter translation-vector #:init-keyword #:translation-vector #:init-form (point 0 0)))
 
 (define-method (translation (pt <point>))
@@ -97,7 +97,7 @@
 
 ;;;;
 ;; Rotation
-(define-class <rotation> (<tranform-type>)
+(define-class <rotation> (<transform-type>)
   (rotation-angle #:getter rotation-angle #:init-keyword #:rotation-angle #:init-form 0)
   (center #:getter center #:init-keyword #:center #:init-form #f))
 
