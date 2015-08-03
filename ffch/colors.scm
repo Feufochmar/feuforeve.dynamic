@@ -2,7 +2,8 @@
 (define-module (ffch colors)
   #:version (0 0 1)
   #:use-module (oop goops)
-  #:export (css-value
+  #:export (<color>
+            css-value
             rgb-color rgba-color
             hsl-color hsla-color
             named-color
@@ -39,7 +40,7 @@
 (define-method (rgba-color (r <integer>) (g <integer>) (b <integer>) (a <real>))
   (make <rgba-color> #:R r #:G g #:B b #:A a))
 
-(define-method (css-value (col <rgb-color>))
+(define-method (css-value (col <rgba-color>))
   (string-append
     "rgba("
     (number->string (R col)) ","
