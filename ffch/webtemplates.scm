@@ -24,7 +24,8 @@
 ;; Html Metadata
 (define-class <metadata> (<object>)
   (stylesheets #:getter stylesheets #:init-keyword #:stylesheets #:init-form (list))
-  (scripts #:getter scripts #:init-keyword #:scripts #:init-form (list)))
+  (scripts #:getter scripts #:init-keyword #:scripts #:init-form (list))
+  (onload #:getter onload #:init-keyword #:onload #:init-form #f))
 
 (define-syntax metadata
   (syntax-rules ()
@@ -44,6 +45,13 @@
         (list 'meta (list '@ (list 'charset "UTF-8")))
         (map
           (lambda (x)
+            (list 'script
+              (list '@
+                (list 'src x)
+              ) ""))
+          (scripts meta))
+        (map
+          (lambda (x)
             (list 'link
               (list '@
                 (list 'href x)
@@ -52,15 +60,8 @@
                 (list 'media "all")
               )))
           (stylesheets meta))
-        (map
-          (lambda (x)
-            (list 'script
-              (list '@
-                (list 'src x)
-              )))
-          (scripts meta))
       )
-      (list 'body
+      (list 'body (if (onload meta) (list '@ (list 'onload (onload meta))) "")
         (article->sxml-html before)
         (article->sxml-html art)
         (article->sxml-html after)
