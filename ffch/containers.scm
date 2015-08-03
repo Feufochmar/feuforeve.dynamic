@@ -6,6 +6,7 @@
   #:export (<container-type> <content-type>
             id style-class contents
             container-type-constructor
+            content-type-constructor
            )
 )
 
