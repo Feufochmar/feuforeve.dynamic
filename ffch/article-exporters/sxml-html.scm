@@ -3,7 +3,9 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:use-module (ffch article)
+  #:use-module (ffch forms)
   #:export (article->sxml-html)
+  #:duplicates (merge-generics)
 )
 
 ;; The only method exported is article->sxml-html, defined for every article datatype and in two variants
@@ -223,3 +225,37 @@
 
 (define-method (article->sxml-html (cnt <image>) (section-level <integer>))
   (list 'img (attributes-of cnt)))
+
+;;;;;;
+;; Forms elements
+
+;; Button
+(define-method (attributes-of (cnt <button>))
+  (if (or (style-class cnt) (id cnt) (onclick cnt))
+    (filter identity
+      (list
+        '@
+        (if (style-class cnt)
+            (list 'class (style-class cnt))
+            #f)
+        (if (id cnt)
+            (list 'id (id cnt))
+            #f)
+        (if (onclick cnt)
+            (list 'onclick (onclick cnt))
+            #f)
+      ))
+    ""))
+
+(define-method (article->sxml-html (cnt <button>) (section-level <integer>))
+  (list
+    'button
+    (attributes-of cnt)
+    (next-method)))
+
+;; Text area
+(define-method (article->sxml-html (cnt <text-area>) (section-level <integer>))
+  (list
+    'textarea
+    (attributes-of cnt)
+    (next-method)))
