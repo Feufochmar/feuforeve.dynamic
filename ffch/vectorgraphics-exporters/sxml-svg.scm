@@ -3,7 +3,7 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:use-module (ffch vectorgraphics)
-  #:use-module (ffch color)
+  #:use-module (ffch colors)
   #:export (vectorgraphics->sxml-svg)
 )
 
@@ -133,7 +133,7 @@
   ))
 
 (define-method (vectorgraphics->sxml-svg (cnt <rectangle>))
-  (list 'rectangle (append (list '@) (attributes-of cnt))))
+  (list 'rect (append (list '@) (attributes-of cnt))))
 
 ;;;;
 ;; Polygon
