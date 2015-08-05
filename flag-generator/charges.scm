@@ -400,7 +400,7 @@
   ((pick-from
      (vector
        large-charge:single-small large-charge:single-small large-charge:single-small large-charge:single-small
-       large-charge:single-small large-charge:single-small large-charge:single-small large-charge:single-small
+       large-charge:single-small large-charge:single-small
        ;;
        large-charge:cross large-charge:lozenge large-charge:fess-or-pale large-charge:disc
        large-charge:border large-charge:saltire
