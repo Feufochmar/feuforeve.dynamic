@@ -4,7 +4,7 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:export (<container-type> <content-type>
-            id style-class contents
+            id style-class contents empty?
             container-type-constructor
             content-type-constructor
            )
@@ -13,6 +13,9 @@
 ;; Generic container. Contains a list of elements
 (define-class <container-type> (<object>)
   (contents #:getter contents #:init-keyword #:contents #:init-form (list)))
+
+(define-method (empty? (cnt <container-type>))
+  (null? (contents cnt)))
 
 ;; Generic content
 (define-class <content-type> (<object>)
