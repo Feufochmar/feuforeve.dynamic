@@ -59,6 +59,12 @@
     vectorgraphics->sxml-svg
     (contents cnt)))
 
+;; List : act as a container
+(define-method (vectorgraphics->sxml-svg (cnt <pair>))
+  (map
+    vectorgraphics->sxml-svg
+    cnt))
+
 ;;;;
 ;; Generic contents
 (define-method (attributes-of (cnt <content-type>))
@@ -99,10 +105,12 @@
   ))
 
 (define-method (vectorgraphics->sxml-svg (cnt <area>))
-  (list 'g
-    (append (list '@) (attributes-of cnt))
-    (next-method)
-  ))
+  (if (empty? cnt)
+    ""
+    (list 'g
+      (append (list '@) (attributes-of cnt))
+      (next-method)
+    )))
 
 ;;;;
 ;; Circle
@@ -147,14 +155,3 @@
 
 (define-method (vectorgraphics->sxml-svg (cnt <polygon>))
   (list 'polygon (append (list '@) (attributes-of cnt))))
-
-#!
-
-
-;;;;
-;; Polygon
-(define-class <polygon> (<content-type>)
-  (points #:accessor points #:init-keyword #:points #:init-form (list))
-)
-
-!#
