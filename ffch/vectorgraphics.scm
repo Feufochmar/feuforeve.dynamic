@@ -16,7 +16,7 @@
             <polygon> polygon points
            )
   #:re-export (<container-type> <content-type>
-               id style-class contents
+               id style-class contents empty?
               )
 )
 
