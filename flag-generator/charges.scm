@@ -5,7 +5,7 @@
   #:use-module (ffch colors)
   #:use-module (ffch vectorgraphics)
   #:use-module (ffch random)
-  #:export (charge
+  #:export (small-charge charge
            )
 )
 
