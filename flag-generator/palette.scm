@@ -16,12 +16,13 @@
 (define metal-colors
   (list
     (hsl-color 0 0 95) ;; Argent <=> White
-    (hsl-color 50 100 50) ;; Or <=> Yellow
-    (hsl-color 200 65 80) ;; Celeste <=> Light blue
-    (hsl-color 0 65 80) ;; Carnation <=> Light red / skin
-    (hsl-color 275 65 80) ;; Lavender <=> Light purple
-    (hsl-color 130 65 80) ;; Mint <=> Light green
-    (hsl-color 50 65 80) ;; Buff <=> Light brown / beige
+    (hsl-color 50 95 55) ;; Or <=> Yellow
+    (hsl-color 200 95 80) ;; Celeste <=> Light blue
+    (hsl-color 10 95 80) ;; Carnation <=> Light red / skin
+    (hsl-color 275 95 80) ;; Lavender <=> Light purple
+    (hsl-color 130 95 80) ;; Mint <=> Light green
+    (hsl-color 50 75 75) ;; Buff <=> Light brown / beige
+    (hsl-color 330 95 80) ;; Pink <=> Pink
   ))
 
 ;; Tinctures (dark colors)
@@ -29,12 +30,12 @@
   (list
     (hsl-color 225 85 40) ;; Azure <=> Blue
     (hsl-color 0 85 50) ;; Gules <=> Red
-    (hsl-color 0 75 30) ;; Sanguine <=> Dark red
+    (hsl-color 350 75 30) ;; Sanguine <=> Dark red
     (hsl-color 310 45 40) ;; Purpure <=> Purple
     (hsl-color 210 15 40) ;; Cendrée <=> Grey
     (hsl-color 0 0 0) ;; Sable <=> Black
     (hsl-color 110 75 30) ;; Vert <=> Green
-    (hsl-color 30 85 50) ;; Orangé <=> Orange
+    (hsl-color 30 90 50) ;; Orangé <=> Orange
     (hsl-color 20 75 30) ;; Tenné <=> Brown
   ))
 
