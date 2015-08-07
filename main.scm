@@ -1,8 +1,10 @@
 (define-module (main)
   #:use-module (ffch article)
+  #:use-module (ffch forms)
   #:use-module (ffch weblets)
   #:use-module (ffch webtemplates)
   #:use-module (arnytron arnytron)
+  #:use-module (flag-generator flag-generator)
   #:use-module (ice-9 regex)
   #:duplicates (merge-generics)
 )
@@ -231,14 +233,34 @@
       )
     )))
 
+;; Flag generator template
+(define flag-generator-template
+  (main-template
+    (metadata
+      (stylesheets
+        "http://static.feuforeve.fr/css/feuforeve.css"
+        "http://static.feuforeve.fr/css/flag-generator.css"
+      )
+      (scripts "http://static.feuforeve.fr/scripts/flag-generator.js"
+      )
+      (onload "getFlag();")
+    )))
+
 ;; Flag generator
 (add-weblet wcontainer (list "FlagGenerator")
   (templated-weblet
-    feuforeve-template
+    flag-generator-template
     (lambda (query)
       (article ((title "Flag generator")(author "feuforeve.fr"))
-        (paragraph
-          "Soon..."
+        (section
+          (button ((onclick "getFlag();")) "New flag")
+          (section ((id "flag")))
+        )
+        (section ((title "Source code"))
+          (text-area ((id "raw")))
+          (paragraph
+            "To save the flag, copy and paste the code into a text file and save as with a "
+            (code "'svg'") " extension.")
         )
       )
     )))
@@ -248,7 +270,7 @@
   (weblet ((error-code 200)
            (content-type "image/svg+xml;charset=UTF-8"))
     ((path query port)
-
+     (generate-flag 600 port) ;; flag width: 600
      (newline port)
     )
   ))
