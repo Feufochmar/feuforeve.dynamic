@@ -8,23 +8,20 @@
   #:export (pick-natures)
 )
 
-(define-class <natures> (<object>)
-  (table #:getter table #:init-keyword #:table #:init-form (vector)))
-
-(define-method (pick-nature (nat <natures>))
-  (pick-from (pick-from (table nat))))
-
 ;; Data singleton
-(define *data:natures* (make <natures>))
+(define *data:natures* (vector))
+
+(define-method (pick-nature)
+  (pick-from (pick-from *data:natures*)))
 
 (define-method (pick-natures (N <number>))
-  (delete-duplicates (map (lambda (x) (pick-nature *data:natures*)) (make-list N #f))))
+  (delete-duplicates (map (lambda (x) (pick-nature)) (make-list N #f))))
 
 ;; Data syntax
 (define-syntax natures
   (syntax-rules ()
    ((_ (cat elem* ...) ...)
-    (slot-set! *data:natures* (quote table) (vector (vector cat elem* ...) ...)))))
+    (set! *data:natures* (vector (vector cat elem* ...) ...)))))
 
 ;; Include the data to fill *data:natures*
 (include "data/natures.scm")
