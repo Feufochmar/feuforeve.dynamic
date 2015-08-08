@@ -24,15 +24,11 @@
 (define-method (plural? (gen <gender>))
   (eq? #:plural (number gen)))
 
-;; Gender map
-(define-class <genders> (<object>)
-  (table #:getter table #:init-keyword #:table #:init-form (make-hash-table)))
-
 ;; Data singleton
-(define *data:genders* (make <genders>))
+(define *data:genders* (make-hash-table))
 
 (define-method (get-gender (key <symbol>))
-  (hash-ref (table *data:genders*) key))
+  (hash-ref *data:genders* key))
 
 (define-syntax genders
   (syntax-rules ()
@@ -40,7 +36,7 @@
      (begin
        (let ((gen (make <gender>)))
          (begin (slot-set! gen (quote slot) value) ...)
-         (hash-set! (table *data:genders*) (quote key) gen)) ...))))
+         (hash-set! *data:genders* (quote key) gen)) ...))))
 
 ;; Include the data to fill *data:genders*
 (include "data/genders.scm")
