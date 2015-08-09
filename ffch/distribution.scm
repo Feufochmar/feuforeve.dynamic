@@ -40,14 +40,17 @@
 
 ;;;;
 ;; Add an item to a distribution
-(define-method (add-to-distribution (dist <distribution>) itm)
+(define-method (add-to-distribution (dist <distribution>) itm (additional-occurences <integer>))
   (let ((occurences (hash-ref (items dist) itm)))
     (if occurences
-        (hash-set! (items dist) itm (+ occurences 1))
-        (hash-set! (items dist) itm 1))
+        (hash-set! (items dist) itm (+ occurences additional-occurences))
+        (hash-set! (items dist) itm additional-occurences))
     (set! (lst-items dist) (hash-map->list (lambda (k v) (cons k v)) (items dist)))
-    (set! (total dist) (+ 1 (total dist)))
+    (set! (total dist) (+ additional-occurences (total dist)))
   ))
+
+(define-method (add-to-distribution (dist <distribution>) itm)
+  (add-to-distribution dist itm 1))
 
 ;;;;
 ;; Pick from a distribution
