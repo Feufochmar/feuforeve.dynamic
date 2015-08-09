@@ -1,0 +1,31 @@
+(calendar
+  (months
+    ((number 1) (name "Rath") (days 31))
+    ((number 2) (name "Oxoth") (days 29))
+    ((number 3) (name "Tigoth") (days 31))
+    ((number 4) (name "Raboth") (days 30))
+    ((number 5) (name "Drath") (days 31))
+    ((number 6) (name "Snakoth") (days 30))
+    ((number 7) (name "Horth") (days 31))
+    ((number 8) (name "Goath") (days 31))
+    ((number 9) (name "Monmonth") (days 30))
+    ((number 10) (name "Roosoth") (days 31))
+    ((number 11) (name "Doth") (days 30))
+    ((number 12) (name "Pigoth") (days 31)))
+  (astrological-signs
+    ;; The parameter order for from and to is (month-number day-number)
+    ((name "Pegasus") (from 1 21) (to 2 16))
+    ((name "Delphinus") (from 2 17) (to 3 11))
+    ((name "Volans") (from 3 12) (to 4 18))
+    ((name "Phoenix") (from 4 19) (to 5 13))
+    ((name "Cetus") (from 5 14) (to 5 14))
+    ((name "Monoceros") (from 5 15) (to 6 21)) ;; ??? limit
+    ((name "Corvus") (from 6 21) (to 7 20)) ;; ??? limit
+    ((name "Lepus") (from 7 21) (to 8 10))
+    ((name "Lupus") (from 8 11) (to 9 16))
+    ((name "Chamaeleo") (from 9 17) (to 10 30))
+    ((name "Hydra") (from 10 31) (to 11 23))
+    ((name "Draco") (from 11 24) (to 11 29))
+    ((name "Ophiuchus") (from 11 30) (to 12 17))
+    ((name "Camelopardus") (from 12 18) (to 1 20)))
+)
