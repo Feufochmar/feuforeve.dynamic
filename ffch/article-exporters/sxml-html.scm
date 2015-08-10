@@ -75,6 +75,8 @@
   cnt)
 (define-method (article->sxml-html (cnt <pair>) (section-level <integer>))
   (map (lambda (x) (article->sxml-html x section-level)) cnt))
+(define-method (article->sxml-html (cnt <null>) (section-level <integer>))
+  "")
 
 ;; Section
 (define-method (article->sxml-html (cnt <section>) (section-level <integer>))
