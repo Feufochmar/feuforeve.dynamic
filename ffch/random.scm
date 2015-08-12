@@ -30,7 +30,9 @@
 ;;;;
 ;; Pick an integer from a range [mn, mx)
 (define-method (pick-from (mn <integer>) (mx <integer>))
-  (+ mn (random (- mx mn))))
+  (if (eq? mn mx)
+      mn
+      (+ mn (random (- mx mn)))))
 
 ;;;;
 ;; Pick given number of items from a collection
