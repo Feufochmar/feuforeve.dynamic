@@ -6,6 +6,7 @@
   #:use-module (ffch random)
   #:use-module (ffch markhov)
   #:use-module (ffch load-all)
+  #:use-module (ffch string)
   #:export (<word> transcription pronounciation
             <language> empty-word generate-word
             <family-names> family-names full-name short-name given-name mother-name father-name
@@ -36,6 +37,9 @@
 
 (define-method (pronounciation (lst <pair>))
   (string-join (map pronounciation lst) " "))
+
+(define-method (transcription (lst <pair>) (capitalize? <boolean>))
+  (string-join (map (lambda (x) (string-capitalize-1st (transcription x))) lst) " "))
 
 ;; Naming rules class
 (define-class <naming-rules> (<object>)
