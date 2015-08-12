@@ -2,6 +2,7 @@
 (define-module (ffch load-all)
   #:version (0 0 1)
   #:use-module (oop goops)
+  #:use-module (ice-9 ftw)
   #:export (load-all load-all-from-path)
 )
 
