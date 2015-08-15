@@ -5,11 +5,12 @@
   #:use-module (oop goops)
   #:use-module (ffch random)
   #:use-module (ffch distribution)
-  #:export (<sex> description mother? gender-distribution
+  #:use-module (flora-character-generator genders)
+  #:export (<sex> description mother? pick-gender
             ;
-            get-sex
+            get-sex sex-keys
            )
-)
+  #:duplicates (merge-generics))
 
 ;; Sex class
 (define-class <sex> (<object>)
@@ -23,11 +24,18 @@
       (pick-boolean)
       (is-mother? sex)))
 
+;; Pick a gender
+(define-method (pick-gender (sex <sex>))
+  (get-gender (pick-from (gender-distribution sex))))
+
 ;; Data singleton
 (define *data:sexes* (make-hash-table))
 
 (define-method (get-sex (key <symbol>))
   (hash-ref *data:sexes* key))
+
+(define-method (sex-keys)
+  (hash-map->list (lambda (k v) k) *data:sexes*))
 
 ;; Data syntax
 (define-syntax sexes
