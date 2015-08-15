@@ -5,7 +5,7 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:use-module (srfi srfi-1)
-  #:export (make-distribution add-to-distribution pick-from)
+  #:export (make-distribution add-to-distribution fill-distribution pick-from)
 )
 
 ;;;;
@@ -51,6 +51,24 @@
 
 (define-method (add-to-distribution (dist <distribution>) itm)
   (add-to-distribution dist itm 1))
+
+;;;;
+;; Macro to fill a distribution by specifying:
+;; - the items of the distribution
+;; - a default number of occurences for every item
+;; - the number of occurences for a set of items
+(define-syntax fill-distribution
+  (syntax-rules (*)
+    ((_ distro item-list (* default-occurences) (itm occurences) ...)
+     (let ((h (make-hash-table)))
+       (map
+         (lambda (x) (hash-set! h x default-occurences))
+         item-list)
+       (begin
+         (hash-set! h (quote itm) occurences) ...)
+       (hash-map->list (lambda (k v) (add-to-distribution distro k v)) h)))
+    ((_ distro item-list (itm occurences) ...)
+     (fill-distribution distro item-list (* 0) (itm occurences) ...))))
 
 ;;;;
 ;; Pick from a distribution
