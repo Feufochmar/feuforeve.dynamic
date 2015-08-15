@@ -7,9 +7,9 @@
   #:export (<age-of-life> description can-have-pet?
             pick-profession pick-nb-partners-children
             ;
-            get-age-of-life
+            get-age-of-life ages-of-life-keys
            )
-)
+  #:duplicates (merge-generics))
 
 ;;
 (define-class <age-of-life> (<object>)
@@ -37,6 +37,9 @@
 ;;
 (define-method (get-age-of-life (key <symbol>))
   (hash-ref *data:ages-of-life* key))
+
+(define-method (ages-of-life-keys)
+  (hash-map->list (lambda (k v) k) *data:ages-of-life*))
 
 ;; Data syntax
 (define-syntax ages-of-life
