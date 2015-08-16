@@ -26,15 +26,15 @@
     (let* ((foster (foster-parent character-data))
             (base-species-foster (if foster (base-species foster) #f))
             (species-foster (if foster (species-of foster) #f))
-            (species-key (if base-species-foster base-species-foster species-foster))
+            (species (if base-species-foster base-species-foster species-foster))
           )
-      (if species-key
-          (get-species species-key)
+      (if species
+          species
           (select-species
             (lambda (sp)
               (and (not (mimic? sp))
-                    (or (citizen? sp) (tribal? sp) (isolated? sp))
-                    (not (eq? 'masked-owl (key sp)))))))))
+                   (or (citizen? sp) (tribal? sp) (isolated? sp))
+                   (not (eq? 'masked-owl (key sp)))))))))
   (common-regions owel)
   (distributions
     (affinity (* 1) (spirit 100) (aura 100) (poison 100) (sound 100) (magnet 100) (psi 100))
