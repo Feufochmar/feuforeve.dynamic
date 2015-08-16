@@ -39,8 +39,7 @@
     (affinity (* 1) (water 40) (earth 40)))
   (reproduction
     (common-pattern? #t)
-    (crossbreed-with cagroo)
-    (special-cases )))
+    (crossbreed-with cagroo)))
 
 (species shagroo
   (name "Shagroo")
@@ -53,8 +52,7 @@
     (affinity (* 1) (water 40) (earth 40)))
   (reproduction
     (common-pattern? #t)
-    (crossbreed-with cagroo)
-    (special-cases )))
+    (crossbreed-with cagroo)))
 
 (species cagrugong
   (name "Cagrugong")
@@ -65,8 +63,7 @@
     (affinity (* 1) (water 40)))
   (reproduction
     (common-pattern? #t)
-    (crossbreed-with cagroo)
-    (special-cases )))
+    (crossbreed-with cagroo)))
 
 (species swagroo
   (name "Swagroo")
@@ -77,8 +74,7 @@
     (affinity (* 1) (water 40) (earth 40)))
   (reproduction
     (common-pattern? #t)
-    (crossbreed-with cagroo)
-    (special-cases )))
+    (crossbreed-with cagroo)))
 
 (species cotton-cagroodle
   (name "Cotton Cagroodle")
@@ -89,8 +85,7 @@
     (affinity (* 1) (water 40) (earth 40)))
   (reproduction
     (common-pattern? #t)
-    (crossbreed-with cagroo)
-    (special-cases )))
+    (crossbreed-with cagroo)))
 
 (species bogroo
   (name "Bogroo")
@@ -102,8 +97,7 @@
     (affinity (* 1)))
   (reproduction
     (common-pattern? #t)
-    (crossbreed-with cagroo)
-    (special-cases )))
+    (crossbreed-with cagroo)))
 
 (species cagroodle
   (name "Cagroodle")
@@ -114,5 +108,4 @@
     (affinity (* 1) (water 40) (earth 40)))
   (reproduction
     (common-pattern? #t)
-    (crossbreed-with cagroo)
-    (special-cases )))
+    (crossbreed-with cagroo)))

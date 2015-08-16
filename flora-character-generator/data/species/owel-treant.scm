@@ -8,5 +8,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      arachoon)
-    (special-cases )))
+      arachoon)))

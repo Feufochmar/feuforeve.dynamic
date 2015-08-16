@@ -8,6 +8,4 @@
   (distributions
     (affinity (* 1) (aura 30) (psi 30)))
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))

@@ -8,7 +8,6 @@
     (sex (none 1)))
   (reproduction
     (common-pattern? #f)
-    (crossbreed-with )
     (special-cases ((father revealeon) (mother #f)) ((father #f) (mother revealeon)) )))
 
 (species surveilleon
@@ -21,7 +20,6 @@
     (sex (none 1)))
   (reproduction
     (common-pattern? #f)
-    (crossbreed-with )
     (special-cases ((father surveilleon) (mother #f)) ((father #f) (mother surveilleon)) )))
 
 (species strawberry-man
@@ -34,5 +32,4 @@
     (sex (none 1)))
   (reproduction
     (common-pattern? #f)
-    (crossbreed-with )
     (special-cases ((father strawberry-man) (mother #f)) ((father #f) (mother strawberry-man)) )))

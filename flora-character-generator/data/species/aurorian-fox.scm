@@ -9,5 +9,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      flowercat foxbat foxbat-spirit satyrfox commons-fox borealan-fox)
-    (special-cases )))
+      flowercat foxbat foxbat-spirit satyrfox commons-fox borealan-fox)))

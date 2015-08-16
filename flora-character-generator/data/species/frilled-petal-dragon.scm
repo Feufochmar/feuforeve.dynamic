@@ -68,9 +68,7 @@
   (distributions
     (affinity (* 1) (fire 15) (water 15) (air 15) (earth 15) (light 15)))
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species frilled-petal-dragosaur
   (name "Frilled Petal Dragosaur")
@@ -81,9 +79,7 @@
   (distributions
     (affinity (* 1) (fire 15) (water 15) (air 15) (earth 15) (light 15)))
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species pomegragon
   (name "Pomegragon")
@@ -99,8 +95,7 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      frilled-petal-dragon)
-    (special-cases )))
+      frilled-petal-dragon)))
 
 (species blueberrygon
   (name "Blueberrygon")
@@ -116,5 +111,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      frilled-petal-dragon)
-    (special-cases )))
+      frilled-petal-dragon)))

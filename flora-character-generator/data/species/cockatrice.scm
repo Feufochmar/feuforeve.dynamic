@@ -10,5 +10,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      seavern coralshell-turtle petaltrice)
-    (special-cases )))
+      seavern coralshell-turtle petaltrice)))

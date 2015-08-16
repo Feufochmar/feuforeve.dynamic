@@ -6,6 +6,4 @@
   (distributions
     (affinity (* 1) (fire 40) (earth 40) (lava 15) (sand 40) (crystal 15)))
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))

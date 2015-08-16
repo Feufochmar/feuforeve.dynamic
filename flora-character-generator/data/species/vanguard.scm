@@ -11,5 +11,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      sea-dragon)
-    (special-cases )))
+      sea-dragon)))

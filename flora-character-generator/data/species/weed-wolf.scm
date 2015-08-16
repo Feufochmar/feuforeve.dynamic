@@ -42,8 +42,7 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      weed-wolf)
-    (special-cases )))
+      weed-wolf)))
 
 (species pin-bull
   (name "Pin Bull")
@@ -56,8 +55,7 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      weed-wolf)
-    (special-cases )))
+      weed-wolf)))
 
 (species palmeranian
   (name "Palmeranian")
@@ -70,8 +68,7 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      weed-wolf)
-    (special-cases )))
+      weed-wolf)))
 
 (species pine-hound
   (name "Pine Hound")
@@ -84,8 +81,7 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      weed-wolf)
-    (special-cases )))
+      weed-wolf)))
 
 (species shruppy
   (name "Shruppy")
@@ -98,8 +94,7 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      weed-wolf)
-    (special-cases )))
+      weed-wolf)))
 
 (species weeping-woodle
   (name "Weeping Woodle")
@@ -112,5 +107,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      weed-wolf)
-    (special-cases )))
+      weed-wolf)))

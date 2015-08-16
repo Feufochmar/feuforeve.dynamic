@@ -96,5 +96,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      satyr satyrbun satyrqorn satyrfox flower-candies)
-    (special-cases )))
+      satyr satyrbun satyrqorn satyrfox flower-candies)))

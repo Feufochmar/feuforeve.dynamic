@@ -6,6 +6,4 @@
   (distributions
     (affinity (* 1) (fire 40) (air 40) (spirit 15)))
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
