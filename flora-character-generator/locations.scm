@@ -4,7 +4,7 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:use-module (ffch random)
-  #:export (<place> name type reference-link
+  #:export (<place> name type reference-link area
             preposition-in preposition-near
             pick-place get-region
            )
@@ -14,7 +14,8 @@
 (define-class <place> (<object>)
   (name #:getter name #:init-keyword #:name #:init-form "")
   (type #:getter type #:init-keyword #:type #:init-form #f)
-  (reference-link #:getter reference-link #:init-keyword #:reference-link #:init-form #f))
+  (reference-link #:getter reference-link #:init-keyword #:reference-link #:init-form #f)
+  (area #:getter area #:init-keyword #:area #:init-form #f))
 
 (define-class <location-type> (<object>)
   (name #:getter name #:init-keyword #:name #:init-form "")
@@ -111,10 +112,14 @@
 ;; Data inclusion for filling *data:locations*
 (include "data/locations.scm")
 
-;; Post inclusion : fix reference links + lst->vector on places
+;; Post inclusion : fix reference links + area in places + lst->vector on places
 (define-method (lock-region (reg <region>))
   (let ((ref (reference-link reg)))
-    (map (lambda (x) (slot-set! x (quote reference-link) ref)) (places reg))
+    (map
+      (lambda (x)
+        (slot-set! x (quote reference-link) ref)
+        (slot-set! x (quote area) reg))
+      (places reg))
     (slot-set! reg (quote places) (list->vector (places reg)))
     (map lock-region (subregions reg))))
 
