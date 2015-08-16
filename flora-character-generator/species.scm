@@ -20,6 +20,8 @@
             pick-sex pick-gender pick-age-of-life pick-affinity
             pick-gender-father pick-gender-mother
             pick-birth-place pick-living-place
+            ;
+            family-species base-species species-of mother father foster-parent individual-species
            )
   #:duplicates (merge-generics))
 
@@ -95,6 +97,54 @@
     ((eq? 0 (random 3)) birth-place)
     ((pick-boolean) (pick-place (area birth-place)))
     (#t (pick-birth-place sp))))
+
+;; Family stuff
+(define-class <individual> (<object>)
+  (species-of #:getter species-of #:init-keyword #:species-of)
+  (base-species #:getter base-species #:init-keyword #:base-species #:init-form #f)
+  (mother #:getter mother #:init-keyword #:mother #:init-form #f)
+  (father #:getter father #:init-keyword #:father #:init-form #f)
+  (foster-parent #:getter foster-parent #:init-keyword #:foster-parent #:init-form #f))
+
+(define-method (make-individual (sp <species>) (generate-parents? <boolean>) (generate-gparents? <boolean>))
+  (let* ((possible-parents-lst (possible-parents sp))
+         (parent-species-keys
+            (if (and generate-parents? (< 0 (vector-length possible-parents-lst)))
+               (pick-from (possible-parents sp))
+               #f))
+         (father-species (if (and generate-parents? parent-species-keys) (get-species (car parent-species-keys)) #f))
+         (mother-species (if (and generate-parents? parent-species-keys) (get-species (cdr parent-species-keys)) #f))
+         (father-individual (if father-species (make-individual father-species generate-gparents? #f) #f))
+         (mother-individual (if mother-species (make-individual mother-species generate-gparents? #f) #f))
+         ;
+         (foster-parent-species
+           (if (and generate-parents? (< (random 100) (foster-parent-probability sp)))
+               (select-species
+                  (lambda (x)
+                    (and (not (member (key x) (foster-excluded sp)))
+                         (or (citizen? x) (tribal? x) (isolated? x)))))
+               #f))
+         (foster-parent (if foster-parent-species (make-individual foster-parent-species #f #f) #f))
+         (self
+           (make <individual>
+                 #:species-of sp
+                 #:mother mother-individual
+                 #:father father-individual
+                 #:foster-parent foster-parent))
+        )
+    (slot-set!
+      self
+      (quote base-species)
+      (if (mimic? sp)
+          ((mimic-base-species-chooser sp) self)
+          #f))
+    self))
+;
+(define-method (family-species (sp <species>))
+  (make-individual sp #t #t))
+
+(define-method (individual-species (sp <species>))
+  (make-individual sp #f #f))
 
 ;; Data containers
 (define *data:species* (make-hash-table))
