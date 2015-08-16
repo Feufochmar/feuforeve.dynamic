@@ -6,7 +6,7 @@
   #:use-module (ffch random)
   #:export (<place> name type reference-link
             preposition-in preposition-near
-            pick-place
+            pick-place get-region
            )
 )
 
