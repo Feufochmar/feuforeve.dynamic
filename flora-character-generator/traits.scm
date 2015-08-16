@@ -29,7 +29,7 @@
     ((eq? 'character:species token) (name species))
     ((and (pair? token) (eq? 'pick:category (car token)))
      (pick-from (hash-ref *data:word-categories* (cadr token))))
-    ((eq? 'pick:nature token) (pick-natures 1))
+    ((eq? 'pick:nature token) (car (pick-natures 1)))
     ((eq? 'pick:species:wild token) (name (pick-wild-species)))
     ((eq? 'pick:species:pet token) (name (pick-pet-species)))
     ((eq? 'pick:species:citizen token) (name (pick-character-species)))
