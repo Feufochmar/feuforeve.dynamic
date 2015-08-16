@@ -9,5 +9,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      sea-dragon cockatrice frilled-petal-dragon)
-    (special-cases )))
+      sea-dragon cockatrice frilled-petal-dragon)))

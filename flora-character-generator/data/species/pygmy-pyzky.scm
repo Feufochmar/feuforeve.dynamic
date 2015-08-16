@@ -7,6 +7,4 @@
     (affinity (* 1) (fire 40) (water 40) (air 40) (earth 40))
     (sex (female 1)))
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))

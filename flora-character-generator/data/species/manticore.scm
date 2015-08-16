@@ -8,5 +8,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      flowercat bastian)
-    (special-cases )))
+      flowercat bastian)))

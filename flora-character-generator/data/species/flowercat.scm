@@ -9,5 +9,4 @@
     (common-pattern? #t)
     (crossbreed-with
       foxbat foxbat-spirit vanguard rock-candies manticore aurorian-fox satyr satyrbun
-      satyrqorn satyrfox flower-candies commons-fox mouse)
-    (special-cases )))
+      satyrqorn satyrfox flower-candies commons-fox mouse)))

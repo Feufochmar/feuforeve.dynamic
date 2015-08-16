@@ -9,8 +9,7 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      rock-candies sea-dragon diogoat)
-    (special-cases )))
+      rock-candies sea-dragon diogoat)))
 
 (species scrapgoat
   (name "Scrapgoat")

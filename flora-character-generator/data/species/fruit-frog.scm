@@ -11,7 +11,6 @@
     (ages (young-adult 10) (adult 15) (mature-adult 10)))
   (reproduction
     (common-pattern? #f)
-    (crossbreed-with )
     (special-cases ((father #f) (mother capricornucopia)))))
 
 (species flower-frog
@@ -25,7 +24,6 @@
     (affinity (* 1) (water 30) (earth 30) (acid 30)))
   (reproduction
     (common-pattern? #f)
-    (crossbreed-with )
     (special-cases ((father #f) (mother capricornucopia)))))
 
 (species capricornucopia
@@ -38,5 +36,4 @@
     (sex (female 1)))
   (reproduction
     (common-pattern? #f)
-    (crossbreed-with )
     (special-cases ((father #f) (mother fruit-frog)))))
