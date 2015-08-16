@@ -175,7 +175,7 @@
   (select-species (lambda (x) #t)))
 
 (define-method (keep-species-combination (child <symbol>) father mother)
-  (cons (vector child father mother) *data:species-combinations*))
+  (set! *data:species-combinations* (cons (vector child father mother) *data:species-combinations*)))
 
 (define-method (process-species-combination (child <symbol>) father mother)
   (let ((child-species (get-species child))
