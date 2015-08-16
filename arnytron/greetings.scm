@@ -395,4 +395,5 @@
  (#t "2015-07-09" "salut les réclures de vieux furoncles purulants" ())
  (#t "2015-07-11" "salut les furonculés!" ("Zluglu: salut l’énuclé !" "ArnY: eunuculé?" "Zluglu: non :)" "ArnY: c'etait pourtant bien trouvé!"))
  (#t "2015-07-13" "salut les ballonés du long tunnel ou la lumière ne brille jamais!" ())
+ (#t "2015-08-16" "salut les vieux niakoué tondus au chalumeau!" ("Zluglu: salut à toi, fidèle utilisateur du arnytron"))
 ))
