@@ -313,7 +313,10 @@
                   (name "Disco-Disco")
                   (places
                     (city "Galop")
-                    (town "Shufflebugg" "Skip")
+                    (town "Shufflebugg" "Skip")))
+          (region screaming-island
+                  (name "Screaming Island")
+                  (places
                     (island "Screaming Island")))) ; End of Trebol
         (region chance
                 ((name "Chance"))
