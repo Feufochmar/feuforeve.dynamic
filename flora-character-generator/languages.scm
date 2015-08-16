@@ -9,7 +9,8 @@
   #:use-module (ffch string)
   #:export (<word> transcription pronounciation
             <language> empty-word generate-word
-            <family-names> family-names full-name short-name given-name mother-name father-name
+            family-names full-name short-name given-name mother-name father-name
+            gff-given-name gmf-given-name gfm-given-name gmm-given-name
             pick-language
            )
 )
@@ -155,49 +156,49 @@
   (list (character-other-name names)))
 
 ;
-(define-method (ascendant-given-name (names <family-names>) . rst)
+(define-method (ascendant-given-name (names <family-names>) (rst <list>))
   (if (null? rst)
       (list (empty-word (language-character names)))
       (if ((car rst) names)
           (list (given-name ((car rst) names)))
-          (ascendant-given-name (cdr rst)))))
+          (ascendant-given-name names (cdr rst)))))
 
 (define-method (GiNaM (names <family-names>))
-  (ascendant-given-name names mother father))
+  (ascendant-given-name names (list mother father)))
 
 (define-method (GiNaF (names <family-names>))
-  (ascendant-given-name names father mother))
+  (ascendant-given-name names (list father mother)))
 
 (define-method (GiNaGMM (names <family-names>))
-  (ascendant-given-name names gmm gfm gmf gff))
+  (ascendant-given-name names (list gmm gfm gmf gff)))
 
 (define-method (GiNaGFM (names <family-names>))
-  (ascendant-given-name names gfm gmm gff gmf))
+  (ascendant-given-name names (list gfm gmm gff gmf)))
 
 (define-method (GiNaGMF (names <family-names>))
-  (ascendant-given-name names gmf gff gmm gfm))
+  (ascendant-given-name names (list gmf gff gmm gfm)))
 
 (define-method (GiNaGFF (names <family-names>))
-  (ascendant-given-name names gff gmf gfm gmm))
+  (ascendant-given-name names (list gff gmf gfm gmm)))
 
-(define-method (ascendant-family-name (names <family-names>) . rst)
+(define-method (ascendant-family-name (names <family-names>) (rst <list>))
   (if (null? rst)
       (list (empty-word (language-character names)))
       (if ((car rst) names)
           (list ((car rst) names))
-          (ascendant-given-name (cdr rst)))))
+          (ascendant-family-name names (cdr rst)))))
 
 (define-method (FaGMM (names <family-names>))
-  (ascendant-family-name names gmm-family-name gfm-family-name gmf-family-name gff-family-name))
+  (ascendant-family-name names (list gmm-family-name gfm-family-name gmf-family-name gff-family-name)))
 
 (define-method (FaGFM (names <family-names>))
-  (ascendant-family-name names gfm-family-name gmm-family-name gff-family-name gmf-family-name))
+  (ascendant-family-name names (list gfm-family-name gmm-family-name gff-family-name gmf-family-name)))
 
 (define-method (FaGMF (names <family-names>))
-  (ascendant-family-name names gmf-family-name gff-family-name gmm-family-name gfm-family-name))
+  (ascendant-family-name names (list gmf-family-name gff-family-name gmm-family-name gfm-family-name)))
 
 (define-method (FaGFF (names <family-names>))
-  (ascendant-family-name names gff-family-name gmf-family-name gfm-family-name gmm-family-name))
+  (ascendant-family-name names (list gff-family-name gmf-family-name gfm-family-name gmm-family-name)))
 
 ;
 (define-method (get-name (names <family-names>) name-type (lang <language>) (gender-key <symbol>))
@@ -226,6 +227,15 @@
   (if (father names)
       (get-name names father-name (language-individual (father names)) (gender-key (father names)))
       (list (empty-word (language-character names)))))
+
+(define-method (gff-given-name (names <family-names>))
+  (GiNaGFF names))
+(define-method (gmf-given-name (names <family-names>))
+  (GiNaGMF names))
+(define-method (gfm-given-name (names <family-names>))
+  (GiNaGFM names))
+(define-method (gmm-given-name (names <family-names>))
+  (GiNaGMM names))
 
 ;; Language singleton
 (define *data:languages* (make-hash-table))
