@@ -220,12 +220,12 @@
 
 (define-method (mother-name (names <family-names>))
   (if (mother names)
-      (get-name names mother-name (language-individual (mother names)) (gender-key (mother names)))
+      (get-name names mother-short-name (language-individual (mother names)) (gender-key (mother names)))
       (list (empty-word (language-character names)))))
 
 (define-method (father-name (names <family-names>))
   (if (father names)
-      (get-name names father-name (language-individual (father names)) (gender-key (father names)))
+      (get-name names father-short-name (language-individual (father names)) (gender-key (father names)))
       (list (empty-word (language-character names)))))
 
 (define-method (gff-given-name (names <family-names>))
