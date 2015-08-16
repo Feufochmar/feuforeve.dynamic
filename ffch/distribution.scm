@@ -5,7 +5,7 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:use-module (srfi srfi-1)
-  #:export (make-distribution add-to-distribution fill-distribution pick-from)
+  #:export (make-distribution add-to-distribution fill-distribution pick-from check-only contains?)
 )
 
 ;;;;
@@ -85,3 +85,17 @@
       0
       (random (total dist)))
   ))
+
+;;;;
+;; Check that the items of the distribution are only in the list of the given items
+(define-method (check-only (dist <distribution>) (lst <pair>))
+  (hash-map->list
+    (lambda (k v)
+      (if (not (member k lst))
+          (error "Distribution contains an unknown item: " k)))
+    (items dist)))
+
+;;;;
+;; Check if an item is in the distribution
+(define-method (contains? itm (dist <distribution>))
+  (member itm (hash-map->list (lambda (k v) k) (items dist))))
