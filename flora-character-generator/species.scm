@@ -22,6 +22,7 @@
             pick-birth-place pick-living-place
             ;
             family-species base-species species-of mother father foster-parent individual-species
+            partners+children
            )
   #:duplicates (merge-generics))
 
@@ -145,6 +146,55 @@
 
 (define-method (individual-species (sp <species>))
   (make-individual sp #f #f))
+
+(define-method (individual-species (sp <species>) (father <individual>) (mother <individual>))
+  (let ((self (make <individual> #:species-of sp #:mother mother #:father father)))
+    (slot-set!
+      self
+      (quote base-species)
+      (if (mimic? sp)
+          ((mimic-base-species-chooser sp) self)
+          #f))
+    self))
+
+(define-method (partners+children (self <individual>) (age <age-of-life>) (sex <sex>) (gender <gender>))
+  (let* ((sp (species-of self))
+         (nb-children-per-partner (pick-nb-partners-children age))
+        )
+    (map
+      (lambda (x)
+        (let* ((nb-child x)
+               (is-mother? (mother? sex))
+               (partner-possible-list (if is-mother? possible-husbands possible-spouses))
+               (partner-species
+                 (cond
+                  ((eq? 0 (random 16))
+                   (pick-character-species))
+                  ((< 0 (vector-length (partner-possible-list sp)))
+                   (get-species (pick-from (partner-possible-list sp))))
+                  (#t (pick-character-species))))
+               (partner (individual-species partner-species))
+               (possible-child-list
+                 (or (hash-ref *data:reproduction:parents->child*
+                               (if is-mother?
+                                   (cons (key partner-species) (key sp))
+                                   (cons (key sp) (key partner-species))))
+                     (vector)))
+              )
+          (list
+            partner
+            is-mother?
+            (filter identity
+              (map
+                (lambda (y)
+                  (if (< 0 (vector-length possible-child-list))
+                      (individual-species
+                        (get-species (pick-from possible-child-list))
+                        (if is-mother? partner self)
+                        (if is-mother? self partner))
+                      #f))
+                (make-list nb-child #f))))))
+      nb-children-per-partner)))
 
 ;; Data containers
 (define *data:species* (make-hash-table))
