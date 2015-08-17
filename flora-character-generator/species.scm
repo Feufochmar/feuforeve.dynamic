@@ -20,6 +20,7 @@
             pick-sex pick-gender pick-age-of-life pick-affinity
             pick-gender-father pick-gender-mother
             pick-birth-place pick-living-place
+            pick-way-of-life
             ;
             family-species base-species species-of mother father foster-parent individual-species
             partners+children
@@ -98,6 +99,16 @@
     ((eq? 0 (random 3)) birth-place)
     ((pick-boolean) (pick-place (area birth-place)))
     (#t (pick-birth-place sp))))
+
+(define-method (pick-way-of-life (sp <species>))
+  (let ((possible-ways
+          (filter identity
+            (map
+              (lambda (x) (if ((car x) sp) (cdr x) #f))
+              (list (cons citizen? #:citizen) (cons tribal? #:tribal) (cons isolated? #:isolated))))))
+    (if (null? possible-ways)
+        #:isolated
+        (pick-from possible-ways))))
 
 ;; Family stuff
 (define-class <individual> (<object>)
