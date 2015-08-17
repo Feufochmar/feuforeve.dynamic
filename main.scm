@@ -5,6 +5,7 @@
   #:use-module (ffch webtemplates)
   #:use-module (arnytron arnytron)
   #:use-module (flag-generator flag-generator)
+  #:use-module (flora-character-generator description)
   #:use-module (ice-9 regex)
   #:duplicates (merge-generics)
 )
@@ -110,11 +111,7 @@
   (templated-weblet
     feuforeve-template
     (lambda (query)
-      (article ((title "Flora character generator")(author "feuforeve.fr"))
-        (paragraph
-          "Soon..."
-        )
-      )
+      (generate-character-description)
     )))
 
 ;; Flora character generator : tumblr sendmail output
@@ -131,7 +128,7 @@
   (templated-weblet
     feuforeve-template
     (lambda (query)
-      (article ((title "Flora character generator: pick...")(author "feuforeve.fr"))
+      (article ((title "Floraverse character generator: pick...")(author "feuforeve.fr"))
         (paragraph
           "Soon..."
         )
