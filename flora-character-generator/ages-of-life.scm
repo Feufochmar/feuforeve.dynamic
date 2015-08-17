@@ -26,10 +26,9 @@
       #f))
 
 (define-method (pick-nb-partners-children (age <age-of-life>))
-  (list->vector
-    (map
-      (lambda (x) (random (+ 1 (max-children-by-partner age))))
-      (make-list (random (+ 1 (max-nb-partners age))) #f))))
+  (map
+    (lambda (x) (random (+ 1 (max-children-by-partner age))))
+    (make-list (random (+ 1 (max-nb-partners age))) #f)))
 
 ;; Data singleton
 (define *data:ages-of-life* (make-hash-table))
