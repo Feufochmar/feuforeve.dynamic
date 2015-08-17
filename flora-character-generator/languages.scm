@@ -29,6 +29,9 @@
 (define-method (transcription (w <word>))
   (apply string-append (map transcription (phonemes w))))
 
+(define-method (transcription (w <word>) (capitalize? <boolean>))
+  (string-capitalize-1st (transcription w)))
+
 (define-method (pronounciation (w <word>))
   (apply string-append (map pronounciation (phonemes w))))
 
@@ -40,7 +43,7 @@
   (string-join (map pronounciation lst) " "))
 
 (define-method (transcription (lst <pair>) (capitalize? <boolean>))
-  (string-join (map (lambda (x) (string-capitalize-1st (transcription x))) lst) " "))
+  (string-join (map (lambda (x) (transcription x capitalize?)) lst) " "))
 
 ;; Naming rules class
 (define-class <naming-rules> (<object>)
