@@ -16,6 +16,7 @@
             key name reference-link
             ;
             get-species pick-character-species pick-pet-species pick-wild-species pick-species
+            list-character-species
             ;
             pick-sex pick-gender pick-age-of-life pick-affinity
             pick-gender-father pick-gender-mother
@@ -234,6 +235,11 @@
 
 (define-method (pick-species)
   (select-species (lambda (x) #t)))
+
+(define-method (list-character-species)
+  (filter
+    (lambda (x) (or (citizen? x) (tribal? x) (isolated? x)))
+    (hash-map->list (lambda (k v) v) *data:species*)))
 
 (define-method (keep-species-combination (child <symbol>) father mother)
   (set! *data:species-combinations* (cons (vector child father mother) *data:species-combinations*)))
