@@ -6,6 +6,8 @@
   #:use-module (arnytron arnytron)
   #:use-module (flag-generator flag-generator)
   #:use-module (flora-character-generator description)
+  #:use-module (flora-character-generator generator)
+  #:use-module (ffch article-exporters markdown-tumblr)
   #:use-module (ice-9 regex)
   #:duplicates (merge-generics)
 )
@@ -111,7 +113,7 @@
   (templated-weblet
     feuforeve-template
     (lambda (query)
-      (generate-character-description)
+      (generate-character-description (generate-character))
     )))
 
 ;; Flora character generator : tumblr sendmail output
@@ -119,9 +121,9 @@
   (weblet ((error-code 200)
            (content-type "text/plain;charset=UTF-8"))
     ((path query port)
-     (display "Soon..." port)(newline port)
-     )
-  ))
+     (let ((art (generate-character-description (generate-character))))
+       (display (article->markdown-tumblr art) port)(newline port)
+     ))))
 
 ;; Flora character generator: Pick a species
 (add-weblet wcontainer (list "FloraCharacterGenerator" "pick...")
