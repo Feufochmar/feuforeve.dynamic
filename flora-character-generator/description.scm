@@ -37,9 +37,14 @@
 
 ;;;;
 ;; Description generation
-(define-method (generate-character-description)
-  (let ((char (generate-character)))
-    (article ((title "Floraverse character generator")(author "feuforeve.fr"))
+(define-method (generate-character-description (char <character>))
+  (let* ((gen (gender char))
+         (all-names (family char))
+         (ttl (string-append
+                (string-capitalize-1st (title-short gen)) " "
+                (transcription (short-name all-names) #t)))
+        )
+    (article ((title ttl)(author "feuforeve.fr"))
       (introduction-section char)
       (name-section char)
       (birth-section char)
@@ -242,7 +247,7 @@
         (section ((title "Pets"))
           (paragraph
             (string-capitalize-1st subject) " " (3rd-person-of "own" plural) " "
-            (map display-pet (cdr pets)) (if (not (null? (cdr pets))) " and " "")
+            (map display-pet (cdr pets)) (if (not (null? (cdr pets))) "and " "")
             (with-undefined-article-and-link (species (car pets)) (base-species (car pets)))
             " named " (string-capitalize-1st (transcription (name (car pets)))) ". "
           ))
