@@ -261,3 +261,82 @@
     'textarea
     (attributes-of cnt)
     (next-method)))
+
+;; Form
+(define-method (attributes-of (cnt <form>))
+  (if (or (style-class cnt) (id cnt) (submit-action cnt) (submit-method cnt))
+    (filter identity
+      (list
+        '@
+        (if (style-class cnt)
+            (list 'class (style-class cnt))
+            #f)
+        (if (id cnt)
+            (list 'id (id cnt))
+            #f)
+        (if (submit-action cnt)
+            (list 'action (submit-action cnt))
+            #f)
+        (if (submit-method cnt)
+            (list 'method (submit-method cnt))
+            #f)
+      ))
+    ""))
+
+(define-method (article->sxml-html (cnt <form>) (section-level <integer>))
+  (list
+    'form
+    (attributes-of cnt)
+    (next-method)))
+
+;; Selector
+(define-method (attributes-of (cnt <selector>))
+  (if (or (style-class cnt) (id cnt) (name cnt) (size cnt))
+    (filter identity
+      (list
+        '@
+        (if (style-class cnt)
+            (list 'class (style-class cnt))
+            #f)
+        (if (id cnt)
+            (list 'id (id cnt))
+            #f)
+        (if (name cnt)
+            (list 'name (name cnt))
+            #f)
+        (if (size cnt)
+            (list 'size (size cnt))
+            #f)
+      ))
+    ""))
+
+(define-method (article->sxml-html (cnt <selector>) (section-level <integer>))
+  (list
+    'select
+    (attributes-of cnt)
+    (map
+      (lambda (x)
+        (list 'option (list '@ (list 'value (car x))) (cdr x)))
+      (contents cnt))))
+
+;; Submit button
+(define-method (article->sxml-html (cnt <submit-button>) (section-level <integer>))
+  (list
+    'input
+    (filter identity
+      (list
+        '@
+        (list 'type "submit")
+        (if (style-class cnt)
+            (list 'class (style-class cnt))
+            #f)
+        (if (id cnt)
+            (list 'id (id cnt))
+            #f)
+        (if (name cnt)
+            (list 'name (name cnt))
+            #f)
+        (if (value cnt)
+            (list 'value (value cnt))
+            #f)
+      ))))
