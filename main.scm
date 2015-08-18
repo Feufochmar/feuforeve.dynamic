@@ -247,7 +247,7 @@
         (paragraph
           "ArnYtron3000, un générateur " (deleted "d'insultes")
           " de salutations se basant sur les légendaires salutations "
-          "postées par " (hyperlink ((to "")) "ArnY") " sur le canal IRC #linux de "
+          "postées par " (hyperlink ((to "http://twitter.com/ArnY")) "ArnY") " sur le canal IRC #linux de "
           (hyperlink ((to "https://www.rezosup.org/")) "RezoSup") ". "
         )
         (paragraph
