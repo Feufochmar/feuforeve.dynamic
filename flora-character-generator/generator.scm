@@ -68,7 +68,10 @@
       (#t "tiny"))))
 
 (define-method (generate-character)
-  (let* ((species (pick-character-species))
+  (generate-character #f))
+
+(define-method (generate-character species-key)
+  (let* ((species (or (get-species species-key) (pick-character-species)))
          (sex (pick-sex species))
          (gender (pick-gender species sex))
          (age (pick-age-of-life species))
