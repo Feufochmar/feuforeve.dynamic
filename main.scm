@@ -7,6 +7,7 @@
   #:use-module (flag-generator flag-generator)
   #:use-module (flora-character-generator description)
   #:use-module (flora-character-generator generator)
+  #:use-module (flora-character-generator species)
   #:use-module (ffch article-exporters markdown-tumblr)
   #:use-module (ice-9 regex)
   #:duplicates (merge-generics)
@@ -113,7 +114,9 @@
   (templated-weblet
     feuforeve-template
     (lambda (query)
-      (generate-character-description (generate-character))
+      (let* ((species-key-str (hash-ref query "species"))
+             (species-key-sym (if species-key-str (string->symbol species-key-str) #f)))
+        (generate-character-description (generate-character species-key-sym)))
     )))
 
 ;; Flora character generator : tumblr sendmail output
@@ -121,7 +124,9 @@
   (weblet ((error-code 200)
            (content-type "text/plain;charset=UTF-8"))
     ((path query port)
-     (let ((art (generate-character-description (generate-character))))
+     (let* ((species-key-str (hash-ref query "species"))
+            (species-key-sym (if species-key-str (string->symbol species-key-str) #f))
+            (art (generate-character-description (generate-character species-key-sym))))
        (display (article->markdown-tumblr art) port)(newline port)
      ))))
 
@@ -132,10 +137,16 @@
     (lambda (query)
       (article ((title "Floraverse character generator: pick...")(author "feuforeve.fr"))
         (paragraph
-          "Soon..."
-        )
-      )
-    )))
+          "Choose a species: "
+          (form ((submit-action "/FloraCharacterGenerator") (submit-method "GET"))
+            (selector ((name "species") (size 15))
+              (map
+                (lambda (x)
+                  (cons (symbol->string (key x)) (name x)))
+                (list-character-species)))
+            (linefeed)
+            (submit-button (value "Generate"))
+          ))))))
 
 ;; Flora character generator: About
 (add-weblet wcontainer (list "FloraCharacterGenerator" "about")
