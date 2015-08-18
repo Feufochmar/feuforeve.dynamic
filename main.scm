@@ -142,12 +142,63 @@
   (templated-weblet
     feuforeve-template
     (lambda (query)
-      (article ((title "About the Floraverse character generator")(author "Feufochmar")(date "2015-08-02"))
-        (paragraph
-          "Soon..."
-        )
-      )
-    )))
+      (article ((title "About the Floraverse Character Generator")(author "Feufochmar")(date "2015-08-18"))
+        (section ((title "The generator"))
+          (paragraph
+            "The Floraverse Character Generator generates characters living in the "
+            (hyperlink ((to "http://floraverse.com")) "Floraverse") " world. "
+            "It is inspired by " (hyperlink ((to "http://fav.me/d7569je")) "this journal post on deviantArt")
+            ", which originally used the "
+            (hyperlink ((to "http://marnok.com/content/_adventure/101npcs.php")) "Marnok's NPC generator") ". "))
+        (section ((title "History"))
+          (paragraph
+            "The current generator deployed on feuforeve.fr is the third version of the generator. " (linefeed)
+            "The first version was written in Java and was originally a desktop application, and I then added "
+            "the feature to run it as a webservice. " (linefeed)
+            "The second version was written in Guile Scheme and ran only as a webservice. " (linefeed)
+            "The current version is based on the second version and is the result of the merger "
+            "of the different generators that are hosted on this website into a single project "
+            "as they were sharing some code. "))
+        (section ((title "Sources"))
+          (paragraph
+            "The first and second versions of the generator are open-source and released under the terms of "
+            "the GNU General Public License version 2 or any later version (GPLv2+). "
+            "The sources are provided through " (hyperlink ((to "http://git-scm.com/")) "git") " repositories."
+            "The third version is not (yet) open-sourced. ")
+          (section ((title "Java generator"))
+            (paragraph
+              "The first generator requires a Java 8 Runtime Environment (JRE) to run. "
+              "It requires a Java 8 Development Kit (JDK) and ant to build. ")
+            (paragraph
+              "To get the sources, clone the repository "
+              (code "http://projects.feuforeve.fr/flora-npc-generator-java.git") ". "
+              "You can do this under GNU/Linux by typing in a terminal: "
+              (preformatted
+                (code "git clone http://projects.feuforeve.fr/flora-npc-generator-java.git")))
+            (paragraph
+              "This generator can run in two different modes. "
+              "By default, it runs as a desktop application. "
+              "To run the generator as a webservice, the argument " (code "-server")
+              " must be added to the command line. "
+              "The output format of the webservice can be configured between html, xml and json. "))
+          (section ((title "Scheme generator"))
+            (paragraph
+              "The second generator requires "
+              (hyperlink ((to "http://www.gnu.org/software/guile/")) "GNU Guile 2") " to run. ")
+            (paragraph
+              "To get the sources, clone the repository "
+              (code "http://projects.feuforeve.fr/flora-character-generator-scm.git") ". "
+              "You can do this under GNU/Linux by typing in a terminal: "
+              (preformatted
+                (code "git clone http://projects.feuforeve.fr/flora-character-generator-scm.git")))
+            (paragraph
+              "The generator only runs in server mode and mainly outputs as html. "
+              "There is a special output at " (code "/sendmail") " in order to post generated "
+              "characters on " (hyperlink ((to "http://floraversegenerators.tumblr.com/")) "Tumblr")
+              " using " (code "sendmail") ". "
+              "Unlike the first generator, this generator also allows to choose the species "
+              "of the generated character. "))
+        )))))
 
 ;; ArnyTron3000
 (add-weblet wcontainer (list "ArnYtron3000")
