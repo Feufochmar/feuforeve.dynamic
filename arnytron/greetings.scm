@@ -398,4 +398,5 @@
  (#t "2015-08-16" "salut les vieux niakoué tondus au chalumeau!" ("Zluglu: salut à toi, fidèle utilisateur du arnytron"))
  (#f "2015-08-17" "bow before me for I am soon bow.before.me.for.I.am.r00t.fr !" ("Zluglu: bow before me for I am a mauviette44"))
  (#f "2015-08-18" "bow before me for why the fuck am I still not bow.before.me.for.I.am.r00t.fr ?!?" ())
+ (#t "2015-08-19" "salut les vieux singes tout fripés dont l'haleine de dragon mort n'égale que la laideur de poux en pétrufaction!" ("Zluglu: :)" "Zluglu: he’s back !" "Zluglu: and he’s r00t.fr !" "ArnY: oh yeah baby!"))
 ))
