@@ -68,15 +68,20 @@
     (attributes-of cnt)
     (next-method)))
 
+;; Navigation as contained block
+(define-method (article->sxml-html (cnt <navigation>) (section-level <integer>))
+  (list
+    'nav
+    (attributes-of cnt)
+    (next-method)))
+
 ;; Terminals
 (define-method (article->sxml-html (cnt <string>) (section-level <integer>))
   cnt)
 (define-method (article->sxml-html (cnt <number>) (section-level <integer>))
   cnt)
-(define-method (article->sxml-html (cnt <pair>) (section-level <integer>))
+(define-method (article->sxml-html (cnt <list>) (section-level <integer>))
   (map (lambda (x) (article->sxml-html x section-level)) cnt))
-(define-method (article->sxml-html (cnt <null>) (section-level <integer>))
-  "")
 
 ;; Section
 (define-method (article->sxml-html (cnt <section>) (section-level <integer>))

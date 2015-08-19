@@ -4,7 +4,7 @@
   #:use-module (oop goops)
   #:use-module (ffch containers)
   #:export (; Types
-            <article> <header> <footer>
+            <article> <header> <footer> <navigation>
             <section> <paragraph>
             <strong> <emphase> <deleted> <inserted> <mark>
             <hyperlink> <text-list> <linefeed> <image> <figure>
@@ -12,7 +12,7 @@
             ; Getters
             title author date to ordered? caption alt source
             ; Construction macros and functions
-            article header footer
+            article header footer navigation
             section paragraph
             strong emphase deleted inserted mark
             hyperlink text-list linefeed image figure
@@ -38,6 +38,9 @@
 
 ;; Footer : something coming last or after an article
 (define-class <footer> (<container-type> <content-type>))
+
+;; Navigation: something containing links to other places
+(define-class <navigation> (<container-type> <content-type>))
 
 ;; Section : a part of the article with a title
 (define-class <section> (<container-type> <content-type>)
@@ -96,6 +99,7 @@
 (container-type-constructor article <article>)
 (container-type-constructor header <header>)
 (container-type-constructor footer <footer>)
+(container-type-constructor navigation <navigation>)
 (container-type-constructor section <section>)
 (container-type-constructor paragraph <paragraph>)
 (container-type-constructor strong <strong>)
