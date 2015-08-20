@@ -1,0 +1,20 @@
+[Unit]
+Description=feuforeve.fr dynamic website
+
+[Service]
+#User=http
+#Group=http
+WorkingDirectory=/opt/feuforeve-fr
+## Uncomment the next lines to update the sources if:
+# - the application needs to be compiled every time it is started
+#   * $XDG_CACHE_HOME may need to be changed to its real value
+#   * a more specific path may be wanted inside guile cache
+# - the installation is a git clone
+# - a git pull is wanted every time the server is started
+#ExecStartPre=/usr/bin/rm -rf $XDG_CACHE_HOME/guile/*
+#ExecStartPre=/usr/bin/git pull
+Environment="GUILE_LOAD_PATH=."
+ExecStart=/usr/bin/guile main.scm
+
+[Install]
+WantedBy=multi-user.target

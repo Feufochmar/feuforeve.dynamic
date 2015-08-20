@@ -1,0 +1,12 @@
+[Unit]
+Description=Floraverse character generator Poster
+Requires=feuforeve-fr.service,postfix.service
+After=feuforeve-fr.service,postfix.service
+
+[Service]
+#User=http
+#Group=http
+WorkingDirectory=/opt/feuforeve-fr/scripts/
+Type=oneshot
+ExecStart=/opt/feuforeve-fr/scripts/flora-character-generator-poster.sh
+
