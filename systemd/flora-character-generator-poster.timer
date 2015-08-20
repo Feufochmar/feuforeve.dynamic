@@ -1,0 +1,10 @@
+[Unit]
+Description=Floraverse Character Generator Poster - Timer
+
+[Timer]
+Persistent=false
+OnCalendar=*-*-* 01:00:00
+Unit=flora-character-generator-poster.service
+
+[Install]
+WantedBy=multi-user.target

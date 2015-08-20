@@ -1,0 +1,10 @@
+[Unit]
+Description=ArnYtron3000 Poster - Timer
+
+[Timer]
+Persistent=false
+OnCalendar=*-*-* 6:00:00
+Unit=arnytron3000-poster.service
+
+[Install]
+WantedBy=multi-user.target
