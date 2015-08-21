@@ -400,4 +400,5 @@
  (#f "2015-08-18" "bow before me for why the fuck am I still not bow.before.me.for.I.am.r00t.fr ?!?" ())
  (#t "2015-08-19" "salut les vieux singes tout fripés dont l'haleine de dragon mort n'égale que la laideur de poux en pétrufaction!" ("Zluglu: :)" "Zluglu: he’s back !" "Zluglu: and he’s r00t.fr !" "ArnY: oh yeah baby!"))
  (#t "2015-08-20" "salut les merdouillus de la kekette molle!" ("katyucha: salut ArnY, inspiration de mon MOTD"))
+ (#t "2015-08-21" "salut les enrhumés du gland phosphorescent!" ())
 ))
