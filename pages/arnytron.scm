@@ -88,14 +88,23 @@
     (templated-weblet
       arnytron-template
       (lambda (query)
-        (let ((real-quote (pick-citation ArnYtron3000)))
-          (article ((title (string-join (list "Le " (date real-quote) ", ArnY a salué #linux en disant...") ""))
+        (let* ((asked-date (hash-ref query "date"))
+               (real-quote
+                 (if asked-date
+                     (pick-citation ArnYtron3000 asked-date)
+                     (pick-citation ArnYtron3000)))
+               (page-title
+                 (if (and asked-date (not (equal? asked-date (date real-quote))))
+                     (string-join
+                       (list "Je ne sais pas si ArnY a salué #linux le " asked-date
+                             " mais, le " (date real-quote) ", ArnY a salué #linux en disant...") "")
+                     (string-join
+                       (list "Le " (date real-quote) ", ArnY a salué #linux en disant...") ""))))
+          (article ((title page-title)
                     (author "ArnY")(date (date real-quote)))
             (section
               (paragraph
-                (strong (citation real-quote))
-              )
-            )
+                (strong (citation real-quote))))
             (if (not (null? (reactions real-quote)))
               (section ((title "Réactions")) (map (lambda (x) (list x (linefeed))) (reactions real-quote)))
               ""))
