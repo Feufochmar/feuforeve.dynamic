@@ -28,10 +28,16 @@
 (define home-template
   (default-template
     default-meta
-    (navigation
-      (section ((style-class "nav-item")) (hyperlink ((to "/")) "Home"))
-      (section ((style-class "nav-item")) (hyperlink ((to "/AboutMe")) "About me"))
-    )))
+    "/"
+    (lambda (path query)
+      (navigation
+        (section
+          ((style-class "nav-item"))
+          (nav-link-to "/" (nav-current-path path) "Home"))
+        (section
+          ((style-class "nav-item"))
+          (nav-link-to "/AboutMe" (nav-current-path path) "About me"))
+      ))))
 
 ;; Home page
 (define (load-home wcontainer)
