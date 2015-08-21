@@ -13,11 +13,16 @@
 (define (flag-generator-template meta)
   (default-template
     meta
-    (navigation
-      (section ((style-class "nav-item")) (hyperlink ((to "/FlagGenerator")) "Flag generator"))
-      (section ((style-class "nav-item")) (hyperlink ((to "/FlagGenerator/RawFlag")) "Flag generator (Raw SVG)"))
-      (section ((style-class "nav-item")) (hyperlink ((to "/FlagGenerator/about")) "About the generator"))
-    )))
+    "/FlagGenerator"
+    (lambda (path query)
+      (navigation
+        (section ((style-class "nav-item"))
+                 (nav-link-to "/FlagGenerator" (nav-current-path path) "Flag generator"))
+        (section ((style-class "nav-item"))
+                 (hyperlink ((to "/FlagGenerator/RawFlag")) "Flag generator (Raw SVG)"))
+        (section ((style-class "nav-item"))
+                 (nav-link-to "/FlagGenerator/about" (nav-current-path path) "About the generator"))
+      ))))
 
 ;; Flag generator
 (define (load-flag-generator wcontainer)

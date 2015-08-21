@@ -12,15 +12,42 @@
   #:duplicates (merge-generics)
 )
 
+;;
+(define (species-key query)
+  (let ((species-key-str (hash-ref query "species")))
+    (if species-key-str
+        (string->symbol species-key-str)
+        #f)))
+
 ;; Template
 (define fcg-template
   (default-template
     default-meta
-    (navigation
-      (section ((style-class "nav-item")) (hyperlink ((to "/FloraCharacterGenerator")) "New character"))
-      (section ((style-class "nav-item")) (hyperlink ((to "/FloraCharacterGenerator/pick...")) "Pick species..."))
-      (section ((style-class "nav-item")) (hyperlink ((to "/FloraCharacterGenerator/about")) "About the generator"))
-    )))
+    "/FloraCharacterGenerator"
+    (lambda (path query)
+      (let* ((species-key-sym (species-key query))
+             (species (if species-key-sym (get-species species-key-sym) #f)))
+        (navigation
+          (if species
+              (section
+                ((style-class "nav-item"))
+                (hyperlink
+                  ((to (string-append "/FloraCharacterGenerator?species=" (symbol->string species-key-sym))))
+                  (string-append "New character (" (name species) ")")))
+              "")
+          (section
+            ((style-class "nav-item"))
+            (hyperlink ((to "/FloraCharacterGenerator"))
+                       (if species
+                           "New character (random species)"
+                           "New character")))
+          (section
+            ((style-class "nav-item"))
+            (nav-link-to "/FloraCharacterGenerator/pick..." (nav-current-path path) "Pick a species..."))
+          (section
+            ((style-class "nav-item"))
+            (nav-link-to "/FloraCharacterGenerator/about" (nav-current-path path) "About the generator"))
+        )))))
 
 ;; Flora character generator
 (define (load-fcg-generator wcontainer)
@@ -28,8 +55,7 @@
     (templated-weblet
       fcg-template
       (lambda (query)
-        (let* ((species-key-str (hash-ref query "species"))
-               (species-key-sym (if species-key-str (string->symbol species-key-str) #f)))
+        (let ((species-key-sym (species-key query)))
           (generate-character-description (generate-character species-key-sym)))
       ))))
 
@@ -39,8 +65,7 @@
     (weblet ((error-code 200)
              (content-type "text/plain;charset=UTF-8"))
       ((path query port)
-       (let* ((species-key-str (hash-ref query "species"))
-              (species-key-sym (if species-key-str (string->symbol species-key-str) #f))
+       (let* ((species-key-sym (species-key query))
               (art (generate-character-description (generate-character species-key-sym))))
          (display (article->markdown-tumblr art) port)(newline port)
        )))))
