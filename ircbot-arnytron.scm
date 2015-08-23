@@ -12,71 +12,10 @@
 (set! *random-state* (random-state-from-platform))
 (set-port-encoding! (current-output-port) "UTF-8")
 
-(define (parse-args args)
-  (letrec ((helper
-             (lambda (lst h)
-               (cond
-                 ((null? lst) h)
-                 ((and (string=? (car lst) "--server") (not (null? (cdr lst))))
-                  (begin
-                    (hash-set! h #:server (cadr lst))
-                    (helper (cddr lst) h)))
-                 ((and (string=? (car lst) "--port") (not (null? (cdr lst))))
-                  (begin
-                    (hash-set! h #:port (cadr lst))
-                    (helper (cddr lst) h)))
-                 ((and (string=? (car lst) "--channels") (not (null? (cdr lst))))
-                  (begin
-                    (hash-set! h #:channels (string-split (cadr lst) #\:))
-                    (helper (cddr lst) h)))
-                 ((and (string=? (car lst) "--nick") (not (null? (cdr lst))))
-                  (begin
-                    (hash-set! h #:nick (cadr lst))
-                    (helper (cddr lst) h)))
-                 ((and (string=? (car lst) "--command-prefix") (not (null? (cdr lst))))
-                  (begin
-                    (hash-set! h #:prefix (cadr lst))
-                    (helper (cddr lst) h)))
-                 ((and (string=? (car lst) "--help") (not (null? (cdr lst))))
-                  (begin
-                    (hash-set! h #:help #t)
-                    (display
-                      (string-append
-                        "ircbot-arnytron"
-                        " --server <server> [--port <port>] [--nick <nick>]"
-                        " --channels <channel>[:<channel>[:...]] [--command-prefix <prefix>]\n"
-                        "With:\n"
-                        " <server> : the server to connect to (required)\n"
-                        " <port> : the server port to connect to (optional, default: 6667)\n"
-                        " <nick> : the nickname to use (optional, default: ArnYtron)\n"
-                        " <channel> : a channel to join, without the beginning # (required)\n"
-                        "             Several channel can be joined. The channels must be separed by colons.\n"
-                        " <prefix> : the command prefix to use (optional, default: !\n"))
-                    h))
-                 (#t (error "Invalid arguments. See --help"))
-                ))))
-    (helper (cdr args) (make-hash-table))))
-
 (define (main args)
-  (let* ((hash-args (parse-args args))
-         (help? (hash-ref hash-args #:help))
-         (server (or help? (hash-ref hash-args #:server) (error "No server given.")))
-         (port-str (or help? (hash-ref hash-args #:port) "6667"))
-         (port (or help? (string->number port-str) (error "Invalid port")))
-         (nick (or help? (hash-ref hash-args #:nick) "ArnYtron"))
-         (channels (or help? (hash-ref hash-args #:channels) (error "No channel given.")))
-         (prefix (or help? (hash-ref hash-args #:prefix) "!"))
-         (ircbot
-           (or help?
-               (make-ircbot
-                 #:nick nick
-                 #:server server
-                 #:port port
-                 #:prefix prefix
-                 #:channels (map (lambda (x) (string-append "#" x)) channels))))
-         (ArnYtron3000 (or help? (arnytron)))
-         )
-    (if (not help?)
+  (let ((ircbot (make-ircbot-from-command-line-args args))
+        (ArnYtron3000 (arnytron)))
+    (if ircbot
         (begin
           (add-command-handler!
             ircbot
