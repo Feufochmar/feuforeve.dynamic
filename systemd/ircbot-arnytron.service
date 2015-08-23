@@ -1,0 +1,16 @@
+[Unit]
+Description=ArnYtron3000 IRC bot
+Requires=feuforeve-fr.service
+After=feuforeve-fr.service
+
+[Service]
+#User=http
+#Group=http
+WorkingDirectory=/opt/feuforeve-fr
+# guile-irc is needed. If installed on the system, remove it from GUILE_LOAD_PATH.
+Environment="GUILE_LOAD_PATH=.:../guile-irc"
+# Replace the variables $IRC-SERVER $IRC-PORT $NICK $CHANNEL $LOGDIR with the parameters the bot must use
+ExecStart=/usr/bin/guile -e "(@ (ircbot-arnytron) main)" -- --server $IRC-SERVER --port $IRC-PORT --nick $NICK --channels $CHANNEL --command-prefix : --log-file $LOGDIR/arnytron.log
+
+[Install]
+WantedBy=multi-user.target
