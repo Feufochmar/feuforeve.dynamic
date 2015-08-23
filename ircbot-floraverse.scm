@@ -95,31 +95,48 @@
         (string-join (traits character) ""))
     )))
 
+(define (add-handlers ircbot)
+  ; Add command
+  (add-command-handler!
+    ircbot
+    "generate"
+    (lambda (ircbot channel asker args)
+      (let ((character (generate-character (string->symbol (string-downcase (string-join args "-"))))))
+        (send-privmsg ircbot channel (generate-description character)))))
+  (add-command-handler!
+    ircbot
+    "character-generator"
+    (lambda (ircbot channel asker args)
+      (send-privmsg ircbot channel (string-append asker ": http://feuforeve.fr/FloraCharacterGenerator"))))
+  (add-command-handler!
+    ircbot
+    "reference"
+    (lambda (ircbot channel asker args)
+      (let* ((species-key (string->symbol (string-downcase (string-join args "-"))))
+            (species (get-species species-key)))
+        (send-privmsg ircbot channel
+                      (if species
+                          (string-append asker ": " (reference-link species))
+                          (string-append asker ": No data on this subject."))))))
+)
+
+(define nbfailures 0)
 (define (main args)
-  (let ((ircbot (make-ircbot-from-command-line-args args)))
-    (if ircbot
-        (begin
-          ; Generate command
-          (add-command-handler!
-            ircbot
-            "generate"
-            (lambda (ircbot channel asker args)
-              (let ((character (generate-character (string->symbol (string-downcase (string-join args "-"))))))
-                (send-privmsg ircbot channel (generate-description character)))))
-          (add-command-handler!
-            ircbot
-            "character-generator"
-            (lambda (ircbot channel asker args)
-              (send-privmsg ircbot channel (string-append asker ": http://feuforeve.fr/FloraCharacterGenerator"))))
-          (add-command-handler!
-            ircbot
-            "reference"
-            (lambda (ircbot channel asker args)
-              (let* ((species-key (string->symbol (string-downcase (string-join args "-"))))
-                     (species (get-species species-key)))
-                (send-privmsg ircbot channel
-                              (if species
-                                  (string-append asker ": " (reference-link species))
-                                  (string-append asker ": No data on this subject."))))))
-          ; Run bot
-          (run-bot ircbot)))))
+  (catch
+    #t
+    (lambda ()
+      (let ((ircbot (make-ircbot-from-command-line-args args)))
+        (if ircbot
+            (begin
+              (add-handlers ircbot)
+              ; Run bot
+              (run-bot ircbot)))))
+    (lambda (key . args)
+      (display "Exception occurred: ")(display key)(display " ")(display args)(newline)))
+  ; Restart after a timeout if exception occurred
+  ; If too much exceptions occured, quit
+  (sleep 10)
+  (set! nbfailures (+ 1 nbfailures))
+  (if (< nbfailures 10)
+      (main args)))
+
