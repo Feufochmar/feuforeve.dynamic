@@ -54,5 +54,7 @@
   ; If too much exceptions occured, quit
   (sleep 10)
   (set! nbfailures (+ 1 nbfailures))
+  (sleep (* 10 nbfailures))
   (if (< nbfailures 10)
-      (main args)))
+      (main args)
+      (error "Unable to start Floraverse IRC bot")))
