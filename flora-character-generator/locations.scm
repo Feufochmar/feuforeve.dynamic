@@ -7,6 +7,7 @@
   #:export (<place> name type reference-link area
             preposition-in preposition-near
             pick-place get-region
+            find-place
            )
 )
 
@@ -65,6 +66,33 @@
   (if (< 0 (vector-length (places region)))
       (pick-from (places region))
       (pick-place (pick-from (filter (lambda (r) (not (restricted? r))) (subregions region))))))
+
+;; Found a place or region of the given name
+(define-method (find-place (asked-query <string>))
+  (letrec* ((query (string-downcase asked-query))
+            (search-place
+              (lambda (places)
+                (if (null? places)
+                    #f
+                    (if (string=? (string-downcase (name (car places))) query)
+                        (car places)
+                        (search-place (cdr places))))))
+            (search-region
+              (lambda (regions)
+                (if (null? regions)
+                    #f
+                    (let* ((region (car regions))
+                           (subreg (subregions region))
+                           (plc (vector->list (places region)))
+                           (found-in-name (and (string=? (string-downcase (name region)) query) region))
+                           (found-in-place (or found-in-name (search-place plc)))
+                           (found (or found-in-place (search-region subreg)))
+                          )
+                      (if found
+                          found
+                          (search-region (cdr regions)))))))
+           )
+    (search-region (list *data:locations:root-region*))))
 
 ;; Region syntax
 (define-syntax region
