@@ -96,13 +96,32 @@
     )))
 
 (define (add-handlers ircbot)
-  ; Add command
+  ; Add commands
+  (add-command-handler!
+    ircbot
+    "help"
+    (lambda (ircbot channel asker args)
+      (send-privmsg ircbot asker
+                    (if (null? args)
+                        "Possible commands: generate character-generator reference help"
+                        (let ((cmd (car args)))
+                             (cond
+                               ((string=? cmd "help")
+                                "help: get help about the commands")
+                               ((string=? cmd "generate")
+                                "generate: generate a new character, character species as optional parameter")
+                               ((string=? cmd "character-generator")
+                                "character-generator: return the link to the full version of character generator")
+                               ((string=? cmd "reference")
+                                "reference: with a species or area as parameter, return the reference")
+                               (#t "Unknown command. Possible commands: generate character-generator reference help")
+                             ))))))
   (add-command-handler!
     ircbot
     "generate"
     (lambda (ircbot channel asker args)
       (let ((character (generate-character (string->symbol (string-downcase (string-join args "-"))))))
-        (send-privmsg ircbot channel (generate-description character)))))
+        (send-privmsg ircbot asker (generate-description character)))))
   (add-command-handler!
     ircbot
     "character-generator"
@@ -113,11 +132,16 @@
     "reference"
     (lambda (ircbot channel asker args)
       (let* ((species-key (string->symbol (string-downcase (string-join args "-"))))
-            (species (get-species species-key)))
+             (species (get-species species-key)))
         (send-privmsg ircbot channel
-                      (if species
-                          (string-append asker ": " (reference-link species))
-                          (string-append asker ": No data on this subject."))))))
+                      (string-append
+                        asker ": "
+                        (if species
+                            (reference-link species)
+                            (let ((place (find-place (string-join args " "))))
+                                 (if place
+                                     (reference-link place)
+                                     (string-append "No data on " (string-join args " "))))))))))
 )
 
 (define nbfailures 0)
@@ -140,4 +164,3 @@
   (if (< nbfailures 10)
       (main args)
       (error "Unable to start Floraverse IRC bot")))
-
