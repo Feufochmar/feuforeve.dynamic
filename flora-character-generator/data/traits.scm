@@ -157,7 +157,7 @@
       (gender:subject (verb "be") "physically weak")
       (gender:genitive "senses are sharp")
       (gender:subject (verb "be") "always sleepy")
-      (gender:subject (verb "be") "sleeps a lot")
+      (gender:subject (verb "sleep") "a lot")
       (gender:subject (verb "suffer") "from a long term illness")
       (gender:subject (verb "suffer") "from hallucinations")
       (gender:subject (verb "be") "very strong")
