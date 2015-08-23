@@ -8,6 +8,8 @@
                 #:renamer (symbol-prefix-proc 'msg:))
   #:export (make-ircbot add-command-handler! add-command-alias!
             run-bot send-privmsg
+            ;
+            make-ircbot-from-command-line-args
            ))
 
 (define-class <ircbot> (<object>)
@@ -16,6 +18,7 @@
   (command-prefix #:getter command-prefix #:init-keyword #:command-prefix)
   (commands #:getter commands #:init-form (make-hash-table))
   (chanels #:getter channels #:init-keyword #:channels #:init-form (list))
+  (nick-password #:getter nick-password #:init-keyword #:nick-password #:init-form #f)
 )
 
 ;; Commands can be given to the bot in three ways:
@@ -76,9 +79,16 @@
     (irc-connection ircbot)
     (lambda (msg)
       (if (eq? (msg:command msg) 001) ;; Welcome message, registering ok
-          (for-each
-            (lambda (x) (do-join (irc-connection ircbot) x))
-            (channels ircbot))))
+          (begin
+            ;; Register nick
+            (if (nick-password ircbot)
+                (begin
+                  (do-privmsg (irc-connection ircbot) "NickServ" (string-append "IDENTIFY " (nick-password ircbot)))
+                  (sleep 2)))
+            ;; Join channels
+            (for-each
+              (lambda (x) (do-join (irc-connection ircbot) x))
+              (channels ircbot)))))
     #:tag 'join-handler))
 
 (define-method (init (ircbot <ircbot>))
@@ -88,7 +98,7 @@
   (install-command-handler! ircbot))
 
 ;;
-(define* (make-ircbot #:key (nick #f) (server #f) (port #f) (prefix "!") (channels (list)))
+(define* (make-ircbot #:key (nick #f) (server #f) (port #f) (prefix "!") (channels (list)) (nick-password #f))
   (or (and nick (string? nick)) (error "ircbot: Invalid nick: " nick))
   (or (and server (string? server)) (error "ircbot: Invalid server: " server))
   (or (and port (integer? port) (< 0 port) (< port 65536)) (error "ircbot: Invalid port: " port))
@@ -97,7 +107,8 @@
             #:irc-connection (make-irc #:nick nick #:server server #:port port)
             #:nick nick
             #:command-prefix prefix
-            #:channels channels)))
+            #:channels channels
+            #:nick-password nick-password)))
     (init ircbot)
     ircbot))
 
@@ -130,3 +141,73 @@
 ;; Send a privmsg
 (define-method (send-privmsg (ircbot <ircbot>) (to <string>) (what <string>))
   (do-privmsg (irc-connection ircbot) to what))
+
+;; Make an ircbot from command-line args
+(define-method (update-hash-from-command-line! (h <hashtable>) (args <list>))
+  (cond
+    ((null? args) h)
+    ((and (string=? (car args) "--server") (not (null? (cdr args))))
+     (begin
+        (hash-set! h #:server (cadr args))
+        (update-hash-from-command-line! h (cddr args))))
+    ((and (string=? (car args) "--port") (not (null? (cdr args))))
+     (begin
+        (hash-set! h #:port (cadr args))
+        (update-hash-from-command-line! h (cddr args))))
+    ((and (string=? (car args) "--channels") (not (null? (cdr args))))
+     (begin
+        (hash-set! h #:channels (string-split (cadr args) #\:))
+        (update-hash-from-command-line! h (cddr args))))
+    ((and (string=? (car args) "--nick") (not (null? (cdr args))))
+     (begin
+        (hash-set! h #:nick (cadr args))
+        (update-hash-from-command-line! h (cddr args))))
+    ((and (string=? (car args) "--command-prefix") (not (null? (cdr args))))
+     (begin
+        (hash-set! h #:prefix (cadr args))
+        (update-hash-from-command-line! h (cddr args))))
+    ((and (string=? (car args) "--nick-password") (not (null? (cdr args))))
+     (begin
+        (hash-set! h #:nick-password (cadr args))
+        (update-hash-from-command-line! h (cddr args))))
+    ((and (string=? (car args) "--help") (not (null? (cdr args))))
+     (begin
+        (hash-set! h #:help #t)
+        (display
+          (string-append
+            "ircbot"
+            " --server <server> [--port <port>] [--nick <nick>]"
+            " --channels <channel>[:<channel>[:...]] [--command-prefix <prefix>]"
+            " [--nick-password <nickpass>]\n"
+            "With:\n"
+            " <server> : the server to connect to (required)\n"
+            " <port> : the server port to connect to (optional, default: 6667)\n"
+            " <nick> : the nickname to use (optional, default: IrcBot)\n"
+            " <channel> : a channel to join, without the beginning # (required)\n"
+            "             Several channel can be joined. The channels must be separed by colons.\n"
+            " <prefix> : the command prefix to use (optional, default: !\n"
+            " <nickpass> : the password for NickServ for using the given nickname\n"
+            "              (optional, if not set, IrcBot do not register to NickServ)\n"))
+        h))
+    (#t (error "Invalid arguments " args ". See --help"))
+  ))
+
+(define-method (make-ircbot-from-command-line-args (args <list>))
+  (let* ((hash-args (update-hash-from-command-line! (make-hash-table) (cdr args)))
+         (help? (hash-ref hash-args #:help))
+         (server (or help? (hash-ref hash-args #:server) (error "No server given.")))
+         (port-str (or help? (hash-ref hash-args #:port) "6667"))
+         (port (or help? (string->number port-str) (error "Invalid port")))
+         (nick (or help? (hash-ref hash-args #:nick) "IrcBot"))
+         (channels (or help? (hash-ref hash-args #:channels) (error "No channel given.")))
+         (prefix (or help? (hash-ref hash-args #:prefix) "!"))
+         (nickpass (or help? (hash-ref hash-args #:nick-password))))
+    (if help?
+        #f
+        (make-ircbot
+          #:nick nick
+          #:server server
+          #:port port
+          #:prefix prefix
+          #:channels (map (lambda (x) (string-append "#" x)) channels)
+          #:nick-password nickpass))))
