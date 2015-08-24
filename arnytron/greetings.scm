@@ -402,4 +402,5 @@
  (#t "2015-08-20" "salut les merdouillus de la kekette molle!" ("katyucha: salut ArnY, inspiration de mon MOTD"))
  (#t "2015-08-21" "salut les enrhumés du gland phosphorescent!" ())
  (#t "2015-08-22" "salut les vieux cagueux tout rabougris du ouistiti" ())
+ (#t "2015-08-24" "salut les globulés de la morve gout fraise et aux bras en forme de bouse!" ("Zluglu: salut à toi, fidèle plagieur de l’ArnYtron3000"))
 ))
