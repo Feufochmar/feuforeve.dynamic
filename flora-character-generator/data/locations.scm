@@ -225,7 +225,8 @@
         (region deep-mountain
                 (name "Deep Mountain")
                 (places
-                  (sinkhole "Deep Mountain")))
+                  (sinkhole "Deep Mountain")
+                  (sinkhole "Deep Mountain summit")))
         (region holiday
                 (name "Holiday Region")
                 (places
