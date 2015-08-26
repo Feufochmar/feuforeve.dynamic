@@ -404,4 +404,5 @@
  (#t "2015-08-22" "salut les vieux cagueux tout rabougris du ouistiti" ())
  (#t "2015-08-24" "salut les globulés de la morve gout fraise et aux bras en forme de bouse!" ("Zluglu: salut à toi, fidèle plagieur de l’ArnYtron3000"))
  (#t "2015-08-25" "salut les naines inuits obèse accros à la glace au schtroumpf" ("Zluglu: stoi" "katyucha: zzzz" "katyucha: tu fais ça pour aider ArnYtron3000 ?"))
+ (#t "2015-08-26" "salut les ragondins discos accrocs à la paillette!" ("katyucha: ArnYtron3000: génère" "ArnYtron3000: salut les golmons mormons" "ArnY: putain ArnYtron3000 me bat niveau originalité, je suis dégouté" "katyucha: ragondins discos !! plus original ça" "katyucha: Comme Kasparov et DeepBlue, désormais Arny doit se battre contre lui-même !!" "ArnY: :)"))
 ))
