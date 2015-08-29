@@ -155,3 +155,63 @@
 
 (define-method (vectorgraphics->sxml-svg (cnt <polygon>))
   (list 'polygon (append (list '@) (attributes-of cnt))))
+
+;; Path
+
+;; Path movement to string
+(define-method (show (movement <move-to>))
+  (string-append
+    (if (relative? movement) "m" "M") " "
+    (show (end-point movement))))
+
+(define-method (show (movement <line-to>))
+  (string-append
+    (if (relative? movement) "l" "L") " "
+    (show (end-point movement))))
+
+(define-method (show (movement <quadratic-to>))
+  (string-append
+    (if (relative? movement) "q" "Q") " "
+    (show (control-point movement)) " "
+    (show (end-point movement))))
+
+(define-method (show (movement <cubic-to>))
+  (string-append
+    (if (relative? movement) "c" "C") " "
+    (show (1st-control-point movement)) " "
+    (show (2nd-control-point movement)) " "
+    (show (end-point movement))))
+
+(define-method (show (movement <smooth-quadratic-to>))
+  (string-append
+    (if (relative? movement) "t" "T") " "
+    (show (end-point movement))))
+
+(define-method (show (movement <smooth-cubic-to>))
+  (string-append
+    (if (relative? movement) "s" "S") " "
+    (show (control-point movement)) " "
+    (show (end-point movement))))
+
+(define-method (show (movement <arc-to>))
+  (string-append
+    (if (relative? movement) "a" "A") " "
+    (show (radius-point movement)) " "
+    (show (x-axis-rotation movement)) " "
+    (if (large-arc? movement) "1" "0") " "
+    (if (sweep? movement) "1" "0") " "
+    (show (end-point movement))))
+
+(define-method (show (movement <close-path>))
+  "Z")
+
+(define-method (attributes-of (cnt <path>))
+  (append
+    (list
+      (list 'd (string-join (map show (movements cnt)) " "))
+    )
+    (next-method)
+  ))
+
+(define-method (vectorgraphics->sxml-svg (cnt <path>))
+  (list 'path (append (list '@) (attributes-of cnt))))
