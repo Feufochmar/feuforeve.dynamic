@@ -75,7 +75,7 @@
   (let* ((cross-size (min width height))
          (cross-width (/ cross-size 3))
         )
-    (area ((width width) (height height))
+    (area
       (rectangle (width cross-width) (height cross-size)
                  (topleft (point (/ (- width cross-width) 2) (/ (- height cross-size) 2)))
                  (style-class (fill-color col)))
@@ -103,6 +103,27 @@
       (style-class (fill-color col)))
   ))
 
+;; Crescent
+;; Crescent is 33 width, 40 height
+;; An area is use to scale it to the right size and rotate it
+(define-method (small-charge:crescent (w <number>) (h <number>) (col <color>))
+  (let* ((area-scaling (min (/ w 40) (/ h 40)))
+         (area-rotation (pick-from (vector 0 45 90 135 180 225 270 315)))
+         (area-translation (point (/ (- w (* 40 area-scaling)) 2) (/ (- h (* 40 area-scaling)) 2)))
+        )
+    (area ((transforms (list (translation area-translation)
+                             (scaling area-scaling)
+                             (rotation area-rotation (point 20 20))
+                             (translation (point 3.5 0)))))
+      (path
+        (style-class (fill-color col))
+        (movements
+          (list
+            (move-to (point 33 5))
+            (arc-to (point 20 20) 0 #t #f (point 33 35))
+            (arc-to (point 16 16) 0 #t #t (point 33 5))
+            (close-path)))))))
+
 ;; Pick a small charge
 (define-method (small-charge (width <number>) (height <number>) (col <color>))
   ((pick-from
@@ -112,6 +133,7 @@
        (small-charge:star-maker 6) (small-charge:star-maker 7) (small-charge:star-maker 8)
        (small-charge:star-maker 9) (small-charge:star-maker 10) (small-charge:star-maker 11)
        (small-charge:star-maker 12)
+       small-charge:crescent
      ))
    width height col))
 
