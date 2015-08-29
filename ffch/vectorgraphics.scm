@@ -5,15 +5,32 @@
   #:use-module (ffch colors)
   #:use-module (ffch containers)
   #:export (<shape-style> shape-style fill-color stroke-color stroke-width
+            ;
             <point> point x y
+            ;
             <vector-image> vector-image width height
+            ;
             <area> area transforms
             <translation> translation translation-vector
             <scaling> scaling scale-factor
             <rotation> rotation rotation-angle center
+            ;
             <circle> circle radius
+            ;
             <rectangle> rectangle topleft
+            ;
             <polygon> polygon points
+            ;
+            <path> path movements
+            relative? end-point
+            <move-to> move-to
+            <line-to> line-to
+            <quadratic-to> quadratic-to control-point
+            <cubic-to> cubic-to 1st-control-point 2nd-control-point
+            <smooth-quadratic-to> smooth-quadratic-to
+            <smooth-cubic-to> smooth-cubic-to
+            <arc-to> arc-to radius-point x-axis-rotation large-arc? sweep?
+            <close-path> close-path
            )
   #:re-export (<container-type> <content-type>
                id style-class contents empty?
@@ -57,20 +74,16 @@
   (make <point> #:x xx #:y yy))
 
 ;;;;
-;; Bounded-container : Container with width and height
-(define-class <bounded-container> (<container-type>)
+;; Vector Image
+(define-class <vector-image> (<container-type>)
   (width #:accessor width #:init-keyword #:width #:init-form 0)
   (height #:accessor height #:init-keyword #:height #:init-form 0))
-
-;;;;
-;; Vector Image
-(define-class <vector-image> (<bounded-container>))
 
 (container-type-constructor vector-image <vector-image>)
 
 ;;;;
 ;; Area
-(define-class <area> (<bounded-container> <content-type>)
+(define-class <area> (<container-type> <content-type>)
   (transforms #:getter transforms #:init-keyword #:transforms #:init-form (list)))
 
 (container-type-constructor area <area>)
@@ -132,3 +145,117 @@
 )
 
 (content-type-constructor polygon <polygon>)
+
+;;;;
+;; Path
+(define-class <path> (<content-type>)
+  (movements #:accessor movements #:init-keyword #:movements #:init-form (list)))
+
+(content-type-constructor path <path>)
+
+;;;;
+;; Path movements
+(define-class <path-movement> (<object>)
+  (relative? #:getter relative? #:init-keyword #:relative? #:init-form #f)
+  (end-point #:getter end-point #:init-keyword #:end-point #:init-form (point 0 0)))
+
+;; Move to
+(define-class <move-to> (<path-movement>))
+
+(define-method (move-to (end-point <point>))
+  (make <move-to> #:end-point end-point))
+
+(define-method (move-to (end-point <point>) (relative? <boolean>))
+  (make <move-to> #:end-point end-point #:relative? relative?))
+
+;; Line to
+(define-class <line-to> (<path-movement>))
+
+(define-method (line-to (end-point <point>))
+  (make <line-to> #:end-point end-point))
+
+(define-method (line-to (end-point <point>) (relative? <boolean>))
+  (make <line-to> #:end-point end-point #:relative? relative?))
+
+;; Curve to
+(define-class <curve-to> (<path-movement>))
+
+;; Quadratic curve
+(define-class <quadratic-to> (<curve-to>)
+  (control-point #:getter control-point #:init-keyword #:control-point #:init-form (point 0 0)))
+
+(define-method (quadratic-to (control-point <point>) (end-point <point>))
+  (make <quadratic-to> #:control-point control-point #:end-point end-point))
+
+(define-method (quadratic-to (control-point <point>) (end-point <point>) (relative? <boolean>))
+  (make <quadratic-to> #:control-point control-point #:end-point end-point #:relative? relative?))
+
+;; Cubic curve
+(define-class <cubic-to> (<curve-to>)
+  (1st-control-point #:getter 1st-control-point #:init-keyword #:1st-control-point #:init-form (point 0 0))
+  (2nd-control-point #:getter 2nd-control-point #:init-keyword #:2nd-control-point #:init-form (point 0 0)))
+
+(define-method (cubic-to (1st-control-point <point>) (2nd-control-point <point>) (end-point <point>))
+  (make <cubic-to>
+        #:1st-control-point 1st-control-point
+        #:2nd-control-point 2nd-control-point
+        #:end-point end-point))
+
+(define-method (cubic-to (1st-control-point <point>) (2nd-control-point <point>)
+                         (end-point <point>) (relative? <boolean>))
+  (make <cubic-to>
+        #:1st-control-point 1st-control-point
+        #:2nd-control-point 2nd-control-point
+        #:end-point end-point
+        #:relative? relative?))
+
+;; Smooth quadratic curve
+(define-class <smooth-quadratic-to> (<curve-to>))
+
+(define-method (smooth-quadratic-to (end-point <point>))
+  (make <smooth-quadratic-to> #:end-point end-point))
+
+(define-method (smooth-quadratic-to (end-point <point>) (relative? <boolean>))
+  (make <smooth-quadratic-to> #:end-point end-point #:relative? relative?))
+
+;; Smooth cubic curve
+(define-class <smooth-cubic-to> (<curve-to>)
+  (control-point #:getter control-point #:init-keyword #:control-point #:init-form (point 0 0)))
+
+(define-method (smooth-cubic-to (control-point <point>) (end-point <point>))
+  (make <smooth-cubic-to> #:control-point control-point #:end-point end-point))
+
+(define-method (smooth-cubic-to (control-point <point>) (end-point <point>) (relative? <boolean>))
+  (make <smooth-cubic-to> #:control-point control-point #:end-point end-point #:relative? relative?))
+
+;; Arc to
+(define-class <arc-to> (<path-movement>)
+  (radius-point #:getter radius-point #:init-keyword #:radius-point #:init-form (point 0 0))
+  (x-axis-rotation #:getter x-axis-rotation #:init-keyword #:x-axis-rotation #:init-form 0)
+  (large-arc? #:getter large-arc? #:init-keyword #:large-arc? #:init-form #f)
+  (sweep? #:getter sweep? #:init-keyword #:sweep? #:init-form #f))
+
+(define-method (arc-to (radius-point <point>) (x-axis-rotation <number>) (large-arc? <boolean>)
+                       (sweep? <boolean>) (end-point <point>))
+  (make <arc-to>
+        #:radius-point radius-point
+        #:x-axis-rotation x-axis-rotation
+        #:large-arc? large-arc?
+        #:sweep? sweep?
+        #:end-point end-point))
+
+(define-method (arc-to (radius-point <point>) (x-axis-rotation <number>) (large-arc? <boolean>)
+                       (sweep? <boolean>) (end-point <point>) (relative? <boolean>))
+  (make <arc-to>
+        #:radius-point radius-point
+        #:x-axis-rotation x-axis-rotation
+        #:large-arc? large-arc?
+        #:sweep? sweep?
+        #:end-point end-point
+        #:relative? relative?))
+
+;; Close path
+(define-class <close-path> (<path-movement>))
+
+(define-method (close-path)
+  (make <close-path>))
