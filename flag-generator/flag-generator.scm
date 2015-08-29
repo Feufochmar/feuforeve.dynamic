@@ -150,7 +150,7 @@
                    (cons field-color-base field-color-chief))
                   ((and (eq? metal-chief? metal-base?) (not (eq? metal-base? metal-middle?)) (pick-boolean))
                    (cons field-color-middle field-color-middle))
-                  (#t (cons charge-color-base charge-color-chief))
+                  (#t (cons charge-color-chief charge-color-base))
                  ))
                (charge-tint-chief (car charge-tints))
                (charge-tint-base (cdr charge-tints)))
