@@ -163,6 +163,30 @@
                 (or (msg:trailing msg) ""))))))
     #:tag 'log-handler))
 
+;; Ping notifier, for ping timeout
+(define-method (install-ping-notifier! (ircbot <ircbot>) (condvar <condition-variable>))
+  (add-message-hook!
+    (irc-connection ircbot)
+    (lambda (msg)
+      (if (eq? (msg:command msg) 'PING)
+          (signal-condition-variable condvar)))
+    #:tag 'ping-notifier))
+
+;; Ping timeout from server: Server has stopped to send pings
+(define-method (close-on-ping-timeout (ircbot <ircbot>) (condvar <condition-variable>) (timeout <integer>))
+  (letrec* ((mtx (make-mutex))
+            (waiter
+              (lambda ()
+                (lock-mutex mtx)
+                (if (unlock-mutex mtx condvar (+ timeout (time-second (current-time))))
+                    (waiter) ; condition variable signaled, wait again
+                    (begin
+                      (display "Closing connection...\n")
+                      ; no ping received, close connection
+                      (do-quit (irc-connection ircbot) #:quit-msg "ArnY timeout.")))))
+           )
+    (call-with-new-thread waiter)))
+
 ;; Init methods
 (define-method (init (ircbot <ircbot>))
   (install-ping-handler! (irc-connection ircbot))
@@ -209,10 +233,25 @@
 
 ;; Run the client. Should not exit unless there is a disconnection.
 (define-method (run-bot (ircbot <ircbot>))
-  (do-connect (irc-connection ircbot))
-  (do-register (irc-connection ircbot))
-  ;; Run the irc client
-  (do-runloop (irc-connection ircbot)))
+  (letrec ((condvar (make-condition-variable))
+           (runloop
+            (lambda ()
+              (if (connected? (irc-connection ircbot))
+                  (let ((msg (do-listen (irc-connection ircbot))))
+                    (if msg
+                        (begin
+                          (run-message-hook (irc-connection ircbot) msg) ; Process message
+                          (runloop))
+                        (begin
+                          (sleep 1) ; Wait a bit before new messages
+                          (runloop))))
+                  (display "Disconnected...\n")))))
+    (install-ping-notifier! (irc-connection ircbot) condvar)
+    (close-on-ping-timeout (irc-connection ircbot) condvar (* 15 60)) ; timeout of 15 minutes before disconnecting
+    (do-connect (irc-connection ircbot))
+    (do-register (irc-connection ircbot))
+    ;; Run the irc client
+    (runloop)))
 
 ;; Send a privmsg
 (define-method (send-privmsg (ircbot <ircbot>) (to <string>) (what <string>))
@@ -230,6 +269,7 @@
     (cons "--command-prefix" #:prefix)
     (cons "--nick-password" #:nick-password)
     (cons "--log-file" #:log-file)))
+
 (define-method (update-hash-from-command-line! (h <hashtable>) (args <list>))
   (cond
     ((null? args) h)
