@@ -246,8 +246,8 @@
                           (sleep 1) ; Wait a bit before new messages
                           (runloop))))
                   (display "Disconnected...\n")))))
-    (install-ping-notifier! (irc-connection ircbot) condvar)
-    (close-on-ping-timeout (irc-connection ircbot) condvar (* 15 60)) ; timeout of 15 minutes before disconnecting
+    (install-ping-notifier! ircbot condvar)
+    (close-on-ping-timeout ircbot condvar (* 15 60)) ; timeout of 15 minutes before disconnecting
     (do-connect (irc-connection ircbot))
     (do-register (irc-connection ircbot))
     ;; Run the irc client
