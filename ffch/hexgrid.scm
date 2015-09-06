@@ -63,6 +63,20 @@
 (define-method (equal? (H1 <hexpoint>) (H2 <hexpoint>))
   (hexpoint=? H1 H2))
 
+(define-method (write (H <hexpoint>) port)
+  (display "(hexpoint " port)
+  (display (q H) port)
+  (display " " port)
+  (display (r H) port)
+  (display ")" port))
+
+(define-method (display (H <hexpoint>) port)
+  (display "#<hexpoint q=" port)
+  (display (q H) port)
+  (display " r=" port)
+  (display (r H) port)
+  (display ">" port))
+
 (define-method (hexpoint-add (H1 <hexpoint>) (H2 <hexpoint>))
   (hexpoint (+ (q H1) (q H2)) (+ (r H1) (r H2))))
 
@@ -107,6 +121,24 @@
 (define-method (equal? (H1 <hexedge>) (H2 <hexedge>))
   (hexedge=? H1 H2))
 
+(define-method (write (H <hexedge>) port)
+  (display "(hexedge " port)
+  (display (q H) port)
+  (display " " port)
+  (display (r H) port)
+  (display " " port)
+  (display (id H) port)
+  (display ")" port))
+
+(define-method (display (H <hexedge>) port)
+  (display "#<hexedge q=" port)
+  (display (q H) port)
+  (display " r=" port)
+  (display (r H) port)
+  (display " id=" port)
+  (display (id H) port)
+  (display ">" port))
+
 ;; Vertex
 (define-class <hexvertex> (<hexpoint>)
   (id #:getter id #:init-keyword #:id)) ;; Possible values: #:+ #:-
@@ -124,6 +156,24 @@
 
 (define-method (equal? (H1 <hexvertex>) (H2 <hexvertex>))
   (hexvertex=? H1 H2))
+
+(define-method (write (H <hexvertex>) port)
+  (display "(hexvertex " port)
+  (display (q H) port)
+  (display " " port)
+  (display (r H) port)
+  (display " " port)
+  (display (id H) port)
+  (display ")" port))
+
+(define-method (display (H <hexvertex>) port)
+  (display "#<hexvertex q=" port)
+  (display (q H) port)
+  (display " r=" port)
+  (display (r H) port)
+  (display " id=" port)
+  (display (id H) port)
+  (display ">" port))
 
 ;;;;
 ;; Neighbours: faces
@@ -345,12 +395,14 @@
 
 (define-method (hexvertex->point (layout <layout>) (H <hexvertex>))
   (let* ((sz (size layout))
-         (pointy-top? (eq? *layout-pointy-top* (orientation layout)))
          (center (hexpoint->point layout H))
-         (offset (if (eq? (id H) #:+) sz (- 0 sz))))
+         (pi (* 4 (atan 1)))
+         (st-ang (start-angle (orientation layout)))
+         (ang (* 2 pi (/ (+ (if (eq? (id H) #:+) 0 3) st-ang) 6)))
+         (offset (point (* (x sz) (cos ang)) (* (y sz) (sin ang)))))
     (point
-      (+ (x center) (if pointy-top? 0 offset))
-      (+ (y center) (if pointy-top? offset 0)))))
+      (+ (x center) (x offset))
+      (+ (y center) (y offset)))))
 
 (define-method (hexpoint->corner-points (layout <layout>) (H <hexpoint>))
   (let* ((pi (* 4 (atan 1)))
