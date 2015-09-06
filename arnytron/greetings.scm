@@ -408,4 +408,6 @@
  (#t "2015-08-27" "salut les limaces chromées à double réacteurs en pate à modelée adeptes de curling nudiste" ("dibalo: c’est pas redondant limace et nudiste ?" "ArnY: non, il y a des limaces qui sont adeptent du curling en fourrure de muppet" "ArnY: je vous en parlerai un autre jour" "ArnY: adeptes"))
  (#t "2015-08-29" "salut les rates pelées du kazakstan en bikini fluo en train de tapiner sur les champs élysées" ("Balise: not bad" "ff: ouais y a de la référence culturelle" "Zluglu: ff : amateur de bikini fluo ?" "Zluglu: ArnY : comment il s’appelle déjà ? Borat ?" "Zluglu: c’est pas un bikini, et c’est pas fluo" "ArnY: :)" "ArnY: il était kazak Borat?" "ArnY: ah ouais"))
  (#t "2015-08-31" "salut les cuistos obèses enduits d'huile de vidange s'apprétant à danser le twist avec des otaries suisses en beton" ())
+ (#t "2015-09-04" "salut les vieux grailleux du ciboulot" ("dibalo: salut, et bon anniversaire" "Olaf-: ah ouais, google m'a dit" "Olaf-: bon anniv à tous les 2 !" "Olaf-: (hier)" "ArnY: dibalo: ah ouais, c'etait mon anniv! merde!" "ArnY: dibalo: merci et à toi aussi du coup" "***ArnY pigeait pas pourquoi tout le monde lui souhait son anniv!"))
+ (#t "2015-09-06" "salut les vieilles croutes d'acnée purulante du dos d'un vieux phoque obèse" ())
 ))
