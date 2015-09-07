@@ -32,6 +32,12 @@
     (if (stroke-width stl)
         (string-append "stroke-width:" (show (stroke-width stl)) ";")
         "")
+    (if (font-size stl)
+        (string-append "font-size:" (show (font-size stl)) ";")
+        "")
+    (if (font-family stl)
+        (string-append "font-family:" (show (font-family stl)) ";")
+        "")
   ))
 
 ;; Translation
@@ -60,10 +66,14 @@
     (contents cnt)))
 
 ;; List : act as a container
-(define-method (vectorgraphics->sxml-svg (cnt <pair>))
+(define-method (vectorgraphics->sxml-svg (cnt <list>))
   (map
     vectorgraphics->sxml-svg
     cnt))
+
+;; String is outputed as is
+(define-method (vectorgraphics->sxml-svg (cnt <string>))
+  cnt)
 
 ;;;;
 ;; Generic contents
@@ -108,6 +118,25 @@
   (if (empty? cnt)
     ""
     (list 'g
+      (append (list '@) (attributes-of cnt))
+      (next-method)
+    )))
+
+;;;;
+;; Text
+(define-method (attributes-of (cnt <text>))
+  (append
+    (list
+      (list 'x (show (x (topleft cnt))))
+      (list 'y (show (y (topleft cnt))))
+    )
+    (next-method)
+  ))
+
+(define-method (vectorgraphics->sxml-svg (cnt <text>))
+  (if (empty? cnt)
+    ""
+    (list 'text
       (append (list '@) (attributes-of cnt))
       (next-method)
     )))
