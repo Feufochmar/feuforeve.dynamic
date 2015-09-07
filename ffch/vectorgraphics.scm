@@ -4,7 +4,7 @@
   #:use-module (oop goops)
   #:use-module (ffch colors)
   #:use-module (ffch containers)
-  #:export (<shape-style> shape-style fill-color stroke-color stroke-width
+  #:export (<shape-style> shape-style fill-color stroke-color stroke-width font-size font-family
             ;
             <point> point x y
             ;
@@ -15,9 +15,11 @@
             <scaling> scaling scale-factor
             <rotation> rotation rotation-angle center
             ;
+            <text> text topleft
+            ;
             <circle> circle radius
             ;
-            <rectangle> rectangle topleft
+            <rectangle> rectangle
             ;
             <polygon> polygon points
             ;
@@ -43,6 +45,8 @@
   (fill-color #:getter fill-color #:init-keyword #:fill-color #:init-value #f)
   (stroke-color #:getter stroke-color #:init-keyword #:stroke-color #:init-value #f)
   (stroke-width #:getter stroke-width #:init-keyword #:stroke-width #:init-value #f)
+  (font-size #:getter font-size #:init-keyword #:font-size #:init-value #f)
+  (font-family #:getter font-family #:init-keyword #:font-family #:init-value #f)
 )
 
 (define-syntax shape-style
@@ -62,6 +66,8 @@
   (make <shape-style> #:stroke-color col))
 (define-method (stroke-width (width <number>))
   (make <shape-style> #:stroke-width width))
+(define-method (font-size (size <number>))
+  (make <shape-style> #:font-size size))
 
 ;;;;
 ;; Point
@@ -118,6 +124,14 @@
   (make <rotation> #:rotation-angle ang))
 (define-method (rotation (ang <number>) (center <point>))
   (make <rotation> #:center center #:rotation-angle ang))
+
+;;;;
+;; Text
+;; Container of strings
+(define-class <text> (<container-type> <content-type>)
+  (topleft #:getter topleft #:init-keyword #:topleft #:init-form (point 0 0)))
+
+(container-type-constructor text <text>)
 
 ;;;;
 ;; Circle
