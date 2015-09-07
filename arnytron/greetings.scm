@@ -410,4 +410,5 @@
  (#t "2015-08-31" "salut les cuistos obèses enduits d'huile de vidange s'apprétant à danser le twist avec des otaries suisses en beton" ())
  (#t "2015-09-04" "salut les vieux grailleux du ciboulot" ("dibalo: salut, et bon anniversaire" "Olaf-: ah ouais, google m'a dit" "Olaf-: bon anniv à tous les 2 !" "Olaf-: (hier)" "ArnY: dibalo: ah ouais, c'etait mon anniv! merde!" "ArnY: dibalo: merci et à toi aussi du coup" "***ArnY pigeait pas pourquoi tout le monde lui souhait son anniv!"))
  (#t "2015-09-06" "salut les vieilles croutes d'acnée purulante du dos d'un vieux phoque obèse" ())
+ (#t "2015-09-07" "salut les découénés funky de la préhistoire mongole" ())
 ))
