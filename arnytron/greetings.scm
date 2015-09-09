@@ -411,4 +411,5 @@
  (#t "2015-09-04" "salut les vieux grailleux du ciboulot" ("dibalo: salut, et bon anniversaire" "Olaf-: ah ouais, google m'a dit" "Olaf-: bon anniv à tous les 2 !" "Olaf-: (hier)" "ArnY: dibalo: ah ouais, c'etait mon anniv! merde!" "ArnY: dibalo: merci et à toi aussi du coup" "***ArnY pigeait pas pourquoi tout le monde lui souhait son anniv!"))
  (#t "2015-09-06" "salut les vieilles croutes d'acnée purulante du dos d'un vieux phoque obèse" ())
  (#t "2015-09-07" "salut les découénés funky de la préhistoire mongole" ())
+ (#f "2015-09-09" "\"What if you could press with 3D Touch on your photos and this happened?\" The photos animate into video, called Live Photos. <-- Ca y'est!! Apple a enfin inventé la vidéo! ca va révolutionner les medias!" ("katyucha: Apple vient de créer le GIF" "katyucha: ArnY: tu sors" "katyucha: même pas un bonjour pour le ArnYtron" "katyucha: pfff" "ArnY: nan!" "Zluglu: remboursé !"))
 ))
