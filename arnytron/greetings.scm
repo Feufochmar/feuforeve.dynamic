@@ -413,4 +413,5 @@
  (#t "2015-09-07" "salut les découénés funky de la préhistoire mongole" ())
  (#f "2015-09-09" "\"What if you could press with 3D Touch on your photos and this happened?\" The photos animate into video, called Live Photos. <-- Ca y'est!! Apple a enfin inventé la vidéo! ca va révolutionner les medias!" ("katyucha: Apple vient de créer le GIF" "katyucha: ArnY: tu sors" "katyucha: même pas un bonjour pour le ArnYtron" "katyucha: pfff" "ArnY: nan!" "Zluglu: remboursé !"))
  (#t "2015-09-10" "salut les vielles taupes embouteillées du canal obscure" ("[Juste avant]" "Zluglu: onoz" "Zluglu: un wild arny appears" "Zluglu: :genere" "ArnYtron3000: salut glands mous du bec" "[Juste après]" "Zluglu: ArnY 1 - 0 ArnYtron3000"))
+ (#t "2015-09-11" "salut les accrocs de la sodomie à la biscotte (en fonte)" ("Zluglu: :genere" "ArnYtron3000: sallut les pisciculteurs scatophiles au chalumeau!" "Zluglu: 1 partout" "Olaf-: moi je préfère la sodomie au chalumeau" "Olaf-: c'est plus sport" "Zluglu: Olaf- : et les scatophiles à la biscote ?"))
 ))
