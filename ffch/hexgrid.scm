@@ -611,7 +611,7 @@
               (lambda (current next edge)
                 (let* ((move (move-cost hexgrid current next edge))
                        (new-cost (and move (+ (hash-ref hex-cost current) move)))
-                       (next-cost (hash-ref hex-cost (car next))))
+                       (next-cost (hash-ref hex-cost next)))
                       (if (and new-cost (or (not next-cost) (< new-cost next-cost)))
                           (begin
                             (hash-set! hex-cost next new-cost)
