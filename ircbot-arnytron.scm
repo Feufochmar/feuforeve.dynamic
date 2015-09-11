@@ -28,9 +28,11 @@
     ircbot
     "cite"
     (lambda (ircbot channel asker args)
-      (let ((arny-quote (pick-citation ArnYtron3000)))
+      (let ((arny-quote (if (not (null? args))
+                            (pick-citation ArnYtron3000 (car args))
+                            (pick-citation ArnYtron3000))))
         (send-privmsg ircbot channel
-                      (string-append "\"" (citation arny-quote) "\" - ArnY, " (date arny-quote))))))
+                      (string-append "«" (citation arny-quote) "» - ArnY, " (date arny-quote))))))
   (add-command-alias!
     ircbot
     "cite"
