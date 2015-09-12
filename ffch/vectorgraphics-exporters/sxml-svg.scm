@@ -79,9 +79,8 @@
 ;; Generic contents
 (define-method (attributes-of (cnt <content-type>))
   (append
-    (if (id cnt)
-        (list (list 'id (id cnt)))
-        (list))
+    (attribute->sxml-attribute cnt id)
+    (attribute->sxml-attribute cnt name-class 'class)
     (if (style-class cnt)
         (let ((stl (show (style-class cnt))))
           (if (string-null? stl)
@@ -89,6 +88,20 @@
               (list (list 'style stl))
           ))
         (list))
+  ))
+
+(define-method (attributes-of (cnt <vectorgraphics-content-type>))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt on-focus-in 'onfocusin)
+    (attribute->sxml-attribute cnt on-focus-out 'onfocusout)
+    (attribute->sxml-attribute cnt on-activate 'onactivate)
+    (attribute->sxml-attribute cnt on-click 'onclick)
+    (attribute->sxml-attribute cnt on-mouse-down 'onmousedown)
+    (attribute->sxml-attribute cnt on-mouse-up 'onmouseup)
+    (attribute->sxml-attribute cnt on-mouse-over 'onmouseover)
+    (attribute->sxml-attribute cnt on-mouse-move 'onmousemove)
+    (attribute->sxml-attribute cnt on-mouse-out 'onmouseout)
   ))
 
 ;;;;
@@ -103,6 +116,14 @@
     )
     (next-method)
   ))
+
+;;;;
+;; Script
+(define-method (vectorgraphics->sxml-svg (cnt <script>))
+  (list 'script
+    "// <![CDATA["
+    (next-method)
+    "// ]]>"))
 
 ;;;;
 ;; Area
