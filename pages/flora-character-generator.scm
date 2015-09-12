@@ -30,22 +30,22 @@
         (navigation
           (if species
               (section
-                ((style-class "nav-item"))
+                ((name-class "nav-item"))
                 (hyperlink
                   ((to (string-append "/FloraCharacterGenerator?species=" (symbol->string species-key-sym))))
                   (string-append "New character (" (name species) ")")))
               "")
           (section
-            ((style-class "nav-item"))
+            ((name-class "nav-item"))
             (hyperlink ((to "/FloraCharacterGenerator"))
                        (if species
                            "New character (random species)"
                            "New character")))
           (section
-            ((style-class "nav-item"))
+            ((name-class "nav-item"))
             (nav-link-to "/FloraCharacterGenerator/pick..." (nav-current-path path) "Pick a species..."))
           (section
-            ((style-class "nav-item"))
+            ((name-class "nav-item"))
             (nav-link-to "/FloraCharacterGenerator/about" (nav-current-path path) "About the generator"))
         )))))
 

@@ -32,10 +32,10 @@
     (lambda (path query)
       (navigation
         (section
-          ((style-class "nav-item"))
+          ((name-class "nav-item"))
           (nav-link-to "/" (nav-current-path path) "Home"))
         (section
-          ((style-class "nav-item"))
+          ((name-class "nav-item"))
           (nav-link-to "/AboutMe" (nav-current-path path) "About me"))
       ))))
 

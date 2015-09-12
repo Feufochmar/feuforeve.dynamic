@@ -22,18 +22,11 @@
 
 ;; Elements of the attributes list of a container
 (define-method (attributes-of (cnt <content-type>))
-  (if (or (style-class cnt) (id cnt))
-    (filter identity
-      (list
-        '@
-        (if (style-class cnt)
-            (list 'class (style-class cnt))
-            #f)
-        (if (id cnt)
-            (list 'id (id cnt))
-            #f)
-      ))
-    ""))
+  (append
+    (attribute->sxml-attribute cnt id)
+    (attribute->sxml-attribute cnt name-class 'class)
+    (attribute->sxml-attribute cnt style-class 'style)
+  ))
 
 ;; Article
 (define-method (article->sxml-html (art <article>))
@@ -58,21 +51,21 @@
 (define-method (article->sxml-html (cnt <header>) (section-level <integer>))
   (list
     'header
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Footer as contained block
 (define-method (article->sxml-html (cnt <footer>) (section-level <integer>))
   (list
     'footer
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Navigation as contained block
 (define-method (article->sxml-html (cnt <navigation>) (section-level <integer>))
   (list
     'nav
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Terminals
@@ -87,7 +80,7 @@
 (define-method (article->sxml-html (cnt <section>) (section-level <integer>))
   (list
     'section
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (if (title cnt)
       (list
         (cond
@@ -107,73 +100,61 @@
 (define-method (article->sxml-html (cnt <paragraph>) (section-level <integer>))
   (list
     'p
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Strong
 (define-method (article->sxml-html (cnt <strong>) (section-level <integer>))
   (list
     'strong
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Emphase
 (define-method (article->sxml-html (cnt <emphase>) (section-level <integer>))
   (list
     'em
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Deleted
 (define-method (article->sxml-html (cnt <deleted>) (section-level <integer>))
   (list
     'del
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Inserted
 (define-method (article->sxml-html (cnt <inserted>) (section-level <integer>))
   (list
     'ins
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Mark
 (define-method (article->sxml-html (cnt <mark>) (section-level <integer>))
   (list
     'mark
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Hyperlink
 (define-method (attributes-of (cnt <hyperlink>))
-  (if (or (style-class cnt) (id cnt) (to cnt))
-    (filter identity
-      (list
-        '@
-        (if (style-class cnt)
-            (list 'class (style-class cnt))
-            #f)
-        (if (id cnt)
-            (list 'id (id cnt))
-            #f)
-        (if (to cnt)
-            (list 'href (to cnt))
-            #f)
-      ))
-    ""))
+  (append
+    (attribute->sxml-attribute cnt to 'href)
+    (next-method)))
 
 (define-method (article->sxml-html (cnt <hyperlink>) (section-level <integer>))
   (list
     'a
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Text lists
 (define-method (article->sxml-html (cnt <text-list>) (section-level <integer>))
   (list
     (if (ordered? cnt) 'ol 'ul)
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (map
       (lambda (x)
         (list 'li
@@ -185,7 +166,7 @@
 (define-method (article->sxml-html (cnt <figure>) (section-level <integer>))
   (list
     'figure
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)
     (if (caption cnt)
         (list 'figcaption (caption cnt))
@@ -195,14 +176,14 @@
 (define-method (article->sxml-html (cnt <code>) (section-level <integer>))
   (list
     'code
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Preformatted
 (define-method (article->sxml-html (cnt <preformatted>) (section-level <integer>))
   (list
     'pre
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Linefeed
@@ -211,137 +192,76 @@
 
 ;; Image
 (define-method (attributes-of (cnt <image>))
-  (if (or (style-class cnt) (id cnt) (alt cnt) (source cnt))
-    (filter identity
-      (list
-        '@
-        (if (style-class cnt)
-            (list 'class (style-class cnt))
-            #f)
-        (if (id cnt)
-            (list 'id (id cnt))
-            #f)
-        (if (alt cnt)
-            (list 'alt (alt cnt))
-            #f)
-        (if (source cnt)
-            (list 'src (source cnt))
-            #f)
-      ))
-    ""))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt alt)
+    (attribute->sxml-attribute cnt source 'src)))
 
 (define-method (article->sxml-html (cnt <image>) (section-level <integer>))
-  (list 'img (attributes-of cnt)))
+  (list
+    'img
+    (append (list '@) (attributes-of cnt))))
 
 ;;;;;;
 ;; Forms elements
 
 ;; Button
 (define-method (attributes-of (cnt <button>))
-  (if (or (style-class cnt) (id cnt) (onclick cnt))
-    (filter identity
-      (list
-        '@
-        (if (style-class cnt)
-            (list 'class (style-class cnt))
-            #f)
-        (if (id cnt)
-            (list 'id (id cnt))
-            #f)
-        (if (onclick cnt)
-            (list 'onclick (onclick cnt))
-            #f)
-      ))
-    ""))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt onclick)))
 
 (define-method (article->sxml-html (cnt <button>) (section-level <integer>))
   (list
     'button
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Text area
 (define-method (article->sxml-html (cnt <text-area>) (section-level <integer>))
   (list
     'textarea
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Form
 (define-method (attributes-of (cnt <form>))
-  (if (or (style-class cnt) (id cnt) (submit-action cnt) (submit-method cnt))
-    (filter identity
-      (list
-        '@
-        (if (style-class cnt)
-            (list 'class (style-class cnt))
-            #f)
-        (if (id cnt)
-            (list 'id (id cnt))
-            #f)
-        (if (submit-action cnt)
-            (list 'action (submit-action cnt))
-            #f)
-        (if (submit-method cnt)
-            (list 'method (submit-method cnt))
-            #f)
-      ))
-    ""))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt submit-action 'action)
+    (attribute->sxml-attribute cnt submit-method 'method)))
 
 (define-method (article->sxml-html (cnt <form>) (section-level <integer>))
   (list
     'form
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (next-method)))
 
 ;; Selector
 (define-method (attributes-of (cnt <selector>))
-  (if (or (style-class cnt) (id cnt) (name cnt) (size cnt))
-    (filter identity
-      (list
-        '@
-        (if (style-class cnt)
-            (list 'class (style-class cnt))
-            #f)
-        (if (id cnt)
-            (list 'id (id cnt))
-            #f)
-        (if (name cnt)
-            (list 'name (name cnt))
-            #f)
-        (if (size cnt)
-            (list 'size (size cnt))
-            #f)
-      ))
-    ""))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt name)
+    (attribute->sxml-attribute cnt size)))
 
 (define-method (article->sxml-html (cnt <selector>) (section-level <integer>))
   (list
     'select
-    (attributes-of cnt)
+    (append (list '@) (attributes-of cnt))
     (map
       (lambda (x)
         (list 'option (list '@ (list 'value (car x))) (cdr x)))
       (contents cnt))))
 
 ;; Submit button
+(define-method (attributes-of (cnt <submit-button>))
+  (append
+    (next-method)
+    (list (list 'type "submit"))
+    (attribute->sxml-attribute cnt name)
+    (attribute->sxml-attribute cnt value)))
+
 (define-method (article->sxml-html (cnt <submit-button>) (section-level <integer>))
   (list
     'input
-    (filter identity
-      (list
-        '@
-        (list 'type "submit")
-        (if (style-class cnt)
-            (list 'class (style-class cnt))
-            #f)
-        (if (id cnt)
-            (list 'id (id cnt))
-            #f)
-        (if (name cnt)
-            (list 'name (name cnt))
-            #f)
-        (if (value cnt)
-            (list 'value (value cnt))
-            #f)
-      ))))
+    (append (list '@) (attributes-of cnt))))

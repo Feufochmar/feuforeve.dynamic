@@ -16,11 +16,11 @@
     "/FlagGenerator"
     (lambda (path query)
       (navigation
-        (section ((style-class "nav-item"))
+        (section ((name-class "nav-item"))
                  (nav-link-to "/FlagGenerator" (nav-current-path path) "Flag generator"))
-        (section ((style-class "nav-item"))
+        (section ((name-class "nav-item"))
                  (hyperlink ((to "/FlagGenerator/RawFlag")) "Flag generator (Raw SVG)"))
-        (section ((style-class "nav-item"))
+        (section ((name-class "nav-item"))
                  (nav-link-to "/FlagGenerator/about" (nav-current-path path) "About the generator"))
       ))))
 
