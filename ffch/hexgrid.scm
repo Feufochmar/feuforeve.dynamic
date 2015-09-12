@@ -503,17 +503,22 @@
     (floodfill (list start-point))))
 
 ;; Exporting hexgrid
+;; The renderer is a function taking a tile and returning a style for the tile
+;; If the renderer returns #f for a tile, the tile is not rendered
 (define-syntax hexgrid->area
   (syntax-rules (hexgrid hexpoint-renderer)
     ((_ (hexgrid grid) (hexpoint-renderer renderer) (area-slot area-value) ...)
      (area ((area-slot area-value) ...)
-        (hash-map->list
-          (lambda (k v)
-            (hexpoint->polygon
-              (layout (grid-layout grid))
-              (hexpoint k)
-              (style-class (renderer v))))
-          (grid-tiles grid))))))
+        (filter identity
+          (hash-map->list
+            (lambda (k v)
+              (let ((stl (renderer v)))
+                (and stl
+                     (hexpoint->polygon
+                       (layout (grid-layout grid))
+                       (hexpoint k)
+                       (style-class stl)))))
+            (grid-tiles grid)))))))
 
 ;;;;
 ;; Grid building methods
