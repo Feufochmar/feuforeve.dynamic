@@ -24,7 +24,7 @@
          (charge-color ((if metal-field? tincture-ref metal-ref) palette 0)))
     (area
       (rectangle (width width) (height height)
-                 (style-class (fill-color field-color)))
+                 (style (fill-color field-color)))
       (if (< 0 (random 20))
           (charge width height charge-color field-color)
           (area)))))
@@ -57,9 +57,9 @@
         )
     (area
       (rectangle (width width) (height height)
-                 (style-class (fill-color field-color-base)))
+                 (style (fill-color field-color-base)))
       (rectangle (width wp) (height hp)
-                 (style-class (fill-color field-color-chief)))
+                 (style (fill-color field-color-chief)))
       (cond
        ((eq? charge-position #:chief)
         (charge wp hp charge-color-chief field-color-chief))
@@ -108,11 +108,11 @@
         )
     (area
       (rectangle (width width) (height height)
-                 (style-class (fill-color field-color-base)))
+                 (style (fill-color field-color-base)))
       (rectangle (width (if fess? width (* 2 wp))) (height (if fess? (* 2 hp) height))
-                 (style-class (fill-color field-color-middle)))
+                 (style (fill-color field-color-middle)))
       (rectangle (width (if fess? width wp)) (height (if fess? hp height))
-                 (style-class (fill-color field-color-chief)))
+                 (style (fill-color field-color-chief)))
       (cond
        ((eq? charge-position #:chief)
         (charge wp hp
@@ -208,7 +208,7 @@
         )
     (area
       (rectangle (width width) (height height)
-                 (style-class (fill-color field-color)))
+                 (style (fill-color field-color)))
       (area ((transforms (list (translation position))))
         (charge-canton canton-width canton-height)))))
 
@@ -228,12 +228,12 @@
         )
     (area
       (rectangle (width width) (height height)
-                 (style-class (fill-color color-field)))
+                 (style (fill-color color-field)))
       (map
         (lambda (x)
           (rectangle (width width) (height stripe-height)
                      (topleft (point 0 (* stripe-height (+ 1 (* 2 x)))))
-                     (style-class (fill-color color-charge))))
+                     (style (fill-color color-charge))))
         (letrec ((helper (lambda (lst i n) (if (>= i n) lst (helper (cons i lst) (+ i 1) n)))))
           (helper (list) 0 nb-charge-stripes)))
       (cond
@@ -257,7 +257,7 @@
                (C (point (if dexter? l (- width l)) (/ height 2)))
               )
           (area
-            (polygon (points (list A B C)) (style-class (fill-color color-field-overlay)))
+            (polygon (points (list A B C)) (style (fill-color color-field-overlay)))
             (if (pick-boolean)
                 (area)
                 (let* ((e 0.1)
@@ -272,7 +272,7 @@
           (area
             (rectangle (width (/ width 3)) (height height)
                        (topleft topleft)
-                       (style-class (fill-color color-field-overlay)))
+                       (style (fill-color color-field-overlay)))
             (if (pick-boolean)
                 (area)
                 (area ((transforms (list (translation topleft))))

@@ -11,7 +11,7 @@
             form button text-area selector submit-button
            )
   #:re-export (<container-type> <content-type>
-               id name-class style-class contents empty?
+               id name-class style contents empty?
                attribute->sxml-attribute
               )
 )

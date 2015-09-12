@@ -4,7 +4,7 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:export (<container-type> <content-type>
-            id name-class style-class contents empty?
+            id name-class style contents empty?
             container-type-constructor
             content-type-constructor
             attribute->sxml-attribute
@@ -22,7 +22,7 @@
 (define-class <content-type> (<object>)
   (id #:getter id #:init-keyword #:id #:init-form #f)
   (name-class #:getter name-class #:init-keyword #:name-class #:init-form #f)
-  (style-class #:getter style-class #:init-keyword #:style-class #:init-form #f))
+  (style #:getter style #:init-keyword #:style #:init-form #f))
 
 ;; Generic macro to build container types
 (define-syntax container-type-constructor

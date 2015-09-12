@@ -81,8 +81,8 @@
   (append
     (attribute->sxml-attribute cnt id)
     (attribute->sxml-attribute cnt name-class 'class)
-    (if (style-class cnt)
-        (let ((stl (show (style-class cnt))))
+    (if (style cnt)
+        (let ((stl (show (style cnt))))
           (if (string-null? stl)
               (list)
               (list (list 'style stl))
