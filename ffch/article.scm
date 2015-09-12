@@ -19,7 +19,8 @@
             code preformatted
            )
   #:re-export (<container-type> <content-type>
-               id style-class contents empty?
+               id name-class style-class contents empty?
+               attribute->sxml-attribute
               )
 )
 

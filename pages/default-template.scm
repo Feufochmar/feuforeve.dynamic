@@ -26,17 +26,17 @@
     meta
     (lambda (path query)
       (header
-        (section ((style-class "banner"))
+        (section ((name-class "banner"))
           (hyperlink ((to "/"))
             (image ((alt "Feuforêve")) "http://static.feuforeve.fr/images/feuforeve-banner.png")))
         (navigation
-          (section ((style-class "nav-item"))
+          (section ((name-class "nav-item"))
                   (strong (nav-link-to "/" 1st-level-path "Home")))
-          (section ((style-class "nav-item"))
+          (section ((name-class "nav-item"))
                   (strong (nav-link-to "/FloraCharacterGenerator" 1st-level-path "Flora character generator")))
-          (section ((style-class "nav-item"))
+          (section ((name-class "nav-item"))
                   (strong (nav-link-to "/ArnYtron3000" 1st-level-path "ArnYtron3000")))
-          (section ((style-class "nav-item"))
+          (section ((name-class "nav-item"))
                   (strong (nav-link-to "/FlagGenerator" 1st-level-path "Flag Generator"))))
         (apply-2nd-level navigation-2nd-level path query)))
     (footer

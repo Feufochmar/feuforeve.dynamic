@@ -19,15 +19,15 @@
     "/ArnYtron3000"
     (lambda (path query)
       (navigation
-        (section ((style-class "nav-item"))
+        (section ((name-class "nav-item"))
                  (hyperlink ((to "/ArnYtron3000")) "Nouvelle citation"))
-        (section ((style-class "nav-item"))
+        (section ((name-class "nav-item"))
                  (hyperlink ((to "/ArnYtron3000/brut")) "Nouvelle citation (texte brut)"))
-        (section ((style-class "nav-item"))
+        (section ((name-class "nav-item"))
                  (hyperlink ((to "/ArnYtron3000/json")) "Nouvelle citation (json)"))
-        (section ((style-class "nav-item"))
+        (section ((name-class "nav-item"))
                  (hyperlink ((to "/ArnYtron3000/vraie")) "Vraie citation"))
-        (section ((style-class "nav-item"))
+        (section ((name-class "nav-item"))
                  (nav-link-to "/ArnYtron3000/about" (nav-current-path path) "À propos du générateur"))
       ))))
 
