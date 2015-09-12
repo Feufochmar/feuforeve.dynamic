@@ -18,7 +18,7 @@
     (circle
       (center (point (/ width 2) (/ height 2)))
       (radius r)
-      (style-class (fill-color col))
+      (style (fill-color col))
     )))
 
 ;; Star
@@ -50,7 +50,7 @@
     )
     (polygon
       (points (add-points (list) 0 (* 2 nb-points)))
-      (style-class (fill-color col)))
+      (style (fill-color col)))
   ))
 
 (define-method (small-charge:star-maker (nb-points <integer>))
@@ -78,10 +78,10 @@
     (area
       (rectangle (width cross-width) (height cross-size)
                  (topleft (point (/ (- width cross-width) 2) (/ (- height cross-size) 2)))
-                 (style-class (fill-color col)))
+                 (style (fill-color col)))
       (rectangle (width cross-size) (height cross-width)
                  (topleft (point (/ (- width cross-size) 2) (/ (- height cross-width) 2)))
-                 (style-class (fill-color col)))
+                 (style (fill-color col)))
     )))
 
 ;; St. Andrew cross / small Saltire
@@ -100,7 +100,7 @@
               (point (+ r offset-x) (+ cross-size offset-y)) (point offset-x (+ (/ h 2) r))
               (point (+ r offset-x) (/ h 2)) (point offset-x (+ offset-y r))
         ))
-      (style-class (fill-color col)))
+      (style (fill-color col)))
   ))
 
 ;; Crescent
@@ -116,7 +116,7 @@
                              (rotation area-rotation (point 20 20))
                              (translation (point 3.5 0)))))
       (path
-        (style-class (fill-color col))
+        (style (fill-color col))
         (movements
           (list
             (move-to (point 33 5))
@@ -147,10 +147,10 @@
     (area
       (rectangle (width cross-width) (height height)
                  (topleft (point (/ (- width cross-width) 2) 0))
-                 (style-class (fill-color charge-color)))
+                 (style (fill-color charge-color)))
       (rectangle (width width) (height cross-width)
                  (topleft (point 0 (/ (- height cross-width) 2)))
-                 (style-class (fill-color charge-color)))
+                 (style (fill-color charge-color)))
       (if (pick-boolean)
           (area)
           (let ((variation
@@ -162,10 +162,10 @@
                 (area
                   (rectangle (width inner-cross-width) (height height)
                              (topleft (point (/ (- width inner-cross-width) 2) 0))
-                             (style-class (fill-color field-color)))
+                             (style (fill-color field-color)))
                   (rectangle (width width) (height inner-cross-width)
                              (topleft (point 0 (/ (- height inner-cross-width) 2)))
-                             (style-class (fill-color field-color))))))
+                             (style (fill-color field-color))))))
              ((eq? variation #:small-inner-charge)
               (area
                 ((transforms (list (translation (point (/ (- width cross-width) 2) (/ (- height cross-width) 2))))))
@@ -176,7 +176,7 @@
                 (area
                   (rectangle (width size-rect) (height size-rect)
                              (topleft (point (/ (- width size-rect) 2) (/ (- height size-rect) 2)))
-                             (style-class (fill-color charge-color)))
+                             (style (fill-color charge-color)))
                   (area
                     ((transforms (list (translation (point (/ (- width size-bonus) 2) (/ (- height size-bonus) 2))))))
                     (small-charge size-bonus size-bonus field-color)))))
@@ -215,7 +215,7 @@
       (polygon
         (points (list (point offset (/ height 2)) (point (/ width 2) offset)
                       (point (- width offset) (/ height 2)) (point (/ width 2) (- height offset))))
-        (style-class (fill-color charge-color)))
+        (style (fill-color charge-color)))
       (if (pick-boolean)
           (area)
           (let* ((wref (- width offset offset))
@@ -235,7 +235,7 @@
     (area
       (rectangle (width w) (height h)
                  (topleft (if fess? (point 0 (/ (- height h) 2)) (point (/ (- width w) 2) 0)))
-                 (style-class (fill-color charge-color)))
+                 (style (fill-color charge-color)))
       (if (pick-boolean)
           (area)
           (let ((variation (pick-from (vector #:inner-pattern #:inner-charge #:surrounding-pattern))))
@@ -246,7 +246,7 @@
                      (ih (if fess? (* h inner-ratio) h)))
                 (rectangle (width iw) (height ih)
                            (topleft (if fess? (point 0 (/ (- height ih) 2)) (point (/ (- width iw) 2) 0)))
-                           (style-class (fill-color field-color)))))
+                           (style (fill-color field-color)))))
              ((eq? variation #:inner-charge)
               (let ((offset (* (if fess? h w) 0.1)))
                 (area
@@ -266,13 +266,13 @@
                                (if fess?
                                  (point 0 (- (/ height 2) (/ h 2) (* 2 mh)))
                                  (point (- (/ width 2) (/ w 2) (* 2 mw)) 0)))
-                             (style-class (fill-color charge-color)))
+                             (style (fill-color charge-color)))
                   (rectangle (width mw) (height mh)
                              (topleft
                                (if fess?
                                  (point 0 (+ (/ height 2) (/ h 2) mh))
                                  (point (+ (/ width 2) (/ w 2) mw) 0)))
-                             (style-class (fill-color charge-color))))))
+                             (style (fill-color charge-color))))))
              (#t (area))
             ))))))
 
@@ -282,7 +282,7 @@
   (let ((r (* (min width height) 1/3)))
     (area
       (circle (center (point (/ width 2) (/ height 2))) (radius r)
-              (style-class (fill-color charge-color)))
+              (style (fill-color charge-color)))
       (area ((transforms
                (list
                  (translation
@@ -297,15 +297,15 @@
   (let ((bw (* 0.1 (min width height))))
     (area
       (rectangle (width width) (height bw)
-                 (style-class (fill-color charge-color)))
+                 (style (fill-color charge-color)))
       (rectangle (width bw) (height height)
-                 (style-class (fill-color charge-color)))
+                 (style (fill-color charge-color)))
       (rectangle (width width) (height bw)
                  (topleft (point 0 (- height bw)))
-                 (style-class (fill-color charge-color)))
+                 (style (fill-color charge-color)))
       (rectangle (width bw) (height height)
                  (topleft (point (- width bw) 0))
-                 (style-class (fill-color charge-color)))
+                 (style (fill-color charge-color)))
       (if (pick-boolean)
           (area)
           (area ((transforms (list (translation (point (* 2 bw) (* 2 bw))))))
@@ -328,7 +328,7 @@
             (point w h) (point (- w lw) h) (point (/ w 2) (+ (/ h 2) lh)) (point lw h)
             (point 0 h) (point 0 (- h lh)) (point (- (/ w 2) lw) (/ h 2)) (point 0 lh)
           ))
-        (style-class (fill-color charge-color)))
+        (style (fill-color charge-color)))
       (if (pick-boolean)
           (area)
           (let ((variation
@@ -344,7 +344,7 @@
                     (point w h) (point (- w (/ lw 2)) h) (point (/ w 2) (+ (/ h 2) (/ lh 2))) (point (/ lw 2) h)
                     (point 0 h) (point 0 (- h (/ lh 2))) (point (- (/ w 2) (/ lw 2)) (/ h 2)) (point 0 (/ lh 2))
                   ))
-                (style-class (fill-color field-color))))
+                (style (fill-color field-color))))
              ((eq? variation #:small-inner-charge)
               (area ((transforms (list (translation (point (- (/ w 2) (* 0.9 lw)) (- (/ h 2) (* 0.9 lh)))))))
                 (small-charge (* 0.9 2 lw) (* 0.9 2 lh) field-color)))

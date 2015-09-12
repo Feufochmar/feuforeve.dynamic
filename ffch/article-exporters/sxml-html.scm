@@ -25,7 +25,7 @@
   (append
     (attribute->sxml-attribute cnt id)
     (attribute->sxml-attribute cnt name-class 'class)
-    (attribute->sxml-attribute cnt style-class 'style)
+    (attribute->sxml-attribute cnt style 'style)
   ))
 
 ;; Article

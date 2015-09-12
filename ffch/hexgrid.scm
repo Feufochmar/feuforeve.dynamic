@@ -517,7 +517,7 @@
                      (hexpoint->polygon
                        (layout (grid-layout grid))
                        (hexpoint k)
-                       (style-class stl)))))
+                       (style stl)))))
             (grid-tiles grid)))))))
 
 ;;;;
