@@ -10,6 +10,11 @@
             ;
             <vector-image> vector-image width height
             ;
+            <script> script
+            ;
+            <vectorgraphics-content-type> on-focus-in on-focus-out on-activate
+            on-click on-mouse-down on-mouse-up on-mouse-over on-mouse-move on-mouse-out
+            ;
             <area> area transforms
             <translation> translation translation-vector
             <scaling> scaling scale-factor
@@ -35,7 +40,8 @@
             <close-path> close-path
            )
   #:re-export (<container-type> <content-type>
-               id style-class contents empty?
+               id name-class style-class contents empty?
+               attribute->sxml-attribute
               )
 )
 
@@ -82,14 +88,33 @@
 ;;;;
 ;; Vector Image
 (define-class <vector-image> (<container-type>)
-  (width #:accessor width #:init-keyword #:width #:init-form 0)
-  (height #:accessor height #:init-keyword #:height #:init-form 0))
+  (width #:getter width #:init-keyword #:width #:init-form 0)
+  (height #:getter height #:init-keyword #:height #:init-form 0))
 
 (container-type-constructor vector-image <vector-image>)
 
 ;;;;
+;; Script elements.
+;; Container of strings - source code
+(define-class <script> (<container-type> <content-type>))
+(container-type-constructor script <script>)
+
+;;;;
+;; Vector content type: add scriptable attributes
+(define-class <vectorgraphics-content-type> (<content-type>)
+  (on-focus-in #:getter on-focus-in #:init-keyword #:on-focus-in #:init-form #f)
+  (on-focus-out #:getter on-focus-out #:init-keyword #:on-focus-out #:init-form #f)
+  (on-activate #:getter on-activate #:init-keyword #:on-activate #:init-form #f)
+  (on-click #:getter on-click #:init-keyword #:on-click #:init-form #f)
+  (on-mouse-down #:getter on-mouse-down #:init-keyword #:on-mouse-down #:init-form #f)
+  (on-mouse-up #:getter on-mouse-up #:init-keyword #:on-mouse-up #:init-form #f)
+  (on-mouse-over #:getter on-mouse-over #:init-keyword #:on-mouse-over #:init-form #f)
+  (on-mouse-move #:getter on-mouse-move #:init-keyword #:on-mouse-move #:init-form #f)
+  (on-mouse-out #:getter on-mouse-out #:init-keyword #:on-mouse-out #:init-form #f))
+
+;;;;
 ;; Area
-(define-class <area> (<container-type> <content-type>)
+(define-class <area> (<container-type> <vectorgraphics-content-type>)
   (transforms #:getter transforms #:init-keyword #:transforms #:init-form (list)))
 
 (container-type-constructor area <area>)
@@ -128,14 +153,14 @@
 ;;;;
 ;; Text
 ;; Container of strings
-(define-class <text> (<container-type> <content-type>)
+(define-class <text> (<container-type> <vectorgraphics-content-type>)
   (topleft #:getter topleft #:init-keyword #:topleft #:init-form (point 0 0)))
 
 (container-type-constructor text <text>)
 
 ;;;;
 ;; Circle
-(define-class <circle> (<content-type>)
+(define-class <circle> (<vectorgraphics-content-type>)
   (center #:accessor center #:init-keyword #:center #:init-form (point 0 0))
   (radius #:accessor radius #:init-keyword #:radius #:init-form 0)
 )
@@ -144,7 +169,7 @@
 
 ;;;;
 ;; Rectangle
-(define-class <rectangle> (<content-type>)
+(define-class <rectangle> (<vectorgraphics-content-type>)
   (width #:accessor width #:init-keyword #:width #:init-form 0.)
   (height #:accessor height #:init-keyword #:height #:init-form 0.)
   (topleft #:accessor topleft #:init-keyword #:topleft #:init-form (point 0 0))
@@ -154,7 +179,7 @@
 
 ;;;;
 ;; Polygon
-(define-class <polygon> (<content-type>)
+(define-class <polygon> (<vectorgraphics-content-type>)
   (points #:accessor points #:init-keyword #:points #:init-form (list))
 )
 
@@ -162,7 +187,7 @@
 
 ;;;;
 ;; Path
-(define-class <path> (<content-type>)
+(define-class <path> (<vectorgraphics-content-type>)
   (movements #:accessor movements #:init-keyword #:movements #:init-form (list)))
 
 (content-type-constructor path <path>)
