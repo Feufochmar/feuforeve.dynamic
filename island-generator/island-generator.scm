@@ -12,6 +12,7 @@
             <biome> name display-color sea? lake? get-biome get-ordered-biomes
             <tile> altitude biome territory
             <island> image-width image-height grid grid-layout river-vertices river-points river-springs
+            simple-generator?
             roads cities
             <city> hex size
             <road> road-path importance
@@ -84,6 +85,7 @@
   (image-width #:getter image-width #:init-keyword #:image-width)
   (image-height #:getter image-height #:init-keyword #:image-height)
   (tile-size #:getter tile-size #:init-keyword #:tile-size)
+  (simple-generator? #:getter simple-generator? #:init-keyword #:simple-generator?)
   (grid-radius #:getter grid-radius #:init-keyword #:grid-radius)
   (grid-layout #:getter grid-layout #:init-keyword #:grid-layout)
   (grid #:getter grid #:init-keyword #:grid)
@@ -126,14 +128,17 @@
 
 ;;;;
 ;; Make
-(define-method (make-island (width <integer>) (height <integer>) (tile-size <integer>))
+(define-method (make-island (width <integer>) (height <integer>) (tile-size <integer>) (simple? <boolean>))
   (let ((radius (inexact->exact (floor (- (* 1/2 width (/ 1 tile-size (sqrt 3))) 1/2))))
         (layout (pointy-top-layout (point tile-size tile-size) (point (/ width 2) (/ height 2))))
-        (altitude-noise (make-noise 3 10)))
+        (altitude-noise (make-noise 3 10))
+        (rainfall-noise (make-noise 3 10))
+        (latitude (+ 10 (random 60))))
     (make <island>
           #:image-width width
           #:image-height height
           #:tile-size tile-size
+          #:simple-generator? simple?
           #:grid-radius radius
           #:grid-layout layout
           #:grid
@@ -148,8 +153,12 @@
                             (* -250 (+ (* qq qq) (* rr rr) (* ss ss)) (/ 1 (* radius radius)))
                             (* 200 (fractal-noise altitude-noise 2 1/4 qq rr ss))
                           ))
+                      #:rainfall
+                        (if simple?
+                            (+ 200 (* -2 latitude) (* 200 (fractal-noise rainfall-noise 2 1/4 qq rr ss)))
+                            0)
                 )))
-          #:latitude (+ 10 (random 60))
+          #:latitude latitude
     )))
 
 ;;;;
@@ -188,28 +197,29 @@
         (set! (altitude tile) (+ (altitude tile) amount)))))
 
 (define-method (erode (island <island>))
-  (let loop ((erode-pass (/ (+ 1 (* 3 (grid-radius island) (+ (grid-radius island) 1))) 5)))
-    (if (< 0 erode-pass)
-        (let* ((range (+ 1 (random (inexact->exact (floor (/ (grid-radius island) 2))))))
-               (ang (random (* 6 range)))
-               (starting-hex
-                 (hexpoint-add
-                   (hexpoint-add (hexpoint 0 0) (hexpoint-multiply range (hexpoint 1 0)))
-                   (list:fold
-                     (lambda (dir H)
-                       (hexpoint-add
-                         H
-                         (hexpoint-multiply (min (max 0 (- ang (* range (car dir)))) range) (cdr dir))))
-                     (hexpoint 0 0)
-                     (list
-                       (cons 0 (hexpoint 0 -1))
-                       (cons 1 (hexpoint -1 0))
-                       (cons 2 (hexpoint -1 1))
-                       (cons 3 (hexpoint 0 1))
-                       (cons 4 (hexpoint 1 0))
-                       (cons 5 (hexpoint 1 -1)))))))
-          (erode (grid island) starting-hex 0 (make-hash-table))
-          (loop (- erode-pass 1))))))
+  (if (not (simple-generator? island))
+      (let loop ((erode-pass (/ (+ 1 (* 3 (grid-radius island) (+ (grid-radius island) 1))) 5)))
+        (if (< 0 erode-pass)
+            (let* ((range (+ 1 (random (inexact->exact (floor (/ (grid-radius island) 2))))))
+                  (ang (random (* 6 range)))
+                  (starting-hex
+                    (hexpoint-add
+                      (hexpoint-add (hexpoint 0 0) (hexpoint-multiply range (hexpoint 1 0)))
+                      (list:fold
+                        (lambda (dir H)
+                          (hexpoint-add
+                            H
+                            (hexpoint-multiply (min (max 0 (- ang (* range (car dir)))) range) (cdr dir))))
+                        (hexpoint 0 0)
+                        (list
+                          (cons 0 (hexpoint 0 -1))
+                          (cons 1 (hexpoint -1 0))
+                          (cons 2 (hexpoint -1 1))
+                          (cons 3 (hexpoint 0 1))
+                          (cons 4 (hexpoint 1 0))
+                          (cons 5 (hexpoint 1 -1)))))))
+              (erode (grid island) starting-hex 0 (make-hash-table))
+              (loop (- erode-pass 1)))))))
 
 ;;;;
 ;; altitudes min & max
@@ -318,18 +328,19 @@
     cloud-map))
 
 (define-method (simulate-rainfalls (island <island>))
-  (let ((wind-direction (pick-wind-direction))
-        (cloud-map (make-hash-table))
-        (cloud-map-next (make-hash-table)))
-    (hexgrid-for-each
-      (lambda (H tile)
-        (hash-set! cloud-map H 20))
-      (grid island))
-    (let loop ((x 0))
-      (if (< x (* 2 (grid-radius island)))
-          (begin
-            (rainfall-pass (grid island) wind-direction cloud-map cloud-map-next)
-            (loop (+ x 1)))))))
+  (if (not (simple-generator? island))
+      (let ((wind-direction (pick-wind-direction))
+            (cloud-map (make-hash-table))
+            (cloud-map-next (make-hash-table)))
+        (hexgrid-for-each
+          (lambda (H tile)
+            (hash-set! cloud-map H 20))
+          (grid island))
+        (let loop ((x 0))
+          (if (< x (* 2 (grid-radius island)))
+              (begin
+                (rainfall-pass (grid island) wind-direction cloud-map cloud-map-next)
+                (loop (+ x 1))))))))
 
 ;;;;
 ;; Initialize the moisture and find the river springs
@@ -620,9 +631,9 @@
 
 (define-method (city-score-from-altitude (alt <number>))
   (cond
-    ((< 2200 alt) -100)
-    ((< 1600 alt) -50)
-    ((< 1200 alt) -10)
+    ((< 1700 alt) -10000) ; No cities above 1700 m
+    ((< 1600 alt) -100)
+    ((< 1200 alt) -30)
     ((< 800 alt) 10)
     (#t 30)))
 
@@ -657,16 +668,19 @@
     minimum))
 
 (define-method (place-cities (island <island>))
-  (letrec* ((nb-cities 0)
+  (letrec* ((max-nb-cities (if (simple-generator? island) 3 5))
+            (max-nb-towns (if (simple-generator? island) 9 15))
+            (max-nb-settlements (if (simple-generator? island) 36 60))
+            (nb-cities 0)
             (nb-towns 0)
             (nb-settlements 0)
             (make-city
               (lambda (lst)
-                (if (and (not (null? lst)) (< nb-settlements 60))
+                (if (and (not (null? lst)) (< nb-settlements max-nb-settlements))
                     (let* ((possible-city (car lst))
                            (sz (cond
-                                ((and (< 100 (score possible-city)) (< nb-cities 5)) #:city)
-                                ((and (< 0 (score possible-city)) (< nb-towns 15)) #:town)
+                                ((and (< 100 (score possible-city)) (< nb-cities max-nb-cities)) #:city)
+                                ((and (< 0 (score possible-city)) (< nb-towns max-nb-towns)) #:town)
                                 (#t #:village)))
                            (dist
                              (cond
@@ -789,16 +803,14 @@
          (b (biome next-tile))
          (road? (has-road? island edge))
          (city? (city next-tile)))
-    (if (not (new-road-cost b))
+    (if (or (not (new-road-cost b)) (< 1800 (altitude next-tile)))
         #f ; No new road possible => No path
         (+ (/ (abs (- (altitude next-tile) (altitude current-tile)))
               (if (or road? city?) 2 1))
            (cond  ;; Avoid roads in mountains
-             ((< 2100 (altitude next-tile)) 800)
-             ((< 1800 (altitude next-tile)) 500)
-             ((< 1500 (altitude next-tile)) 300)
-             ((< 1200 (altitude next-tile)) 200)
-             ((< 900 (altitude next-tile)) 100)
+             ((< 1500 (altitude next-tile)) 500)
+             ((< 1200 (altitude next-tile)) 300)
+             ((< 900 (altitude next-tile)) 150)
              ((< 600 (altitude next-tile)) 50)
              (#t 0))
            (if (and (not road?) (has-river? island edge)) 100 0)
@@ -852,67 +864,89 @@
             #t)
           #f))))
 ;
+(define-method (road-type-between (c1 <city>) (c2 <city>))
+  (cond
+    ((and (eq? (size c1) #:city) (eq? (size c2) #:city)) #:main-road)
+    ((and (eq? (size c1) #:town) (eq? (size c2) #:city)) #:secondary-road)
+    ((and (eq? (size c1) #:city) (eq? (size c2) #:town)) #:secondary-road)
+    ((and (eq? (size c1) #:town) (eq? (size c2) #:town)) #:secondary-road)
+    (#t #:other-road)))
+
+(define-method (city-big-or-bigger? (c1 <city>) (c2 <city>))
+  (let ((s1 (size c1))
+        (s2 (size c2)))
+    (or (eq? s1 #:city)
+        (and (eq? s1 #:town) (eq? s2 #:town))
+        (and (eq? s1 #:town) (eq? s2 #:village))
+        (and (eq? s1 #:village) (eq? s2 #:village)))))
+
+(define-method (city-small-or-smaller? (c1 <city>) (c2 <city>))
+  (let ((s1 (size c1))
+        (s2 (size c2)))
+    (or (eq? s1 #:village)
+        (and (eq? s1 #:town) (eq? s2 #:town))
+        (and (eq? s1 #:town) (eq? s2 #:city))
+        (and (eq? s1 #:city) (eq? s2 #:city)))))
+;
 (define-method (build-roads (island <island>))
-  (let* ((all-cities (filter (lambda (x) (eq? (size x) #:city)) (cities island)))
-         (all-towns (filter (lambda (x) (eq? (size x) #:town)) (cities island)))
-         (all-villages (filter (lambda (x) (eq? (size x) #:village)) (cities island)))
-         (all-cities-towns (append all-cities all-towns))
-        )
-    ; Link every neighbour cities
-    (for-each
-      (lambda (x)
-        (let ((capital (capital-city x))
-              (neighbour-cities
-                (hash-map->list
-                  (lambda (k v)
-                    (capital-city k))
-                  (neighbours x))))
-          (for-each
-            (lambda (x)
-              (add-road island capital x
-                        (cond
-                          ((and (eq? (size capital) #:city) (eq? (size x) #:city)) #:main-road)
-                          ((and (eq? (size capital) #:town) (eq? (size x) #:city)) #:secondary-road)
-                          ((and (eq? (size capital) #:city) (eq? (size x) #:town)) #:secondary-road)
-                          ((and (eq? (size capital) #:town) (eq? (size x) #:town)) #:secondary-road)
-                          (#t #:other-road))))
-            neighbour-cities)))
-      (subdivision island))
-    ; Correct the importance of the roads by linking each cities to the two closest cities
-    (for-each
-      (lambda (x)
-        (let* ((cls (closests x all-cities))
-               (first (and cls (not (null? cls)) (car cls)))
-               (second (and first (not (null? (cdr cls))) (cadr cls))))
-          (and first (add-road island x first #:main-road))
-          (and second (add-road island x second #:main-road))))
-      all-cities)
-    ; Correct the importance of the roads by linking each town to the two closest cities or towns
-    (for-each
-      (lambda (x)
-        (let* ((cls (closests x all-cities-towns))
-               (first (and cls (not (null? cls)) (car cls)))
-               (second (and first (not (null? (cdr cls))) (cadr cls))))
-          (and first (add-road island x first #:secondary-road))
-          (and second (add-road island x second #:secondary-road))))
-      all-towns)
-    ; Sort the roads by order of importance (lower to higher)
-    (set! (roads island)
-          (sort
-            (roads island)
-            (lambda (x y)
-              (or (and (eq? (importance x) #:other-road) (eq? (importance y) #:secondary-road))
-                  (and (eq? (importance x) #:other-road) (eq? (importance y) #:main-road))
-                  (and (eq? (importance x) #:secondary-road) (eq? (importance y) #:main-road))))))
-  ))
+  (if (not (simple-generator? island))
+    (let* ((all-cities (filter (lambda (x) (eq? (size x) #:city)) (cities island)))
+          (all-towns (filter (lambda (x) (eq? (size x) #:town)) (cities island)))
+          (all-villages (filter (lambda (x) (eq? (size x) #:village)) (cities island)))
+          (all-cities-towns (append all-cities all-towns))
+          )
+      ; Link every neighbour cities
+      (measure-time "Initial roads"
+        (for-each
+          (lambda (x)
+            (let ((capital (capital-city x))
+                  (neighbour-cities
+                    (hash-map->list
+                      (lambda (k v)
+                        (capital-city k))
+                      (neighbours x))))
+              (for-each
+                (lambda (y)
+                  (if (city-small-or-smaller? capital y)
+                      (add-road island capital y (road-type-between capital y))))
+                  neighbour-cities)))
+          (subdivision island)))
+      (measure-time "Road importance corrections"
+        ; Correct the importance of the roads by linking each cities to the two closest cities
+        (for-each
+          (lambda (x)
+            (let* ((cls (closests x all-cities))
+                  (first (and cls (not (null? cls)) (car cls)))
+                  (second (and first (not (null? (cdr cls))) (cadr cls))))
+              (and first (add-road island x first #:main-road))
+              (and second (add-road island x second #:main-road))))
+          all-cities)
+        ; Correct the importance of the roads by linking each town to the two closest cities or towns
+        (for-each
+          (lambda (x)
+            (let* ((cls (closests x all-cities-towns))
+                  (first (and cls (not (null? cls)) (car cls)))
+                  (second (and first (not (null? (cdr cls))) (cadr cls))))
+              (and first (add-road island x first #:secondary-road))
+              (and second (add-road island x second #:secondary-road))))
+          all-towns))
+      ; Sort the roads by order of importance (lower to higher)
+      (set! (roads island)
+            (sort
+              (roads island)
+              (lambda (x y)
+                (or (and (eq? (importance x) #:other-road) (eq? (importance y) #:secondary-road))
+                    (and (eq? (importance x) #:other-road) (eq? (importance y) #:main-road))
+                    (and (eq? (importance x) #:secondary-road) (eq? (importance y) #:main-road))))))
+    )))
 
 ;;;;
 ;; Island generator
-(define-method (generate-island (width <integer>) (height <integer>) (tile-size <integer>))
+(define-method (generate-island (width <integer>) (height <integer>) (tile-size <integer>) (simple? <boolean>))
   (measure-time "Island generation total time"
     (let ((island
             (measure-time "Altitude initialization"
-              (make-island width height tile-size))))
+              (make-island width height tile-size simple?))))
       (measure-time "Erosion"
         (erode island))
       (measure-time "Flood the sea"

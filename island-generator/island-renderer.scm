@@ -149,14 +149,17 @@
     (zone-description (point 5 40) (display-color (get-biome #:lake)) "Lake")
     ; Rivers
     (path-description (point 5 70) (river-renderer) "Rivers")
-    ; Roads
-    (path-description (point 5 100) (road-renderer #:main-road) "Main roads")
-    (path-description (point 5 115) (road-renderer #:secondary-road) "Secondary roads")
-    (path-description (point 5 130) (road-renderer #:other-road) "Other roads")
     ; Cities
-    (point-description (point 5 160) (city-renderer #:city) 6 "City")
-    (point-description (point 5 175) (city-renderer #:town) 4 "Town")
-    (point-description (point 5 190) (city-renderer #:village) 2 "Village")
+    (point-description (point 5 100) (city-renderer #:city) 6 "City")
+    (point-description (point 5 115) (city-renderer #:town) 4 "Town")
+    (point-description (point 5 130) (city-renderer #:village) 2 "Village")
+    ; Roads
+    (if (simple-generator? island)
+        (list)
+        (list
+          (path-description (point 5 160) (road-renderer #:main-road) "Main roads")
+          (path-description (point 5 175) (road-renderer #:secondary-road) "Secondary roads")
+          (path-description (point 5 190) (road-renderer #:other-road) "Other roads")))
     ;
     (area ((transforms (list (translation (point 5 230)))))
       (area ((id "caption-Biomes")(visible? #f))
@@ -256,13 +259,15 @@
                       (river-vertices island (hash-ref (river-points island) k) (list))))))
               (river-springs island)))
           ; Roads
-          (area ((id "roads"))
-            (map
-              (lambda (x)
-                (path
-                  (style (road-renderer (importance x)))
-                  (movements (path-movements island hexpoint->point (road-path x)))))
-              (roads island)))
+          (if (simple-generator? island)
+              (list)
+              (area ((id "roads"))
+                (map
+                  (lambda (x)
+                    (path
+                      (style (road-renderer (importance x)))
+                      (movements (path-movements island hexpoint->point (road-path x)))))
+                  (roads island))))
           ; Cities
           (area ((id "cities"))
             (map
@@ -344,10 +349,15 @@
               (font-size 12)
               (font-family "serif")
               (on-click (string-append "toggleVisibility(this, '" (car x) "');"))))
-          (list
-            (cons "rivers" 0)
-            (cons "roads" 1)
-            (cons "cities" 2)))
+          (if (simple-generator? island)
+            (list
+              (cons "rivers" 0)
+              (cons "cities" 1))
+            (list
+              (cons "rivers" 0)
+              (cons "cities" 1)
+              (cons "roads" 2))
+            ))
       ))
     port)
   (newline port))
