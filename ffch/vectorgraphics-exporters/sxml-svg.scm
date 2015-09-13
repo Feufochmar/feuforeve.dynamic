@@ -36,7 +36,7 @@
         (string-append "font-size:" (show (font-size stl)) ";")
         "")
     (if (font-family stl)
-        (string-append "font-family:" (show (font-family stl)) ";")
+        (string-append "font-family:" (font-family stl) ";")
         "")
   ))
 
@@ -121,9 +121,9 @@
 ;; Script
 (define-method (vectorgraphics->sxml-svg (cnt <script>))
   (list 'script
-    "// <![CDATA["
+    "// <![CDATA[\n"
     (next-method)
-    "// ]]>"))
+    "\n// ]]>"))
 
 ;;;;
 ;; Area
