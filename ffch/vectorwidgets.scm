@@ -125,6 +125,7 @@
   (font-family #:getter font-family #:init-form #f)
   (on-click #:getter on-click #:init-form #f)
   (titles #:getter titles #:init-form #f)
+  (default #:getter default #:init-form #f)
 )
 
 (define-method (update-combo-color (combo <vectorwidgets-combo>) (color <applicable>))
@@ -166,7 +167,7 @@
                  (height (button-height combo))
                  (style
                    (shape-style
-                     (fill-color (fill-color-inactive combo))
+                     (fill-color ((if (equal? title (default combo)) fill-color-active fill-color-inactive) combo))
                      (stroke-color (stroke-color combo))
                      (stroke-width (stroke-width combo)))))
                (text
