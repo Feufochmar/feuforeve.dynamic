@@ -12,7 +12,7 @@
             ;
             <script> script
             ;
-            <vectorgraphics-content-type> on-focus-in on-focus-out on-activate
+            <vectorgraphics-content-type> visible? on-focus-in on-focus-out on-activate
             on-click on-mouse-down on-mouse-up on-mouse-over on-mouse-move on-mouse-out
             ;
             <area> area transforms
@@ -102,6 +102,7 @@
 ;;;;
 ;; Vector content type: add scriptable attributes
 (define-class <vectorgraphics-content-type> (<content-type>)
+  (visible? #:getter visible? #:init-keyword #:visible? #:init-form #t)
   (on-focus-in #:getter on-focus-in #:init-keyword #:on-focus-in #:init-form #f)
   (on-focus-out #:getter on-focus-out #:init-keyword #:on-focus-out #:init-form #f)
   (on-activate #:getter on-activate #:init-keyword #:on-activate #:init-form #f)
