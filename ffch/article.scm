@@ -8,15 +8,15 @@
             <section> <paragraph>
             <strong> <emphase> <deleted> <inserted> <mark>
             <hyperlink> <text-list> <linefeed> <image> <figure>
-            <code> <preformatted>
+            <code> <preformatted> <embedded-object>
             ; Getters
-            title author date to ordered? caption alt source
+            title author date to ordered? caption alt source data type
             ; Construction macros and functions
             article header footer navigation
             section paragraph
             strong emphase deleted inserted mark
             hyperlink text-list linefeed image figure
-            code preformatted
+            code preformatted embedded-object
            )
   #:re-export (<container-type> <content-type>
                id name-class style contents empty?
@@ -95,6 +95,11 @@
   (alt #:getter alt #:init-keyword #:alt #:init-form #f) ;; Alternative text
   (source #:getter source #:init-keyword #:source #:init-form #f)) ;; link to image
 
+;; Embedded object: a content-type to display an embedded object element
+(define-class <embedded-object> (<content-type>)
+  (data #:getter data #:init-keyword #:data #:init-form #f)
+  (type #:getter type #:init-keyword #:type #:init-form #f))
+
 ;;;;
 ;; Constructor functions and macros
 (container-type-constructor article <article>)
@@ -112,6 +117,7 @@
 (container-type-constructor figure <figure>)
 (container-type-constructor code <code>)
 (container-type-constructor preformatted <preformatted>)
+(content-type-constructor embedded-object <embedded-object>)
 
 ;; Text-list use a different syntax because of its list of contents
 (define-syntax text-list
