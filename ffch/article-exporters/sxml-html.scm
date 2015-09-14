@@ -202,6 +202,19 @@
     'img
     (append (list '@) (attributes-of cnt))))
 
+;; Embedded object
+(define-method (attributes-of (cnt <embedded-object>))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt data)
+    (attribute->sxml-attribute cnt type)))
+
+(define-method (article->sxml-html (cnt <embedded-object>) (section-level <integer>))
+  (list
+    'object
+    (append (list '@) (attributes-of cnt))
+    " "))
+
 ;;;;;;
 ;; Forms elements
 
