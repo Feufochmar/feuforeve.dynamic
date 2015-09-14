@@ -1,0 +1,12 @@
+[Unit]
+Description=Daily Island Updater
+
+[Service]
+#User=http
+#Group=http
+WorkingDirectory=/opt/feuforeve-fr/
+Type=oneshot
+Environment="GUILE_LOAD_PATH=."
+# Replace the variable $OUTPUT-DIR with the variable to use
+ExecStart=/usr/bin/guile -e "(@ (island-generator) main)" island-generator.scm $OUTPUT-PATH
+
