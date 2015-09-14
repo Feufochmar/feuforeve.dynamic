@@ -4,6 +4,7 @@
   #:use-module (pages flora-character-generator)
   #:use-module (pages arnytron)
   #:use-module (pages flag-generator)
+  #:use-module (pages daily-island)
   #:duplicates (merge-generics)
 )
 
@@ -21,6 +22,7 @@
 (load-pages:flora-character-generator wcontainer)
 (load-pages:arnytron wcontainer)
 (load-pages:flag-generator wcontainer)
+(load-pages:daily-island wcontainer)
 
 ;; Run the webserver
 (run-webcontainer wcontainer)
