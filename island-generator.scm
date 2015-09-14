@@ -1,8 +1,9 @@
-(define-module (hexamap)
+(define-module (island-generator)
   #:use-module (island-generator island-generator)
   #:use-module (island-generator island-renderer)
-  #:use-module (ffch debug)
+  #:use-module ((srfi srfi-19) #:renamer (symbol-prefix-proc 'time:))
   #:duplicates (merge-generics)
+  #:export (main)
 )
 
 ;; To avoid using the C locale in guile-2.0
@@ -12,19 +13,20 @@
 (set! *random-state* (random-state-from-platform))
 (set-port-encoding! (current-output-port) "UTF-8")
 
-(display "Start\n")
-(define *image-width* 800)
-(define *image-height* 700)
-(define *size* 6)
-(define *simple?* #f)
-
-(format #t "Image width: ~s ; Size: ~s\n" *image-width* *size*)
-
-(define *island* (generate-island *image-width* *image-height* *size* *simple?*))
-(format #t "Nb polygons: ~s\n" (+ 1 (* 3 ((@@ (island-generator island-generator) grid-radius) *island*)
-                                         (+ ((@@ (island-generator island-generator) grid-radius) *island*) 1))))
-
-(measure-time "Rendering island"
-  (let ((*island-file* (open-file "island.svg" "w")))
-    (render-island *island* *island-file*)
-    (close *island-file*)))
+(define (main args)
+  (let* ((image-width 900)
+         (image-height 800)
+         (tile-size 6)
+         (simple? #f)
+         (tomorrow-time (time:add-duration (time:current-time)
+                                           (time:make-time time:time-duration 0 (* 24 60 60))))
+         (tomorrow-date (time:time-utc->date tomorrow-time))
+         (output-dir (if (and (not (null? args)) (not (null? (cdr args)))) (cadr args) "./"))
+         (island-file-name (string-append output-dir "island-" (time:date->string tomorrow-date "~Y-~m-~d") ".svg"))
+         (island (generate-island image-width image-height tile-size simple?))
+         (island-file (open-file island-file-name "w"))
+       )
+    (render-island
+      island
+      island-file)
+    (close island-file)))
