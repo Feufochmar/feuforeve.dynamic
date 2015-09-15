@@ -416,4 +416,6 @@
  (#t "2015-09-11" "salut les accrocs de la sodomie à la biscotte (en fonte)" ("Zluglu: :genere" "ArnYtron3000: sallut les pisciculteurs scatophiles au chalumeau!" "Zluglu: 1 partout" "Olaf-: moi je préfère la sodomie au chalumeau" "Olaf-: c'est plus sport" "Zluglu: Olaf- : et les scatophiles à la biscote ?"))
  (#t "2015-09-12" "salut les gros enturbannés nus glissant sur le carrelage badigeonnés de mayonnaise au son de la  marseillaise" ("Olaf-: ah pas mal" "Olaf-: 8/10" "Olaf-: ArnYtron3000: génère" "ArnYtron3000: salut les cretins tintin" "ArnY: ahah, le nul!" "ArnY: I win!"))
  (#t "2015-09-14" "salut les merveilleux esthètes membrés comme des étalons dont les éfluves hormonales liquéfient toute représentante de la gente féminine!" ())
+ (#t "2015-09-15" "salut les ptit zozios enculeurs de rapaces et cagueurs volants" ("Zluglu: CagueurVolant \o/" "ArnY: il se reconnait! comme c'est mimi! :)" "Zluglu: non" "Zluglu: je ne pense pas que les o< chient en vol"))
 ))
+ 
