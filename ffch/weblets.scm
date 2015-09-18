@@ -7,7 +7,7 @@
   #:use-module (web response)
   #:use-module (web http)
   #:use-module (web uri)
-  #:export (weblet webcontainer
+  #:export (weblet dynamic-header-weblet webcontainer
             add-weblet run-webcontainer
             add-redirections
            )
@@ -20,6 +20,9 @@
   (error-code #:getter error-code #:init-keyword #:error-code #:init-form 200)
   (location #:getter location #:init-keyword #:location #:init-form #f)
 )
+
+;; Weblet with dynamic headers : its header slots are evaluated when built
+(define-class <dynamic-header-weblet> (<weblet>))
 
 ;; Web container : the webserver
 (define-class <webcontainer> (<object>)
@@ -56,6 +59,38 @@
     (if (location wlet)
         (set! headers (cons (cons 'location (location wlet)) headers)))
     headers))
+
+;;;;
+;; Dynamic header Weblet methods
+
+;; Constructor
+(define-syntax dynamic-header-weblet
+  (syntax-rules ()
+   ((_ ((slot value) ...) ((params* ...) cmd cmd* ...))
+    (let ((wlet (make <dynamic-header-weblet> #:output-writer (lambda (params* ...) cmd cmd* ...))))
+      (begin
+        (weblet-slot-set! wlet (quote slot) value) ...
+      )
+      wlet
+    ))))
+
+;; Slot set
+(define-method (weblet-slot-set! (wlet <dynamic-header-weblet>) (slot <symbol>) value)
+  (cond
+    ((eq? slot 'error-code) (slot-set! wlet 'error-code value))
+    ((eq? slot 'content-type) (slot-set! wlet 'content-type (lambda () (parse-header 'content-type value))))
+    ((eq? slot 'location) (slot-set! wlet 'location (lambda () (parse-header 'location value))))
+    (#t (error "Unkown weblet slot: " slot))))
+
+;; Build the header of a weblet
+(define-method (build-headers (wlet <dynamic-header-weblet>))
+  (let ((headers (list)))
+    (if (content-type wlet)
+        (set! headers (cons (cons 'content-type ((content-type wlet))) headers)))
+    (if (location wlet)
+        (set! headers (cons (cons 'location ((location wlet))) headers)))
+    headers))
+
 
 ;;;;
 ;; Webcontainer methods
