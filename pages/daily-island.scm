@@ -48,12 +48,13 @@
 ;; Daily Island, today's image
 (define (load-daily-island-image wcontainer)
   (add-weblet wcontainer (list "DailyIsland" "Image")
-    (weblet ((error-code 303)
-             (content-type "text/plain;charset=UTF-8")
-             (location (daily-island-link)))
-          ((path query port)
-           (display "See: " port)(display (daily-island-link) port)
-           (newline port))
+    (dynamic-header-weblet
+      ((error-code 303)
+       (content-type "text/plain;charset=UTF-8")
+       (location (daily-island-link)))
+      ((path query port)
+       (display "See: " port)(display (daily-island-link) port)
+       (newline port))
     )))
 
 (define (generate-raw port)
