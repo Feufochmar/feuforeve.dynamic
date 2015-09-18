@@ -418,4 +418,5 @@
  (#t "2015-09-14" "salut les merveilleux esthètes membrés comme des étalons dont les éfluves hormonales liquéfient toute représentante de la gente féminine!" ())
  (#t "2015-09-15" "salut les ptit zozios enculeurs de rapaces et cagueurs volants" ("Zluglu: CagueurVolant \\o/" "ArnY: il se reconnait! comme c'est mimi! :)" "Zluglu: non" "Zluglu: je ne pense pas que les o< chient en vol"))
  (#f "2015-09-17" "salut KK PD O Q KC K PT!" ("Zluglu :genere" "ArnYtron3000: salut les épluchés du crotin d'ane corse à l'intellect déficient" "ArnY: roh flute, il fait fort, là" "rbs: ouais, et ton salut va foutre le bordel dans l'ArnYtron3000" "Zluglu: faut dire que t’as fait faible…" "rbs: t'es en train de la saboter :)"))
+ (#t "2015-09-18" "salut les mous du fondement rugueux à l'ouverture béante!" ())
 ))
