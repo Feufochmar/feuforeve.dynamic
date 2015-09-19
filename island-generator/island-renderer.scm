@@ -162,7 +162,7 @@
           (path-description (point 5 190) (road-renderer #:other-road) "Other roads")))
     ;
     (area ((transforms (list (translation (point 5 230)))))
-      (area ((id "caption-Biomes")(visible? #f))
+      (area ((id "caption-Biomes")(style (shape-style (visible? #f))))
         (let ((idx -1))
           (map
             (lambda (b)
@@ -172,7 +172,7 @@
                     (zone-description (point 0 (* 15 idx)) (display-color b) (name b)))
                   (list)))
             (get-ordered-biomes))))
-      (area ((id "caption-Elevation")(visible? #f))
+      (area ((id "caption-Elevation")(style (shape-style (visible? #f))))
         (let ((idx -1))
           (map
             (lambda (elev)
@@ -197,7 +197,7 @@
               (vector 101 "100 - 150 m")
               (vector 51 "50 - 100 m")
               (vector 1 "0 - 50 m")))))
-      (area ((id "caption-Subdivisions")(visible? #f))
+      (area ((id "caption-Subdivisions")(style (shape-style (visible? #f))))
         (rectangle (width 1) (height 1) (style (fill-color (rgba-color 0 0 0 0))))
       )
       (area ((id "caption-Blank"))
@@ -224,22 +224,19 @@
             (hexgrid (grid island))
             (hexpoint-renderer (tile-renderer elevation-color))
             (id "layer-Elevation")
-            (style (stroke-width 1))
-            (visible? #f))
+            (style (shape-style (stroke-width 1)(visible? #f))))
           ; Biomes
           (hexgrid->area
             (hexgrid (grid island))
             (hexpoint-renderer (tile-renderer biome-color))
             (id "layer-Biomes")
-            (style (stroke-width 1))
-            (visible? #f))
+            (style (shape-style (stroke-width 1)(visible? #f))))
           ; Administrative subdivisions
           (hexgrid->area
             (hexgrid (grid island))
             (hexpoint-renderer (tile-renderer subdivision-color))
             (id "layer-Subdivisions")
-            (style (stroke-width 1))
-            (visible? #f))
+            (style (shape-style (stroke-width 1)(visible? #f))))
           ; Blank map
           (hexgrid->area
             (hexgrid (grid island))
@@ -289,12 +286,12 @@
         (script
           "function toggleVisibility(button, what) {"
           "  var target = document.getElementById(what);"
-          "  var visible = target.getAttribute('visibility');"
-          "  if (visible == 'hidden') {"
-          "    target.setAttribute('visibility', 'visible');"
+          "  var visible = target.style.display;"
+          "  if (visible == 'none') {"
+          "    target.style.display = 'inline';"
           "    updateButtonTitle(button, 'Hide ' + what);"
           "  } else {"
-          "    target.setAttribute('visibility', 'hidden');"
+          "    target.style.display = 'none';"
           "    updateButtonTitle(button, 'Show ' + what);"
           "  }"
           "}"
@@ -306,11 +303,11 @@
           "      var targetLayer = document.getElementById('layer-' + current);"
           "      var targetCaption = document.getElementById('caption-' + current);"
           "      if (current != activeBackground) {"
-          "        targetLayer.setAttribute('visibility', 'hidden');"
-          "        targetCaption.setAttribute('visibility', 'hidden');"
+          "        targetLayer.style.display = 'none';"
+          "        targetCaption.style.display = 'none';"
           "      } else {"
-          "        targetLayer.setAttribute('visibility', 'visible');"
-          "        targetCaption.setAttribute('visibility', 'visible');"
+          "        targetLayer.style.display = 'inline';"
+          "        targetCaption.style.display = 'inline';"
           "      }"
           "    });"
           "}"
