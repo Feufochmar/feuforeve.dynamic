@@ -108,12 +108,12 @@
 (define-class <city> (<object>)
   (hex #:getter hex #:init-keyword #:hex)
   (score #:getter score #:init-keyword #:score)
-  (size #:accessor size #:init-keyword #:size))
+  (size #:accessor size #:init-keyword #:size)
+  (territory #:accessor territory #:init-keyword #:territory))
 
 (define-class <territory> (<object>)
   (capital-city #:accessor capital-city #:init-keyword #:capital-city)
   (neighbours #:accessor neighbours #:init-form (make-hash-table))
-  (subdivision #:accessor subdivision #:init-keyword #:subdivision #:init-form #f)
   (building-frontier #:accessor building-frontier #:init-keyword #:building-frontier)
   (display-color #:accessor display-color
                  #:init-form (hsl-color
@@ -737,8 +737,9 @@
             (begin
               (if (and next tile (not (eq? ter (territory tile))))
                   (begin
-                    (hash-set! (neighbours ter) (territory tile) #t)
-                    (hash-set! (neighbours (territory tile)) ter #t)))
+                     ; Use hashq as we want eq? for the comparison and not equal?
+                    (hashq-set! (neighbours ter) (territory tile) #t)
+                    (hashq-set! (neighbours (territory tile)) ter #t)))
               (find-new-frontier island ter (cdr lst)))))))
 
 (define-method (next-territory? (island <island>) (territory <territory>))
@@ -772,13 +773,13 @@
                                         (map
                                           (lambda (y) (cons y (compute-territory-score island x y)))
                                           (neighbour-faces (hex x))))
-                                      (lambda (x y) (> (cdr x) (cdr y)))))))
+                                      (lambda (a b) (> (cdr a) (cdr b)))))))
+                   (set! (territory x) ter)
                    (set! (territory (hexgrid-ref (grid island) (hex x))) ter)
                    ter))
                all-cities)
              (list))))
-    (set! (subdivision island) territories)
-  ))
+    (set! (subdivision island) territories)))
 
 ;;;;
 ;; Compute roads
@@ -803,7 +804,7 @@
          (b (biome next-tile))
          (road? (has-road? island edge))
          (city? (city next-tile)))
-    (if (or (not (new-road-cost b)) (< 1800 (altitude next-tile)))
+    (if (or (not (new-road-cost b)) (< 2000 (altitude next-tile)))
         #f ; No new road possible => No path
         (+ (/ (abs (- (altitude next-tile) (altitude current-tile)))
               (if (or road? city?) 2 1))
@@ -815,8 +816,8 @@
              (#t 0))
            (if (and (not road?) (has-river? island edge)) 100 0)
            (cond
-             (road? 1)
              (city? 1)
+             (road? (/ (new-road-cost b) 5))
              (#t (new-road-cost b)))))))
 
 (define-method (move-cost-method (island <island>) (road-type <keyword>))
@@ -839,19 +840,25 @@
     (filter (lambda (x) (not (eq? city x))) lst)
     (lambda (x y) (< (hexpoint-distance (hex x) (hex city)) (hexpoint-distance (hex y) (hex city))))))
 
-(define-method (update-edges-places (island <island>) (city-from <city>) (from <hexpoint>) (rest <list>))
+(define-method (update-edges-places (island <island>) (cities-along-path <list>) (from <hexpoint>) (rest <list>))
   (if (not (null? rest))
       (let* ((next (car rest))
              (edge (edge-between from next))
              (next-tile (hexgrid-ref (grid island) next)))
         (hash-set! (edge-crossing-roads island) edge #t)
         (if (and next-tile (city next-tile))
-            (hash-set! (linked-places island) (cons city-from (city next-tile)) #t))
-        (update-edges-places island city-from next (cdr rest)))))
+            (begin
+              (map
+                (lambda (city-from)
+                  (hash-set! (linked-places island) (cons city-from (city next-tile)) #t))
+                cities-along-path)
+              (set! cities-along-path (cons (city next-tile) cities-along-path))
+              ))
+        (update-edges-places island cities-along-path next (cdr rest)))))
 
 (define-method (add-road (island <island>) (from <city>) (to <city>) (road-type <keyword>))
-  (if (and (not (hash-ref (linked-places island) (cons from to)))
-           (not (hash-ref (linked-places island) (cons to from))))
+  (if (not (or (hash-ref (linked-places island) (cons from to))
+               (hash-ref (linked-places island) (cons to from))))
     (let ((path (hexgrid-pathfind (grid island) (hex from) (hex to)
                                   (move-cost-method island road-type) (heuristic-cost-method island))))
       (if path
@@ -860,7 +867,7 @@
                   (cons
                     (make <road> #:road-path path #:importance road-type)
                     (roads island)))
-            (update-edges-places island from (car path) (cdr path))
+            (update-edges-places island (list from) (car path) (cdr path))
             #t)
           #f))))
 ;
@@ -887,16 +894,66 @@
         (and (eq? s1 #:town) (eq? s2 #:town))
         (and (eq? s1 #:town) (eq? s2 #:city))
         (and (eq? s1 #:city) (eq? s2 #:city)))))
+
+; The capital of the island is the city with the higher city score
+(define-method (island-capital (island <island>))
+  (car
+    (sort
+      (cities island)
+      (lambda (x y) (> (score x) (score y))))))
+;
+; take from guile srfi-1 implementation is not what I want
+(define-method (take (lst <list>) (i <integer>))
+  (letrec ((helper
+            (lambda (l n res)
+              (if (or (null? l) (<= i n))
+                  (reverse res)
+                  (helper (cdr l) (+ 1 n) (cons (car l) res))))))
+    (helper lst 0 (list))))
+;
+(define-method (closest-place (city <city>) (lst-places <list>))
+  (if (null? lst-places)
+      #f
+      (car
+        (sort
+          lst-places
+          (lambda (x y)
+            (< (hexpoint-distance (hex city) (hex x))
+               (hexpoint-distance (hex city) (hex x))))))))
+;
+(define-method (has-neighbour-city? (city <city>))
+  (not (null? (hash-map->list (lambda (k v) k) (neighbours (territory city))))))
 ;
 (define-method (build-roads (island <island>))
   (if (not (simple-generator? island))
-    (let* ((all-cities (filter (lambda (x) (eq? (size x) #:city)) (cities island)))
-          (all-towns (filter (lambda (x) (eq? (size x) #:town)) (cities island)))
-          (all-villages (filter (lambda (x) (eq? (size x) #:village)) (cities island)))
-          (all-cities-towns (append all-cities all-towns))
+    (let* ((icapital (island-capital island))
+           (all-reachable-cities (filter has-neighbour-city? (cities island)))
+           (all-cities
+             (filter
+               (lambda (x) (eq? (size x) #:city))
+               all-reachable-cities))
+           (all-towns
+             (filter
+               (lambda (x) (eq? (size x) #:town))
+               all-reachable-cities))
           )
-      ; Link every neighbour cities
-      (measure-time "Initial roads"
+      ; Every city has a road to the capital
+      (measure-time "Roads - cities to capital"
+        (for-each
+          (lambda (x)
+            (if (not (eq? icapital x))
+                (add-road island x icapital #:main-road)))
+          all-cities))
+      ; Every town has a road to the closest city
+      (measure-time "Roads - town to closest city"
+        (for-each
+          (lambda (x)
+            (let ((closest (closest-place x all-cities)))
+              (if closest
+                (add-road island x closest #:secondary-road))))
+          all-towns))
+      ; Link neighbour cities. Max: 3 neighbours. Neighbours are sorted by distance.
+      (measure-time "Roads - neighbours"
         (for-each
           (lambda (x)
             (let ((capital (capital-city x))
@@ -907,29 +964,15 @@
                       (neighbours x))))
               (for-each
                 (lambda (y)
-                  (if (city-small-or-smaller? capital y)
-                      (add-road island capital y (road-type-between capital y))))
-                  neighbour-cities)))
+                  (add-road island capital y (road-type-between capital y)))
+                (take
+                  (sort
+                    neighbour-cities
+                    (lambda (c1 c2)
+                      (< (hexpoint-distance (hex c1) (hex capital))
+                          (hexpoint-distance (hex c2) (hex capital)))))
+                  3))))
           (subdivision island)))
-      (measure-time "Road importance corrections"
-        ; Correct the importance of the roads by linking each cities to the two closest cities
-        (for-each
-          (lambda (x)
-            (let* ((cls (closests x all-cities))
-                  (first (and cls (not (null? cls)) (car cls)))
-                  (second (and first (not (null? (cdr cls))) (cadr cls))))
-              (and first (add-road island x first #:main-road))
-              (and second (add-road island x second #:main-road))))
-          all-cities)
-        ; Correct the importance of the roads by linking each town to the two closest cities or towns
-        (for-each
-          (lambda (x)
-            (let* ((cls (closests x all-cities-towns))
-                  (first (and cls (not (null? cls)) (car cls)))
-                  (second (and first (not (null? (cdr cls))) (cadr cls))))
-              (and first (add-road island x first #:secondary-road))
-              (and second (add-road island x second #:secondary-road))))
-          all-towns))
       ; Sort the roads by order of importance (lower to higher)
       (set! (roads island)
             (sort
