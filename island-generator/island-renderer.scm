@@ -72,7 +72,7 @@
   (shape-style
     (stroke-color (display-color (get-biome #:lake)))
     (stroke-width 2)
-    (fill-color (rgba-color 0 0 0 0))))
+    (fill-color (no-color))))
 
 (define-method (road-renderer (type <keyword>))
   (shape-style
@@ -85,7 +85,7 @@
         ((eq? #:main-road type) 3)
         ((eq? #:secondary-road type) 2)
         (#t 1)))
-    (fill-color (rgba-color 0 0 0 0))))
+    (fill-color (no-color))))
 
 (define-method (city-renderer (size <keyword>))
   (shape-style
@@ -198,10 +198,10 @@
               (vector 51 "50 - 100 m")
               (vector 1 "0 - 50 m")))))
       (area ((id "caption-Subdivisions")(style (shape-style (visible? #f))))
-        (rectangle (width 1) (height 1) (style (fill-color (rgba-color 0 0 0 0))))
+        (rectangle (width 1) (height 1) (style (fill-color (no-color))))
       )
       (area ((id "caption-Blank"))
-        (rectangle (width 1) (height 1) (style (fill-color (rgba-color 0 0 0 0))))
+        (rectangle (width 1) (height 1) (style (fill-color (no-color))))
       )
 
   )))

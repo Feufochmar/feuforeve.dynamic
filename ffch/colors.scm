@@ -4,6 +4,8 @@
   #:use-module (oop goops)
   #:export (<color>
             css-value
+            transparent-color
+            no-color
             rgb-color rgba-color
             hsl-color hsla-color
             named-color
@@ -16,6 +18,19 @@
 ;; Method to retrieve color as css. It must be redefined for each type of color
 (define-method (css-value (col <color>))
   "transparent")
+
+;; Transparent color : the base class is the transparent color, use it
+(define-method (transparent-color)
+  (make <color>))
+
+;; No color
+(define-class <no-color> (<color>))
+
+(define-method (no-color)
+  (make <no-color>))
+
+(define-method (css-value (col <no-color>))
+  "none")
 
 ;; RGB color
 (define-class <rgb-color> (<color>)
