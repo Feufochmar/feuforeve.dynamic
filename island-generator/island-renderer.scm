@@ -77,9 +77,10 @@
 (define-method (road-renderer (type <keyword>))
   (shape-style
     (stroke-color
-      (if (eq? #:other-road type)
-          (hsl-color 0 0 0)
-          (hsl-color 0 100 50)))
+      (cond
+        ((eq? #:other-road type) (hsl-color 0 0 0))
+        ((eq? #:secondary-road type) (hsl-color 15 100 50))
+        (#t (hsl-color 0 100 50))))
     (stroke-width
       (cond
         ((eq? #:main-road type) 3)
