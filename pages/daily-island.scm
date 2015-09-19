@@ -50,8 +50,8 @@
   (add-weblet wcontainer (list "DailyIsland" "Image")
     (dynamic-header-weblet
       ((error-code 303)
-       (content-type "text/plain;charset=UTF-8")
-       (location (daily-island-link)))
+       (content-type (const "text/plain;charset=UTF-8"))
+       (location daily-island-link))
       ((path query port)
        (display "See: " port)(display (daily-island-link) port)
        (newline port))

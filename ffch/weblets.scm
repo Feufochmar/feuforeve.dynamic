@@ -78,8 +78,8 @@
 (define-method (weblet-slot-set! (wlet <dynamic-header-weblet>) (slot <symbol>) value)
   (cond
     ((eq? slot 'error-code) (slot-set! wlet 'error-code value))
-    ((eq? slot 'content-type) (slot-set! wlet 'content-type (lambda () (parse-header 'content-type value))))
-    ((eq? slot 'location) (slot-set! wlet 'location (lambda () (parse-header 'location value))))
+    ((eq? slot 'content-type) (slot-set! wlet 'content-type (lambda () (parse-header 'content-type (value)))))
+    ((eq? slot 'location) (slot-set! wlet 'location (lambda () (parse-header 'location (value)))))
     (#t (error "Unkown weblet slot: " slot))))
 
 ;; Build the header of a weblet
