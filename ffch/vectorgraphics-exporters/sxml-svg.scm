@@ -38,6 +38,9 @@
     (if (font-family stl)
         (string-append "font-family:" (font-family stl) ";")
         "")
+    (if (not (visible? stl))
+        (string-append "display:none;")
+        "")
   ))
 
 ;; Translation
@@ -93,9 +96,6 @@
 (define-method (attributes-of (cnt <vectorgraphics-content-type>))
   (append
     (next-method)
-    (if (not (visible? cnt))
-        (list (list 'visibility "hidden"))
-        (list))
     (attribute->sxml-attribute cnt on-focus-in 'onfocusin)
     (attribute->sxml-attribute cnt on-focus-out 'onfocusout)
     (attribute->sxml-attribute cnt on-activate 'onactivate)
