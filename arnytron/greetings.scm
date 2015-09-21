@@ -420,4 +420,5 @@
  (#f "2015-09-17" "salut KK PD O Q KC K PT!" ("Zluglu :genere" "ArnYtron3000: salut les épluchés du crotin d'ane corse à l'intellect déficient" "ArnY: roh flute, il fait fort, là" "rbs: ouais, et ton salut va foutre le bordel dans l'ArnYtron3000" "Zluglu: faut dire que t’as fait faible…" "rbs: t'es en train de la saboter :)"))
  (#t "2015-09-18" "salut les mous du fondement rugueux à l'ouverture béante!" ())
  (#t "2015-09-19" "salut les limaçons portugais à fourrure verte electrisée et à la trique de porte drapeau" ())
+ (#t "2015-09-21" "salut les vieux nains patatophiles hydrophobes" ("katyucha: salut à toi, l'homme de l'autre bord de la France" "ArnY: du bon bord, tu veux dire!" "katyucha: pas sur !" "ArnY: le bord salé!" "ArnY: pas comme le bord doux, qui n'est pas bon!"))
 ))
