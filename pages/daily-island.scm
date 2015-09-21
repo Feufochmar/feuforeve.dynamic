@@ -24,13 +24,13 @@
     (lambda (path query)
       (navigation
         (section ((name-class "nav-item"))
-          (hyperlink ((to "/DailyIsland")) "Daily Island"))
+          (nav-link-to "/DailyIsland" (nav-current-path path) "Daily Island"))
         (section ((name-class "nav-item"))
           (hyperlink ((to "/DailyIsland/Image")) "Daily Island (image)"))
         (section ((name-class "nav-item"))
           (hyperlink ((to "/DailyIsland/Generator")) "Island generator"))
         (section ((name-class "nav-item"))
-          (hyperlink ((to "/DailyIsland/About")) "About"))
+          (nav-link-to "/DailyIsland/About" (nav-current-path path) "About"))
       ))))
 
 ;; Daily Island
