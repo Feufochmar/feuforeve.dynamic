@@ -423,4 +423,5 @@
  (#t "2015-09-21" "salut les vieux nains patatophiles hydrophobes" ("katyucha: salut à toi, l'homme de l'autre bord de la France" "ArnY: du bon bord, tu veux dire!" "katyucha: pas sur !" "ArnY: le bord salé!" "ArnY: pas comme le bord doux, qui n'est pas bon!"))
  (#t "2015-09-23" "salut les gobeurs de boules suédois!" ("katyucha: chuuut" "Olaf-: encore des boules bleues !" "katyucha: y a match"))
  (#t "2015-09-24" "salut les vieux grumeaux cagueux" ())
+ (#t "2015-09-25" "salut les vieux vivant pour qui la vie,  à vélo, va!" ())
 ))
