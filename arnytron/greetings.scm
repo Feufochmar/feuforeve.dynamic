@@ -424,4 +424,5 @@
  (#t "2015-09-23" "salut les gobeurs de boules suédois!" ("katyucha: chuuut" "Olaf-: encore des boules bleues !" "katyucha: y a match"))
  (#t "2015-09-24" "salut les vieux grumeaux cagueux" ())
  (#t "2015-09-25" "salut les vieux vivant pour qui la vie,  à vélo, va!" ())
+ (#t "2015-09-28" "salut les loubards à fourrure de muppets" ())
 ))
