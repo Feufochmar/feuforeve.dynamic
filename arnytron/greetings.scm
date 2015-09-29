@@ -425,4 +425,5 @@
  (#t "2015-09-24" "salut les vieux grumeaux cagueux" ())
  (#t "2015-09-25" "salut les vieux vivant pour qui la vie,  à vélo, va!" ())
  (#t "2015-09-28" "salut les loubards à fourrure de muppets" ())
+ (#t "2015-09-29" "salut les troufions portugais aux rasoirs en carton!" ("***Zluglu fourre ArnY avec des miettes de biscotte en carton" "Zluglu: bon, j’ai faim…" "katyucha: salut à toi ArnY" "ArnY: Zluglu: en fonte, la biscotte, en fonte!!"))
 ))
