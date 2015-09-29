@@ -36,6 +36,9 @@
           (nav-link-to "/" (nav-current-path path) "Home"))
         (section
           ((name-class "nav-item"))
+          (nav-link-to "/ToyCatCreator" (nav-current-path path) "Toy Cat Creator"))
+        (section
+          ((name-class "nav-item"))
           (nav-link-to "/AboutMe" (nav-current-path path) "About me"))
       ))))
 
@@ -95,9 +98,39 @@
         )
       ))))
 
+;; Toy cat creator
+(define (load-toy-cat-creator wcontainer)
+  (add-weblet wcontainer (list "ToyCatCreator")
+    (templated-weblet
+      home-template
+      (lambda (query)
+        (article ((title "Toy Cat Creator")(author "Feufochmar")(date "2015-09-30"))
+          (section
+            (paragraph
+              (embedded-object
+                (data "http://static.feuforeve.fr/images/toy-cat-creator.svg")
+                (type "image/svg+xml")))
+          )
+          (section ((title "About"))
+            (paragraph
+              "The Toy Cat Creator is a small dress up game starring the toy cat demon Beleth from "
+              (hyperlink ((to "http://floraverse.com")) "Floraverse") ". ")
+            (paragraph
+              "The game is contained inside an SVG image and is made under Inkscape. "
+              "The image is released under the "
+              (hyperlink ((to "https://creativecommons.org/licenses/by-sa/3.0/fr/"))
+                         "Creative Commons Attribution Share-Alike CC BY-SA") ". ")
+            (paragraph
+              (hyperlink ((to "http://static.feuforeve.fr/images/toy-cat-creator.svg"))
+                         "Direct link")
+              ". ")
+            )
+        )))))
+
 ;; Load all
 (define (load-pages:home wcontainer)
   (load-redirections wcontainer)
   (load-home wcontainer)
   (load-404 wcontainer)
-  (load-about-me wcontainer))
+  (load-about-me wcontainer)
+  (load-toy-cat-creator wcontainer))
