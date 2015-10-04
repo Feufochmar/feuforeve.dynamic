@@ -426,4 +426,6 @@
  (#t "2015-09-25" "salut les vieux vivant pour qui la vie,  à vélo, va!" ())
  (#t "2015-09-28" "salut les loubards à fourrure de muppets" ())
  (#t "2015-09-29" "salut les troufions portugais aux rasoirs en carton!" ("***Zluglu fourre ArnY avec des miettes de biscotte en carton" "Zluglu: bon, j’ai faim…" "katyucha: salut à toi ArnY" "ArnY: Zluglu: en fonte, la biscotte, en fonte!!"))
+ (#t "2015-10-02" "salut les lépreux gluants de sauce bbq se mangeant les croutes !" ("[Juste avant]" "Zluglu: :genere" "ArnYtron3000: salut les pustulés du ouistiti" "Zluglu: ArnY : à ton tour" "Feufochmar: ou bien ArnY est en train de préparer un greeting de fou, ou bien il n'a pas envie de faire de greeting aujourd'hui" "[Juste après]" "ArnY: et bon appetit, bien sur"))
+ (#t "2015-10-04" "salut les entrartrés du canal ou le soleil ne brille jamais et où les repas s'entassent" ("Zluglu: ça n’a tellement aucun sens qu’on dirait ArnYtron3000" "ArnY: et pourtant!"))
 ))
