@@ -155,12 +155,9 @@
     (point-description (point 5 115) (city-renderer #:town) 4 "Town")
     (point-description (point 5 130) (city-renderer #:village) 2 "Village")
     ; Roads
-    (if (simple-generator? island)
-        (list)
-        (list
-          (path-description (point 5 160) (road-renderer #:main-road) "Main roads")
-          (path-description (point 5 175) (road-renderer #:secondary-road) "Secondary roads")
-          (path-description (point 5 190) (road-renderer #:other-road) "Other roads")))
+    (path-description (point 5 160) (road-renderer #:main-road) "Main roads")
+    (path-description (point 5 175) (road-renderer #:secondary-road) "Secondary roads")
+    (path-description (point 5 190) (road-renderer #:other-road) "Other roads")
     ;
     (area ((transforms (list (translation (point 5 230)))))
       (area ((id "caption-Biomes")(style (shape-style (visible? #f))))
@@ -257,15 +254,13 @@
                       (river-vertices island (hash-ref (river-points island) k) (list))))))
               (river-springs island)))
           ; Roads
-          (if (simple-generator? island)
-              (list)
-              (area ((id "roads"))
-                (map
-                  (lambda (x)
-                    (path
-                      (style (road-renderer (importance x)))
-                      (movements (path-movements island hexpoint->point (road-path x)))))
-                  (roads island))))
+          (area ((id "roads"))
+            (map
+              (lambda (x)
+                (path
+                  (style (road-renderer (importance x)))
+                  (movements (path-movements island hexpoint->point (road-path x)))))
+              (roads island)))
           ; Cities
           (area ((id "cities"))
             (map
@@ -347,15 +342,11 @@
               (font-size 12)
               (font-family "serif")
               (on-click (string-append "toggleVisibility(this, '" (car x) "');"))))
-          (if (simple-generator? island)
-            (list
-              (cons "rivers" 0)
-              (cons "cities" 1))
-            (list
-              (cons "rivers" 0)
-              (cons "cities" 1)
-              (cons "roads" 2))
-            ))
+          (list
+            (cons "rivers" 0)
+            (cons "cities" 1)
+            (cons "roads" 2))
+        )
       ))
     port)
   (newline port))
