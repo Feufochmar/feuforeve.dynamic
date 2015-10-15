@@ -434,4 +434,5 @@
  (#t "2015-10-08" "salut graves et grosses cagouilles gagas gateuses de Mongolie" ())
  (#t "2015-10-10" "salut les loubards en tutu à paillette sur leurs mobylettes mbk oranges" ("***ArnYtron3000 a quitté le salon (Ping timeout)" "ArnY: ahah, vainqueur par KO!"))
  (#t "2015-10-11" "salut les lombrics à anneaux peniens" ())
+ (#t "2015-10-15" "salut les lapons acnéiques suceurs de cones oranges!" ())
 ))
