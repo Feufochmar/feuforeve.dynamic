@@ -81,7 +81,5 @@
 (define (load-pages:daily-island wcontainer)
   (load-daily-island wcontainer)
   (load-daily-island-image wcontainer)
-  (load-island-generator-raw wcontainer)
-  (load-island-generator wcontainer)
   (load-about-daily-island wcontainer)
   )
