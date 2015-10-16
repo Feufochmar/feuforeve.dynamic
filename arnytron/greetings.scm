@@ -435,4 +435,5 @@
  (#t "2015-10-10" "salut les loubards en tutu à paillette sur leurs mobylettes mbk oranges" ("***ArnYtron3000 a quitté le salon (Ping timeout)" "ArnY: ahah, vainqueur par KO!"))
  (#t "2015-10-11" "salut les lombrics à anneaux peniens" ())
  (#t "2015-10-15" "salut les lapons acnéiques suceurs de cones oranges!" ())
+ (#t "2015-10-16" "salut les vieilles biques polonaises en spandex à paillettes ivres d'alcool de courgette au bitume" ("companion_cube: ça devient élaboré" "ArnY: c'est du boulot ma petit dame!" "ArnY: +e"))
 ))
