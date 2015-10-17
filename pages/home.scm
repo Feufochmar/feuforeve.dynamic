@@ -25,9 +25,9 @@
       (cons (list "generator2") "http://feuforeve.fr/FloraCharacterGenerator")
     )))
 
-(define home-template
+(define (home-template meta)
   (default-template
-    default-meta
+    meta
     "/"
     (lambda (path query)
       (navigation
@@ -46,7 +46,7 @@
 (define (load-home wcontainer)
   (add-weblet wcontainer (list "")
     (templated-weblet
-      home-template
+      (home-template default-meta)
       (lambda (query)
         (article ((title "Feuforêve: home")(author "Feufochmar")(date "2015-08-01"))
           (paragraph
@@ -60,7 +60,7 @@
 (define (load-404 wcontainer)
   (add-weblet wcontainer (list "404")
     (templated-weblet
-      home-template
+      (home-template default-meta)
       (lambda (query)
         (article ((title "Not found")(author "404"))
           (paragraph
@@ -71,7 +71,7 @@
 (define (load-about-me wcontainer)
   (add-weblet wcontainer (list "AboutMe")
     (templated-weblet
-      home-template
+      (home-template default-meta)
       (lambda (query)
         (article ((title "About: Feufochmar")(author "Feufochmar")(date "2015-08-02"))
           (section ((title "Myself"))
@@ -102,12 +102,20 @@
 (define (load-toy-cat-creator wcontainer)
   (add-weblet wcontainer (list "ToyCatCreator")
     (templated-weblet
-      home-template
+      (home-template
+        (metadata
+          (stylesheets
+            "http://static.feuforeve.fr/css/feuforeve.css")
+          (scripts "http://static.feuforeve.fr/scripts/toy-cat-creator.js")
+          (onload "initToyCatCreator();")))
       (lambda (query)
-        (article ((title "Toy Cat Creator")(author "Feufochmar")(date "2015-09-30"))
+        (article ((title "Toy Cat Creator")(author "Feufochmar")(date "2015-10-17"))
           (section
+            (paragraph ((id "preset.link"))
+              "Link to current selection")
             (paragraph
               (embedded-object
+                (id "toy.cat.creator")
                 (data "http://static.feuforeve.fr/images/toy-cat-creator.svg")
                 (type "image/svg+xml")))
           )
