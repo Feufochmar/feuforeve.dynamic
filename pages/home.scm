@@ -116,7 +116,7 @@
             (paragraph
               (embedded-object
                 (id "toy.cat.creator")
-                (data "http://static.feuforeve.fr/images/toy-cat-creator.svg")
+                (data "toy-cat-creator.svg")
                 (type "image/svg+xml")))
           )
           (section ((title "About"))
@@ -135,10 +135,18 @@
             )
         )))))
 
+(define (load-toy-cat-creator-svg wcontainer)
+  (add-redirections wcontainer
+    (list
+      (cons (list "toy-cat-creator.svg") "http://static.feuforeve.fr/images/toy-cat-creator.svg")
+    )))
+
 ;; Load all
 (define (load-pages:home wcontainer)
   (load-redirections wcontainer)
   (load-home wcontainer)
   (load-404 wcontainer)
   (load-about-me wcontainer)
-  (load-toy-cat-creator wcontainer))
+  (load-toy-cat-creator wcontainer)
+  (load-toy-cat-creator-svg wcontainer)
+)
