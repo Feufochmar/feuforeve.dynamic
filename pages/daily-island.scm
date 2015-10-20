@@ -5,8 +5,6 @@
   #:use-module (ffch webtemplates)
   #:use-module (pages default-template)
   #:use-module ((srfi srfi-19) #:renamer (symbol-prefix-proc 'time:))
-  #:use-module (island-generator island-generator)
-  #:use-module (island-generator island-renderer)
   #:export (load-pages:daily-island)
   #:duplicates (merge-generics)
 )
@@ -14,7 +12,7 @@
 (define (today-string)
   (time:date->string (time:current-date) "~Y-~m-~d"))
 (define (daily-island-link)
-  (string-append (string-append "http://static.feuforeve.fr/islands/island-" (today-string) ".svg")))
+  (string-append (string-append (static-data "islands/island-") (today-string) ".svg")))
 
 ;; Template
 (define (daily-island-template meta)
@@ -54,12 +52,6 @@
        (display "See: " port)(display (daily-island-link) port)
        (newline port))
     )))
-
-(define (generate-raw port)
-  (render-island
-    (generate-island 700 600 10 #t)
-    port)
-  (newline port))
 
 ;; About
 (define (load-about-daily-island wcontainer)

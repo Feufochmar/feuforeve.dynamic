@@ -31,9 +31,9 @@
       (flag-generator-template
         (metadata
           (stylesheets
-            "http://static.feuforeve.fr/css/feuforeve.css"
-            "http://static.feuforeve.fr/css/flag-generator.css")
-          (scripts "http://static.feuforeve.fr/scripts/flag-generator.js")
+            (static-data "css/feuforeve.css")
+            (static-data "css/flag-generator.css"))
+          (scripts (static-data "scripts/flag-generator.js"))
           (onload "getFlag();")))
       (lambda (query)
         (article ((title "Flag generator")(author "feuforeve.fr"))

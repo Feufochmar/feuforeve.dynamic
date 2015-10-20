@@ -3,9 +3,14 @@
   #:use-module (ffch article)
   #:use-module (ffch weblets)
   #:use-module (ffch webtemplates)
-  #:export (default-template default-meta nav-link-to nav-current-path)
+  #:export (default-template default-meta nav-link-to nav-current-path static-data)
   #:duplicates (merge-generics)
 )
+
+(define *static-file-path* "http://static.feuforeve.fr")
+
+(define-method (static-data (relative-path <string>))
+  (string-append *static-file-path* "/" relative-path))
 
 (define-method (nav-current-path (path <list>))
   (string-append "/" (string-join path "/")))
@@ -28,7 +33,7 @@
       (header
         (section ((name-class "banner"))
           (hyperlink ((to "/"))
-            (image ((alt "Feuforêve")) "http://static.feuforeve.fr/images/feuforeve-banner.png")))
+            (image ((alt "Feuforêve")) (static-data "images/feuforeve-banner.png"))))
         (navigation
           (section ((name-class "nav-item"))
             (strong (nav-link-to "/" 1st-level-path "Home")))
@@ -46,4 +51,4 @@
   ))
 
 (define default-meta
-  (metadata (stylesheets "http://static.feuforeve.fr/css/feuforeve.css")))
+  (metadata (stylesheets (static-data "css/feuforeve.css"))))
