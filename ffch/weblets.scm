@@ -130,6 +130,8 @@
                    (wlet404 (hash-ref (weblets wcontainer) (list "404")))
                    (real-wlet (if wlet wlet wlet404))
                   )
+              (hash-set! query 'request request)
+              (hash-set! query 'request-body request-body)
               (if real-wlet
                   (values
                     (build-response #:code (error-code real-wlet)
