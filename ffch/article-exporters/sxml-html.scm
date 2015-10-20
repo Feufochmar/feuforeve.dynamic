@@ -218,6 +218,31 @@
 ;;;;;;
 ;; Forms elements
 
+;; Form
+(define-method (attributes-of (cnt <form>))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt submit-action 'action)
+    (attribute->sxml-attribute cnt submit-method 'method)))
+
+(define-method (article->sxml-html (cnt <form>) (section-level <integer>))
+  (list
+    'form
+    (append (list '@) (attributes-of cnt))
+    (next-method)))
+
+;; Label
+(define-method (attributes-of (cnt <label>))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt for)))
+
+(define-method (article->sxml-html (cnt <label>) (section-level <integer>))
+  (list
+    'label
+    (append (list '@) (attributes-of cnt))
+    (next-method)))
+
 ;; Form content type
 (define-method (attributes-of (cnt <form-content-type>))
   (append
@@ -240,19 +265,6 @@
 (define-method (article->sxml-html (cnt <text-area>) (section-level <integer>))
   (list
     'textarea
-    (append (list '@) (attributes-of cnt))
-    (next-method)))
-
-;; Form
-(define-method (attributes-of (cnt <form>))
-  (append
-    (next-method)
-    (attribute->sxml-attribute cnt submit-action 'action)
-    (attribute->sxml-attribute cnt submit-method 'method)))
-
-(define-method (article->sxml-html (cnt <form>) (section-level <integer>))
-  (list
-    'form
     (append (list '@) (attributes-of cnt))
     (next-method)))
 
