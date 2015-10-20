@@ -308,3 +308,9 @@
     (if (checked cnt)
         (list (list 'checked "checked"))
         (list))))
+
+;; Text input
+(define-method (attributes-of (cnt <text-input>))
+  (append
+    (next-method)
+    (list (list 'type "text"))))
