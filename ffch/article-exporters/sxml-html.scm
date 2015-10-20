@@ -218,6 +218,12 @@
 ;;;;;;
 ;; Forms elements
 
+;; Form content type
+(define-method (attributes-of (cnt <form-content-type>))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt name)))
+
 ;; Button
 (define-method (attributes-of (cnt <button>))
   (append
@@ -254,7 +260,6 @@
 (define-method (attributes-of (cnt <selector>))
   (append
     (next-method)
-    (attribute->sxml-attribute cnt name)
     (attribute->sxml-attribute cnt size)))
 
 (define-method (article->sxml-html (cnt <selector>) (section-level <integer>))
@@ -266,15 +271,28 @@
         (list 'option (list '@ (list 'value (car x))) (cdr x)))
       (contents cnt))))
 
+;; Input content type
+(define-method (attributes-of (cnt <input-content-type>))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt value)))
+
+(define-method (article->sxml-html (cnt <input-content-type>) (section-level <integer>))
+  (list
+    'input
+    (append (list '@) (attributes-of cnt))))
+
 ;; Submit button
 (define-method (attributes-of (cnt <submit-button>))
   (append
     (next-method)
-    (list (list 'type "submit"))
-    (attribute->sxml-attribute cnt name)
-    (attribute->sxml-attribute cnt value)))
+    (list (list 'type "submit"))))
 
-(define-method (article->sxml-html (cnt <submit-button>) (section-level <integer>))
-  (list
-    'input
-    (append (list '@) (attributes-of cnt))))
+;; Checkbox
+(define-method (attributes-of (cnt <checkbox>))
+  (append
+    (next-method)
+    (list (list 'type "checkbox"))
+    (if (checked cnt)
+        (list (list 'checked "checked"))
+        (list))))
