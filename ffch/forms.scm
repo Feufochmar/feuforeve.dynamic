@@ -6,11 +6,11 @@
   #:export (; Types
             <form> <label>
             <form-content-type> <button> <text-area>
-            <input-content-type> <selector> <submit-button> <checkbox>
+            <input-content-type> <selector> <submit-button> <checkbox> <text-input>
             ; Getters
             submit-action submit-method name onclick size value checked for
             ; Construction macros and functions
-            form button text-area selector submit-button checkbox label
+            form button text-area selector submit-button checkbox label text-input
            )
   #:re-export (<container-type> <content-type>
                id name-class style contents empty?
@@ -53,6 +53,9 @@
 (define-class <checkbox> (<input-content-type>)
   (checked #:getter checked #:init-keyword #:checked #:init-form #f))
 
+;; Text input
+(define-class <text-input> (<input-content-type>))
+
 ;; Construction  methods
 (container-type-constructor form <form>)
 (container-type-constructor label <label>)
@@ -60,6 +63,7 @@
 (container-type-constructor text-area <text-area>)
 (content-type-constructor submit-button <submit-button>)
 (content-type-constructor checkbox <checkbox>)
+(content-type-constructor text-input <text-input>)
 
 ;; Text-list use a different syntax because of its list of contents
 (define-syntax selector
