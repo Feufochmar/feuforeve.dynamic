@@ -105,8 +105,8 @@
       (home-template
         (metadata
           (stylesheets
-            "http://static.feuforeve.fr/css/feuforeve.css")
-          (scripts "http://static.feuforeve.fr/scripts/toy-cat-creator.js")
+            (static-data "css/feuforeve.css"))
+          (scripts (static-data "scripts/toy-cat-creator.js"))
           (onload "initToyCatCreator();")))
       (lambda (query)
         (article ((title "Toy Cat Creator")(author "Feufochmar")(date "2015-10-17"))
@@ -129,7 +129,7 @@
               (hyperlink ((to "https://creativecommons.org/licenses/by-sa/3.0/fr/"))
                          "Creative Commons Attribution Share-Alike CC BY-SA") ". ")
             (paragraph
-              (hyperlink ((to "http://static.feuforeve.fr/images/toy-cat-creator.svg"))
+              (hyperlink ((to (static-data "images/toy-cat-creator.svg")))
                          "Direct link")
               ". ")
             )
