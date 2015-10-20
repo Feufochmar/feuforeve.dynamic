@@ -437,4 +437,5 @@
  (#t "2015-10-15" "salut les lapons acnéiques suceurs de cones oranges!" ())
  (#t "2015-10-16" "salut les vieilles biques polonaises en spandex à paillettes ivres d'alcool de courgette au bitume" ("companion_cube: ça devient élaboré" "ArnY: c'est du boulot ma petit dame!" "ArnY: +e"))
  (#t "2015-10-17" "salut les gros turcs nus et saucissonés dans du fils dentaire" ())
+ (#t "2015-10-20" "salut les inuits à ecailles de crapeau électronique vibrant dans le marais anal d'un couple homo sortant de boîte zouk" ())
 ))
