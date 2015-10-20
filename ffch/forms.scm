@@ -4,11 +4,11 @@
   #:use-module (oop goops)
   #:use-module (ffch containers)
   #:export (; Types
-            <form> <form-content-type> <button> <text-area> <selector> <submit-button>
+            <form> <form-content-type> <button> <text-area> <input-content-type> <selector> <submit-button> <checkbox>
             ; Getters
-            submit-action submit-method name onclick size value
+            submit-action submit-method name onclick size value checked
             ; Construction macros and functions
-            form button text-area selector submit-button
+            form button text-area selector submit-button checkbox
            )
   #:re-export (<container-type> <content-type>
                id name-class style contents empty?
@@ -43,11 +43,16 @@
 ;; Submit button
 (define-class <submit-button> (<input-content-type>))
 
+;; Checkbox
+(define-class <checkbox> (<input-content-type>)
+  (checked #:getter checked #:init-keyword #:checked #:init-form #f))
+
 ;; Construction  methods
 (container-type-constructor form <form>)
 (container-type-constructor button <button>)
 (container-type-constructor text-area <text-area>)
 (content-type-constructor submit-button <submit-button>)
+(content-type-constructor checkbox <checkbox>)
 
 ;; Text-list use a different syntax because of its list of contents
 (define-syntax selector
