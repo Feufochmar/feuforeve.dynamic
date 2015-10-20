@@ -4,11 +4,13 @@
   #:use-module (oop goops)
   #:use-module (ffch containers)
   #:export (; Types
-            <form> <form-content-type> <button> <text-area> <input-content-type> <selector> <submit-button> <checkbox>
+            <form> <label>
+            <form-content-type> <button> <text-area>
+            <input-content-type> <selector> <submit-button> <checkbox>
             ; Getters
-            submit-action submit-method name onclick size value checked
+            submit-action submit-method name onclick size value checked for
             ; Construction macros and functions
-            form button text-area selector submit-button checkbox
+            form button text-area selector submit-button checkbox label
            )
   #:re-export (<container-type> <content-type>
                id name-class style contents empty?
@@ -20,6 +22,10 @@
 (define-class <form> (<container-type> <content-type>)
   (submit-action #:getter submit-action #:init-keyword #:submit-action #:init-form #f)
   (submit-method #:getter submit-method #:init-keyword #:submit-method #:init-form #f))
+
+;; Label for a form item
+(define-class <label> (<container-type> <content-type>)
+  (for #:getter for #:init-keyword #:for #:init-form #f))
 
 ;; In a form, every element have a name
 (define-class <form-content-type> (<content-type>)
@@ -49,6 +55,7 @@
 
 ;; Construction  methods
 (container-type-constructor form <form>)
+(container-type-constructor label <label>)
 (container-type-constructor button <button>)
 (container-type-constructor text-area <text-area>)
 (content-type-constructor submit-button <submit-button>)
