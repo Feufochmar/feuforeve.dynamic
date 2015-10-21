@@ -16,15 +16,16 @@
   #:use-module (flora-character-generator species)
   #:use-module (flora-character-generator traits)
   #:use-module (flora-character-generator family)
-  #:export (generate-character
+  #:export (generate-character make-character-bound-parameters
             ;
-            <character>
+            <character> <character-bound-parameters>
             motto natures gender sex birthday affinity age profession
             birth-place in-birth-place? living-place in-living-place?
             language family species size weight traits
            )
   #:duplicates (merge-generics))
 
+;; Character class
 (define-class <character> (<object>)
   (motto #:getter motto #:init-keyword #:motto)
   (natures #:getter natures #:init-keyword #:natures)
@@ -45,6 +46,13 @@
   (weight #:getter weight #:init-keyword #:weight)
   (traits #:getter traits #:init-keyword #:traits)
 )
+
+; Character bound parameters class when generating a character
+(define-class <character-bound-parameters> (<object>)
+  (species #:accessor species #:init-form #f)) ; key of the species
+
+(define-method (make-character-bound-parameters)
+  (make <character-bound-parameters>))
 
 ;
 (define-method (pick-weight)
@@ -68,10 +76,11 @@
       (#t "tiny"))))
 
 (define-method (generate-character)
-  (generate-character #f))
+  (generate-character (make <character-bound-parameters>)))
 
-(define-method (generate-character species-key)
-  (let* ((species (or (get-species species-key) (pick-character-species)))
+(define-method (generate-character (bound-parameters <character-bound-parameters>))
+  (let* ((species-key (species bound-parameters))
+         (species (or (get-species species-key) (pick-character-species)))
          (sex (pick-sex species))
          (gender (pick-gender species sex))
          (age (pick-age-of-life species))

@@ -13,11 +13,13 @@
 )
 
 ;;
-(define (species-key query)
-  (let ((species-key-str (hash-ref query "species")))
+(define (character-bindings query)
+  (let ((bound-parameters (make-character-bound-parameters))
+        (species-key-str (hash-ref query "species"))
+       )
     (if species-key-str
-        (string->symbol species-key-str)
-        #f)))
+        (set! (species bound-parameters) (string->symbol species-key-str)))
+    bound-parameters))
 
 ;; Template
 (define fcg-template
@@ -25,14 +27,15 @@
     default-meta
     "/FloraCharacterGenerator"
     (lambda (path query)
-      (let* ((species-key-sym (species-key query))
-             (species (if species-key-sym (get-species species-key-sym) #f)))
+      (let* ((bound-parameters (character-bindings query))
+             (species-key (species bound-parameters))
+             (species (if species-key (get-species species-key) #f)))
         (navigation
           (if species
               (section
                 ((name-class "nav-item"))
                 (hyperlink
-                  ((to (string-append "/FloraCharacterGenerator?species=" (symbol->string species-key-sym))))
+                  ((to (string-append "/FloraCharacterGenerator?species=" (symbol->string species-key))))
                   (string-append "New character (" (name species) ")")))
               "")
           (section
@@ -55,8 +58,8 @@
     (templated-weblet
       fcg-template
       (lambda (query)
-        (let ((species-key-sym (species-key query)))
-          (generate-character-description (generate-character species-key-sym)))
+        (let ((bound-parameters (character-bindings query)))
+          (generate-character-description (generate-character bound-parameters)))
       ))))
 
 ;; Flora character generator : tumblr sendmail output
@@ -65,8 +68,8 @@
     (weblet ((error-code 200)
              (content-type "text/plain;charset=UTF-8"))
       ((path query port)
-       (let* ((species-key-sym (species-key query))
-              (art (generate-character-description (generate-character species-key-sym))))
+       (let* ((bound-parameters (character-bindings query))
+              (art (generate-character-description (generate-character bound-parameters))))
          (display (article->markdown-tumblr art) port)(newline port)
        )))))
 
