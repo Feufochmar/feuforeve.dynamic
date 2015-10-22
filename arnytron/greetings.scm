@@ -439,4 +439,5 @@
  (#t "2015-10-17" "salut les gros turcs nus et saucissonés dans du fils dentaire" ())
  (#t "2015-10-20" "salut les inuits à ecailles de crapeau électronique vibrant dans le marais anal d'un couple homo sortant de boîte zouk" ())
  (#t "2015-10-21" "salut les muppets fisteurs de schtroumphs!" ())
+ (#t "2015-10-22" "salut les micro-kekette mono-atomique se faisant gloulouter par biomans en slip de marbre!" ("ArnY: -s" "ArnY: -s et +s" "***katyucha valide" "ArnY: :)"))
 ))
