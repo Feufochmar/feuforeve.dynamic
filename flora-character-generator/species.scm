@@ -23,6 +23,8 @@
             pick-birth-place pick-living-place
             pick-way-of-life
             ;
+            make-species-bound-parameters father mother bound-species bound-base-species
+            ;
             family-species base-species species-of mother father foster-parent individual-species
             partners+children
            )
@@ -112,6 +114,24 @@
         (pick-from possible-ways))))
 
 ;; Family stuff
+
+;; Bound parameters
+(define-class <species-bound-parameters> (<object>)
+  (father #:getter father #:init-keyword #:father #:init-form #:f)
+  (mother #:getter mother #:init-keyword #:mother #:init-form #:f)
+  (bound-species #:accessor bound-species #:init-form #f)
+  (bound-base-species #:accessor bound-base-species #:init-form #f))
+
+(define-method (make-species-bound-parameters)
+  (let* ((gff (make <species-bound-parameters>))
+         (gmf (make <species-bound-parameters>))
+         (gfm (make <species-bound-parameters>))
+         (gmm (make <species-bound-parameters>))
+         (father (make <species-bound-parameters> #:father gff #:mother gmf))
+         (mother (make <species-bound-parameters> #:father gfm #:mother gmm)))
+    (make <species-bound-parameters> #:father father #:mother mother)))
+
+;
 (define-class <individual> (<object>)
   (species-of #:getter species-of #:init-keyword #:species-of)
   (base-species #:getter base-species #:init-keyword #:base-species #:init-form #f)
@@ -153,7 +173,8 @@
           #f))
     self))
 ;
-(define-method (family-species (sp <species>))
+(define-method (family-species (bound-parameters <species-bound-parameters>) (sp <species>))
+  ;; TODO: use the bound-parameters
   (make-individual sp #t #t))
 
 (define-method (individual-species (sp <species>))

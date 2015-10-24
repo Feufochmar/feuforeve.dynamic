@@ -121,7 +121,7 @@
     "generate"
     (lambda (ircbot channel asker args)
       (let* ((bound-parameters
-               (let ((bp (make-character-bound-parameters)))
+               (let ((bp (make-bound-parameters)))
                  (fill-bound-parameters bp `((species . ,(string->symbol (string-downcase (string-join args "-"))))))
                  bp))
              (character (generate-character bound-parameters)))

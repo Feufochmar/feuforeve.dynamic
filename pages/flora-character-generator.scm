@@ -1,24 +1,25 @@
 (define-module (pages flora-character-generator)
+  #:use-module (web request)
+  #:use-module (rnrs bytevectors)
   #:use-module (ffch article)
   #:use-module (ffch forms)
   #:use-module (ffch weblets)
   #:use-module (ffch webtemplates)
   #:use-module (ffch json)
+  #:use-module (ffch article-exporters markdown-tumblr)
   #:use-module (flora-character-generator description)
   #:use-module (flora-character-generator generator)
+  #:use-module (flora-character-generator bound-parameters)
   #:use-module (flora-character-generator species)
   #:use-module (flora-character-generator json-output)
-  #:use-module (ffch article-exporters markdown-tumblr)
   #:use-module (pages default-template)
-  #:use-module (web request)
-  #:use-module (rnrs bytevectors)
   #:export (load-pages:flora-character-generator)
   #:duplicates (merge-generics)
 )
 
 ;;
 (define (character-bindings query)
-  (let ((bound-parameters (make-character-bound-parameters))
+  (let ((bound-parameters (make-bound-parameters))
         (species-key-str (hash-ref query "species"))
        )
     (if species-key-str
@@ -32,7 +33,7 @@
     "/FloraCharacterGenerator"
     (lambda (path query)
       (let* ((bound-parameters (character-bindings query))
-             (species-key (species bound-parameters))
+             (species-key (bound-species (species-parameters bound-parameters)))
              (species (if species-key (get-species species-key) #f)))
         (navigation
           (if species
@@ -220,7 +221,7 @@
                 (and content-type (eq? (car content-type) 'text/x-sexpr)
                      content-encoding (equal? content-encoding "UTF-8")
                      request-body (utf8->string request-body)))
-         (bound-parameters (make-character-bound-parameters)))
+         (bound-parameters (make-bound-parameters)))
     (catch #t
       (lambda ()
         (if constraints-request-string

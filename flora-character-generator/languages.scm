@@ -7,9 +7,13 @@
   #:use-module (ffch markhov)
   #:use-module (ffch load-all)
   #:use-module (ffch string)
-  #:export (key
+  #:export (key phoneme
             <word> transcription pronounciation word-language phonemes
             <language> empty-word generate-word
+            ;
+            make-language-bound-parameters father mother bound-language
+            bound-given-name bound-other-name bound-family-name
+            ;
             family-names full-name short-name given-name mother-name father-name
             gff-given-name gmf-given-name gfm-given-name gmm-given-name
             character-given-names character-other-name language-character
@@ -86,6 +90,26 @@
 ;; Individual class & Family names class
 ;; Needed to load languages
 ;; Individual is not exported
+
+; Language-related bound parameters
+(define-class <language-bound-parameters> (<object>)
+  (father #:getter father #:init-keyword #:father #:init-form #f)
+  (mother #:getter mother #:init-keyword #:mother #:init-form #f)
+  (bound-language #:accessor bound-language #:init-form #f)
+  (bound-given-name #:accessor bound-given-name #:init-form #f)
+  (bound-other-name #:accessor bound-other-name #:init-form #f)
+  (bound-family-name #:accessor bound-family-name #:init-form #f))
+
+(define-method (make-language-bound-parameters)
+  (let* ((gff (make <language-bound-parameters>))
+         (gmf (make <language-bound-parameters>))
+         (gfm (make <language-bound-parameters>))
+         (gmm (make <language-bound-parameters>))
+         (father (make <language-bound-parameters> #:father gff #:mother gmf))
+         (mother (make <language-bound-parameters> #:father gfm #:mother gmm)))
+    (make <language-bound-parameters> #:father father #:mother mother)))
+
+;;
 (define-class <individual> (<object>)
   (language-individual #:getter language-individual #:init-keyword #:language-individual)
   (given-name #:getter given-name #:init-keyword #:given-name)
@@ -112,8 +136,9 @@
   (character-other-name #:getter character-other-name #:init-keyword #:character-other-name))
 
 (define-syntax family-names
-  (syntax-rules (language genders character mother father gmm gfm gmf gff)
-    ((_ (language lang)
+  (syntax-rules (constraints language genders character mother father gmm gfm gmf gff)
+    ((_ (constraints bound-parameters)
+        (language lang)
         (genders
           (character character-gender)
           (mother mother-gender)
@@ -135,9 +160,10 @@
          #:gender-key-character character-gender
          #:gender-key-name-character (hash-key* (full-name naming) character-gender)
          #:character-given-names
-           (map
-             (lambda (x) (generate-word lang))
-             (make-list (pick-from (given-names-min-nb naming) (given-names-max-nb naming)) #f))
+           (or (bound-given-name bound-parameters)
+               (map
+                 (lambda (x) (generate-word lang))
+                 (make-list (pick-from (given-names-min-nb naming) (given-names-max-nb naming)) #f)))
          #:mother (if mother-gender (individual mother-lang mother-gender) #f)
          #:father (if father-gender (individual father-lang father-gender) #f)
          #:gmm (if gmm-gender (individual gmm-lang gmm-gender) #f)
@@ -148,7 +174,7 @@
          #:gfm-family-name (if gfm-gender (generate-word gfm-lang) #f)
          #:gmf-family-name (if gmf-gender (generate-word gmf-lang) #f)
          #:gff-family-name (if gff-gender (generate-word gff-lang) #f)
-         #:character-other-name (generate-word lang))))))
+         #:character-other-name (or (bound-other-name bound-parameters) (generate-word lang)))))))
 
 ; Short methods for use in language definitions
 (define-method (GiNa (names <family-names>))
