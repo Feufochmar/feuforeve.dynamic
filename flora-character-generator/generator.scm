@@ -16,7 +16,8 @@
   #:use-module (flora-character-generator species)
   #:use-module (flora-character-generator traits)
   #:use-module (flora-character-generator family)
-  #:export (generate-character make-character-bound-parameters
+  #:use-module (flora-character-generator elements)
+  #:export (generate-character make-character-bound-parameters fill-bound-parameters
             ;
             <character> <character-bound-parameters>
             motto natures gender sex birthday affinity age profession
@@ -49,10 +50,57 @@
 
 ; Character bound parameters class when generating a character
 (define-class <character-bound-parameters> (<object>)
-  (species #:accessor species #:init-form #f)) ; key of the species
+  ;(given-names #:accessor given-names #:init-form #f)
+  ;(other-names #:accessor other-names #:init-form #f)
+  (language #:accessor language #:init-form #f)
+  (species #:accessor species #:init-form #f)
+  (base-species #:accessor base-species #:init-form #f)
+  (affinity #:accessor affinity #:init-form #f)
+  (gender #:accessor gender #:init-form #f)
+)
 
 (define-method (make-character-bound-parameters)
   (make <character-bound-parameters>))
+
+(define-method (fill-bound-parameters (bound-parameters <character-bound-parameters>) (constraints <list>))
+  (write constraints)(newline)
+  (for-each
+    (lambda (x)
+      (cond
+        ((eq? (car x) 'language) (check-add-language bound-parameters (cdr x)))
+        ((eq? (car x) 'species) (check-add-species bound-parameters (cdr x)))
+        ((eq? (car x) 'base-species) (check-add-base-species bound-parameters (cdr x)))
+        ((eq? (car x) 'affinity) (check-add-affinity bound-parameters (cdr x)))
+        ((eq? (car x) 'gender) (check-add-gender bound-parameters (cdr x)))
+        ; TODO
+        (#t #f)
+      ))
+    constraints))
+
+(define-method (check-add-language (bound-parameters <character-bound-parameters>) language-key)
+  (set!
+    (language bound-parameters)
+    (and (symbol? language-key) (get-language language-key))))
+
+(define-method (check-add-species (bound-parameters <character-bound-parameters>) species-key)
+  (set!
+    (species bound-parameters)
+    (and (symbol? species-key) (get-species species-key))))
+
+(define-method (check-add-base-species (bound-parameters <character-bound-parameters>) base-species-key)
+  (set!
+    (base-species bound-parameters)
+    (and (symbol? base-species-key) (get-species base-species-key))))
+
+(define-method (check-add-affinity (bound-parameters <character-bound-parameters>) affinity-key)
+  (set!
+    (affinity bound-parameters)
+    (and (symbol? affinity-key) (get-element affinity-key))))
+
+(define-method (check-add-gender (bound-parameters <character-bound-parameters>) gender-key)
+  (set!
+    (gender bound-parameters)
+    (and (symbol? gender-key) (get-gender gender-key))))
 
 ;
 (define-method (pick-weight)
@@ -79,13 +127,12 @@
   (generate-character (make <character-bound-parameters>)))
 
 (define-method (generate-character (bound-parameters <character-bound-parameters>))
-  (let* ((species-key (species bound-parameters))
-         (species (or (get-species species-key) (pick-character-species)))
+  (let* ((species (or (species bound-parameters) (pick-character-species)))
          (sex (pick-sex species))
-         (gender (pick-gender species sex))
+         (gender (or (gender bound-parameters) (pick-gender species sex)))
          (age (pick-age-of-life species))
-         (lang (pick-language))
-         (affinity (pick-affinity species))
+         (lang (or (language bound-parameters) (pick-language)))
+         (affinity (or (affinity bound-parameters) (pick-affinity species)))
          (birth-place (pick-birth-place species))
          (way-of-life (pick-way-of-life species))
         )
