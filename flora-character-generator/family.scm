@@ -10,6 +10,7 @@
   #:use-module (flora-character-generator languages)
   #:use-module (flora-character-generator species)
   #:use-module (flora-character-generator ages-of-life)
+  #:use-module (flora-character-generator bound-parameters)
   #:export (<individual> given-name species
             <full-family> gff gmf gfm gmm father mother foster self partners-and-children pets
             generate-family given-name short-name full-name fam-names
@@ -53,9 +54,12 @@
   ((@ (flora-character-generator languages) full-name) (fam-names full-family)))
 
 ;;
-(define-method (generate-family (species <species>) (sex <sex>) (gender <gender>)
+(define-method (generate-family (bound-parameters <bound-parameters>)
+                                (species <species>) (sex <sex>) (gender <gender>)
                                 (lang <language>) (age <age-of-life>))
-  (let* ((famsp ((@ (flora-character-generator species) family-species) species))
+  (let* ((famsp ((@ (flora-character-generator species) family-species)
+                 (species-parameters bound-parameters)
+                 species))
          (famsp-father ((@ (flora-character-generator species) father) famsp))
          (famsp-mother ((@ (flora-character-generator species) mother) famsp))
          (famsp-gff (if famsp-father ((@ (flora-character-generator species) father) famsp-father) #f))
@@ -72,6 +76,7 @@
          (gender-key (key gender))
          ;
          (famnm (family-names
+                  (constraints (language-parameters bound-parameters))
                   (language lang)
                   (genders
                     (character gender-key)
