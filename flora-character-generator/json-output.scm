@@ -1,0 +1,79 @@
+;; Floraverse character generator
+;; JSON Output of a character
+(define-module (flora-character-generator json-output)
+  #:version (0 0 1)
+  #:use-module (oop goops)
+  #:use-module (flora-character-generator generator)
+  #:use-module (flora-character-generator genders)
+  #:use-module (flora-character-generator sexes)
+  #:use-module (flora-character-generator calendar)
+  #:use-module (flora-character-generator elements)
+  #:use-module (flora-character-generator ages-of-life)
+  #:use-module (flora-character-generator locations)
+  #:use-module (flora-character-generator languages)
+  #:use-module (flora-character-generator species)
+  #:use-module (flora-character-generator english)
+  #:use-module (flora-character-generator family)
+  #:export (character->json-object)
+  #:duplicates (merge-generics))
+
+(define-method (word->json-object (word <word>))
+  `((word-phonemes
+      ,(string-append
+         "#("
+         (string-join
+           (map (lambda (phon) (symbol->string (key phon))) (phonemes word))
+           " ")
+         ")"))
+    (word-language ,(key (word-language word)))
+    (transcription ,(transcription word #t))
+    (pronounciation ,(pronounciation word))))
+
+(define-method (words->json-object (words <pair>))
+  `((transcription ,(transcription words #t))
+    (pronounciation ,(pronounciation words))))
+
+(define-method (names->json-object (char <character>))
+  (let* ((fam (family char))
+         (names (fam-names fam))
+         (lang (language-character names)))
+    `((short ,(words->json-object (short-name fam)))
+      (full ,(words->json-object (full-name fam)))
+      (given
+        ,(list->vector
+           (map
+             word->json-object
+             (character-given-names names))))
+      (other ,(word->json-object (character-other-name names)))
+      (language
+        ((name ,(key lang))
+         (key ,(key lang)))))))
+
+(define-method (species->json-object (char <character>))
+  (let ((sp (species char))
+        (bsp (base-species (self (family char)))))
+    `((name ,(name sp))
+      (key ,(key sp))
+      (mimic-name ,(and bsp (name bsp)))
+      (mimic-key ,(and bsp (key bsp))))))
+
+(define-method (affinity->json-object (char <character>))
+  (let ((aff (affinity char)))
+    `((name ,(name aff))
+      (key ,(key aff)))))
+
+(define-method (gender->json-object (char <character>))
+  (let ((gen (gender char)))
+    `((title ,(title-full gen))
+      (key ,(key gen))
+      (pronouns ,(string-append (subject-pronoun gen) "/"
+                                (object-pronoun gen) "/"
+                                (genitive-adjective gen) "/"
+                                (reflexive-pronoun gen))))))
+
+(define-method (character->json-object (char <character>))
+  `((names ,(names->json-object char))
+    (species ,(species->json-object char))
+    (affinity ,(affinity->json-object char))
+    (gender ,(gender->json-object char))
+   ))

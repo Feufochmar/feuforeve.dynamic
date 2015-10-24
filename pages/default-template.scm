@@ -7,7 +7,8 @@
   #:duplicates (merge-generics)
 )
 
-(define *static-file-path* "http://static.feuforeve.fr")
+(define *static-file-path* "http://localhost:8081")
+;(define *static-file-path* "http://static.feuforeve.fr")
 
 (define-method (static-data (relative-path <string>))
   (string-append *static-file-path* "/" relative-path))

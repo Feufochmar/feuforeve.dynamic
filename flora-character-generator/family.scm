@@ -12,7 +12,7 @@
   #:use-module (flora-character-generator ages-of-life)
   #:export (<individual> given-name species
             <full-family> gff gmf gfm gmm father mother foster self partners-and-children pets
-            generate-family given-name short-name full-name
+            generate-family given-name short-name full-name fam-names
             <partner-and-children> partner mother? children
            )
   #:duplicates (merge-generics))

@@ -7,11 +7,13 @@
   #:use-module (ffch markhov)
   #:use-module (ffch load-all)
   #:use-module (ffch string)
-  #:export (<word> transcription pronounciation
+  #:export (key
+            <word> transcription pronounciation word-language phonemes
             <language> empty-word generate-word
             family-names full-name short-name given-name mother-name father-name
             gff-given-name gmf-given-name gfm-given-name gmm-given-name
-            pick-language
+            character-given-names character-other-name language-character
+            pick-language get-language
            )
 )
 
@@ -245,6 +247,9 @@
 
 (define-method (pick-language)
   (cdr (pick-from *data:languages*)))
+
+(define-method (get-language (language-key <symbol>))
+  (hash-ref *data:languages* language-key))
 
 ;; Data syntax
 (define-syntax language

@@ -120,7 +120,11 @@
     ircbot
     "generate"
     (lambda (ircbot channel asker args)
-      (let ((character (generate-character (string->symbol (string-downcase (string-join args "-"))))))
+      (let* ((bound-parameters
+               (let ((bp (make-character-bound-parameters)))
+                 (fill-bound-parameters bp `((species . ,(string->symbol (string-downcase (string-join args "-"))))))
+                 bp))
+             (character (generate-character bound-parameters)))
         (send-privmsg ircbot asker (generate-description character)))))
   (add-command-handler!
     ircbot
