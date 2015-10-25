@@ -84,8 +84,8 @@
          (way-of-life (pick-way-of-life species))
         )
     (make <character>
-      #:motto (pick-motto)
-      #:natures (pick-natures (+ 2 (random 3)))
+      #:motto (or (bound-motto bound-parameters) (pick-motto))
+      #:natures (or (bound-natures bound-parameters) (pick-natures (+ 2 (random 3))))
       #:gender gender
       #:sex sex
       #:birthday (pick-birthday (birthdate-parameters bound-parameters))
@@ -101,7 +101,7 @@
       #:language lang
       #:species species
       #:family (generate-family bound-parameters species sex gender lang age)
-      #:size (pick-size)
-      #:weight (pick-weight)
-      #:traits (pick-traits (+ 3 (random 3)) gender species)
+      #:size (or (bound-size bound-parameters) (pick-size))
+      #:weight (or (bound-weight bound-parameters) (pick-weight))
+      #:traits (or (bound-traits bound-parameters) (pick-traits (+ 3 (random 3)) gender species))
     )))

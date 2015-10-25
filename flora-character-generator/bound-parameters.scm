@@ -16,6 +16,7 @@
             language-parameters species-parameters bound-affinity bound-gender
             birthdate-parameters bound-birth-place bound-sex
             bound-living-place bound-age bound-profession
+            bound-size bound-weight bound-natures bound-traits bound-motto
            )
   #:duplicates (merge-generics))
 
@@ -31,6 +32,11 @@
   (bound-living-place #:accessor bound-living-place #:init-form #f)
   (bound-age #:accessor bound-age #:init-form #f)
   (bound-profession #:accessor bound-profession #:init-form #f)
+  (bound-size #:accessor bound-size #:init-form #f)
+  (bound-weight #:accessor bound-weight #:init-form #f)
+  (bound-natures #:accessor bound-natures #:init-form #f)
+  (bound-traits #:accessor bound-traits #:init-form #f)
+  (bound-motto #:accessor bound-motto #:init-form #f)
 )
 
 (define-method (make-bound-parameters)
@@ -77,8 +83,13 @@
 (define (get-checked-age age-id)
   (and (symbol? age-id) (get-age-of-life age-id)))
 
-(define (get-checked-profession profession)
-  (and (string? profession) profession))
+(define (get-checked-string str)
+  (and (string? str) str))
+
+(define (get-checked-string-vector strvec)
+  (and (vector? strvec)
+       (not (member #f (map string? (vector->list strvec))))
+       (vector->list strvec)))
 
 ;
 (define-method (fill-bound-parameters (bound-parameters <bound-parameters>) (constraints <list>))
@@ -105,7 +116,17 @@
   (set! (bound-age bound-parameters)
         (get-checked-age (sloppy-assq-ref constraints 'age)))
   (set! (bound-profession bound-parameters)
-        (get-checked-profession (sloppy-assq-ref constraints 'profession)))
+        (get-checked-string (sloppy-assq-ref constraints 'profession)))
+  (set! (bound-size bound-parameters)
+        (get-checked-string (sloppy-assq-ref constraints 'size)))
+  (set! (bound-weight bound-parameters)
+        (get-checked-string (sloppy-assq-ref constraints 'weight)))
+  (set! (bound-natures bound-parameters)
+        (get-checked-string-vector (sloppy-assq-ref constraints 'natures)))
+  (set! (bound-traits bound-parameters)
+        (get-checked-string-vector (sloppy-assq-ref constraints 'traits)))
+  (set! (bound-motto bound-parameters)
+        (get-checked-string (sloppy-assq-ref constraints 'motto)))
 )
 
 (define-method (check-word (word <list>))

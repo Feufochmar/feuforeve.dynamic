@@ -96,6 +96,21 @@
 (define-method (profession->json-object (char <character>))
   (profession char))
 
+(define-method (size->json-object (char <character>))
+  (size char))
+
+(define-method (weight->json-object (char <character>))
+  (weight char))
+
+(define-method (natures->json-object (char <character>))
+  (list->vector (natures char)))
+
+(define-method (traits->json-object (char <character>))
+  (list->vector (traits char)))
+
+(define-method (motto->json-object (char <character>))
+  (motto char))
+
 (define-method (character->json-object (char <character>))
   `((names ,(names->json-object char))
     (species ,(species->json-object char))
@@ -107,4 +122,9 @@
     (living-place ,(living-place->json-object char))
     (age ,(age->json-object char))
     (profession ,(profession->json-object char))
+    (size ,(size->json-object char))
+    (weight ,(weight->json-object char))
+    (natures ,(natures->json-object char))
+    (traits ,(traits->json-object char))
+    (motto ,(motto->json-object char))
    ))
