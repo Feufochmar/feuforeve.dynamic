@@ -14,18 +14,18 @@
     ((number 12) (name "Pigoth") (days 31)))
   (astrological-signs
     ;; The parameter order for from and to is (month-number day-number)
-    ((name "Pegasus") (from 1 21) (to 2 16))
-    ((name "Delphinus") (from 2 17) (to 3 11))
-    ((name "Volans") (from 3 12) (to 4 18))
-    ((name "Phoenix") (from 4 19) (to 5 13))
-    ((name "Cetus") (from 5 14) (to 5 14))
-    ((name "Monoceros") (from 5 15) (to 6 21)) ;; ??? limit
-    ((name "Corvus") (from 6 21) (to 7 20)) ;; ??? limit
-    ((name "Lepus") (from 7 21) (to 8 10))
-    ((name "Lupus") (from 8 11) (to 9 16))
-    ((name "Chamaeleo") (from 9 17) (to 10 30))
-    ((name "Hydra") (from 10 31) (to 11 23))
-    ((name "Draco") (from 11 24) (to 11 29))
-    ((name "Ophiuchus") (from 11 30) (to 12 17))
-    ((name "Camelopardus") (from 12 18) (to 1 20)))
+    (pegasus (name "Pegasus") (from 1 21) (to 2 16))
+    (delphinus (name "Delphinus") (from 2 17) (to 3 11))
+    (volans (name "Volans") (from 3 12) (to 4 18))
+    (phoenix (name "Phoenix") (from 4 19) (to 5 13))
+    (cetus (name "Cetus") (from 5 14) (to 5 14))
+    (monoceros (name "Monoceros") (from 5 15) (to 6 21)) ;; ??? limit
+    (corvus (name "Corvus") (from 6 21) (to 7 20)) ;; ??? limit
+    (lepus (name "Lepus") (from 7 21) (to 8 10))
+    (lupus (name "Lupus") (from 8 11) (to 9 16))
+    (chamaeleo (name "Chamaeleo") (from 9 17) (to 10 30))
+    (hydra (name "Hydra") (from 10 31) (to 11 23))
+    (draco (name "Draco") (from 11 24) (to 11 29))
+    (ophiuchus (name "Ophiuchus") (from 11 30) (to 12 17))
+    (camelopardus (name "Camelopardus") (from 12 18) (to 1 20)))
 )

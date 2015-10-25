@@ -7,7 +7,7 @@
   #:export (<place> name type reference-link area
             preposition-in preposition-near
             pick-place get-region
-            find-place
+            find-place place-from-name
            )
 )
 
@@ -67,7 +67,7 @@
       (pick-from (places region))
       (pick-place (pick-from (filter (lambda (r) (not (restricted? r))) (subregions region))))))
 
-;; Found a place or region of the given name
+;; Find a place or region of the given name
 (define-method (find-place (asked-query <string>))
   (letrec* ((query (string-downcase asked-query))
             (search-place
@@ -93,6 +93,11 @@
                           (search-region (cdr regions)))))))
            )
     (search-region (list *data:locations:root-region*))))
+
+;; Find the place corresponding to the given name, region are ignored
+(define-method (place-from-name (place-name <string>))
+  (let ((found (find-place place-name)))
+    (and (is-a? found <place>) found)))
 
 ;; Region syntax
 (define-syntax region

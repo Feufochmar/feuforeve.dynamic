@@ -71,9 +71,27 @@
                                 (genitive-adjective gen) "/"
                                 (reflexive-pronoun gen))))))
 
+(define-method (birthdate->json-object (char <character>))
+  (let ((date (birthday char)))
+    `((day ,(day date))
+      (month ((name ,(name (month date)))
+              (key ,(number (month date)))))
+      (astrological-sign ((name ,(name (astrological-sign date)))
+                          (key ,(key (astrological-sign date))))))))
+
+(define-method (birth-place->json-object (char <character>))
+  (name (birth-place char)))
+
+(define-method (sex->json-object (char <character>))
+  `((description ,(description (sex char)))
+    (key ,(key (sex char)))))
+
 (define-method (character->json-object (char <character>))
   `((names ,(names->json-object char))
     (species ,(species->json-object char))
     (affinity ,(affinity->json-object char))
     (gender ,(gender->json-object char))
+    (birthdate ,(birthdate->json-object char))
+    (birth-place ,(birth-place->json-object char))
+    (sex ,(sex->json-object char))
    ))

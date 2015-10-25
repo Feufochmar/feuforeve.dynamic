@@ -75,12 +75,12 @@
 
 (define-method (generate-character (bound-parameters <bound-parameters>))
   (let* ((species (or (bound-species (species-parameters bound-parameters)) (pick-character-species)))
-         (sex (pick-sex species))
+         (sex (or (bound-sex bound-parameters) (pick-sex species)))
          (gender (or (bound-gender bound-parameters) (pick-gender species sex)))
          (age (pick-age-of-life species))
          (lang (or (bound-language (language-parameters bound-parameters)) (pick-language)))
          (affinity (or (bound-affinity bound-parameters) (pick-affinity species)))
-         (birth-place (pick-birth-place species))
+         (birth-place (or (bound-birth-place bound-parameters) (pick-birth-place species)))
          (way-of-life (pick-way-of-life species))
         )
     (make <character>
@@ -88,7 +88,7 @@
       #:natures (pick-natures (+ 2 (random 3)))
       #:gender gender
       #:sex sex
-      #:birthday (pick-birthday)
+      #:birthday (pick-birthday (birthdate-parameters bound-parameters))
       #:affinity affinity
       #:age age
       #:profession (if (eq? way-of-life #:citizen) (pick-profession age) #f)

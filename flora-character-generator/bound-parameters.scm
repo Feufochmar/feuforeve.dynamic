@@ -7,9 +7,13 @@
   #:use-module (flora-character-generator species)
   #:use-module (flora-character-generator elements)
   #:use-module (flora-character-generator genders)
+  #:use-module (flora-character-generator calendar)
+  #:use-module (flora-character-generator sexes)
+  #:use-module (flora-character-generator locations)
   #:export (<bound-parameters> make-bound-parameters fill-bound-parameters
             ;
             language-parameters species-parameters bound-affinity bound-gender
+            birthdate-parameters bound-birth-place bound-sex
            )
   #:duplicates (merge-generics))
 
@@ -19,6 +23,9 @@
   (species-parameters #:getter species-parameters #:init-form (make-species-bound-parameters))
   (bound-affinity #:accessor bound-affinity #:init-form #f)
   (bound-gender #:accessor bound-gender #:init-form #f)
+  (birthdate-parameters #:getter birthdate-parameters #:init-form (make-birthdate-bound-parameters))
+  (bound-birth-place #:accessor bound-birth-place #:init-form #f)
+  (bound-sex #:accessor bound-sex #:init-form #f)
 )
 
 (define-method (make-bound-parameters)
@@ -42,6 +49,26 @@
 (define (get-checked-gender gender-key)
   (and (symbol? gender-key) (get-gender gender-key)))
 
+(define-method (check-add-birthdate (bound-parameters <bound-parameters>) birthdate)
+  (if (list? birthdate)
+      (let* ((month-id (sloppy-assq-ref birthdate 'month))
+             (day-id (sloppy-assq-ref birthdate 'day))
+             (astrological-sign-id (sloppy-assq-ref birthdate 'astrological-sign))
+             (month-param (and (integer? month-id) (find-month month-id)))
+             (day-param (and (integer? day-id) day-id))
+             (astrological-sign-param
+               (and (symbol? astrological-sign-id) (get-astrological-sign astrological-sign-id)))
+            )
+        (set! (month (birthdate-parameters bound-parameters)) month-param)
+        (set! (day (birthdate-parameters bound-parameters)) day-param)
+        (set! (astrological-sign (birthdate-parameters bound-parameters)) astrological-sign-param))))
+
+(define (get-checked-place place-name)
+  (and (string? place-name) (place-from-name place-name)))
+
+(define (get-checked-sex sex-id)
+  (and (symbol? sex-id) (get-sex sex-id)))
+
 ;
 (define-method (fill-bound-parameters (bound-parameters <bound-parameters>) (constraints <list>))
   ;(write constraints)(newline)
@@ -57,6 +84,11 @@
         (get-checked-element (sloppy-assq-ref constraints 'affinity)))
   (set! (bound-gender bound-parameters)
         (get-checked-gender (sloppy-assq-ref constraints 'gender)))
+  (check-add-birthdate bound-parameters (sloppy-assq-ref constraints 'birthdate))
+  (set! (bound-birth-place bound-parameters)
+        (get-checked-place (sloppy-assq-ref constraints 'birth-place)))
+  (set! (bound-sex bound-parameters)
+        (get-checked-sex (sloppy-assq-ref constraints 'sex)))
 )
 
 (define-method (check-word (word <list>))

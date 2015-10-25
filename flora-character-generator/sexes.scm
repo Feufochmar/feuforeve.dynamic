@@ -6,7 +6,7 @@
   #:use-module (ffch random)
   #:use-module (ffch distribution)
   #:use-module (flora-character-generator genders)
-  #:export (<sex> description mother? pick-gender
+  #:export (<sex> description mother? pick-gender key
             ;
             get-sex sex-keys
            )
@@ -14,6 +14,7 @@
 
 ;; Sex class
 (define-class <sex> (<object>)
+  (key #:getter key #:init-keyword #:key #:init-form #f)
   (description #:getter description #:init-keyword #:description #:init-form "")
   (is-mother? #:getter is-mother? #:init-keyword #:is-mother? #:init-form #:maybe) ;; #t, #f or #:maybe
   (gender-distribution #:getter gender-distribution #:init-keyword #:gender-distribution #:init-form #f))
@@ -42,7 +43,9 @@
   (syntax-rules (default-gender-distribution)
     ((_ (key (slot value) ... (default-gender-distribution (gender probability) ...)) ...)
      (begin
-       (let ((sex (make <sex> #:gender-distribution (make-distribution (list (cons (quote gender) probability) ...)))))
+       (let ((sex (make <sex>
+                        #:key (quote key)
+                        #:gender-distribution (make-distribution (list (cons (quote gender) probability) ...)))))
          (begin (slot-set! sex (quote slot) value) ...)
          (hash-set! *data:sexes* (quote key) sex)) ...))))
 
