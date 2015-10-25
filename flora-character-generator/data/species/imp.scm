@@ -1,6 +1,6 @@
 (species imp
   (name "Imp")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Imps-451794787")
+  (reference-link "http://floraverse.com/wiki/species/imp")
   (citizen? #t)
   (tribal? #t)
   (isolated? #t)

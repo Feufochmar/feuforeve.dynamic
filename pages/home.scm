@@ -80,7 +80,7 @@
             )
             (paragraph
               "You can find me on "
-              (hyperlink ((to "http://feufochmar.deviantart.com/")) "Tumblr")
+              (hyperlink ((to "http://feufochmar.tumblr.com/")) "Tumblr")
               " and "
               (hyperlink ((to "http://feufochmar.deviantart.com/")) "deviantArt") ". " (linefeed)
               "You can also contact me at " (code "feufochmar [dot] gd [at] gmail [dot] com") "."

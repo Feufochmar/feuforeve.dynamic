@@ -1,6 +1,6 @@
 (species hanged-man
   (name "Hanged Man")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Flowercat-425633502")
+  (reference-link "http://floraverse.com/wiki/species/hanged_man")
   (citizen? #t)
   (common-regions auroria kadath national-port-of-owel candy-rock althar beheaded-city prospector)
   (distributions

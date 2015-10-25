@@ -1,6 +1,6 @@
 (species rock-candies
   (name "Rock Candies")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Rock-Candies-426862526")
+  (reference-link "http://floraverse.com/wiki/species/rock_candies")
   (citizen? #t)
   (common-regions candy-rock honeycomb-plateau miaoustok beheaded-city)
   (distributions

@@ -1,6 +1,6 @@
 (species flowercat
   (name "Flowercat")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Flowercat-425633502")
+  (reference-link "http://floraverse.com/wiki/species/flowercat")
   (citizen? #t)
   (common-regions dewclaw moggy)
   (distributions

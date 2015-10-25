@@ -1,6 +1,6 @@
 (species beholding-siren
   (name "Beholding Siren")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Beholders-443329310")
+  (reference-link "http://floraverse.com/wiki/species/beholding_siren")
   (only-in-common-regions? #t)
   (tribal? #t)
   (common-regions

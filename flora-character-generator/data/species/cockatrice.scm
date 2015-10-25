@@ -1,6 +1,6 @@
 (species cockatrice
   (name "Cockatrice")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Cockatrice-425774716")
+  (reference-link "http://floraverse.com/wiki/species/cockatrice")
   (citizen? #t)
   (tribal? #t)
   (isolated? #t)
