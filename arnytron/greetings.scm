@@ -444,4 +444,5 @@
  (#t "2015-10-22" "salut les micro-kekette mono-atomique se faisant gloulouter par biomans en slip de marbre!" ("ArnY: -s" "ArnY: -s et +s" "***katyucha valide" "ArnY: :)"))
  (#t "2015-10-23" "salut les mormons mous machouillant de la morve et marmonant de la merde en morse" ("rbs: s/mormons/marmots/" "ArnY: rbs: ou marmots mormonts" "Zluglu: ArnY : t’as oublié Mauves" "ArnY: ah ouais, quel mauvais je suis!" "ArnY: pardon, malvien"))
  (#t "2015-10-24" "salut les vieux sumos lesbiens en string de barbelés enduits de confiture à la fraise" ("Olaf-: la confiture pour adoucir, +1"))
+ (#t "2015-10-25" "salut les gentils petits nains de jardin escargophiles à la queue molle et glueuse de bave" ("ArnY: 2 insultes aujourd'hui, comme vous êtes vernis!" "companion_cube: t'as dit «gentil», c'est un peu faible" "ArnY: c'est parce qu'on sait tous que vous êtes des cons, alors c'est une insulte de vous traiter de gentils" "companion_cube: attention, t'as dit gentil, pas homosexuel" "***ArnY n'a rien contre les homos!" "ArnY: les gentils, je peux pas les blairer"))
 ))
