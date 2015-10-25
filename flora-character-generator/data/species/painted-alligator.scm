@@ -1,6 +1,6 @@
 (species painted-alligator
   (name "Painted Alligator")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Painted-Alligators-426396078")
+  (reference-link "http://floraverse.com/wiki/species/painted_alligator")
   (citizen? #t)
   (common-regions althar miaoustok gnawth national-port-of-owel)
   (distributions

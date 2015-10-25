@@ -1,6 +1,6 @@
 (species pygmy-pyzky
   (name "Pygmy Pyzky")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Pygmy-Pyzkyes-428655978")
+  (reference-link "http://floraverse.com/wiki/species/pygmy_pyzky")
   (tribal? #t)
   (common-regions prospector new-gnoll-nation dewclaw stemm cherran musapeel citrico polaris peril bluegrass)
   (distributions

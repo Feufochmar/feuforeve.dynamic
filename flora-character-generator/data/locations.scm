@@ -27,7 +27,7 @@
              (reference-link "http://floraverse.com/"))
       (region owel
              ((name "Owel")
-              (reference-link "http://purplekecleon.deviantart.com/art/Owel-Geography-441905405"))
+              (reference-link "http://floraverse.deviantart.com/art/Owel-Geography-441905405"))
         (region citrico-archipelago
                 ((name "Citrico Archipelago")
                  (reference-link "http://floraverse.com/comic/flora/page/99-the-citrico-archipelago/"))

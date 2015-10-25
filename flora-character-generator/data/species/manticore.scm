@@ -1,6 +1,6 @@
 (species manticore
   (name "Manticore")
-  (reference-link "http://purplekecleon.deviantart.com/art/Species-Manticore-431977038")
+  (reference-link "http://floraverse.com/wiki/species/manticore")
   (citizen? #t)
   (common-regions dewclaw gnawth)
   (distributions

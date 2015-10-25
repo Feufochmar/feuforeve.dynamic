@@ -1,7 +1,7 @@
 ; Low intelect
 (species foxbat
   (name "Foxbat")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Foxbat-425768408")
+  (reference-link "http://floraverse.com/wiki/species/foxbat")
   (pet? #t)
   (tamable? #t)
   (wild? #t)
@@ -16,7 +16,7 @@
 ; High intelect
 (species foxbat-spirit
   (name "Foxbat")
-  (reference-link "http://floraverse.deviantart.com/art/Species-Foxbat-425768408")
+  (reference-link "http://floraverse.com/wiki/species/foxbat")
   (citizen? #t)
   (tribal? #t)
   (isolated? #t)

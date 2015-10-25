@@ -1,6 +1,6 @@
 (species aurorian-fox
   (name "Aurorian Fox")
-  (reference-link "http://purplekecleon.deviantart.com/art/Species-Aurorian-Foxes-439191930")
+  (reference-link "http://floraverse.com/wiki/species/aurorian_fox")
   (citizen? #t)
   (common-regions
     auroria althar mew-york citrico-capital twin-luxuries national-port-of-owel kadath)
