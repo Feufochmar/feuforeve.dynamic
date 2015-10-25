@@ -86,6 +86,16 @@
   `((description ,(description (sex char)))
     (key ,(key (sex char)))))
 
+(define-method (living-place->json-object (char <character>))
+  (name (living-place char)))
+
+(define-method (age->json-object (char <character>))
+  `((description ,(description (age char)))
+    (key ,(key (age char)))))
+
+(define-method (profession->json-object (char <character>))
+  (profession char))
+
 (define-method (character->json-object (char <character>))
   `((names ,(names->json-object char))
     (species ,(species->json-object char))
@@ -94,4 +104,7 @@
     (birthdate ,(birthdate->json-object char))
     (birth-place ,(birth-place->json-object char))
     (sex ,(sex->json-object char))
+    (living-place ,(living-place->json-object char))
+    (age ,(age->json-object char))
+    (profession ,(profession->json-object char))
    ))

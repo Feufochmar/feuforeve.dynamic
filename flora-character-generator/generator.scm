@@ -77,7 +77,7 @@
   (let* ((species (or (bound-species (species-parameters bound-parameters)) (pick-character-species)))
          (sex (or (bound-sex bound-parameters) (pick-sex species)))
          (gender (or (bound-gender bound-parameters) (pick-gender species sex)))
-         (age (pick-age-of-life species))
+         (age (or (bound-age bound-parameters) (pick-age-of-life species)))
          (lang (or (bound-language (language-parameters bound-parameters)) (pick-language)))
          (affinity (or (bound-affinity bound-parameters) (pick-affinity species)))
          (birth-place (or (bound-birth-place bound-parameters) (pick-birth-place species)))
@@ -91,10 +91,12 @@
       #:birthday (pick-birthday (birthdate-parameters bound-parameters))
       #:affinity affinity
       #:age age
-      #:profession (if (eq? way-of-life #:citizen) (pick-profession age) #f)
+      #:profession (or (bound-profession bound-parameters)
+                       (if (eq? way-of-life #:citizen) (pick-profession age) #f))
       #:birth-place birth-place
       #:in-birth-place? (if (eq? way-of-life #:isolated) #f (pick-boolean))
-      #:living-place (pick-living-place species birth-place)
+      #:living-place (or (bound-living-place bound-parameters)
+                         (pick-living-place species birth-place))
       #:in-living-place? (if (eq? way-of-life #:isolated) #f (pick-boolean))
       #:language lang
       #:species species
