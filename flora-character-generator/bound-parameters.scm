@@ -10,10 +10,12 @@
   #:use-module (flora-character-generator calendar)
   #:use-module (flora-character-generator sexes)
   #:use-module (flora-character-generator locations)
+  #:use-module (flora-character-generator ages-of-life)
   #:export (<bound-parameters> make-bound-parameters fill-bound-parameters
             ;
             language-parameters species-parameters bound-affinity bound-gender
             birthdate-parameters bound-birth-place bound-sex
+            bound-living-place bound-age bound-profession
            )
   #:duplicates (merge-generics))
 
@@ -26,6 +28,9 @@
   (birthdate-parameters #:getter birthdate-parameters #:init-form (make-birthdate-bound-parameters))
   (bound-birth-place #:accessor bound-birth-place #:init-form #f)
   (bound-sex #:accessor bound-sex #:init-form #f)
+  (bound-living-place #:accessor bound-living-place #:init-form #f)
+  (bound-age #:accessor bound-age #:init-form #f)
+  (bound-profession #:accessor bound-profession #:init-form #f)
 )
 
 (define-method (make-bound-parameters)
@@ -69,6 +74,12 @@
 (define (get-checked-sex sex-id)
   (and (symbol? sex-id) (get-sex sex-id)))
 
+(define (get-checked-age age-id)
+  (and (symbol? age-id) (get-age-of-life age-id)))
+
+(define (get-checked-profession profession)
+  (and (string? profession) profession))
+
 ;
 (define-method (fill-bound-parameters (bound-parameters <bound-parameters>) (constraints <list>))
   ;(write constraints)(newline)
@@ -89,6 +100,12 @@
         (get-checked-place (sloppy-assq-ref constraints 'birth-place)))
   (set! (bound-sex bound-parameters)
         (get-checked-sex (sloppy-assq-ref constraints 'sex)))
+  (set! (bound-living-place bound-parameters)
+        (get-checked-place (sloppy-assq-ref constraints 'living-place)))
+  (set! (bound-age bound-parameters)
+        (get-checked-age (sloppy-assq-ref constraints 'age)))
+  (set! (bound-profession bound-parameters)
+        (get-checked-profession (sloppy-assq-ref constraints 'profession)))
 )
 
 (define-method (check-word (word <list>))

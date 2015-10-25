@@ -4,7 +4,7 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:use-module (ffch random)
-  #:export (<age-of-life> description can-have-pet?
+  #:export (<age-of-life> key description can-have-pet?
             pick-profession pick-nb-partners-children
             ;
             get-age-of-life ages-of-life-keys
@@ -13,6 +13,7 @@
 
 ;;
 (define-class <age-of-life> (<object>)
+  (key #:getter key #:init-keyword #:key #:init-form #f)
   (description #:getter description #:init-keyword #:descriprion #:init-form "")
   (professions #:getter professions #:init-keyword #:professions #:init-form (vector))
   (can-have-pet? #:getter can-have-pet? #:init-keyword #:can-have-pet? #:init-form #f)
@@ -45,7 +46,7 @@
   (syntax-rules (professions from-other-ages)
     ((_ (key (slot value) ... (profession (from-other-ages ages* ...) prof* ...)) ...)
      (let ((professions-of-age (make-hash-table)))
-       (let ((age (make <age-of-life>))
+       (let ((age (make <age-of-life> #:key (quote key)))
              (initial-professions (list prof* ...)))
          (begin (slot-set! age (quote slot) value) ...)
          (hash-set! professions-of-age (quote key) initial-professions)
