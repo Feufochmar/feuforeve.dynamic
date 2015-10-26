@@ -114,14 +114,19 @@
   (list (lock-view entry-id) " " parameter-name ": " (output-view entry-id)))
 
 (define (family-member-view character key-id display-family-name?)
-  (section ((title character))
+  (section ((title character)(id key-id))
     (paragraph
-      (parameter-view "Given name" (string-append key-id ".name")) (linefeed)
+      (parameter-view "Given name" (string-append key-id ".name"))
+      " Pronounced: " (output-view (string-append key-id ".name.pronounciation")) (linefeed)
       (parameter-view "Species" (string-append key-id ".species")) (linefeed)
-      (parameter-view "Gender" (string-append key-id ".gender")) (linefeed)
+      (parameter-view "Gender" (string-append key-id ".gender"))
+      " Pronouns: " (output-view (string-append key-id ".gender.pronouns"))
+      (linefeed)
       (parameter-view "Language" (string-append key-id ".language"))
       (if display-family-name?
-          (list (linefeed) (parameter-view "Family name" (string-append key-id ".name.family")))
+          (list (linefeed)
+                (parameter-view "Family name" (string-append key-id ".name.family"))
+                " Pronounced: " (output-view (string-append key-id ".name.family.pronounciation")))
           ""))))
 
 (define (load-fcg-sheet wcontainer)
@@ -143,8 +148,9 @@
               "but unlike the other generator, this version allows you to lock parameters "
               "when generating a new character to keep them instead of being overwritten. "
               (linefeed)
-              "Click on the lock next to a characteristic to lock or unlock it over generation." (linefeed)
-              (button ((onclick "updateSheet();")) "Generate Character"))
+              "Click on the lock next to a characteristic to lock or unlock it over generation."
+              (linefeed)
+              (button ((onclick "updateSheet();")) "Generate character parameters"))
           )
           (section ((id "character.sheet"))
             (section ((title "Names"))
@@ -170,6 +176,8 @@
                 (parameter-view "Species" "species") (linefeed)
                 (parameter-view "Affinity" "affinity") (linefeed)
                 (parameter-view "Gender" "gender") " Pronouns: " (output-view "gender.pronouns")))
+            (paragraph
+              (button ((onclick "updateSheet();")) "Generate character parameters"))
             (section ((title "Birth"))
               (paragraph
                 (parameter-view "Month of birth" "birthdate.month") (linefeed)
@@ -184,6 +192,8 @@
                 (parameter-view "Living place" "living.place") (linefeed)
                 (parameter-view "Age" "age") (linefeed)
                 (parameter-view "Profession" "profession")))
+            (paragraph
+              (button ((onclick "updateSheet();")) "Generate character parameters"))
             (section ((title "Physical and personality traits"))
               (paragraph
                 (parameter-view "Size" "size") (linefeed)
@@ -194,18 +204,23 @@
                 (parameter-view "Motto" "motto")))
             (section ((title "Family"))
               (paragraph
+                "Locking family parameters without locking the main parameters may lead to inconsistencies."
+                (linefeed)
+                (button ((onclick "updateSheet();")) "Generate character parameters")
                 (section ((title "Mother side"))
                   (paragraph
                     (family-member-view "Mother" "mother" #f)
                     (family-member-view "Grandmother" "grandmother.mother" #t)
                     (family-member-view "Grandfather" "grandfather.mother" #t)))
+                (button ((onclick "updateSheet();")) "Generate character parameters")
                 (section ((title "Father side"))
                   (paragraph
                     (family-member-view "Father" "father" #f)
                     (family-member-view "Grandmother" "grandmother.father" #t)
                     (family-member-view "Grandfather" "grandfather.father" #t)))
                 (paragraph
-                  "Partners, children and pets are not displayed currently. They will never be lockable though.")))
+                  "Partners, children and pets are not displayed. "
+                  "They won't be made lockable if they are displayed in the future.")))
           )
         )
       ))))
