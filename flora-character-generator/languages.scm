@@ -18,6 +18,10 @@
             gff-given-name gmf-given-name gfm-given-name gmm-given-name
             character-given-names character-other-name language-character
             pick-language get-language
+            ;
+            gender-key
+            gmm gfm gmf gff
+            gmm-family-name gfm-family-name gmf-family-name gff-family-name
            )
 )
 
