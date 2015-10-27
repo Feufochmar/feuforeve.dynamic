@@ -11,7 +11,7 @@
   #:use-module ((flora-character-generator species) #:renamer (symbol-prefix-proc 'sp:))
   #:use-module (flora-character-generator ages-of-life)
   #:use-module (flora-character-generator bound-parameters)
-  #:export (<individual> given-name species base-species
+  #:export (<individual> name species base-species
             <full-family> gff gmf gfm gmm father mother foster self partners-and-children pets
             generate-family given-name short-name full-name fam-names
             <partner-and-children> partner mother? children
