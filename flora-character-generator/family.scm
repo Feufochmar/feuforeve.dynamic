@@ -7,11 +7,11 @@
   #:use-module (ffch random)
   #:use-module (flora-character-generator genders)
   #:use-module (flora-character-generator sexes)
-  #:use-module (flora-character-generator languages)
-  #:use-module (flora-character-generator species)
+  #:use-module ((flora-character-generator languages) #:renamer (symbol-prefix-proc 'lang:))
+  #:use-module ((flora-character-generator species) #:renamer (symbol-prefix-proc 'sp:))
   #:use-module (flora-character-generator ages-of-life)
   #:use-module (flora-character-generator bound-parameters)
-  #:export (<individual> given-name species
+  #:export (<individual> given-name species base-species
             <full-family> gff gmf gfm gmm father mother foster self partners-and-children pets
             generate-family given-name short-name full-name fam-names
             <partner-and-children> partner mother? children
@@ -45,37 +45,53 @@
   (pets #:getter pets #:init-keyword #:pets #:init-form (list)))
 
 (define-method (given-name (full-family <full-family>))
-  ((@ (flora-character-generator languages) given-name) (fam-names full-family)))
+  (lang:given-name (fam-names full-family)))
 
 (define-method (short-name (full-family <full-family>))
-  ((@ (flora-character-generator languages) short-name) (fam-names full-family)))
+  (lang:short-name (fam-names full-family)))
 
 (define-method (full-name (full-family <full-family>))
-  ((@ (flora-character-generator languages) full-name) (fam-names full-family)))
+  (lang:full-name (fam-names full-family)))
 
 ;;
 (define-method (generate-family (bound-parameters <bound-parameters>)
-                                (species <species>) (sex <sex>) (gender <gender>)
-                                (lang <language>) (age <age-of-life>))
-  (let* ((famsp ((@ (flora-character-generator species) family-species)
-                 (species-parameters bound-parameters)
-                 species))
-         (famsp-father ((@ (flora-character-generator species) father) famsp))
-         (famsp-mother ((@ (flora-character-generator species) mother) famsp))
-         (famsp-gff (if famsp-father ((@ (flora-character-generator species) father) famsp-father) #f))
-         (famsp-gmf (if famsp-father ((@ (flora-character-generator species) mother) famsp-father) #f))
-         (famsp-gfm (if famsp-mother ((@ (flora-character-generator species) father) famsp-mother) #f))
-         (famsp-gmm (if famsp-mother ((@ (flora-character-generator species) mother) famsp-mother) #f))
+                                (species sp:<species>) (sex <sex>) (gender <gender>)
+                                (lang lang:<language>) (age <age-of-life>))
+  (let* ((famsp (sp:family-species (species-parameters bound-parameters) species))
+         (famsp-father (sp:father famsp))
+         (famsp-mother (sp:mother famsp))
+         (famsp-gff (and famsp-father (sp:father famsp-father)))
+         (famsp-gmf (and famsp-father (sp:mother famsp-father)))
+         (famsp-gfm (and famsp-mother (sp:father famsp-mother)))
+         (famsp-gmm (and famsp-mother (sp:mother famsp-mother)))
          ;
-         (gender-father-key (if famsp-father (key (pick-gender-father (species-of famsp-father))) #f))
-         (gender-mother-key (if famsp-mother (key (pick-gender-mother (species-of famsp-mother))) #f))
-         (gender-gff-key (if famsp-gff (key (pick-gender-father (species-of famsp-gff))) #f))
-         (gender-gmf-key (if famsp-gmf (key (pick-gender-mother (species-of famsp-gmf))) #f))
-         (gender-gfm-key (if famsp-gfm (key (pick-gender-father (species-of famsp-gfm))) #f))
-         (gender-gmm-key (if famsp-gmm (key (pick-gender-mother (species-of famsp-gmm))) #f))
+         (gender-father-key
+           (and famsp-father
+                (key (or (lang:bound-gender (lang:father (language-parameters bound-parameters)))
+                         (sp:pick-gender-father (sp:species-of famsp-father))))))
+         (gender-mother-key
+           (and famsp-mother
+                (key (or (lang:bound-gender (lang:mother (language-parameters bound-parameters)))
+                         (sp:pick-gender-mother (sp:species-of famsp-mother))))))
+         (gender-gff-key
+           (and famsp-gff
+                (key (or (lang:bound-gender (lang:father (lang:father (language-parameters bound-parameters))))
+                         (sp:pick-gender-father (sp:species-of famsp-gff))))))
+         (gender-gmf-key
+           (and famsp-gmf
+                (key (or (lang:bound-gender (lang:mother (lang:father (language-parameters bound-parameters))))
+                         (sp:pick-gender-mother (sp:species-of famsp-gmf))))))
+         (gender-gfm-key
+           (and famsp-gfm
+                (key (or (lang:bound-gender (lang:father (lang:mother (language-parameters bound-parameters))))
+                         (sp:pick-gender-father (sp:species-of famsp-gfm))))))
+         (gender-gmm-key
+           (and famsp-gmm
+                (key (or (lang:bound-gender (lang:mother (lang:mother (language-parameters bound-parameters))))
+                         (sp:pick-gender-mother (sp:species-of famsp-gmm))))))
          (gender-key (key gender))
          ;
-         (famnm (family-names
+         (famnm (lang:family-names
                   (constraints (language-parameters bound-parameters))
                   (language lang)
                   (genders
@@ -92,58 +108,58 @@
              (if indiv
                 (make <individual>
                      #:name (namefunc famnm)
-                     #:species (species-of indiv)
-                     #:base-species ((@ (flora-character-generator species) base-species) indiv))
+                     #:species (sp:species-of indiv)
+                     #:base-species (sp:base-species indiv))
                 #f)))
          (make-pet
            (lambda ()
-             (let ((sp-indiv (individual-species (pick-pet-species))))
+             (let ((sp-indiv (sp:individual-species (sp:pick-pet-species))))
                (make <individual>
-                     #:name (generate-word (if (pick-boolean) lang (pick-language)))
-                     #:species (species-of sp-indiv)
-                     #:base-species ((@ (flora-character-generator species) base-species) sp-indiv)))))
+                     #:name (lang:generate-word (if (pick-boolean) lang (lang:pick-language)))
+                     #:species (sp:species-of sp-indiv)
+                     #:base-species (sp:base-species sp-indiv)))))
          (partners-and-children
            (map
              (lambda (x)
-               (let ((partner-lang (if (pick-boolean) lang (pick-language))))
+               (let ((partner-lang (if (pick-boolean) lang (lang:pick-language))))
                  (make <partner-and-children>
                        #:partner
                          (make <individual>
-                               #:name (generate-word partner-lang)
-                               #:species (species-of (car x))
-                               #:base-species ((@ (flora-character-generator species) base-species) (car x)))
+                               #:name (lang:generate-word partner-lang)
+                               #:species (sp:species-of (car x))
+                               #:base-species (sp:base-species (car x)))
                        #:mother? (cadr x)
                        #:children
                          (map
                             (lambda (y)
                               (make <individual>
-                                    #:name (generate-word (if (pick-boolean) lang partner-lang))
-                                    #:species (species-of y)
-                                    #:base-species ((@ (flora-character-generator species) base-species) y)))
+                                    #:name (lang:generate-word (if (pick-boolean) lang partner-lang))
+                                    #:species (sp:species-of y)
+                                    #:base-species (sp:base-species y)))
                             (caddr x)))))
-             (partners+children famsp age sex gender)))
+             (sp:partners+children famsp age sex gender)))
         )
     (make <full-family>
       #:fam-names famnm
       #:fam-species famsp
-      #:gff (make-individual famsp-gff gff-given-name)
-      #:gmf (make-individual famsp-gmf gmf-given-name)
-      #:gfm (make-individual famsp-gfm gfm-given-name)
-      #:gmm (make-individual famsp-gmm gmm-given-name)
-      #:father (make-individual famsp-father father-name)
-      #:mother (make-individual famsp-mother mother-name)
+      #:gff (make-individual famsp-gff lang:gff-given-name)
+      #:gmf (make-individual famsp-gmf lang:gmf-given-name)
+      #:gfm (make-individual famsp-gfm lang:gfm-given-name)
+      #:gmm (make-individual famsp-gmm lang:gmm-given-name)
+      #:father (make-individual famsp-father lang:father-name)
+      #:mother (make-individual famsp-mother lang:mother-name)
       #:foster
-        (let ((foster-p (foster-parent famsp)))
+        (let ((foster-p (sp:foster-parent famsp)))
              (if foster-p
                  (make <individual>
-                       #:name (generate-word (if (pick-boolean) lang (pick-language)))
-                       #:species (species-of foster-p)
-                       #:base-species ((@ (flora-character-generator species) base-species) foster-p))
+                       #:name (lang:generate-word (if (pick-boolean) lang (lang:pick-language)))
+                       #:species (sp:species-of foster-p)
+                       #:base-species (sp:base-species foster-p))
                  #f))
       #:self
         (make <individual>
               #:name #f #:species species
-              #:base-species ((@ (flora-character-generator species) base-species) famsp))
+              #:base-species (sp:base-species famsp))
       #:partners-and-children partners-and-children
       #:pets
         (if (can-have-pet? age)

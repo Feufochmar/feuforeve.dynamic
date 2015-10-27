@@ -204,7 +204,10 @@
                 (parameter-view "Motto" "motto")))
             (section ((title "Family"))
               (paragraph
-                "Locking family parameters without locking the main parameters may lead to inconsistencies."
+                "Locking family parameters without locking the species in the main parameters "
+                "may lead to inconsistencies. "
+                "Also, keep in mind that some species do not need two individuals to make a child. "
+                "Locked parameters may be lost if the new species in the main parameters is one of those."
                 (linefeed)
                 (button ((onclick "updateSheet();")) "Generate character parameters")
                 (section ((title "Mother side"))
@@ -244,7 +247,9 @@
               (if (list? input)
                   (fill-bound-parameters bound-parameters input)))))
       (lambda (key . rest)
-        (display "Error while reading constraints - ignoring data\n")))
+        (display "Error while reading constraints - ignoring data\n")
+        (display key)(display " ")(display rest)(newline)
+        ))
     bound-parameters))
 
 (define (load-fcg-sheet-backend wcontainer)

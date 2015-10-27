@@ -11,8 +11,9 @@
             <word> transcription pronounciation word-language phonemes
             <language> empty-word generate-word
             ;
+            <language-bound-parameters>
             make-language-bound-parameters father mother bound-language
-            bound-given-name bound-other-name bound-family-name
+            bound-given-name bound-other-name bound-family-name bound-gender
             ;
             family-names full-name short-name given-name mother-name father-name
             gff-given-name gmf-given-name gfm-given-name gmm-given-name
@@ -102,7 +103,8 @@
   (bound-language #:accessor bound-language #:init-form #f)
   (bound-given-name #:accessor bound-given-name #:init-form #f)
   (bound-other-name #:accessor bound-other-name #:init-form #f)
-  (bound-family-name #:accessor bound-family-name #:init-form #f))
+  (bound-family-name #:accessor bound-family-name #:init-form #f)
+  (bound-gender #:accessor bound-gender #:init-form #f))
 
 (define-method (make-language-bound-parameters)
   (let* ((gff (make <language-bound-parameters>))
@@ -119,8 +121,14 @@
   (given-name #:getter given-name #:init-keyword #:given-name)
   (gender-key #:getter gender-key #:init-keyword #:gender-key))
 
-(define-method (individual (lang <language>) (gender-key <symbol>))
-  (make <individual> #:language-individual lang #:given-name (generate-word lang) #:gender-key gender-key))
+(define-method (individual
+                 (lang <language>)
+                 (gender-key <symbol>)
+                 bound-word)
+  (make <individual>
+        #:language-individual lang
+        #:given-name (or bound-word (generate-word lang))
+        #:gender-key gender-key))
 ;;
 (define-class <family-names> (<object>)
   (language-character #:getter language-character #:init-keyword #:language-character)
@@ -153,12 +161,18 @@
           (gff gff-gender)))
      (let* ((naming (naming-rules lang))
             (pick-parent-language (lambda (l) (if (eq? 0 (random 8)) (pick-language) l)))
-            (mother-lang (pick-parent-language lang))
-            (father-lang (pick-parent-language lang))
-            (gmm-lang (pick-parent-language mother-lang))
-            (gfm-lang (pick-parent-language mother-lang))
-            (gmf-lang (pick-parent-language father-lang))
-            (gff-lang (pick-parent-language father-lang)))
+            (mother-lang (or (bound-language (mother bound-parameters))
+                             (pick-parent-language lang)))
+            (father-lang (or (bound-language (father bound-parameters))
+                             (pick-parent-language lang)))
+            (gmm-lang (or (bound-language (mother (mother bound-parameters)))
+                          (pick-parent-language mother-lang)))
+            (gfm-lang (or (bound-language (father (mother bound-parameters)))
+                          (pick-parent-language mother-lang)))
+            (gmf-lang (or (bound-language (mother (father bound-parameters)))
+                          (pick-parent-language father-lang)))
+            (gff-lang (or (bound-language (father (father bound-parameters)))
+                          (pick-parent-language father-lang))))
        (make <family-names>
          #:language-character lang
          #:gender-key-character character-gender
@@ -168,16 +182,30 @@
                (map
                  (lambda (x) (generate-word lang))
                  (make-list (pick-from (given-names-min-nb naming) (given-names-max-nb naming)) #f)))
-         #:mother (if mother-gender (individual mother-lang mother-gender) #f)
-         #:father (if father-gender (individual father-lang father-gender) #f)
-         #:gmm (if gmm-gender (individual gmm-lang gmm-gender) #f)
-         #:gfm (if gfm-gender (individual gfm-lang gfm-gender) #f)
-         #:gmf (if gmf-gender (individual gmf-lang gmf-gender) #f)
-         #:gff (if gff-gender (individual gff-lang gff-gender) #f)
-         #:gmm-family-name (if gmm-gender (generate-word gmm-lang) #f)
-         #:gfm-family-name (if gfm-gender (generate-word gfm-lang) #f)
-         #:gmf-family-name (if gmf-gender (generate-word gmf-lang) #f)
-         #:gff-family-name (if gff-gender (generate-word gff-lang) #f)
+         #:mother (and mother-gender
+                       (individual mother-lang mother-gender (bound-given-name (mother bound-parameters))))
+         #:father (and father-gender
+                       (individual father-lang father-gender (bound-given-name (father bound-parameters))))
+         #:gmm (and gmm-gender
+                    (individual gmm-lang gmm-gender (bound-given-name (mother (mother bound-parameters)))))
+         #:gfm (and gfm-gender
+                    (individual gfm-lang gfm-gender (bound-given-name (father (mother bound-parameters)))))
+         #:gmf (and gmf-gender
+                    (individual gmf-lang gmf-gender (bound-given-name (mother (father bound-parameters)))))
+         #:gff (and gff-gender
+                    (individual gff-lang gff-gender (bound-given-name (father (father bound-parameters)))))
+         #:gmm-family-name (and gmm-gender
+                                (or (bound-family-name (mother (mother bound-parameters)))
+                                    (generate-word gmm-lang)))
+         #:gfm-family-name (and gfm-gender
+                                (or (bound-family-name (father (mother bound-parameters)))
+                                    (generate-word gfm-lang)))
+         #:gmf-family-name (and gmf-gender
+                                (or (bound-family-name (mother (father bound-parameters)))
+                                    (generate-word gmf-lang)))
+         #:gff-family-name (and gff-gender
+                                (or (bound-family-name (father (father bound-parameters)))
+                                    (generate-word gff-lang)))
          #:character-other-name (or (bound-other-name bound-parameters) (generate-word lang)))))))
 
 ; Short methods for use in language definitions

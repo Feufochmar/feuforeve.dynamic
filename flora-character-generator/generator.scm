@@ -76,7 +76,7 @@
 (define-method (generate-character (bound-parameters <bound-parameters>))
   (let* ((species (or (bound-species (species-parameters bound-parameters)) (pick-character-species)))
          (sex (or (bound-sex bound-parameters) (pick-sex species)))
-         (gender (or (bound-gender bound-parameters) (pick-gender species sex)))
+         (gender (or (bound-gender (language-parameters bound-parameters)) (pick-gender species sex)))
          (age (or (bound-age bound-parameters) (pick-age-of-life species)))
          (lang (or (bound-language (language-parameters bound-parameters)) (pick-language)))
          (affinity (or (bound-affinity bound-parameters) (pick-affinity species)))
