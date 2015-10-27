@@ -23,6 +23,7 @@
             pick-birth-place pick-living-place
             pick-way-of-life
             ;
+            <species-bound-parameters>
             make-species-bound-parameters father mother bound-species bound-base-species
             ;
             family-species base-species species-of mother father foster-parent individual-species
@@ -139,25 +140,43 @@
   (father #:getter father #:init-keyword #:father #:init-form #f)
   (foster-parent #:getter foster-parent #:init-keyword #:foster-parent #:init-form #f))
 
-(define-method (make-individual (sp <species>) (generate-parents? <boolean>) (generate-gparents? <boolean>))
+(define-method (make-individual
+                 (sp <species>)
+                 (bound-parameters <species-bound-parameters>)
+                 (generate-parents? <boolean>)
+                 (generate-gparents? <boolean>))
   (let* ((possible-parents-lst (possible-parents sp))
          (parent-species-keys
-            (if (and generate-parents? (< 0 (vector-length possible-parents-lst)))
-               (pick-from (possible-parents sp))
-               #f))
-         (father-species (if (and generate-parents? parent-species-keys) (get-species (car parent-species-keys)) #f))
-         (mother-species (if (and generate-parents? parent-species-keys) (get-species (cdr parent-species-keys)) #f))
-         (father-individual (if father-species (make-individual father-species generate-gparents? #f) #f))
-         (mother-individual (if mother-species (make-individual mother-species generate-gparents? #f) #f))
+            (and generate-parents?
+                 (< 0 (vector-length possible-parents-lst))
+                 (pick-from (possible-parents sp))))
+         (father-species
+           (and generate-parents?
+                parent-species-keys
+                (or (bound-species (father bound-parameters))
+                    (get-species (car parent-species-keys)))))
+         (mother-species
+           (and generate-parents?
+                parent-species-keys
+                (or (bound-species (mother bound-parameters))
+                    (get-species (cdr parent-species-keys)))))
+         (father-individual
+           (and father-species
+                (make-individual father-species (father bound-parameters) generate-gparents? #f)))
+         (mother-individual
+           (and mother-species
+                (make-individual mother-species (mother bound-parameters) generate-gparents? #f)))
          ;
          (foster-parent-species
-           (if (and generate-parents? (< (random 100) (foster-parent-probability sp)))
-               (select-species
-                  (lambda (x)
-                    (and (not (member (key x) (foster-excluded sp)))
-                         (or (citizen? x) (tribal? x) (isolated? x)))))
-               #f))
-         (foster-parent (if foster-parent-species (make-individual foster-parent-species #f #f) #f))
+           (and generate-parents?
+                (< (random 100) (foster-parent-probability sp))
+                (select-species
+                   (lambda (x)
+                     (and (not (member (key x) (foster-excluded sp)))
+                          (or (citizen? x) (tribal? x) (isolated? x)))))))
+         (foster-parent
+           (and foster-parent-species
+                (make-individual foster-parent-species (make-species-bound-parameters) #f #f)))
          (self
            (make <individual>
                  #:species-of sp
@@ -168,17 +187,16 @@
     (slot-set!
       self
       (quote base-species)
-      (if (mimic? sp)
-          ((mimic-base-species-chooser sp) self)
-          #f))
+      (and (mimic? sp)
+           (or (bound-base-species bound-parameters)
+               ((mimic-base-species-chooser sp) self))))
     self))
 ;
 (define-method (family-species (bound-parameters <species-bound-parameters>) (sp <species>))
-  ;; TODO: use the bound-parameters
-  (make-individual sp #t #t))
+  (make-individual sp bound-parameters #t #t))
 
 (define-method (individual-species (sp <species>))
-  (make-individual sp #f #f))
+  (make-individual sp (make-species-bound-parameters) #f #f))
 
 (define-method (individual-species (sp <species>) (father <individual>) (mother <individual>))
   (let ((self (make <individual> #:species-of sp #:mother mother #:father father)))

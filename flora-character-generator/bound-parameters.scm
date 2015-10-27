@@ -13,7 +13,7 @@
   #:use-module (flora-character-generator ages-of-life)
   #:export (<bound-parameters> make-bound-parameters fill-bound-parameters
             ;
-            language-parameters species-parameters bound-affinity bound-gender
+            language-parameters species-parameters bound-affinity
             birthdate-parameters bound-birth-place bound-sex
             bound-living-place bound-age bound-profession
             bound-size bound-weight bound-natures bound-traits bound-motto
@@ -25,7 +25,6 @@
   (language-parameters #:getter language-parameters #:init-form (make-language-bound-parameters))
   (species-parameters #:getter species-parameters #:init-form (make-species-bound-parameters))
   (bound-affinity #:accessor bound-affinity #:init-form #f)
-  (bound-gender #:accessor bound-gender #:init-form #f)
   (birthdate-parameters #:getter birthdate-parameters #:init-form (make-birthdate-bound-parameters))
   (bound-birth-place #:accessor bound-birth-place #:init-form #f)
   (bound-sex #:accessor bound-sex #:init-form #f)
@@ -95,7 +94,10 @@
 (define-method (fill-bound-parameters (bound-parameters <bound-parameters>) (constraints <list>))
   ;(write constraints)(newline)
   (check-add-given-names bound-parameters (sloppy-assq-ref constraints 'given-names))
-  (check-add-other-name bound-parameters (sloppy-assq-ref constraints 'other-name))
+  (check-add-name
+    (language-parameters bound-parameters)
+    bound-other-name
+    (sloppy-assq-ref constraints 'other-name))
   (set! (bound-language (language-parameters bound-parameters))
         (get-checked-language (sloppy-assq-ref constraints 'language)))
   (set! (bound-species (species-parameters bound-parameters))
@@ -104,7 +106,7 @@
         (get-checked-species (sloppy-assq-ref constraints 'base-species)))
   (set! (bound-affinity bound-parameters)
         (get-checked-element (sloppy-assq-ref constraints 'affinity)))
-  (set! (bound-gender bound-parameters)
+  (set! (bound-gender (language-parameters bound-parameters))
         (get-checked-gender (sloppy-assq-ref constraints 'gender)))
   (check-add-birthdate bound-parameters (sloppy-assq-ref constraints 'birthdate))
   (set! (bound-birth-place bound-parameters)
@@ -127,6 +129,12 @@
         (get-checked-string-vector (sloppy-assq-ref constraints 'traits)))
   (set! (bound-motto bound-parameters)
         (get-checked-string (sloppy-assq-ref constraints 'motto)))
+  (check-add-mother bound-parameters constraints)
+  (check-add-father bound-parameters constraints)
+  (check-add-gmm bound-parameters constraints)
+  (check-add-gfm bound-parameters constraints)
+  (check-add-gmf bound-parameters constraints)
+  (check-add-gff bound-parameters constraints)
 )
 
 (define-method (check-word (word <list>))
@@ -155,7 +163,80 @@
                #f
                lst-names)))))
 
-(define-method (check-add-other-name (bound-parameters <bound-parameters>) name)
+(define-method (check-add-name
+                 (language-bound-parameters <language-bound-parameters>)
+                 (bound-name <applicable>)
+                 name)
   (set!
-    (bound-other-name (language-parameters bound-parameters))
+    (bound-name language-bound-parameters)
     (and (list? name) (eq? (length name) 2) (check-word name))))
+
+(define-method (check-add-parent-parameters
+                 (language-bound-parameters <language-bound-parameters>)
+                 (species-bound-parameters <species-bound-parameters>)
+                 (constraints <list>))
+  (check-add-name
+    language-bound-parameters
+    bound-given-name
+    (sloppy-assq-ref constraints 'given-name))
+  (check-add-name
+    language-bound-parameters
+    bound-family-name
+    (sloppy-assq-ref constraints 'family-name))
+  (set! (bound-language language-bound-parameters)
+        (get-checked-language (sloppy-assq-ref constraints 'language)))
+  (set! (bound-species species-bound-parameters)
+        (get-checked-species (sloppy-assq-ref constraints 'species)))
+  (set! (bound-base-species species-bound-parameters)
+        (get-checked-species (sloppy-assq-ref constraints 'base-species)))
+  (set! (bound-gender language-bound-parameters)
+        (get-checked-gender (sloppy-assq-ref constraints 'gender)))
+)
+
+(define-method (check-add-mother (bound-parameters <bound-parameters>) (constraints <list>))
+  (let ((parent-constraints (sloppy-assq-ref constraints 'mother)))
+    (if (and parent-constraints (list? parent-constraints))
+        (check-add-parent-parameters
+          (mother (language-parameters bound-parameters))
+          (mother (species-parameters bound-parameters))
+          parent-constraints))))
+
+(define-method (check-add-father (bound-parameters <bound-parameters>) (constraints <list>))
+  (let ((parent-constraints (sloppy-assq-ref constraints 'father)))
+    (if (and parent-constraints (list? parent-constraints))
+        (check-add-parent-parameters
+          (father (language-parameters bound-parameters))
+          (father (species-parameters bound-parameters))
+          parent-constraints))))
+
+(define-method (check-add-gmm (bound-parameters <bound-parameters>) (constraints <list>))
+  (let ((parent-constraints (sloppy-assq-ref constraints 'gmm)))
+    (if (and parent-constraints (list? parent-constraints))
+        (check-add-parent-parameters
+          (mother (mother (language-parameters bound-parameters)))
+          (mother (mother (species-parameters bound-parameters)))
+          parent-constraints))))
+
+(define-method (check-add-gfm (bound-parameters <bound-parameters>) (constraints <list>))
+  (let ((parent-constraints (sloppy-assq-ref constraints 'gfm)))
+    (if (and parent-constraints (list? parent-constraints))
+        (check-add-parent-parameters
+          (father (mother (language-parameters bound-parameters)))
+          (father (mother (species-parameters bound-parameters)))
+          parent-constraints))))
+
+(define-method (check-add-gmf (bound-parameters <bound-parameters>) (constraints <list>))
+  (let ((parent-constraints (sloppy-assq-ref constraints 'gmf)))
+    (if (and parent-constraints (list? parent-constraints))
+        (check-add-parent-parameters
+          (mother (father (language-parameters bound-parameters)))
+          (mother (father (species-parameters bound-parameters)))
+          parent-constraints))))
+
+(define-method (check-add-gff (bound-parameters <bound-parameters>) (constraints <list>))
+  (let ((parent-constraints (sloppy-assq-ref constraints 'gff)))
+    (if (and parent-constraints (list? parent-constraints))
+        (check-add-parent-parameters
+          (father (father (language-parameters bound-parameters)))
+          (father (father (species-parameters bound-parameters)))
+          parent-constraints))))
