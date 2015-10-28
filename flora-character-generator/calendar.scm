@@ -157,7 +157,9 @@
           (cond
             (m (day-coherent? d m))
             (sign (or (day-coherent? d (month (from sign))) (day-coherent? d (month (to sign)))))
-            (#t (not (member #f (map (lambda (x) (day-coherent? d x)) (vector->list (months *data:calendar*)))))))
+            (#t (not (null? (filter identity (map
+                                               (lambda (x) (day-coherent? d x))
+                                               (vector->list (months *data:calendar*))))))))
           #t)
       ; 2. check sign is coherent with month or/and day
       (if (and sign (or m d))
