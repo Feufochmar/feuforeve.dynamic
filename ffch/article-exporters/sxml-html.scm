@@ -28,6 +28,21 @@
     (attribute->sxml-attribute cnt style 'style)
   ))
 
+;; Elements of the attributes list of a container
+(define-method (attributes-of (cnt <trigger-content-type>))
+  (append
+    (next-method)
+    (attribute->sxml-attribute cnt on-focus-in 'onfocusin)
+    (attribute->sxml-attribute cnt on-focus-out 'onfocusout)
+    (attribute->sxml-attribute cnt on-activate 'onactivate)
+    (attribute->sxml-attribute cnt on-click 'onclick)
+    (attribute->sxml-attribute cnt on-mouse-down 'onmousedown)
+    (attribute->sxml-attribute cnt on-mouse-up 'onmouseup)
+    (attribute->sxml-attribute cnt on-mouse-over 'onmouseover)
+    (attribute->sxml-attribute cnt on-mouse-move 'onmousemove)
+    (attribute->sxml-attribute cnt on-mouse-out 'onmouseout)
+  ))
+
 ;; Article
 (define-method (article->sxml-html (art <article>))
   (list 'article
@@ -214,6 +229,20 @@
     'object
     (append (list '@) (attributes-of cnt))
     " "))
+
+;; Inline
+(define-method (article->sxml-html (cnt <inline>) (section-level <integer>))
+  (list
+    'span
+    (append (list '@) (attributes-of cnt))
+    (next-method)))
+
+;; Inline
+(define-method (article->sxml-html (cnt <block>) (section-level <integer>))
+  (list
+    'div
+    (append (list '@) (attributes-of cnt))
+    (next-method)))
 
 ;;;;;;
 ;; Forms elements
