@@ -12,8 +12,7 @@
             ;
             <script> script
             ;
-            <vectorgraphics-content-type> on-focus-in on-focus-out on-activate
-            on-click on-mouse-down on-mouse-up on-mouse-over on-mouse-move on-mouse-out
+            <vectorgraphics-content-type>
             ;
             <area> area transforms
             <translation> translation translation-vector
@@ -42,6 +41,9 @@
   #:re-export (<container-type> <content-type>
                id name-class style contents empty?
                attribute->sxml-attribute
+               ;
+               <trigger-content-type> on-focus-in on-focus-out on-activate
+               on-click on-mouse-down on-mouse-up on-mouse-over on-mouse-move on-mouse-out
               )
 )
 
@@ -102,16 +104,7 @@
 
 ;;;;
 ;; Vector content type: add scriptable attributes
-(define-class <vectorgraphics-content-type> (<content-type>)
-  (on-focus-in #:getter on-focus-in #:init-keyword #:on-focus-in #:init-form #f)
-  (on-focus-out #:getter on-focus-out #:init-keyword #:on-focus-out #:init-form #f)
-  (on-activate #:getter on-activate #:init-keyword #:on-activate #:init-form #f)
-  (on-click #:getter on-click #:init-keyword #:on-click #:init-form #f)
-  (on-mouse-down #:getter on-mouse-down #:init-keyword #:on-mouse-down #:init-form #f)
-  (on-mouse-up #:getter on-mouse-up #:init-keyword #:on-mouse-up #:init-form #f)
-  (on-mouse-over #:getter on-mouse-over #:init-keyword #:on-mouse-over #:init-form #f)
-  (on-mouse-move #:getter on-mouse-move #:init-keyword #:on-mouse-move #:init-form #f)
-  (on-mouse-out #:getter on-mouse-out #:init-keyword #:on-mouse-out #:init-form #f))
+(define-class <vectorgraphics-content-type> (<trigger-content-type>))
 
 ;;;;
 ;; Area

@@ -9,6 +9,7 @@
             <strong> <emphase> <deleted> <inserted> <mark>
             <hyperlink> <text-list> <linefeed> <image> <figure>
             <code> <preformatted> <embedded-object>
+            <block> <inline>
             ; Getters
             title author date to ordered? caption alt source data type
             ; Construction macros and functions
@@ -17,10 +18,14 @@
             strong emphase deleted inserted mark
             hyperlink text-list linefeed image figure
             code preformatted embedded-object
+            block inline
            )
   #:re-export (<container-type> <content-type>
                id name-class style contents empty?
                attribute->sxml-attribute
+               ;
+               <trigger-content-type> on-focus-in on-focus-out on-activate
+               on-click on-mouse-down on-mouse-up on-mouse-over on-mouse-move on-mouse-out
               )
 )
 
@@ -84,6 +89,12 @@
 ;; Preformatted : a block of preformatted text : all spaces and newlines are kept
 (define-class <preformatted> (<container-type> <content-type>))
 
+;; Inline : To group elements within the same class / id (inline disposition)
+(define-class <inline> (<container-type> <trigger-content-type>))
+
+;; Block : To group elements within the same class / id (block disposition)
+(define-class <block> (<container-type> <trigger-content-type>))
+
 ;;;;
 ;; Not containers
 
@@ -117,6 +128,8 @@
 (container-type-constructor figure <figure>)
 (container-type-constructor code <code>)
 (container-type-constructor preformatted <preformatted>)
+(container-type-constructor inline <inline>)
+(container-type-constructor block <block>)
 (content-type-constructor embedded-object <embedded-object>)
 
 ;; Text-list use a different syntax because of its list of contents
