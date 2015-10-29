@@ -13,6 +13,7 @@
   #:use-module (flora-character-generator species)
   #:use-module (flora-character-generator english)
   #:use-module (flora-character-generator family)
+  #:use-module (flora-character-generator bound-parameters)
   ;
   #:export (main)
   #:duplicates (merge-generics)
