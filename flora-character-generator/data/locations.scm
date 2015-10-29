@@ -59,7 +59,7 @@
                     (town "Snow" "Snap" "String")))) ; Citrico Archipelago End
         (region southwest-owel
                 ((name "Southwest Owel")
-                 (reference-link "http://floraverse.com/comic/flora/page/172-southwest-owel-map/"))
+                 (reference-link "http://floraverse.com/comic/references/172-southwest-owel-map/"))
           (region citrico-capital
                   (name "Mainland Citrico")
                   (places
@@ -103,6 +103,32 @@
                   (town "West York Harbor")
                   (lake "Mew York Reservoir")
                   (river "Miaoustok River")))
+        (region althar
+                ((name "Althar Province")
+                 (reference-link "http://floraverse.com/comic/references/375-althar-province/"))
+          (region upper-altar
+                  (name "Upper Althar")
+                  (places
+                    (town "Upper Althar")
+                    (river "Seif Straits")
+                    (village "The Crystal Farms")
+                    (valley "Sere Valley"))) ; Sere Valley put there, but not sure if correct
+          (region delta-islands
+                  (name "Delta Islands")
+                  (places
+                    (river "Miaoustok River")
+                    (village "Perish")
+                    (town "Petal")))
+          (region lower-althar
+                  (name "Lower Althar")
+                  (places
+                    (city "Lower Althar")
+                    (grassland "The Pharms")
+                    (grassland "The Hatchery")
+                    (lake "Trickle Lakes")
+                    (lake "Fickle Lakes")
+                    (grassland "Flower")
+                    (grassland "Paradise Fields"))))
         ; Owel regions below are not as known as above
         (region beheaded-city
                 (name "Beheaded City Region")
@@ -153,14 +179,6 @@
                   (name "Heaven's Keys Archipelago")
                   (places
                     (island "Heaven's Keys")))) ; End of Nature's Folly
-        (region althar
-                (name "Althar Region")
-                (places
-                  (city "Althar")
-                  (hill "Seif Straits")
-                  (valley "Sere Valley")
-                  (grassland "Paradise Fields")
-                  (river "Miaoustok River")))
         (region gloam
                 (name "Gloam Region")
                 (places
