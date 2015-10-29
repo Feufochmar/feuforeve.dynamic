@@ -116,6 +116,7 @@
           (region delta-islands
                   (name "Delta Islands")
                   (places
+                    (city "Althar") ; put there so that reference lookup is ok
                     (river "Miaoustok River")
                     (village "Perish")
                     (town "Petal")))
