@@ -5,6 +5,11 @@
   #:use-module (ffch webtemplates)
   #:use-module (pages default-template)
   #:use-module ((srfi srfi-19) #:renamer (symbol-prefix-proc 'time:))
+  #:use-module (configuration)
+  ;;
+  #:use-module (ice-9 ftw)
+  #:use-module (ice-9 regex)
+  ;;
   #:export (load-pages:daily-island)
   #:duplicates (merge-generics)
 )
@@ -25,6 +30,8 @@
           (nav-link-to "/DailyIsland" (nav-current-path path) "Daily Island"))
         (section ((name-class "nav-item"))
           (hyperlink ((to "/DailyIsland/Image")) "Daily Island (image)"))
+        (section ((name-class "nav-item"))
+          (nav-link-to  "/DailyIsland/Archives" (nav-current-path path) "Archives"))
         (section ((name-class "nav-item"))
           (nav-link-to "/DailyIsland/About" (nav-current-path path) "About"))
       ))))
@@ -53,6 +60,29 @@
        (newline port))
     )))
 
+;; Daily Island, archives
+(define (old-island-link filename)
+  (let* ((match-date (map match:substring (list-matches "[0-9][0-9][0-9][0-9]-[0-9]*[0-9]-[0-9]*[0-9]" filename)))
+         (date (and (not (null? match-date)) (car match-date))))
+    (or (and date (hyperlink ((to (static-data (string-append "islands/island-" date ".svg")))) date))
+        (list))))
+
+(define (load-daily-island-archives wcontainer)
+  (add-weblet wcontainer (list "DailyIsland" "Archives")
+    (templated-weblet
+      (daily-island-template default-meta)
+      (lambda (query)
+        (article
+          ((title "Archives")(author "feuforeve.fr"))
+          (section ((title "Archives"))
+            (paragraph
+              (map
+                old-island-link
+                (sort
+                  (scandir (generated-islands-path) (lambda (x) (string-suffix? ".svg" x)))
+                  string>=?)))
+          ))))))
+
 ;; About
 (define (load-about-daily-island wcontainer)
   (add-weblet wcontainer (list "DailyIsland" "About")
@@ -60,7 +90,7 @@
       (daily-island-template default-meta)
       (lambda (query)
         (article
-          ((title "About the Daily Island")(author "feuforeve.fr")(date "2015-09-14"))
+          ((title "About the Daily Island")(author "Feufochmar")(date "2015-09-14"))
           (section ((title "Daily Island"))
             (paragraph
               "The Daily Island is an island map that is generated every day. "
@@ -73,5 +103,6 @@
 (define (load-pages:daily-island wcontainer)
   (load-daily-island wcontainer)
   (load-daily-island-image wcontainer)
+  (load-daily-island-archives wcontainer)
   (load-about-daily-island wcontainer)
   )
