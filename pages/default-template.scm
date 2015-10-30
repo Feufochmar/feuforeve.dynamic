@@ -3,15 +3,13 @@
   #:use-module (ffch article)
   #:use-module (ffch weblets)
   #:use-module (ffch webtemplates)
+  #:use-module (configuration)
   #:export (default-template default-meta nav-link-to nav-current-path static-data)
   #:duplicates (merge-generics)
 )
 
-;(define *static-file-path* "http://localhost:8081")
-(define *static-file-path* "http://static.feuforeve.fr")
-
 (define-method (static-data (relative-path <string>))
-  (string-append *static-file-path* "/" relative-path))
+  (string-append (static-files-server) "/" relative-path))
 
 (define-method (nav-current-path (path <list>))
   (string-append "/" (string-join path "/")))
