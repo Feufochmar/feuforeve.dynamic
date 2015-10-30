@@ -64,7 +64,10 @@
 (define (old-island-link filename)
   (let* ((match-date (map match:substring (list-matches "[0-9][0-9][0-9][0-9]-[0-9]*[0-9]-[0-9]*[0-9]" filename)))
          (date (and (not (null? match-date)) (car match-date))))
-    (or (and date (hyperlink ((to (static-data (string-append "islands/island-" date ".svg")))) date))
+    (or (and date
+             (list
+               (hyperlink ((to (static-data (string-append "islands/island-" date ".svg")))) date)
+               (linefeed)))
         (list))))
 
 (define (load-daily-island-archives wcontainer)
