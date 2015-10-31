@@ -7,9 +7,7 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species commons-fox
   (name "Commons Fox")
@@ -17,9 +15,7 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species borealan-fox
   (name "Borealan Fox")
@@ -27,9 +23,7 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species gorgon
   (name "Gorgon")
@@ -37,9 +31,7 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species kelpie
   (name "Kelpie")
@@ -47,9 +39,7 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species arachoon
   (name "Arachoon")
@@ -57,9 +47,7 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species mouse
   (name "Mouse")
@@ -67,9 +55,7 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species bastian
   (name "Bastian")
@@ -77,9 +63,7 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
 (species rugaru
   (name "Rugaru")
@@ -87,16 +71,28 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
 
-(species necropossum
-  (name "Necropossum")
+(species clover-lamb
+  (name "Clover Lamb")
   (reference-link "http://floraverse.com")
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)
-    (crossbreed-with )
-    (special-cases )))
+    (common-pattern? #t)))
+
+(species cat
+  (name "Cat")
+  (reference-link "http://floraverse.com")
+  (common-regions )
+  (distributions )
+  (reproduction
+    (common-pattern? #t)))
+
+(species jackal
+  (name "Jackal")
+  (reference-link "http://floraverse.com")
+  (common-regions )
+  (distributions )
+  (reproduction
+    (common-pattern? #t)))

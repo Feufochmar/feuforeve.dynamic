@@ -58,7 +58,7 @@
   (common-regions
     owel eastar)
   (distributions
-    (affinity (* 1) (air 30) (light 15) (cloud 15) (storm 15) (sound 15)))
+    (affinity (* 1) (spirit 30) (air 30)))
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
