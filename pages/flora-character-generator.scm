@@ -33,14 +33,13 @@
     "/FloraCharacterGenerator"
     (lambda (path query)
       (let* ((bound-parameters (character-bindings query))
-             (species-key (bound-species (species-parameters bound-parameters)))
-             (species (if species-key (get-species species-key) #f)))
+             (species (bound-species (species-parameters bound-parameters))))
         (navigation
           (if species
               (section
                 ((name-class "nav-item"))
                 (hyperlink
-                  ((to (string-append "/FloraCharacterGenerator?species=" (symbol->string species-key))))
+                  ((to (string-append "/FloraCharacterGenerator?species=" (symbol->string (key species)))))
                   (string-append "New character (" (name species) ")")))
               "")
           (section
