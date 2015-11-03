@@ -1,7 +1,7 @@
 (define-module (arnytron arnytron)
   #:version (0 0 1)
   #:use-module (oop goops)
-  #:use-module (arnytron greetings)
+  #:use-module (arnytron data greetings)
   #:use-module (ffch markhov)
   #:use-module (ffch random)
   #:export (arnytron generate-citation pick-citation
