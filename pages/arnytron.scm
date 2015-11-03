@@ -60,7 +60,7 @@
     (weblet ((error-code 200)
             (content-type "application/json;charset=UTF-8"))
       ((path query port)
-       (display (json ((#:greeting (generate-citation ArnYtron3000)))) port)
+       (display (json `((#:greeting ,(generate-citation ArnYtron3000)))) port)
        (newline port)
       )
     )))
