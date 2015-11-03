@@ -11,8 +11,8 @@
     (crossbreed-with
       rock-candies sea-dragon diogoat)))
 
-(species scrapgoat
-  (name "Scrapgoat")
+(species diogoat
+  (name "Diogoat")
   (reference-link "http://floraverse.com/comic/references/329-species-scrapgoats/")
   (citizen? #t)
   (tribal? #t)
