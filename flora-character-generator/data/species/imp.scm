@@ -40,21 +40,99 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      flowercat foxbat foxbat-spirit cockatrice vanguard painted-alligator rock-candies hanged-man pygmy-pyzky
-      manticore aurorian-fox satyr satyrbun satyrqorn satyrfox flower-candies goatixy sea-dragon seavern
-      sea-dragorgon trojan-dragon coralshell-turtle frilled-petal-dragon petaltrice flower-dragorgon
-      pomegragon blueberrygon cagroo shagroo cagrugong swagroo cotton-cagroodle bogroo cagroodle weed-wolf
-      maple-dog pin-bull palmeranian pine-hound shruppy weeping-woodle owel-treant pommeranian fiddeleon
-      snowl muddler broccolamb cauliflamb scalamar zucchinu gingrake tomato-oh flamingon pomegrub frogola
-      catermelon ankirschelosaur platorgon bananavern starfinch lemarlon momonkey pearimate ananantelope
-      zanahorsia clementillo pumpkit kikinut taro-moth caterpither salamango myrticke muscant berry-bunny
-      pfig lettuce-lion moletato aubergoose habaneron wasabika tetradish zwiebat seahorseradish cheeli
-      mustallusk ghost-ray sea-bear kamerge armor-fish sucker-shark bweehorse diamond-head-dolphin peliclam
-      sack-jelly coif-crab polester rockabelly-whale shell-slicer-whale squinker rubbyou mark-knocker beavering
-      sharker slugrub pastelbit gel-squinker drip-seel watercolor-buffalo pangochoir chromadillo spool-spider
-      prism-star giraffe-roller palette-fish glazemodo spraypaint-skunk sack-anemone pearly-whelk cleaner-shrimp
-      porcelain-plate-crab urn-urchin bell-shelled-tortoise doubloon-barnacle charcoal-chicken stamp-roller
-      sponge-frog gum-shooter living-likeness mandrake jack melodingo smelodingo bandragon trebol-bweehorse
-      backwater-bweehorse singing-rabbat scrapgoat
-      uniqorn commons-fox borealan-fox gorgon kelpie arachoon mouse bastian
+      ; Animals - Althar 1
+      pendragon bookwyrm vinedra dyevern
+      ; Animals - Bugs of Deep Mountain
+      ; None
+      ; Animals - Cherran
+      tomato-oh flamingon pomegrub frogola catermelon ankirschelosaur
+      ; Animals - Citrico
+      zanahorsia clementillo pumpkit kikinut taro-moth caterpither salamango
+      ; Animals - Extra
+      habaneron wasabika tetradish zwiebat seahorseradish cheeli mustallusk ghost-ray
+      ; Animals - Musapeel
+      platorgon bananavern starfinch lemarlon momonkey pearimate ananantelope
+      ; Animals - Polaris
+      berry-bunny pfig lettuce-lion moletato aubergoose
+      ; Animals - Southwest Owel Coast - 1
+      sea-bear kamerge armor-fish sucker-shark bweehorse
+      ; Animals - Southwest Owel Coast - 2
+      diamond-head-dolphin peliclam sack-jelly coif-crab polester
+      ; Animals - Southwest Owel Coast - 3
+      rockabelly-whale shell-slicer-whale
+      ; Animals - Southwest Owel Coast - 4
+      squinker rubbyou mark-knocker beavering
+      ; Animals - Southwest Owel Coast - 5
+      sharker slugrub pastelbit gel-squinker drip-seel
+      ; Animals - Southwest Owel Coast - 6
+      watercolor-buffalo pangochoir chromadillo prism-star
+      ; Animals - Southwest Owel Coast - 7
+      giraffe-roller palette-fish glazemodo spraypaint-skunk
+      ; Animals - Southwest Owel Coast - 8
+      sack-anemone pearly-whelk cleaner-shrimp porcelain-plate-crab bell-shelled-tortoise
+      ; Animals - Southwest Owel Coast - 9
+      charcoal-chicken stamp-roller sponge-frog gum-shooter living-likeness
+      ; Animals - Stemm
+      pommeranian fiddeleon snowl muddler broccolamb cauliflamb scalamar zucchinu gingrake
+      ; Animals - Trebol - Screaming Island Animals
+      mandrake jack
+      ; Animals - Trebol - 1
+      melodingo smelodingo bandragon trebol-bweehorse backwater-bweehorse
+      ; Aurorian Fox
+      aurorian-fox
+      ; Beholding Siren
+      ; None
+      ; Cagroo
+      cagroo shagroo cagrugong swagroo cotton-cagroodle bogroo cagroodle
+      ; Cockatrice
+      cockatrice
+      ; Coralshell turtle
+      coralshell-turtle
+      ; Flowercat
+      flowercat
+      ; Foxbat
+      foxbat foxbat-spirit
+      ; Frilled Petal Dragon
+      frilled-petal-dragon petaltrice flower-dragorgon pomegragon blueberrygon
+      ; Fruit Frog
+      ; None
+      ; Gelbeast
+      ; None
+      ; Hanged Man
+      hanged-man
+      ; Imp
+      ; See above
+      ; Manticore
+      manticore
+      ; Masked Owl
+      ; None
+      ; Moahu
+      ; None
+      ; Necropossum
+      necropossum deathwalker bansheep bonefish nekopossum shackal
+      ; Owel Treant
+      owel-treant
+      ; Painted Alligator
+      painted-alligator
+      ; Pygmy Pyzky
+      pygmy-pyzky
+      ; Revealeon
+      ; None
+      ; Rock Candies
+      rock-candies
+      ; Satyr
+      satyr satyrbun satyrqorn satyrfox flower-candies goatixy
+      ; Scrapgoat
+      scrapgoat diogoat
+      ; Sea Dragon
+      sea-dragon seavern sea-dragorgon trojan-dragon
+      ; Singing Rabbat
+      singing-rabbat chirping-rabbat rugarabbat vampire-rabbat
+      ; Vanguard
+      vanguard
+      ; Weed Wolf
+      weed-wolf maple-dog pin-bull palmeranian pine-hound shruppy weeping-woodle
+      ;
+      ; Undescribed
+      uniqorn commons-fox borealan-fox gorgon kelpie arachoon mouse bastian clover-lamb cat jackal
     )))
