@@ -11,7 +11,7 @@ Dependencies
 ============
 
 The website is written in GNU Guile Scheme. http://www.gnu.org/software/guile/
-The module guile-irc is needed for running the bots. https://github.com/fbs/guile-irc
+The module guile-irc is needed for running the irc bots. https://github.com/fbs/guile-irc
 
 The website needs data from feuforeve.static.
  - Main repository: http://projects.feuforeve.fr/feuforeve.static.git
