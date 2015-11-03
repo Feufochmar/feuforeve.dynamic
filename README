@@ -1,0 +1,18 @@
+feuforeve.dynamic
+=================
+
+The code behind the website http://feuforeve.fr and some related tools and scripts.
+
+The licence of the files depends on their locations.
+All files under the following listed directories (and in their sub-directories) are licensed under
+the Creative Commons Attribution-ShareAlike 4.0:
+ - arnytron/data/
+ - flora-character-generator/data/
+ - island-generator/data/
+
+All other files are licenced under the GNU General Public License version 2 or any later version (GPLv2+).
+
+See https://creativecommons.org/licenses/by-sa/4.0/ and https://www.gnu.org/licenses/gpl-2.0.html
+for more information about the licenses.
+
+The module guile-irc is needed for running the bots. It is available at https://github.com/fbs/guile-irc
