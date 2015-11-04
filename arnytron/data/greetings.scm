@@ -450,4 +450,5 @@
  (#t "2015-10-28" "salut les motards montés comme des mouches" ())
  (#t "2015-10-31" "salut les péripatéticiennes estoniennes bourgeonnés de la lune désinfectées à la nitroglycérine" ())
  (#t "2015-11-03" "salut les vieux eunuques bègues à la peau équailleuse et groudronneuse" ())
+ (#t "2015-11-04" "salut les étalons d'ébennes bien calés des bennes de calais!" ())
 ))
