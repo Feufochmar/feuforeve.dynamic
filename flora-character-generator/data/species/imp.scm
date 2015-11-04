@@ -42,6 +42,8 @@
     (crossbreed-with
       ; Animals - Althar 1
       pendragon bookwyrm vinedra dyevern
+      ; Animals - Althar 2
+      pricklehog sicklehog
       ; Animals - Bugs of Deep Mountain
       ; None
       ; Animals - Cherran
