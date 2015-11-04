@@ -278,7 +278,7 @@
     (templated-weblet
       (fcg-template default-meta)
       (lambda (query)
-        (article ((title "About the Floraverse Character Generator")(author "Feufochmar")(date "2015-08-18"))
+        (article ((title "About the Floraverse Character Generator")(author "Feufochmar")(date "2015-11-04"))
           (section ((title "The generator"))
             (paragraph
               "The Floraverse Character Generator generates characters living in the "
@@ -299,9 +299,8 @@
             (paragraph
               "The first and second versions of the generator are open-source and released under the terms of "
               "the GNU General Public License version 2 or any later version (GPLv2+). "
-              "The sources are provided through " (hyperlink ((to "http://git-scm.com/")) "git") " repositories."
-              "The third version is not (yet) open-sourced. ")
-            (section ((title "Java generator"))
+              "The sources are provided through " (hyperlink ((to "http://git-scm.com/")) "git") " repositories.")
+            (section ((title "Generator v1"))
               (paragraph
                 "The first generator requires a Java 8 Runtime Environment (JRE) to run. "
                 "It requires a Java 8 Development Kit (JDK) and ant to build. ")
@@ -317,7 +316,7 @@
                 "To run the generator as a webservice, the argument " (code "-server")
                 " must be added to the command line. "
                 "The output format of the webservice can be configured between html, xml and json. "))
-            (section ((title "Scheme generator"))
+            (section ((title "Generator v2"))
               (paragraph
                 "The second generator requires "
                 (hyperlink ((to "http://www.gnu.org/software/guile/")) "GNU Guile 2") " to run. ")
@@ -334,6 +333,12 @@
                 " using " (code "sendmail") ". "
                 "Unlike the first generator, this generator also allows to choose the species "
                 "of the generated character. "))
+            (section ((title "Generator v3 (current version)"))
+              (paragraph
+                "The generator is available with the sources of this website. "
+                "The sources are available on the repository "
+                (code "http://projects.feuforeve.fr/feuforeve.dynamic.git") " and "
+                "on " (hyperlink ((to "https://github.com/Feufochmar/feuforeve.dynamic")) "GitHub") "."))
           ))))))
 
 ;; Load all pages
