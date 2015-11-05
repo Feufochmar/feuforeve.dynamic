@@ -451,4 +451,5 @@
  (#t "2015-10-31" "salut les péripatéticiennes estoniennes bourgeonnés de la lune désinfectées à la nitroglycérine" ())
  (#t "2015-11-03" "salut les vieux eunuques bègues à la peau équailleuse et groudronneuse" ())
  (#t "2015-11-04" "salut les étalons d'ébennes bien calés des bennes de calais!" ())
+ (#t "2015-11-05" "et bien sur, salut les suce moules ibères adeptes de pogots avec des nonnes obèses et huilées" ())
 ))
