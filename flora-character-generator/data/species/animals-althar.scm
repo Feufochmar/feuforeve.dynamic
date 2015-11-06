@@ -57,3 +57,46 @@
   (common-regions pike)
   (reproduction
     (common-pattern? #t)))
+
+;; Althar Entry 3
+(species goatato
+  (name "Goatato")
+  (reference-link "http://floraverse.com/comic/cascas-journal/379-althar-entry-3/")
+  (only-in-common-regions? #t)
+  (pet? #t)
+  (tamable? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species gossheep
+  (name "Gossheep")
+  (reference-link "http://floraverse.com/comic/cascas-journal/379-althar-entry-3/")
+  (only-in-common-regions? #t)
+  (pet? #t)
+  (tamable? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species star-anisheep
+  (name "Star Anisheep")
+  (reference-link "http://floraverse.com/comic/cascas-journal/379-althar-entry-3/")
+  (only-in-common-regions? #t)
+  (pet? #t)
+  (tamable? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species histle
+  (name "Histle")
+  (reference-link "http://floraverse.com/comic/cascas-journal/379-althar-entry-3/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
