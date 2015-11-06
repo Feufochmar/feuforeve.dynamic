@@ -44,6 +44,8 @@
       pendragon bookwyrm vinedra dyevern
       ; Animals - Althar 2
       pricklehog sicklehog
+      ; Animals - Althar 3
+      goatato gossheep star-anisheep
       ; Animals - Bugs of Deep Mountain
       ; None
       ; Animals - Cherran
