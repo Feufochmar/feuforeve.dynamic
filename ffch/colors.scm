@@ -6,8 +6,8 @@
             css-value
             transparent-color
             no-color
-            rgb-color rgba-color
-            hsl-color hsla-color
+            rgb-color rgba-color R G B A
+            hsl-color hsla-color H S L
             named-color
            )
 )
