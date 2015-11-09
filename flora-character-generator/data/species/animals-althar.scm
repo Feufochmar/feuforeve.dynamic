@@ -100,3 +100,40 @@
   (common-regions althar)
   (reproduction
     (common-pattern? #t)))
+
+;; Althar Entry 4
+(species oregagnome
+  (name "Oregagnome")
+  (reference-link "http://floraverse.com/comic/cascas-journal/380-althar-entry-4/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species cilantroll
+  (name "Cilantroll")
+  (reference-link "http://floraverse.com/comic/cascas-journal/380-althar-entry-4/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species sorrelf
+  (name "Sorrelf")
+  (reference-link "http://floraverse.com/comic/cascas-journal/380-althar-entry-4/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species fennelf
+  (name "Fennelf")
+  (reference-link "http://floraverse.com/comic/cascas-journal/380-althar-entry-4/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
