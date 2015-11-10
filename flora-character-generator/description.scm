@@ -5,6 +5,7 @@
   #:use-module (oop goops)
   #:use-module (ffch article)
   #:use-module (ffch string)
+  #:use-module (ffch colors)
   #:use-module (flora-character-generator generator)
   #:use-module (flora-character-generator genders)
   #:use-module (flora-character-generator sexes)
@@ -158,6 +159,17 @@
         (traits char))
       (paragraph
         (string-capitalize-1st genitive) " motto: “" (motto char) "”")
+      (figure ((caption "Fig.1: Body colors"))
+        (map
+          (lambda (col)
+            (inline
+              ((style
+                  (string-append
+                    "display:inline-block; width:30px; height:20px;"
+                    "border-style:solid; border-width:thin;"
+                    "background:" (css-value col) ";")))
+              ""))
+          (colors char)))
     )))
 
 (define-method (family-section char)

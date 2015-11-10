@@ -3,7 +3,7 @@
 (define-module (flora-character-generator elements)
   #:version (0 0 1)
   #:use-module (oop goops)
-  #:export (<element> name key
+  #:export (<element> name key pick-main-hue
             get-element element-keys
            )
 )
@@ -11,6 +11,9 @@
 (define-class <element> (<object>)
   (key #:getter key #:init-keyword #:key #:init-form #f)
   (name #:getter name #:init-keyword #:name #:init-form ""))
+
+(define-method (pick-main-hue (elem <element>))
+  (random 360))
 
 ;; Data singleton
 (define *data:elements* (make-hash-table))

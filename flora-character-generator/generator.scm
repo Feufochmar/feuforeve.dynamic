@@ -18,12 +18,13 @@
   #:use-module (flora-character-generator family)
   #:use-module (flora-character-generator elements)
   #:use-module (flora-character-generator bound-parameters)
+  #:use-module (flora-character-generator palette)
   #:export (generate-character
             ;
             <character>
             motto natures gender sex birthday affinity age profession
             birth-place in-birth-place? living-place in-living-place?
-            language family species size weight traits
+            language family species size weight traits colors
            )
   #:duplicates (merge-generics))
 
@@ -47,6 +48,7 @@
   (size #:getter size #:init-keyword #:size)
   (weight #:getter weight #:init-keyword #:weight)
   (traits #:getter traits #:init-keyword #:traits)
+  (colors #:getter colors #:init-keyword #:colors)
 )
 
 ;
@@ -104,4 +106,5 @@
       #:size (or (bound-size bound-parameters) (pick-size))
       #:weight (or (bound-weight bound-parameters) (pick-weight))
       #:traits (or (bound-traits bound-parameters) (pick-traits (+ 3 (random 3)) gender species))
+      #:colors (pick-palette affinity species)
     )))
