@@ -137,3 +137,24 @@
   (common-regions althar)
   (reproduction
     (common-pattern? #t)))
+
+;; Althar Entry 5
+(species sand-hippo
+  (name "Sand Hippo")
+  (reference-link "http://floraverse.com/comic/cascas-journal/381-althar-entry-5/")
+  (only-in-common-regions? #t)
+  (tamable? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species sea-snamel
+  (name "Sea Snamel")
+  (reference-link "http://floraverse.com/comic/cascas-journal/381-althar-entry-5/")
+  (only-in-common-regions? #t)
+  (tamable? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
