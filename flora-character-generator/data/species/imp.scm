@@ -46,6 +46,10 @@
       pricklehog sicklehog
       ; Animals - Althar 3
       goatato gossheep star-anisheep
+      ; Animals - Althar 4
+      oregagnome cilantroll sorrelf fennelf
+      ; Animals - Althar 5
+      sand-hippo sea-snamel
       ; Animals - Bugs of Deep Mountain
       ; None
       ; Animals - Cherran
