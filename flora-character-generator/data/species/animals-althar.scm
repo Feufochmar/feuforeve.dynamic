@@ -158,3 +158,42 @@
   (common-regions althar)
   (reproduction
     (common-pattern? #t)))
+
+;; Althar Entry 6
+(species puppea
+  (name "Puppea")
+  (reference-link "http://floraverse.com/comic/cascas-journal/382-althar-entry-6/")
+  (only-in-common-regions? #t)
+  (pet? #t)
+  (tamable? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species snappea-turtle
+  (name "Snappea Turtle")
+  (reference-link "http://floraverse.com/comic/cascas-journal/382-althar-entry-6/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species lycheel
+  (name "Lycheel")
+  (reference-link "http://floraverse.com/comic/cascas-journal/382-althar-entry-6/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species saffrog
+  (name "Saffrog")
+  (reference-link "http://floraverse.com/comic/cascas-journal/382-althar-entry-6/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
