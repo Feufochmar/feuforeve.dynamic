@@ -50,6 +50,8 @@
       oregagnome cilantroll sorrelf fennelf
       ; Animals - Althar 5
       sand-hippo sea-snamel
+      ; Animals - Althar 6
+      puppea snappea-turtle lycheel saffrog
       ; Animals - Bugs of Deep Mountain
       ; None
       ; Animals - Cherran
