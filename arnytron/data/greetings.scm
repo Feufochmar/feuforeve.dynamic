@@ -453,4 +453,7 @@
  (#t "2015-11-04" "salut les étalons d'ébennes bien calés des bennes de calais!" ())
  (#t "2015-11-05" "et bien sur, salut les suce moules ibères adeptes de pogots avec des nonnes obèses et huilées" ())
  (#t "2015-11-06" "salut broutefientes et lechemorves!" ())
+ (#t "2015-11-07" "salut branleboules et gobefoutres!" ())
+ (#t "2015-11-08" "salut les sucefions de Branboules-le-gland" ())
+ (#t "2015-11-13" "salut les eskimos bourrés à l'huile de phoque decoupant la glace avec leur queue en chantant l'hymne nationale russe" ())
 ))
