@@ -458,4 +458,5 @@
  (#t "2015-11-13" "salut les eskimos bourrés à l'huile de phoque decoupant la glace avec leur queue en chantant l'hymne nationale russe" ())
  (#t "2015-11-16" "salut les nihilistes germain adeptes du bowling mais moins de la décoration de sol" ())
  (#t "2015-11-17" "salut les cabossés du tunnel sous la merde!" ())
+ (#t "2015-11-18" "salut les poilus de l'intestin grelle!" ("Olaf-: *grêle" "***ArnY grèle sur Olaf-"))
 ))
