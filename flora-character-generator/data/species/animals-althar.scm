@@ -197,3 +197,31 @@
   (common-regions althar)
   (reproduction
     (common-pattern? #t)))
+
+;; Althar Entry 7
+(species capsicorn
+  (name "Capsicorn")
+  (reference-link "http://floraverse.com/comic/cascas-journal/384-althar-entry-7/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species nauticorn
+  (name "Nauticorn")
+  (reference-link "http://floraverse.com/comic/cascas-journal/384-althar-entry-7/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
+
+(species gingerbrab
+  (name "Gingerbrab")
+  (reference-link "http://floraverse.com/comic/cascas-journal/384-althar-entry-7/")
+  (only-in-common-regions? #t)
+  (wild? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #t)))
