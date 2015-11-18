@@ -52,6 +52,8 @@
       sand-hippo sea-snamel
       ; Animals - Althar 6
       puppea snappea-turtle lycheel saffrog
+      ; Animals - Althar 7
+      capsicorn nauticorn gingerbrab
       ; Animals - Bugs of Deep Mountain
       ; None
       ; Animals - Cherran
