@@ -459,4 +459,5 @@
  (#t "2015-11-16" "salut les nihilistes germain adeptes du bowling mais moins de la décoration de sol" ())
  (#t "2015-11-17" "salut les cabossés du tunnel sous la merde!" ())
  (#t "2015-11-18" "salut les poilus de l'intestin grelle!" ("Olaf-: *grêle" "***ArnY grèle sur Olaf-"))
+ (#t "2015-11-19" "salut les vieilles raclures de fond d'égouts new-yorkais" ("dibalo: salut le fond de latrine"))
 ))
