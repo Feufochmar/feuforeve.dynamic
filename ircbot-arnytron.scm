@@ -42,12 +42,32 @@
     "salut"
     (lambda (ircbot channel asker args)
       (if (not (null? args))
+          (let* ((receiver (car args))
+                 (receiver-channel? (string-prefix? "#" receiver))
+                 (on-channel? (member receiver (channels ircbot)))
+                )
+            (cond
+              ((equal? receiver (irc-nick ircbot))
+               (send-privmsg
+                 ircbot asker
+                 (string-append asker ": Je n'ai pas besoin de me saluer.")))
+              ((and receiver-channel? on-channel?)
+               (send-privmsg
+                 ircbot receiver
+                 (string-append "De la part de " asker " : " (generate-citation ArnYtron3000))))
+              ((and receiver-channel? (not on-channel?))
+               (send-privmsg
+                 ircbot asker
+                 (string-append asker ": Je ne salue pas les canaux que je ne fréquente pas.")))
+              ((not receiver-channel?)
+               (send-privmsg
+                 ircbot receiver
+                 (string-append "De la part de " asker " : " (generate-citation ArnYtron3000))))
+              (#t #f) ; do nothing
+            ))
           (send-privmsg
-            ircbot (car args)
-            (string-append "De la part de " asker " : " (generate-citation ArnYtron3000)))
-          (send-privmsg
-            ircbot channel
-            (string-append asker ": " (generate-citation ArnYtron3000))))))
+           ircbot channel
+           (string-append asker ": " (generate-citation ArnYtron3000))))))
   (add-command-alias!
     ircbot
     "salut"
