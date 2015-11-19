@@ -37,6 +37,21 @@
     ircbot
     "cite"
     (list "cite!" "cite!!" "cite!!!"))
+  (add-command-handler!
+    ircbot
+    "salut"
+    (lambda (ircbot channel asker args)
+      (if (not (null? args))
+          (send-privmsg
+            ircbot (car args)
+            (string-append "De la part de " asker " : " (generate-citation ArnYtron3000)))
+          (send-privmsg
+            ircbot channel
+            (string-append asker ": " (generate-citation ArnYtron3000))))))
+  (add-command-alias!
+    ircbot
+    "salut"
+    (list "salue"))
 )
 
 (define (main args)
