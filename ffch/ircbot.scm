@@ -11,6 +11,7 @@
             run-bot send-privmsg
             ;
             make-ircbot-from-command-line-args
+            channels irc-nick
            ))
 
 (define-class <ircbot> (<object>)
