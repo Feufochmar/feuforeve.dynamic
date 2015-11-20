@@ -33,6 +33,7 @@
     ((eq? 'pick:species:wild token) (name (pick-wild-species)))
     ((eq? 'pick:species:pet token) (name (pick-pet-species)))
     ((eq? 'pick:species:citizen token) (name (pick-character-species)))
+    ((eq? 'pick:species:plant token) (name (pick-plant-species)))
     ((eq? 'pick:place token) (name (pick-place)))
     ((and (pair? token) (eq? 'plural (car token)))
      (plural-of (interpret-token (cadr token) gender species)))
