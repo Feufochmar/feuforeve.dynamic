@@ -247,6 +247,7 @@
       (gender:subject "never" (verb "throw") "anything away")
       (gender:subject (verb "own") "a signature item - a distinctive" (pick:category item))
       (gender:subject (verb "have") "no money")
+      (gender:subject (verb "own") (undefined-article pick:species:plant) "in" gender:genitive "garden")
     )
 ;    (abilities
 ;      (gender:subject (verb "have") "the ability to see fragments of the future")
