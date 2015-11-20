@@ -42,6 +42,7 @@
   (pet? #:getter pet? #:init-form #f)
   (tamable? #:getter tamable? #:init-form #f)
   (wild? #:getter wild? #:init-form #f)
+  (plant? #:getter plant? #:init-form #f)
   (only-in-common-regions? #:getter only-in-common-regions? #:init-form #f)
   (foster-parent-probability #:getter foster-parent-probability #:init-form 1) ;; Between 0 and 100
   (foster-excluded #:getter foster-excluded #:init-form (list))
@@ -271,6 +272,9 @@
 
 (define-method (pick-wild-species)
   (select-species (lambda (x) (or (wild? x) (tamable? x)))))
+
+(define-method (pick-plant-species)
+  (select-species plant?))
 
 (define-method (pick-species)
   (select-species (lambda (x) #t)))
