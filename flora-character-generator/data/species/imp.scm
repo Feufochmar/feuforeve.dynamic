@@ -54,6 +54,8 @@
       puppea snappea-turtle lycheel saffrog
       ; Animals - Althar 7
       capsicorn nauticorn gingerbrab
+      ; Animals - Althar 8
+      ; None
       ; Animals - Bugs of Deep Mountain
       ; None
       ; Animals - Cherran

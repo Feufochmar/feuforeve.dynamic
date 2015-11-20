@@ -225,3 +225,31 @@
   (common-regions althar)
   (reproduction
     (common-pattern? #t)))
+
+;; Althar Entry 8
+(species mocking-tree
+  (name "Mocking Tree")
+  (reference-link "http://floraverse.com/comic/cascas-journal/385-althar-entry-8/")
+  (only-in-common-regions? #t)
+  (plant? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #f)))
+
+(species tomb-brush
+  (name "Tomb Brush")
+  (reference-link "http://floraverse.com/comic/cascas-journal/385-althar-entry-8/")
+  (only-in-common-regions? #t)
+  (plant? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #f)))
+
+(species heavens-archway
+  (name "Heaven's Archway")
+  (reference-link "http://floraverse.com/comic/cascas-journal/385-althar-entry-8/")
+  (only-in-common-regions? #t)
+  (plant? #t)
+  (common-regions althar)
+  (reproduction
+    (common-pattern? #f)))
