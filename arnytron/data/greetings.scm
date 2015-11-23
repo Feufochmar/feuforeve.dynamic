@@ -461,4 +461,7 @@
  (#t "2015-11-18" "salut les poilus de l'intestin grelle!" ("Olaf-: *grêle" "***ArnY grèle sur Olaf-"))
  (#t "2015-11-19" "salut les vieilles raclures de fond d'égouts new-yorkais" ("dibalo: salut le fond de latrine"))
  (#t "2015-11-20" "salut les homos déçus travaillant à l'usine de pipes!" ())
+ (#t "2015-11-21" "salut les vieilles moules tonkinoise purulentes!" ())
+ (#t "2015-11-22" "salut les vieux anglais obèses adeptes du fisting de canard en groupe" ("Olaf-: ArnY: ah non, on n'aime pas fister Zluglu !" "katyucha: quackz"))
+ (#t "2015-11-23" "salut les résidu de vieux chlingeux mal démoulés ramassés par une moto crotte creuvée sur un trottoirs de barbès!" ())
 ))
