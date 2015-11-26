@@ -465,4 +465,5 @@
  (#t "2015-11-22" "salut les vieux anglais obèses adeptes du fisting de canard en groupe" ("Olaf-: ArnY: ah non, on n'aime pas fister Zluglu !" "katyucha: quackz"))
  (#t "2015-11-23" "salut les résidu de vieux chlingeux mal démoulés ramassés par une moto crotte creuvée sur un trottoirs de barbès!" ())
  (#t "2015-11-25" "salut les mongols décérébrés aux engrenages en bois faisant du pédalo en string léopard sur l'autoroute A1" ("rbs: y a pas grand monde du chan aux abords de l'A1"))
+ (#t "2015-11-26" "salut les jean foutres de fesse mathieu fort maris, je vous conspue, je vous conchie!" ())
 ))
