@@ -467,4 +467,5 @@
  (#t "2015-11-25" "salut les mongols décérébrés aux engrenages en bois faisant du pédalo en string léopard sur l'autoroute A1" ("rbs: y a pas grand monde du chan aux abords de l'A1"))
  (#t "2015-11-26" "salut les jean foutres de fesse mathieu fort maris, je vous conspue, je vous conchie!" ())
  (#t "2015-11-29" "salut les anulingueurs!" ())
+ (#t "2015-11-30" "salut les naines cubiques à cul de sumo!" ())
 ))
