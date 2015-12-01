@@ -1,5 +1,6 @@
 (define-module (pages home)
   #:use-module (ffch article)
+  #:use-module (ffch forms)
   #:use-module (ffch weblets)
   #:use-module (ffch webtemplates)
   #:use-module (pages default-template)
@@ -37,6 +38,9 @@
         (section
           ((name-class "nav-item"))
           (nav-link-to "/ToyCatCreator" (nav-current-path path) "Toy Cat Creator"))
+        (section
+          ((name-class "nav-item"))
+          (nav-link-to "/Fonts" (nav-current-path path) "Fonts"))
         (section
           ((name-class "nav-item"))
           (nav-link-to "/AboutMe" (nav-current-path path) "About me"))
@@ -135,6 +139,56 @@
             )
         )))))
 
+;; Custom fonts
+(define (font-example name)
+  (paragraph ((name-class name))
+    "The quick brown dog jumps over the lazy fox." (linefeed)
+    "Voix ambiguë d'un cœur qui, au zéphyr, " (linefeed)
+    "préfère les jattes de kiwis." (linefeed)
+    "0 1 2 3 4 5 6 7 8 9 () [] {}" (linefeed)
+    "A B C D E F G H I J K L M" (linefeed)
+    "N O P Q R S T U V W X Y Z" (linefeed)
+    "a b c d e f g h i j k l m" (linefeed)
+    "n o p q r s t u v w x y z" (linefeed)
+    "! \" ' . , ?" (linefeed)
+    "Andre told Beleth they would work with Amdusias and Orobas." (linefeed)
+    "àáćèéǵìíḱĺḿǹńòóṕŕśùúẃẁýỳź" (linefeed)
+    "âĉêĝĥîĵôŝûŵŷẑãẽĩñõũṽỹäëḧïöẗüẅẍÿ"))
+
+(define (load-custom-fonts wcontainer)
+  (add-weblet wcontainer (list "Fonts")
+    (templated-weblet
+      (home-template
+        (metadata
+          (stylesheets
+            (static-data "css/feuforeve.css")
+            (static-data "css/custom-fonts.css"))))
+      (lambda (query)
+        (article ((title "Fonts")(author "Feufochmar")(date "2015-10-17"))
+          (section ((title "Prattling"))
+            (paragraph
+              "A font inspired by the Prattle scripts appearing in the Floraverse webcomic. "
+              (hyperlink ((to (static-data "fonts/Prattling.otf"))) "Download")(linefeed)
+              "Note: The font is not yet finished.")
+            (section ((title "Sample"))
+              (section ((name-class "font-contents"))
+                (section ((name-class "font-example"))
+                  (font-example #f))
+                (section ((name-class "font-example"))
+                  (font-example "prattling")))
+              (section ((title "Playfield"))
+                (paragraph ((name-class "font-playfield"))
+                  (text-area ((name-class "prattling")) "You can type what you want here."))))
+            (section ((title "Source file and licence"))
+              "The font is released under the "
+              (hyperlink ((to "http://scripts.sil.org/OFL")) "SIL Open Font license") ". "
+              "So you can also modify the font and share the result. "
+              "Open the " (hyperlink ((to (static-data "fonts/Prattling.sfd"))) "source file") " "
+              "in " (hyperlink ((to "https://fontforge.github.io/")) "fontforge") " and edit whatever you want."
+            )
+          )
+        )))))
+
 ;; Load all
 (define (load-pages:home wcontainer)
   (load-redirections wcontainer)
@@ -142,4 +196,5 @@
   (load-404 wcontainer)
   (load-about-me wcontainer)
   (load-toy-cat-creator wcontainer)
+  (load-custom-fonts wcontainer)
 )
