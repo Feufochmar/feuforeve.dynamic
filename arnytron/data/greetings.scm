@@ -470,4 +470,5 @@
  (#t "2015-11-30" "salut les naines cubiques à cul de sumo!" ())
  (#t "2015-12-01" "salut les cancerologues lépreux dépistant les cancers de la prostate avec leurs 10 ah non 9... ah non.. 8 maintenant... plus que 7 doigts" ("katyucha: :)" "katyucha: bravo" "katyucha: superbe" "katyucha: clap clap" "katyucha la forme ArnY ?" "ArnY: plutot fallique" "katyucha: madame va être contente :)" "Balise: \"ew\"" "Balise: c'est tout ce que j'ai à dire à ce sujet"))
  (#t "2015-12-05" "salut les mono-cellulaires du cerveau spongiforme au gland en fleur" ())
+ (#t "2015-12-09" "salut les trompétistes nudistes à la valve testiculaire incontrolable pris d'éjaculation fontaine!" ("companion_cube: valve testiculaire" "companion_cube: hmmmm"))
 ))
