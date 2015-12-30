@@ -16,6 +16,7 @@
             key name reference-link
             ;
             get-species pick-character-species pick-pet-species pick-wild-species pick-species
+            pick-plant-species
             list-character-species
             ;
             pick-sex pick-gender pick-age-of-life pick-affinity
