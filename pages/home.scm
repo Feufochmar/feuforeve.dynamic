@@ -143,17 +143,40 @@
 (define (font-example name)
   (paragraph ((name-class name))
     "The quick brown dog jumps over the lazy fox." (linefeed)
-    "Voix ambiguë d'un cœur qui, au zéphyr, " (linefeed)
+    "Voix ambiguë d'un coeur qui, au zéphyr, " (linefeed)
     "préfère les jattes de kiwis." (linefeed)
     "0 1 2 3 4 5 6 7 8 9 () [] {}" (linefeed)
     "A B C D E F G H I J K L M" (linefeed)
     "N O P Q R S T U V W X Y Z" (linefeed)
     "a b c d e f g h i j k l m" (linefeed)
     "n o p q r s t u v w x y z" (linefeed)
-    "! \" ' . , ?" (linefeed)
+    "! \" ' . , ? & $ %" (linefeed)
+    "Æ Þ Ð æ þ ð ß å â á à ä ã" (linefeed)
     "Andre told Beleth they would work with Amdusias and Orobas." (linefeed)
-    "àáćèéǵìíḱĺḿǹńòóṕŕśùúẃẁýỳź" (linefeed)
-    "âĉêĝĥîĵôŝûŵŷẑãẽĩñõũṽỹäëḧïöẗüẅẍÿ"))
+    "I'm Furfur, and I shall eradicate You."))
+
+(define (font-paragraph name description css-class)
+  (section ((title name))
+    (paragraph
+      description
+      (hyperlink ((to (static-data (string-append "fonts/" name ".otf")))) "Download"))
+    (section ((title "Sample"))
+      (section ((name-class "font-contents"))
+        (section ((name-class "font-example"))
+          (font-example #f))
+        (section ((name-class "font-example"))
+          (font-example css-class)))
+      (section ((title "Playfield"))
+        (paragraph ((name-class "font-playfield"))
+          (text-area ((name-class css-class)) "You can type what you want here."))))
+    (section ((title "Source file and licence"))
+      "The font is released under the "
+      (hyperlink ((to "http://scripts.sil.org/OFL")) "SIL Open Font license") ". "
+      "So you can also modify the font and share the result. "
+      "Open the " (hyperlink ((to (static-data (string-append "fonts/" name ".sfd")))) "source file") " "
+      "in " (hyperlink ((to "https://fontforge.github.io/")) "fontforge") " and edit whatever you want."
+    )
+  ))
 
 (define (load-custom-fonts wcontainer)
   (add-weblet wcontainer (list "Fonts")
@@ -165,28 +188,14 @@
             (static-data "css/custom-fonts.css"))))
       (lambda (query)
         (article ((title "Fonts")(author "Feufochmar")(date "2015-10-17"))
-          (section ((title "Prattling"))
-            (paragraph
-              "A font inspired by the Prattle scripts appearing in the Floraverse webcomic. "
-              (hyperlink ((to (static-data "fonts/Prattling.otf"))) "Download")(linefeed)
-              "Note: The font is not yet finished.")
-            (section ((title "Sample"))
-              (section ((name-class "font-contents"))
-                (section ((name-class "font-example"))
-                  (font-example #f))
-                (section ((name-class "font-example"))
-                  (font-example "prattling")))
-              (section ((title "Playfield"))
-                (paragraph ((name-class "font-playfield"))
-                  (text-area ((name-class "prattling")) "You can type what you want here."))))
-            (section ((title "Source file and licence"))
-              "The font is released under the "
-              (hyperlink ((to "http://scripts.sil.org/OFL")) "SIL Open Font license") ". "
-              "So you can also modify the font and share the result. "
-              "Open the " (hyperlink ((to (static-data "fonts/Prattling.sfd"))) "source file") " "
-              "in " (hyperlink ((to "https://fontforge.github.io/")) "fontforge") " and edit whatever you want."
-            )
-          )
+          (font-paragraph
+            "Prattling"
+            "A font inspired by the Prattle scripts appearing in the Floraverse webcomic. "
+            "prattling")
+          (font-paragraph
+            "Furfur"
+            "A font inspired by what say the character Furfur in the Floraverse webcomic. "
+            "furfur")
         )))))
 
 ;; Load all
