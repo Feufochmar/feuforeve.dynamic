@@ -170,12 +170,12 @@
         (paragraph ((name-class "font-playfield"))
           (text-area ((name-class css-class)) "You can type what you want here."))))
     (section ((title "Source file and licence"))
-      "The font is released under the "
-      (hyperlink ((to "http://scripts.sil.org/OFL")) "SIL Open Font license") ". "
-      "So you can also modify the font and share the result. "
-      "Open the " (hyperlink ((to (static-data (string-append "fonts/" name ".sfd")))) "source file") " "
-      "in " (hyperlink ((to "https://fontforge.github.io/")) "fontforge") " and edit whatever you want."
-    )
+      (paragraph
+        "The font is released under the "
+        (hyperlink ((to "http://scripts.sil.org/OFL")) "SIL Open Font license") ". "
+        "So you can also modify the font and share the result. "
+        "Open the " (hyperlink ((to (static-data (string-append "fonts/" name ".sfd")))) "source file") " "
+        "in " (hyperlink ((to "https://fontforge.github.io/")) "fontforge") " and edit whatever you want."))
   ))
 
 (define (load-custom-fonts wcontainer)
@@ -194,7 +194,7 @@
             "prattling")
           (font-paragraph
             "Furfur"
-            "A font inspired by what say the character Furfur in the Floraverse webcomic. "
+            "A font inspired by what is said by the character Furfur in the Floraverse webcomic. "
             "furfur")
         )))))
 
