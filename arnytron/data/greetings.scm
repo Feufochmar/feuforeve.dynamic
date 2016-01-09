@@ -474,6 +474,8 @@
  (#t "2015-12-08" "salut les trompétistes nudistes à la valve testiculaire incontrolable pris d'éjaculation fontaine!" ("companion_cube: valve testiculaire" "companion_cube: hmmmm"))
  (#t "2015-12-13" "salut les electroluminescents de la prostate!" ())
  (#t "2015-12-15" "ahah, vous êtes tout rikiki rabougris du zizi sur mon nouveau laptop" ("ArnY: le fullHD sur un ecran de 11\" ca nique les yeux fissa" "ArnY: bon, faut dire qu'en 9px c'etait déjà petit avant" "Zluglu: ctb" "ArnY: farpaitement!"))
+ (#t "2015-12-29" "salut les routiers polonais mal démoulés portant un string de ronce à paillettes en gise d'appareil dentaire!" ())
+ (#t "2016-01-01" "salut les schlingeux de lepreux fans de fingers" ("ArnY: et beaux nénés de lepreux aussi" "***Olaf- gives ArnY a finger" "Olaf-: if not THE finger"))
  (#t "2016-01-06" "salut les enculés de culbutos" ())
  (#t "2016-01-08" "salut les petits bonzommes en patte à merde qui sentent la chèvre enduite de cirage vert caca d'oie!" ())
 ))
