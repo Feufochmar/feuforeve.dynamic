@@ -8,4 +8,9 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      flowercat flower-candies)))
+      flowercat
+      ;
+      flower-candies glam-candies)
+    (special-cases
+      ((father flower-candies) (mother glam-candies)) ((father glam-candies) (mother flower-candies))
+    )))

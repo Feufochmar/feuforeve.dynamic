@@ -142,6 +142,9 @@
       sea-dragon seavern sea-dragorgon trojan-dragon
       ; Singing Rabbat
       singing-rabbat chirping-rabbat rugarabbat vampire-rabbat
+      ; Turf Tiger
+      turf-tiger thistle-tiger tomb-tiger surf-tiger glam-candies stripe-goat truce-tiger
+      pygmy-tiger flower-tiger
       ; Vanguard
       vanguard
       ; Weed Wolf

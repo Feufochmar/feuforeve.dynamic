@@ -79,7 +79,12 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)))
+    (common-pattern? #t)
+    (crossbreed-with
+      bansheep truce-tiger)
+    (special-cases
+      ((father bansheep) (mother truce-tiger)) ((father truce-tiger) (mother bansheep))
+    )))
 
 (species cat
   (name "Cat")

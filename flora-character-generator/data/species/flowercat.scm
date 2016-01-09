@@ -9,4 +9,10 @@
     (common-pattern? #t)
     (crossbreed-with
       foxbat foxbat-spirit vanguard rock-candies manticore aurorian-fox satyr satyrbun
-      satyrqorn satyrfox flower-candies commons-fox mouse)))
+      satyrqorn satyrfox flower-candies commons-fox mouse
+      ;
+      thistle-tiger flower-tiger
+      )
+    (special-cases
+      ((father thistle-tiger) (mother flower-tiger)) ((father flower-tiger) (mother thistle-tiger))
+    )))

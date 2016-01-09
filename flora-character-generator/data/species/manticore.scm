@@ -8,4 +8,5 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      flowercat bastian)))
+      flowercat bastian
+      deathwalker)))

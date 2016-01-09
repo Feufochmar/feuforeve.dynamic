@@ -11,4 +11,9 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      sea-dragon)))
+      sea-dragon
+      ;
+      bonefish surf-tiger)
+    (special-cases
+      ((father bonefish) (mother surf-tiger)) ((father surf-tiger) (mother bonefish))
+    )))

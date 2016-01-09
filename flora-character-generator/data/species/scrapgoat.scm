@@ -9,7 +9,12 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      rock-candies sea-dragon diogoat)))
+      rock-candies sea-dragon
+      ;
+      diogoat stripe-goat)
+    (special-cases
+      ((father diogoat) (mother stripe-goat)) ((father stripe-goat) (mother diogoat))
+    )))
 
 (species diogoat
   (name "Diogoat")
