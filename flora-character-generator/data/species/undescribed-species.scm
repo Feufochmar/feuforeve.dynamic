@@ -63,7 +63,9 @@
   (common-regions )
   (distributions )
   (reproduction
-    (common-pattern? #t)))
+    (common-pattern? #t)
+    (crossbreed-with
+      pygmy-bastian)))
 
 (species rugaru
   (name "Rugaru")
@@ -101,3 +103,13 @@
   (distributions )
   (reproduction
     (common-pattern? #t)))
+
+(species rakshasa
+  (name "Rakshasa")
+  (reference-link "http://floraverse.com")
+  (common-regions )
+  (distributions )
+  (reproduction
+    (common-pattern? #t)
+    (crossbreed-with
+      atrocitiger)))

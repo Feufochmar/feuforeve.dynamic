@@ -113,32 +113,3 @@
     (special-cases
       ((father clover-lamb) (mother turf-tiger)) ((father turf-tiger) (mother clover-lamb))
     )))
-
-;; Pygmy Tigers
-(species pygmy-tiger
-  (name "Pygmy Tiger")
-  (reference-link "http://floraverse.com/comic/this-means-war/406-species-turf-tigers/")
-  (citizen? #t)
-  (distributions
-    (affinity (* 1)))
-  (reproduction
-    (common-pattern? #t)
-    (crossbreed-with
-      turf-tiger
-      ;
-      flower-tiger
-      )))
-
-(species flower-tiger
-  (name "Flower Tiger")
-  (reference-link "http://floraverse.com/comic/this-means-war/406-species-turf-tigers/")
-  (citizen? #t)
-  (distributions
-    (affinity (* 1)))
-  (reproduction
-    (common-pattern? #t)
-    (crossbreed-with
-      pygmy-tiger flowercat)
-    (special-cases
-      ((father flowercat) (mother pygmy-tiger)) ((father pygmy-tiger) (mother flowercat))
-    )))
