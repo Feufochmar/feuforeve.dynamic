@@ -375,7 +375,7 @@
        (hash-set! *data:species* (quote key) sp)
        sp))))
 
-;; Load languages to fill *data:species*
+;; Load species to fill *data:species*
 (load-all-from-path "flora-character-generator/data/species")
 
 ;; Process species combinations. Can only be done there as it needs all species to be known
