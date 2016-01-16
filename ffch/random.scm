@@ -13,7 +13,7 @@
 
 ;;;;
 ;; Shuffle a list
-(define-method (shuffle (lst <pair>))
+(define-method (shuffle (lst <list>))
   (sort lst (lambda (a b) (pick-boolean))))
 
 ;;;;
@@ -21,7 +21,7 @@
 (define-method (pick-from (vec <vector>))
   (vector-ref vec (random (vector-length vec))))
 
-(define-method (pick-from (lst <pair>))
+(define-method (pick-from (lst <list>))
   (pick-from (list->vector lst)))
 
 (define-method (pick-from (hsh <hashtable>))
@@ -35,9 +35,21 @@
       (+ mn (random (- mx mn)))))
 
 ;;;;
+;; Take at most n element in a list.
+;; If the list has less than n elements, returns the input
+;; Else returns the first n elements of the list
+;; Note: the take function in guile fails in the first case
+(define-method (take-at-most (lst <list>) (n <integer>))
+  (letrec ((tam (lambda (in-lst n out-lst)
+                  (if (or (null? in-lst) (<= n 0))
+                      (reverse out-lst)
+                      (tam (cdr in-lst) (- n 1) (cons (car in-lst) out-lst))))))
+    (tam lst n (list))))
+
+;;;;
 ;; Pick given number of items from a collection
-(define-method (pick-from (lst <pair>) (n <integer>))
-  (take (shuffle lst) n))
+(define-method (pick-from (lst <list>) (n <integer>))
+  (take-at-most (shuffle lst) n))
 
 (define-method (pick-from (vec <vector>) (n <integer>))
   (list->vector (pick-from (vector->list vec) n)))
