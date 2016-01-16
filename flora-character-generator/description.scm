@@ -17,6 +17,7 @@
   #:use-module (flora-character-generator species)
   #:use-module (flora-character-generator english)
   #:use-module (flora-character-generator family)
+  #:use-module (flora-character-generator abilities)
   #:export (generate-character-description)
   #:duplicates (merge-generics))
 
@@ -51,6 +52,7 @@
       (birth-section char)
       (current-situation-section char)
       (traits-section char)
+      (abilities-section char)
       (family-section char)
       (pets-section char)
     )))
@@ -127,7 +129,7 @@
         " " (hyperlink ((to (reference-link livingplace))) (name livingplace)) ". "
       ))))
 ;
-(define-method (traits-section char)
+(define-method (traits-section (char <character>))
   (let* ((gen (gender char))
          (subject (subject-pronoun gen))
          (genitive (genitive-adjective gen))
@@ -172,7 +174,15 @@
           (colors char)))
     )))
 
-(define-method (family-section char)
+(define-method (abilities-section (char <character>))
+  (let ((abilities-lst (abilities char))
+        (ability-paragraph (lambda (ab) (paragraph (section ((title (name ab))) (description ab))))))
+    (if (not (null? abilities-lst))
+        (section ((title "Abilities"))
+          (map ability-paragraph abilities-lst))
+        "")))
+
+(define-method (family-section (char <character>))
   (letrec* ((gen (gender char))
             (subject (subject-pronoun gen))
             (genitive (genitive-adjective gen))
@@ -245,7 +255,7 @@
               ""))
         "")))
 
-(define-method (pets-section char)
+(define-method (pets-section (char <character>))
   (let* ((pets (pets (family char)))
          (gen (gender char))
          (subject (subject-pronoun gen))
