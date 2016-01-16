@@ -53,6 +53,6 @@
   ;; original idea by SP3CT3R
   (name "Memory Reveal")
   (category "Knowledge")
-  (description "A person with the Memory Reveal can project a beam of Psi energy. When the beam encounters an item, it turns into bubbles displaying what happens around the item during the last times an individual touched it. The number of bubble formed depends on the amount of energy projected in the beam.")
+  (description "A person with the Memory Reveal can project a beam of Psi energy. When the beam encounters an item, it turns into bubbles displaying what happened around the item during the last times an individual touched it. The number of bubble formed depends on the amount of energy projected in the beam.")
   (restrictions
     (has-affinity psi)))
