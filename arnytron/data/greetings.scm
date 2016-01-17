@@ -478,4 +478,5 @@
  (#t "2016-01-01" "salut les schlingeux de lepreux fans de fingers" ("ArnY: et beaux nénés de lepreux aussi" "***Olaf- gives ArnY a finger" "Olaf-: if not THE finger"))
  (#t "2016-01-06" "salut les enculés de culbutos" ())
  (#t "2016-01-08" "salut les petits bonzommes en patte à merde qui sentent la chèvre enduite de cirage vert caca d'oie!" ())
+ (#t "2016-01-17" "salut les bourssouflé de la vanne à caca" ())
 ))
