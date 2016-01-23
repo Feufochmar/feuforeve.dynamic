@@ -53,6 +53,14 @@
   ;; original idea by SP3CT3R
   (name "Memory Reveal")
   (category "Knowledge")
-  (description "A person with the Memory Reveal can project a beam of Psi energy. When the beam encounters an item, it turns into bubbles displaying what happened around the item during the last times an individual touched it. The number of bubble formed depends on the amount of energy projected in the beam.")
+  (description "A person with the Memory Reveal ability can project a beam of Psi energy. When the beam encounters an item, it turns into bubbles displaying what happened around the item during the last times an individual touched it. The number of bubble formed depends on the amount of energy projected in the beam.")
   (restrictions
     (has-affinity psi)))
+
+(ability
+  ;; original idea by SP3CT3R
+  (name "Reflected Future")
+  (category "Divination")
+  (description "A person with the Reflected Future ability can see how other individuals would look like at varying points in the future by looking at their reflections in a mirror. The reflections seen by the user show what would happen if the user does not intervene. The ability does not work on the user's reflection.")
+  (restrictions
+    (has-affinity crystal)))

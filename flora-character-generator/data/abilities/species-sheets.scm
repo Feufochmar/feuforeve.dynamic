@@ -4,7 +4,7 @@
   (category "Thermodynamics")
   (description "A person with the Cold Tolerance ability can live in very cold environments without the need of protecting themselves from the low temperatures.")
   (restrictions
-    (is-species aurorian-fox cagroodle)))
+    (is-species aurorian-fox cagroodle swirl-fox)))
 
 (ability
   ;; same as above, but restriction on affinity
@@ -54,14 +54,14 @@
   (category "Language")
   (description "A person with the Plant Speaker ability can understand and talk to any kind of sentient plant innately.")
   (restrictions
-    (is-species flowercat fruit-frog flower-frog capricornucopia)))
+    (is-species flowercat fruit-frog flower-frog capricornucopia owel-treant pygmy-pyzky flower-tiger)))
 
 (ability
   (name "Weather Forecast")
   (category "Foresight")
   (description "A person with the Weather Forecast ability can predict abrupt weather changes a few days in advance.")
   (restrictions
-    (is-species flowercat)))
+    (is-species flowercat flower-tiger)))
 
 (ability
   ;; Same as above, but restricted on affinities
@@ -76,14 +76,14 @@
   (category "Healthcare")
   (description "A person with the Plant Diagnosis ability can diagnose the condition of non-sentient plants.")
   (restrictions
-    (is-species flowercat)))
+    (is-species flowercat flower-tiger)))
 
  (ability
   (name "Plant Knowledge")
   (category "Knowledge")
   (description "A person with the Plant Knowledge ability can tell if plants are edible, poisonous, or medicinal by inspecting them briefly.")
   (restrictions
-    (is-species flowercat)))
+    (is-species flowercat flower-tiger)))
 
 (ability
   (name "Fruit Sharing")
@@ -286,3 +286,179 @@
   (restrictions
     (is-species
        shackal)))
+
+(ability
+  (name "Feral Indifference")
+  (category "Nature")
+  (description "A person with the Feral Indifference ability are never attacked by feral animals unless they provoke them.")
+  (restrictions
+    (is-species
+       pygmy-pyzky)))
+
+(ability
+  (name "Feral Control")
+  (category "Nature")
+  (description "A person with the Feral Control ability can issue minor commands to small feral animals. Although the animals may ignore the commands, they tend to follow them.")
+  (restrictions
+    (is-species
+       pygmy-pyzky)))
+
+(ability
+  (name "Nature Boost")
+  (category "Nature")
+  (description "A person with the Nature Boost ability makes nature flourish around their living place. An area under the effect of Nature Boost sees plants growing quicker, wild animal presence increasing, weather becoming more docile, and other effects depending on the area and its affinity. The effects are amplified if several persons with the Nature Boost ability are present in the same area.")
+  (restrictions
+    (is-species
+       pygmy-pyzky)))
+
+(ability
+  (name "Wind Pacification")
+  (category "Weather")
+  (description "A person with the Wind Pacification ability can stop wind from hitting anything inside an area. The extent of the protected area depends on the user control on the ability.")
+  (restrictions
+    (is-species pygmy-pyzky)))
+
+(ability
+  ;; Same as above, but with affinity restrictions
+  (name "Wind Pacification")
+  (category "Weather")
+  (description "A person with the Wind Pacification ability can stop wind from hitting anything inside an area. The extent of the protected area depends on the user control on the ability.")
+  (restrictions
+    (has-affinity storm air)))
+
+(ability
+  (name "Flower Colors")
+  (category "Shape Changing")
+  (description "A person with the Flower Colors ability can change the colors of flowers.")
+  (restrictions
+    (is-species pygmy-pyzky)))
+
+(ability
+  (name "Vegetarian")
+  (category "Diet")
+  (description "A person with the Vegetarian ability can only eat food made from plants. They get food illness if they eat meat.")
+  (restrictions
+    (is-species pygmy-pyzky)))
+
+(ability
+  (name "Crowd Camo")
+  (category "Society")
+  (description "A person with the Crowd Camo ability can fit into new groups easily and swiftly. The larger the group, the more seamless the assimilation.")
+  (restrictions
+    (is-species pygmy-tiger flower-tiger pygmy-bastian swirl-fox atrocitiger)))
+
+(ability
+  (name "Leon Speaker")
+  (category "Language")
+  (description "A person with the Leon Speaker ability can understand Leon and speak it innately.")
+  (restrictions
+    (is-species
+       revealeon surveilleon strawberry-man)))
+
+(ability
+  (name "Eye Spy")
+  (category "Shape Changing")
+  (description "A person with the Eye Spy ability can observe and completely memorize their surrounding environment. They are then able to replay this observation, or memory, in the form of taking on the appearance of anything within it. The memories are not perfect, however, and the forms they take on are flawed in some way. If they do not periodically refresh their memory, their appearance will start to degrade over time.")
+  (restrictions
+    (is-species
+       revealeon surveilleon)))
+
+(ability
+  (name "Bad Sleeper")
+  (category "Mind Control")
+  (description "A person with the Bad Sleeper ability is immune to all forms of hypnosis.")
+  (restrictions
+    (is-species
+       rock-candies flower-candies glam-candies
+       fruit-frog flower-frog capricornucopia
+       )))
+
+(ability
+  (name "Grower")
+  (category "Body Shape")
+  (description "A person with the Grower ability grows things on their body. The kind of things they grow depends on the species.")
+  (restrictions
+    (is-species
+       rock-candies flower-candies glam-candies
+       coralshell-turtle
+       satyr satyrqorn satyrfox goatixy diogoat
+       )))
+
+(ability
+  (name "Electrical Insulation")
+  (category "Body Shape")
+  (description "A person with the Electrical Insulation ability is immune to all but strong electric currents.")
+  (restrictions
+    (is-species
+       rock-candies flower-candies glam-candies)))
+
+(ability
+  (name "Venom Ferment")
+  (category "Healing")
+  (description "A person with the Venom Ferment ability processes all ingested poison into alcohol.")
+  (restrictions
+    (is-species
+       satyr satyrbun satyrqorn satyrfox flower-candies goatixy diogoat)))
+
+(ability
+  (name "Recycle")
+  (category "Shape Shifting")
+  (description "A person with the Recycle ability is able to insert into their body any item of interest that physically fit. They will then integrate the item into their body, which cause gradual changes in their appearance, affinities and abilities. If they does not consume the required nutrients to allow for continued integration and growth of the item, they will shed it and their appearance will slowly revert to its look pre-integration.")
+  (restrictions
+    (is-species
+       scrapgoat diogoat stripe-goat)))
+
+(ability
+  (name "Catalyst Needed")
+  (category "Healing")
+  (description "A person with the Catalyst Needed ability is unable to physically heal on their own. They need a catalyst of some kind to start and maintain the healing process, degrading the item for this use thereafter. The user is able to tell if a catalyst item can still be used for the healing process.")
+  (restrictions
+    (is-species
+       sea-dragon seavern sea-dragorgon trojan-dragon)))
+
+(ability
+  (name "Energy Reader")
+  (category "Knowledge")
+  (description "A person with the Energy Reader ability can tell how much a crystal contains magic energy.")
+  (restrictions
+    (has-affinity crystal)))
+
+(ability
+  (name "Properties Listener")
+  (category "Hearing")
+  (description "A person with the Properties Listener ability can discern with the sense of hearing additionnal informations or properties that are inaudible to individual without the Properties Listener ability. The kind of properties heard depends on the individual.")
+  (restrictions
+    (is-species
+       singing-rabbat chirping-rabbat rugarabbat vampire-rabbat satyrbun)))
+
+(ability
+  (name "Quality Listener")
+  (category "Hearing")
+  (description "A person with the Quality Listener ability can discern, with the sense of hearing, if a given item is of good quality.")
+  (restrictions
+    (is-species
+       singing-rabbat chirping-rabbat rugarabbat vampire-rabbat satyrbun)))
+
+(ability
+  (name "Value Listener")
+  (category "Hearing")
+  (description "A person with the Value Listener ability can discern, with the sense of hearing, the value that someone places in an item.")
+  (restrictions
+    (is-species
+       singing-rabbat chirping-rabbat rugarabbat vampire-rabbat satyrbun)))
+
+(ability
+  (name "Prophecy Song")
+  (category "Prediction")
+  (description "A person with the Prophecy Song ability may dream of a song being sung to them. The song is always without lyrics, consisting of just melodies and tones. The song is the form their prophecies take, and they’re always for the individual who sang it to them in the dream. A person with the Prophecy Song ability will usually attempt to seek that individual out and sing the song back to them. If this happens, the two will share a dream detailing the events of the prophecy. If more than one individual hears the song, the prophecy and dream will be shared among all of them.")
+  (restrictions
+    (is-species
+       singing-rabbat chirping-rabbat rugarabbat vampire-rabbat satyrbun)))
+
+(ability
+  (name "Weak War")
+  (category "Robustness")
+  (description "A person with the Weak War ability can render all forms of combat, either physical or magic, during a fight incapable of causing grievous or permanent injury to anyone subjected to them.")
+  (restrictions
+    (is-species
+       turf-tiger thistle-tiger tomb-tiger surf-tiger glam-candies stripe-goat truce-tiger)))
