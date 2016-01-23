@@ -9,14 +9,18 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      flowercat satyrbun satyrqorn satyrfox flower-candies)
+      flowercat satyrbun satyrqorn satyrfox flower-candies diogoat)
     (special-cases
       ((father satyrbun) (mother satyrqorn)) ((father satyrqorn) (mother satyrbun))
       ((father satyrbun) (mother satyrfox)) ((father satyrfox) (mother satyrbun))
       ((father satyrbun) (mother flower-candies)) ((father flower-candies) (mother satyrbun))
+      ((father satyrbun) (mother diogoat)) ((father diogoat) (mother satyrbun))
       ((father satyrqorn) (mother satyrfox)) ((father satyrfox) (mother satyrqorn))
       ((father satyrqorn) (mother flower-candies)) ((father flower-candies) (mother satyrqorn))
+      ((father satyrqorn) (mother diogoat)) ((father diogoat) (mother satyrqorn))
       ((father satyrfox) (mother flower-candies)) ((father flower-candies) (mother satyrfox))
+      ((father satyrfox) (mother diogoat)) ((father diogoat) (mother satyrfox))
+      ((father flower-candies) (mother diogoat)) ((father diogoat) (mother flower-candies))
     )))
 
 (species satyrbun
@@ -96,4 +100,4 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      satyr satyrbun satyrqorn satyrfox flower-candies)))
+      satyr satyrbun satyrqorn satyrfox flower-candies diogoat)))
