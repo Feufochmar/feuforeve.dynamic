@@ -167,7 +167,7 @@
 (ability
   (name "Amphibious")
   (category "Body Type")
-  (description "A person with the Amphibious ability can breathe underwater and abovewater.")
+  (description "A person with the Amphibious ability can breathe in air and underwater.")
   (restrictions
     (has-affinity water)))
 
@@ -403,7 +403,7 @@
 (ability
   (name "Recycle")
   (category "Shape Shifting")
-  (description "A person with the Recycle ability is able to insert into their body any item of interest that physically fit. They will then integrate the item into their body, which cause gradual changes in their appearance, affinities and abilities. If they does not consume the required nutrients to allow for continued integration and growth of the item, they will shed it and their appearance will slowly revert to its look pre-integration.")
+  (description "A person with the Recycle ability is able to insert into their body any item of interest that physically fit. They will then integrate the item into their body, which cause gradual changes in their appearance, affinities and abilities. If they do not consume the required nutrients to allow for continued integration and growth of the item, they will shed it and their appearance will slowly revert to its look pre-integration.")
   (restrictions
     (is-species
        scrapgoat diogoat stripe-goat)))
@@ -462,3 +462,48 @@
   (restrictions
     (is-species
        turf-tiger thistle-tiger tomb-tiger surf-tiger glam-candies stripe-goat truce-tiger)))
+
+(ability
+  (name "Sand Swimmer")
+  (category "Moving")
+  (description "A person with the Sand Swimmer ability can swim and move in the sand as if it was water.")
+  (restrictions
+    (is-species sand-hippo)))
+
+(ability
+  ;; Same as above, but restricted on affinity
+  (name "Sand Swimmer")
+  (category "Moving")
+  (description "A person with the Sand Swimmer ability can swim and move in the sand as if it was water.")
+  (restrictions
+    (has-affinity sand)))
+
+(ability
+  (name "Hypnotizing Lights")
+  (category "Mind Control")
+  (description "A person with the Hypnotizing Lights ability can suggest behaviour and practice mind control on other individuals by emitting lights with their bodies.")
+  (restrictions
+    (is-species nauticorn)))
+
+(ability
+  ;; Same as above, but restricted on affinity
+  (name "Hypnotizing Lights")
+  (category "Mind Control")
+  (description "A person with the Hypnotizing Lights ability can suggest behaviour and practice mind control on other individuals by emitting lights with their bodies.")
+  (restrictions
+    (has-affinity light)))
+
+(ability
+  (name "Spicy Cloud")
+  (category "Clouds")
+  (description "A person with the Spicy Cloud ability can breathe out or emit volatile and spicy oils that cause burns.")
+  (restrictions
+    (is-species capsicorn)))
+
+(ability
+  ;; Same as above, but restricted on affinity
+  (name "Spicy Cloud")
+  (category "Clouds")
+  (description "A person with the Spicy Cloud ability can breathe out or emit volatile and spicy oils that cause burns.")
+  (restrictions
+    (has-affinity acid)))
