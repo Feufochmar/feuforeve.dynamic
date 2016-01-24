@@ -479,4 +479,5 @@
  (#t "2016-01-06" "salut les enculés de culbutos" ())
  (#t "2016-01-08" "salut les petits bonzommes en patte à merde qui sentent la chèvre enduite de cirage vert caca d'oie!" ())
  (#t "2016-01-17" "salut les bourssouflé de la vanne à caca" ())
+ (#t "2016-01-24" "salut les granuleux du pustule anal" ("katyucha: :genere" "ArnYtron3000: salut les champs élysées" "katyucha: bof" "katyucha: préfère l'original même si c'est pas bof aussi" "ArnY: vous êtes devenu trop exigeants en matière fécale^Wd'insultes"))
 ))
