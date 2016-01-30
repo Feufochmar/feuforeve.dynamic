@@ -481,4 +481,5 @@
  (#t "2016-01-17" "salut les bourssouflé de la vanne à caca" ())
  (#t "2016-01-24" "salut les granuleux du pustule anal" ("katyucha: :genere" "ArnYtron3000: salut les champs élysées" "katyucha: bof" "katyucha: préfère l'original même si c'est pas bof aussi" "ArnY: vous êtes devenu trop exigeants en matière fécale^Wd'insultes"))
  (#t "2016-01-29" "salut les fissurés anals" ())
+ (#t "2016-01-30" "salut les vieilles cagouilles dorées à la fiente de mouette diarhéique!" ())
 ))
