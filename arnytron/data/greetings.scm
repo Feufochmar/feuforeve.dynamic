@@ -486,4 +486,5 @@
  (#t "2016-02-07" "salut les vieilles biques à moteur thermique bi-turbo!" ())
  (#t "2016-02-21" "salut les vielles biques nymphomanes à réactions!" ("rbs: t'as trop joué à goat simulator"))
  (#t "2016-02-25" "salut les dégoupillés du syphon qui pue!" ())
+ (#t "2016-02-26" "salut les mouches adaptes de vieilles moules de bonnes soeurs nonagénaires!" ())
 ))
