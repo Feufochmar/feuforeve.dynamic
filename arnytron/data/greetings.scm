@@ -487,4 +487,5 @@
  (#t "2016-02-21" "salut les vielles biques nymphomanes à réactions!" ("rbs: t'as trop joué à goat simulator"))
  (#t "2016-02-25" "salut les dégoupillés du syphon qui pue!" ())
  (#t "2016-02-26" "salut les mouches adaptes de vieilles moules de bonnes soeurs nonagénaires!" ())
+ (#t "2016-03-01" "salut les petites kekettes de vieux routiers coprofiles adaptes du macramé!" ())
 ))
