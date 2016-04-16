@@ -493,4 +493,5 @@
  (#t "2016-03-05" "salut les biquettes broute-ethernet" ())
  (#t "2016-03-11" "salut les décalaminés du pot d'échappement organique" ())
  (#t "2016-03-25" "salut les vieux routiers obèses nudiste nonagénaires qui adepte de l'usage de l'huile de vidange comme lubrifiant anal" ())
+ (#t "2016-04-16" "salut les singes en poil de limaille de fer!" ("***ArnY jète des bananes en fer sur le chan"))
 ))
