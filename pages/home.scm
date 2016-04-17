@@ -24,6 +24,8 @@
       (cons (list "generator-v2") "http://feuforeve.fr/FloraCharacterGenerator")
       (cons (list "generator") "http://feuforeve.fr/FloraCharacterGenerator")
       (cons (list "generator2") "http://feuforeve.fr/FloraCharacterGenerator")
+      ;; The Toy Cat creator has movedto its own website
+      (cons (list "ToyCatCreator") "http://beleth.pink")
     )))
 
 (define (home-template meta)
@@ -35,9 +37,6 @@
         (section
           ((name-class "nav-item"))
           (nav-link-to "/" (nav-current-path path) "Home"))
-        (section
-          ((name-class "nav-item"))
-          (nav-link-to "/ToyCatCreator" (nav-current-path path) "Toy Cat Creator"))
         (section
           ((name-class "nav-item"))
           (nav-link-to "/Fonts" (nav-current-path path) "Fonts"))
@@ -56,9 +55,12 @@
           (paragraph
             "Hello, I'm "
             (hyperlink ((to "/AboutMe")) "Feufochmar")
-            " and this is my personnal website."))
-          ))))
-
+            " and this is my personnal website.")
+          (section ((title "Notes"))
+            (paragraph
+              "The Toy Cat Creator that was hosted on this website has moved to its own "
+              (hyperlink ((to "http://beleth.pink")) "website") "."))
+        )))))
 
 ;; 404 error page
 (define (load-404 wcontainer)
@@ -101,43 +103,6 @@
           )
         )
       ))))
-
-;; Toy cat creator
-(define (load-toy-cat-creator wcontainer)
-  (add-weblet wcontainer (list "ToyCatCreator")
-    (templated-weblet
-      (home-template
-        (metadata
-          (stylesheets
-            (static-data "css/feuforeve.css"))
-          (scripts (static-data "scripts/toy-cat-creator.js"))
-          (onload "initToyCatCreator();")))
-      (lambda (query)
-        (article ((title "Toy Cat Creator")(author "Feufochmar")(date "2015-10-17"))
-          (section
-            (paragraph ((id "preset.link"))
-              "Link to current selection")
-            (paragraph
-              (embedded-object
-                (id "toy.cat.creator")
-                (data "toy-cat-creator.svg")
-                (type "image/svg+xml")))
-          )
-          (section ((title "About"))
-            (paragraph
-              "The Toy Cat Creator is a small dress up game starring the toy cat demon Beleth from "
-              (hyperlink ((to "http://floraverse.com")) "Floraverse") ". ")
-            (paragraph
-              "The game is contained inside an SVG image and is made under Inkscape. "
-              "The image is released under the "
-              (hyperlink ((to "https://creativecommons.org/licenses/by-sa/3.0/fr/"))
-                         "Creative Commons Attribution Share-Alike CC BY-SA") ". ")
-            (paragraph
-              (hyperlink ((to (static-data "images/toy-cat-creator.svg")))
-                         "Direct link")
-              ". ")
-            )
-        )))))
 
 ;; Custom fonts
 (define (font-example name)
@@ -204,6 +169,5 @@
   (load-home wcontainer)
   (load-404 wcontainer)
   (load-about-me wcontainer)
-  (load-toy-cat-creator wcontainer)
   (load-custom-fonts wcontainer)
 )
