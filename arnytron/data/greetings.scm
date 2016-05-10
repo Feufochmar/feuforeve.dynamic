@@ -496,4 +496,5 @@
  (#t "2016-04-16" "salut les singes en poil de limaille de fer!" ("***ArnY jète des bananes en fer sur le chan"))
  (#t "2016-05-04" "salut les bergers pétomanes des alpages franco-ukrainiens adepte du sexe anal lubrifié au ciment à prise rapide" ("companion_cube: oh, salut ArnY " "companion_cube: :genere" "ArnYtron3000: salut les cartonnés du gland!" "ArnY: ah, je m'incline" "ArnY: mais pas trop, petits pervers" "Olaf-: ben en même temps on est adepte du ciment à prise rapide" "Olaf-: on voulait te faire partager notre passion ArnY !"))
  (#t "2016-05-07" "salut les nougatineux du colon mazouté" ())
+ (#f "2016-05-11" "tagada tsoing tsoing!" ("Zluglu: stoi la fraise tsoing tsoing"))
 ))
