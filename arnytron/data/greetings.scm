@@ -500,4 +500,5 @@
  (#t "2016-05-11" "salut les vieux chipendales nonagénaires ayant du pq collé sous le pied" ("ArnY: ca manque d'huile de vidange ce greeting"))
  (#t "2016-05-15" "salut les flowered asshole dick cheese makers" ())
  (#t "2016-05-17" "salut les péripatéticiennes albanaises en bikini de latex rose siphonant des réservoirs de poids lourds à la paille !" ())
+ (#t "2016-05-18" "salut les lepenisés du conduit anal lubrifié à la blanquette de veaux façon fistinière" ())
 ))
