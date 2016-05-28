@@ -503,4 +503,5 @@
  (#t "2016-05-18" "salut les lepenisés du conduit anal lubrifié à la blanquette de veaux façon fistinière" ())
  (#t "2016-05-21" "salut les mazoutés du bout qui sent la marée" ())
  (#t "2016-05-22" "salut les boursouflés du gland suédois made by ikea" ())
+ (#t "2016-05-28" "salut les athlètes russes pas dopés!" ())
 ))
