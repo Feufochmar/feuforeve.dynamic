@@ -505,4 +505,7 @@
  (#t "2016-05-22" "salut les boursouflés du gland suédois made by ikea" ())
  (#t "2016-05-28" "salut les athlètes russes pas dopés!" ())
  (#t "2016-05-29" "salut les vermoulus citoyens d'honneur du boukistan!" ())
+ (#t "2016-06-07" "salut les malodorants des chicots anals" ())
+ (#t "2016-06-10" "salut les vieilles cagouilles frippées à l'odeur d'anus de bison sauce moutarde" ())
+ (#t "2016-06-14" "salut les déménageurs méxicains constipés de l'égout à fist" ())
 ))
