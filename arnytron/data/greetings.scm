@@ -510,4 +510,5 @@
  (#t "2016-06-14" "salut les déménageurs méxicains constipés de l'égout à fist" ())
  (#t "2016-06-18" "salut les parfumés de l'anus senteur \"digestion de camember 8 ans d'age\"" ())
  (#t "2016-06-23" "salut les gazeux du pot d'échappement organique!" ())
+ (#t "2016-06-24" "salut les mal léchés de l'anus" ())
 ))
