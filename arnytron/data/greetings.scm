@@ -512,4 +512,5 @@
  (#t "2016-06-23" "salut les gazeux du pot d'échappement organique!" ())
  (#t "2016-06-24" "salut les mal léchés de l'anus" ())
  (#t "2016-06-27" "salut les mongolonautes herpesophile enculosaures" ())
+ (#t "2016-06-28" "salut les barbues tricoteuses de pull en poil de cul d'albanais itinérants" ("katyucha: salut le futur voisin d'un bel aéroport tout neuf et vide" "ArnY: katyucha: pas trop voisin, l'aeroport actuel est plus pret de chez moi que le futur"))
 ))
