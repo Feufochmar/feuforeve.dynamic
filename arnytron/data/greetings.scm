@@ -515,4 +515,5 @@
  (#t "2016-06-28" "salut les barbues tricoteuses de pull en poil de cul d'albanais itinérants" ("katyucha: salut le futur voisin d'un bel aéroport tout neuf et vide" "ArnY: katyucha: pas trop voisin, l'aeroport actuel est plus pret de chez moi que le futur"))
  (#t "2016-07-06" "salut les mamies caniches coupe iroquoise et butt plug à led!" ())
  (#t "2016-07-07" "salut les encroutés du bout qui gonfle" ())
+ (#t "2016-07-13" "salut les vieilles branlemous polonaises décolorées" ())
 ))
