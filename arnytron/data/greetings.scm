@@ -516,4 +516,5 @@
  (#t "2016-07-06" "salut les mamies caniches coupe iroquoise et butt plug à led!" ())
  (#t "2016-07-07" "salut les encroutés du bout qui gonfle" ())
  (#t "2016-07-13" "salut les vieilles branlemous polonaises décolorées" ())
+ (#t "2016-07-15" "salaut les produbérants de l'embouchure du gange anal" ("dibalo: salaut toi-même !" "ArnY: uhuh j'avais même pas remarqué :)"))
 ))
