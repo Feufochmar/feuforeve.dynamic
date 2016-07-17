@@ -517,4 +517,5 @@
  (#t "2016-07-07" "salut les encroutés du bout qui gonfle" ())
  (#t "2016-07-13" "salut les vieilles branlemous polonaises décolorées" ())
  (#t "2016-07-15" "salaut les produbérants de l'embouchure du gange anal" ("dibalo: salaut toi-même !" "ArnY: uhuh j'avais même pas remarqué :)"))
+ (#t "2016-07-17" "salut broutemoules et autres lechefions!" ())
 ))
