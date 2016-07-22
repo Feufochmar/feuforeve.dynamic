@@ -6,7 +6,10 @@ After=feuforeve-fr.service postfix.service
 [Service]
 #User=http
 #Group=http
-WorkingDirectory=/opt/feuforeve-fr/scripts/
+WorkingDirectory=/opt/feuforeve-fr
 Type=oneshot
-ExecStart=/opt/feuforeve-fr/scripts/arnytron3000-poster.sh
+# guile-oauth is needed. If installed on the system, remove it from GUILE_LOAD_PATH.
+Environment="GUILE_LOAD_PATH=.:../guile-oauth"
+# You should modify the script to change the keys and secrets
+ExecStart=/usr/bin/guile arnytron-postbot.scm
 
