@@ -1,7 +1,7 @@
 [Unit]
 Description=ArnYtron3000 Poster
-Requires=feuforeve-fr.service postfix.service
-After=feuforeve-fr.service postfix.service
+Requires=feuforeve-fr.service
+After=feuforeve-fr.service
 
 [Service]
 #User=http
