@@ -519,4 +519,5 @@
  (#t "2016-07-15" "salaut les produbérants de l'embouchure du gange anal" ("dibalo: salaut toi-même !" "ArnY: uhuh j'avais même pas remarqué :)"))
  (#t "2016-07-17" "salut broutemoules et autres lechefions!" ())
  (#t "2016-07-22" "salut les bibemdums bidanbant!" ())
+ (#t "2016-07-24" "salut les vérolés de la compote de trompette anale" ())
 ))
