@@ -523,4 +523,5 @@
  (#t "2016-07-25" "salut les gentils linuxiens adorables qui sentent bons, qui sont beaux et qui sont membrés comme des taureaux!" ("Balise: mouif" "Balise: je tiens pas à l'être, perso" "ArnY: Balise: j'ai failli ajouter une close sur la poitrine fabuleuse des belles linuxiennes du chan" "ArnY: mais je me suis dis que tu ne regarderais probablement pas" "katyucha: t'en feras un spécial pour elle mais fait pas trop macho" "katyucha: :genere" "ArnYtron3000: salut les folles accros du zizi sur la vie, à la glote" "katyucha: bon, c'est donc une soirée penis" "ArnY: le zizi à la glote, nickel!"))
  (#t "2016-07-26" "salut les joyeux boutrefions" ("ArnY: et voila un salut foiré" "ArnY: brouttefion, bien sur" "ArnY: mais vous aurez corrigé de vous même"))
  (#t "2016-07-27" "salut les vieux forniquateurs de routier obèses accros aux buritos pine de porc/bouse de vache" ())
+ (#t "2016-07-30" "salut les suceurs de biroutes de bigorneaux" ())
 ))
