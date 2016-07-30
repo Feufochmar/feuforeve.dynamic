@@ -8,8 +8,11 @@
   #:use-module (ffch load-all)
   #:use-module (ffch string)
   #:export (key phoneme
-            <word> transcription pronounciation word-language phonemes
-            <language> empty-word generate-word
+            <word>
+            native-transcription latin-transcription pronounciation transcription
+            word-language phonemes
+            <language>
+            empty-word generate-word
             ;
             <language-bound-parameters>
             make-language-bound-parameters father mother bound-language
@@ -30,31 +33,54 @@
 (define-class <phoneme> (<object>)
   (key #:accessor key #:init-keyword #:key)
   (pronounciation #:getter pronounciation #:init-keyword #:pronounciation #:init-form "")
-  (transcription #:getter transcription #:init-keyword #:transcription #:init-form ""))
+  (native-transcription #:getter native-transcription #:init-keyword #:native-transcription #:init-form "")
+  (latin-transcription #:getter latin-transcription #:init-keyword #:latin-transcription #:init-form ""))
 
 ;; Word class
 (define-class <word> (<object>)
   (word-language #:getter word-language #:init-keyword #:word-language)
   (phonemes #:getter phonemes #:init-keyword #:phonemes #:init-form (list)))
 
-(define-method (transcription (w <word>))
-  (apply string-append (map transcription (phonemes w))))
+(define-method (native-transcription (w <word>))
+  (apply string-append (map native-transcription (phonemes w))))
 
-(define-method (transcription (w <word>) (capitalize? <boolean>))
-  (string-capitalize-1st (transcription w)))
+(define-method (native-transcription (w <word>) (capitalize? <boolean>))
+  (string-capitalize-1st (native-transcription w)))
+
+(define-method (latin-transcription (w <word>))
+  (apply string-append (map latin-transcription (phonemes w))))
+
+(define-method (latin-transcription (w <word>) (capitalize? <boolean>))
+  (string-capitalize-1st (latin-transcription w)))
 
 (define-method (pronounciation (w <word>))
   (apply string-append (map pronounciation (phonemes w))))
 
 ; for lists of words
-(define-method (transcription (lst <pair>))
-  (string-join (map transcription lst) " "))
+(define-method (native-transcription (lst <pair>))
+  (string-join (map native-transcription lst) " "))
+
+(define-method (native-transcription (lst <pair>) (capitalize? <boolean>))
+  (string-join (map (lambda (x) (native-transcription x capitalize?)) lst) " "))
+
+(define-method (latin-transcription (lst <pair>))
+  (string-join (map latin-transcription lst) " "))
+
+(define-method (latin-transcription (lst <pair>) (capitalize? <boolean>))
+  (string-join (map (lambda (x) (latin-transcription x capitalize?)) lst) " "))
 
 (define-method (pronounciation (lst <pair>))
   (string-join (map pronounciation lst) " "))
 
-(define-method (transcription (lst <pair>) (capitalize? <boolean>))
-  (string-join (map (lambda (x) (transcription x capitalize?)) lst) " "))
+;; The transcription shows the native trasncription and latin transcription
+(define-method (transcription name)
+  (let ((native-transcr (native-transcription name #t))
+        (latin-transcr (latin-transcription name #t)))
+    (string-append
+      native-transcr
+      (if (equal? native-transcr latin-transcr)
+          ""
+          (string-append " (" latin-transcr ")")))))
 
 ;; Naming rules class
 (define-class <naming-rules> (<object>)
@@ -318,7 +344,7 @@
          (name-rules (name-hash-slot (gender-key fun ...) ...) ...))
        (words
          (generator-order order)
-         (phonemes (phoneme-key phoneme-transcription phoneme-pronounciation) ...)
+         (phonemes (phoneme-key phoneme-pronounciation phoneme-native-transcr phoneme-latin-transcr) ...)
          (examples (example-key ...) ...)))
     (let* ((naming-rules (make <naming-rules>))
            (lang (make <language>
@@ -332,7 +358,8 @@
                    (quote phoneme-key)
                    (make <phoneme>
                          #:key (quote phoneme-key)
-                         #:transcription phoneme-transcription
+                         #:native-transcription phoneme-native-transcr
+                         #:latin-transcription phoneme-latin-transcr
                          #:pronounciation phoneme-pronounciation)) ...)
       (begin (add-example (word-generator lang) (list (quote example-key) ...)) ...)
       (hash-set! *data:languages* (quote language-key) lang)

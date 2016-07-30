@@ -44,7 +44,7 @@
          (all-names (family char))
          (ttl (string-append
                 (string-capitalize-1st (title-short gen)) " "
-                (transcription (short-name all-names) #t)))
+                (transcription (short-name all-names))))
         )
     (article ((title ttl)(author "feuforeve.fr"))
       (introduction-section char)
@@ -68,7 +68,7 @@
     (section ((title "Introduction"))
       (paragraph
         (string-capitalize-1st (title-short gen)) " "
-        (transcription (short-name all-names) #t)
+        (transcription (short-name all-names))
         " " (3rd-person-of "be" plural) " "
         (with-undefined-article-and-link sp bsp) " with "
         (if (eq? 'none (key aff)) "no" (with-undefined-article (name aff))) " affinity. "
@@ -82,10 +82,10 @@
     (section ((title "Names"))
       (paragraph
         (string-capitalize-1st genitive) " full name is "
-        (transcription fullname  #t) " and is pronounced "
+        (transcription fullname) " and is pronounced "
         "/" (pronounciation fullname) "/. "
         (string-capitalize-1st genitive) " given name is "
-        (string-capitalize-1st (transcription (given-name all-names))) ". "
+        (transcription (given-name all-names)) ". "
       ))))
 ;
 (define-method (birth-section (char <character>))
@@ -197,7 +197,7 @@
                 (let ((gm (if gmother (gmother fam) #f))
                       (gf (if gfather (gfather fam) #f)))
                   (list
-                    (string-capitalize-1st genitive) " " parent-type ", " (transcription (name parent) #t)
+                    (string-capitalize-1st genitive) " " parent-type ", " (transcription (name parent))
                     ", is " (with-undefined-article-and-link (species parent) (base-species parent)) ". "
                     (if gm (parent-paragraph gm (string-append parent-type "'s " "mother") #f #f) "")
                     (if gf (parent-paragraph gf (string-append parent-type "'s " "father") #f #f) "")))))
@@ -212,7 +212,7 @@
                       (list "currently " (3rd-person-of "live" plural))
                       "formerly lived")
                     " with " (with-undefined-article-and-link (species ptner) (base-species ptner))
-                    " named " (transcription (name ptner) #t) ". "
+                    " named " (transcription (name ptner)) ". "
                     (if (not (null? cdren))
                         (list "Of this relationship, " subject " " (3rd-person-of "be" plural)
                               " the " (if is-mother? "mother" "father") " of "
@@ -222,12 +222,12 @@
                                       (lambda (x)
                                         (list
                                           (with-undefined-article-and-link (species x) (base-species x))
-                                          " named " (transcription (name x) #t) ", "))
+                                          " named " (transcription (name x)) ", "))
                                       (cdr cdren))
                                     " and ")
                                   "")
                               (with-undefined-article-and-link (species (car cdren)) (base-species (car cdren)))
-                              " named " (transcription (name (car cdren)) #t) ". " (linefeed))
+                              " named " (transcription (name (car cdren))) ". " (linefeed))
                         (linefeed))))))
          )
     (if (or ch-father ch-mother ch-foster (not (null? partners-children)))
@@ -246,7 +246,7 @@
                           (if (and ch-mother ch-father) "s" "") " but ")
                     " raised ")
                 "by " (with-undefined-article-and-link (species ch-foster) (base-species ch-foster))
-                " named " (transcription (name ch-foster) #t))
+                " named " (transcription (name ch-foster)))
               "")
           (if (not (null? partners-children))
               (paragraph
@@ -263,7 +263,7 @@
          (display-pet
            (lambda (pet)
              (list (with-undefined-article-and-link (species pet) (base-species pet)) " named "
-                   (string-capitalize-1st (transcription (name pet))) ", ")))
+                   (transcription (name pet)) ", ")))
          )
     (if (not (null? pets))
         (section ((title "Pets"))
@@ -271,6 +271,6 @@
             (string-capitalize-1st subject) " " (3rd-person-of "own" plural) " "
             (map display-pet (cdr pets)) (if (not (null? (cdr pets))) "and " "")
             (with-undefined-article-and-link (species (car pets)) (base-species (car pets)))
-            " named " (string-capitalize-1st (transcription (name (car pets)))) ". "
+            " named " (transcription (name (car pets))) ". "
           ))
         "")))

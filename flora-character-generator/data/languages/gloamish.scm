@@ -18,20 +18,21 @@
   (words
     (generator-order 2)
     (phonemes
-      ; (key transcription pronounciation)
-      (syllable-break "" ".") (stress "" "'")
+      ; (key pronounciation native-transcription latin-transcription)
+      (syllable-break "." "" "") (stress "ˈ" "" "")
+      ; Uses armenian alphabet, but based on english
+      (J "d͡ʒ" "ջ" "j") (C "t͡ʃ" "ճ" "c") (X "ks" "խ" "x")
+      (N "n" "ն" "n") (M "m" "մ" "m")
+      (T "t" "տ" "t") (D "d" "դ" "d") (P "p" "պ" "p") (B "b" "բ" "b") (K "k" "կ" "k") (G "ɡ" "գ" "g")
+      (S "s" "ս" "s") (Z "z" "զ" "z") (F "f" "ֆ" "f") (V "v" "վ" "v")
+      (TH "θ" "թ" "ŝ") (DH "ð" "ձ" "ẑ") (SH "ʃ" "շ" "ĉ") (ZH "ʒ" "ժ" "ĵ")
+      (R "r" "ր" "r") (L "l" "լ" "l") (H "h" "հ" "h") (W "w" "ռ" "w") (Y "j" "յ" "y")
       ;
-      (J "j" "d͡ʒ") (C "c" "t͡ʃ") (X "x" "ks")
-      (N "n" "n") (M "m" "m")
-      (T "t" "t") (D "d" "d") (P "p" "p") (B "b" "b") (K "k" "k") (G "g" "ɡ")
-      (S "s" "s") (Z "z" "z") (F "f" "f") (V "v" "v") (TH "ŝ" "θ") (DH "ẑ" "ð") (SH "ĉ" "ʃ") (ZH "ĵ" "ʒ")
-      (R "r" "r") (L "l" "l") (H "h" "h") (W "w" "w") (Y "y" "j")
+      (A "æ" "ա" "a") (E "ə" "ը" "e") (I "ɪ" "ի" "i") (O "ɒ" "ո" "o") (U "ʊ" "ւ" "u")
+      (AA "ɑː" "ա" "a") (EE "ɛː" "ը" "e") (II "iː" "ի" "i") (OO "ɔː" "ո" "o") (UU "uː" "ւ" "u")
       ;
-      (A "a" "æ") (E "e" "ə") (I "i" "ɪ") (O "o" "ɒ") (U "u" "ʊ")
-      (AA "ä" "ɑː") (EE "ë" "ɛː") (II "ï" "iː") (OO "ö" "ɔː") (UU "ü" "uː")
-      ;
-      (OU "ou" "ɒʊ")
-      (AAI "äi" "ɑi") (EEI "ëi" "ɛi") (OOU "öu" "ɔu"))
+      (OU "ɒʊ" "ու" "ou")
+      (AAI "ɑi" "աի" "ai") (EEI "ɛi" "ըի" "ei") (OOU "ɔu" "ու" "ou"))
     (examples
       (A syllable-break stress M II syllable-break L I syllable-break A)
       (A syllable-break stress M II syllable-break L Y A)

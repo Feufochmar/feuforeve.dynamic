@@ -60,7 +60,7 @@
     (string-append
       ; Introduction
       (string-capitalize-1st (title-short gen)) " "
-      (transcription (short-name fam) #t) " (/" (pronounciation (short-name fam)) "/)"
+      (transcription (short-name fam)) " (/" (pronounciation (short-name fam)) "/)"
       " " (3rd-person-of "be" plural) " "
       (add-undefined-article sp bsp) " with "
       (if (eq? 'none (key aff)) "no" (with-undefined-article (name aff))) " affinity. "

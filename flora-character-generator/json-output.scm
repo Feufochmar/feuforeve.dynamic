@@ -26,11 +26,11 @@
            " ")
          ")"))
     (word-language ,(key (word-language word)))
-    (transcription ,(transcription word #t))
+    (transcription ,(transcription word))
     (pronounciation ,(pronounciation word))))
 
 (define-method (words->json-object (words <pair>))
-  `((transcription ,(transcription words #t))
+  `((transcription ,(transcription words))
     (pronounciation ,(pronounciation words))))
 
 (define-method (language->json-object (lang <language>))
