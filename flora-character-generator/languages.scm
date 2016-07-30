@@ -361,6 +361,7 @@
                          #:native-transcription phoneme-native-transcr
                          #:latin-transcription phoneme-latin-transcr
                          #:pronounciation phoneme-pronounciation)) ...)
+      (begin (check-example lang (list (quote example-key) ...)) ...)
       (begin (add-example (word-generator lang) (list (quote example-key) ...)) ...)
       (hash-set! *data:languages* (quote language-key) lang)
       lang))))
