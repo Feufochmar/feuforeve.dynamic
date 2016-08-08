@@ -524,4 +524,5 @@
  (#t "2016-07-26" "salut les joyeux boutrefions" ("ArnY: et voila un salut foiré" "ArnY: brouttefion, bien sur" "ArnY: mais vous aurez corrigé de vous même"))
  (#t "2016-07-27" "salut les vieux forniquateurs de routier obèses accros aux buritos pine de porc/bouse de vache" ())
  (#t "2016-07-30" "salut les suceurs de biroutes de bigorneaux" ())
+ (#t "2016-08-08" "salut les gros pompiers coprophages fraise-vanille" ("rbs: c'est pas ici" "Zluglu: on diti vanille-fraise"))
 ))
