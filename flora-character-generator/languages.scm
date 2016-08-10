@@ -42,13 +42,13 @@
   (phonemes #:getter phonemes #:init-keyword #:phonemes #:init-form (list)))
 
 (define-method (native-transcription (w <word>))
-  (apply string-append (map native-transcription (phonemes w))))
+  (string-normalize-nfc (apply string-append (map native-transcription (phonemes w)))))
 
 (define-method (native-transcription (w <word>) (capitalize? <boolean>))
   (string-capitalize-1st (native-transcription w)))
 
 (define-method (latin-transcription (w <word>))
-  (apply string-append (map latin-transcription (phonemes w))))
+  (string-normalize-nfc (apply string-append (map latin-transcription (phonemes w)))))
 
 (define-method (latin-transcription (w <word>) (capitalize? <boolean>))
   (string-capitalize-1st (latin-transcription w)))
