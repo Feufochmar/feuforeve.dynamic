@@ -120,10 +120,10 @@
         (if (null? (cdr nats)) "" "and ") (car nats) ".")
     )))
 
-; Traits - Only the first 4 are used
+; Traits - Only the first 3 are used
 (define (traits-tweet character)
   (let* ((lst (traits character))
-         (trts (if (> 4 (length lst)) lst (take lst 4))))
+         (trts (if (> 3 (length lst)) lst (take lst 3))))
     (string-join trts "")))
 
 ;; Extract Status Id of tweet from the json answer
