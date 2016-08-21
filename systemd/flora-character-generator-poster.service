@@ -1,12 +1,14 @@
 [Unit]
 Description=Floraverse character generator Poster
-Requires=feuforeve-fr.service postfix.service
-After=feuforeve-fr.service postfix.service
+Requires=feuforeve-fr.service
+After=feuforeve-fr.service
 
 [Service]
 #User=http
 #Group=http
-WorkingDirectory=/opt/feuforeve-fr/scripts/
+WorkingDirectory=/opt/feuforeve-fr
 Type=oneshot
-ExecStart=/opt/feuforeve-fr/scripts/flora-character-generator-poster.sh
-
+# guile-oauth and guile-json are needed. If installed on the system, remove it from GUILE_LOAD_PATH.
+Environment="GUILE_LOAD_PATH=.:../guile-oauth:../guile-json"
+# You should modify the script to change the keys and secrets
+ExecStart=/usr/bin/guile floraverse-postbot.scm
