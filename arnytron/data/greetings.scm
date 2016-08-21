@@ -528,4 +528,5 @@
  (#t "2016-08-13" "salut les fermentés du cerveau" ())
  (#t "2016-08-19" "salut les vieux residus de déféquation halucinogène" ())
  (#t "2016-08-20" "salut les tirbouchonnés du colon" ())
+ (#t "2016-08-21" "salut les vermifugés au lance-flamme" ())
 ))
