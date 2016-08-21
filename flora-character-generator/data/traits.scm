@@ -148,7 +148,7 @@
       (gender:subject (verb "wear") "old, dusty clothing")
       (gender:subject (verb "wear") "a flower on" gender:genitive "headgear")
       (gender:subject (verb "wear") "a flower on" gender:genitive "clothes")
-      (gender:subject (verb "is") "fashionable")
+      (gender:subject (verb "be") "fashionable")
     )
     (physical-condition
       (gender:subject (verb "be") "capable of taking hits")
