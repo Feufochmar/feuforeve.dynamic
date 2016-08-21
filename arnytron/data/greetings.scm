@@ -527,4 +527,5 @@
  (#t "2016-08-08" "salut les gros pompiers coprophages fraise-vanille" ("rbs: c'est pas ici" "Zluglu: on diti vanille-fraise"))
  (#t "2016-08-13" "salut les fermentés du cerveau" ())
  (#t "2016-08-19" "salut les vieux residus de déféquation halucinogène" ())
+ (#t "2016-08-20" "salut les tirbouchonnés du colon" ())
 ))
