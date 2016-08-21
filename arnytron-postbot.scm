@@ -12,7 +12,7 @@
 (define *twitter-access-token* "...")
 (define *twitter-access-token-secret* "...")
 
-;; Fill the blanks in credentials.scm before using this
+;; Fill the twitter keys before using this
 (let ((credentials (oauth1-credentials *twitter-consumer-key* *twitter-consumer-secret*))
       (access (oauth1-credentials *twitter-access-token* *twitter-access-token-secret*))
       (generator (arnytron))
