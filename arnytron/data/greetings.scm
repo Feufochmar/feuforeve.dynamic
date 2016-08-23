@@ -533,4 +533,5 @@
  (#t "2016-08-20" "salut les tirbouchonnés du colon" ())
  (#t "2016-08-21" "salut les vermifugés au lance-flamme" ())
  (#t "2016-08-22" "salut les gros encule-tractopelles en string de fonte" ("Zluglu: stoi (http://quotes.roulaize.net/260)" "ArnY: :)"))
+ (#t "2016-08-23" "salut les gourmands vidangeurs de motocrotte!" ())
 ))
