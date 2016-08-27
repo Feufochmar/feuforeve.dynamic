@@ -535,4 +535,5 @@
  (#t "2016-08-22" "salut les gros encule-tractopelles en string de fonte" ("Zluglu: stoi (http://quotes.roulaize.net/260)" "ArnY: :)"))
  (#t "2016-08-23" "salut les gourmands vidangeurs de motocrotte!" ())
  (#t "2016-08-26" "salut brouteboules et machefions!" ())
+ (#t "2016-08-27" "salut les membres de la loge international des fiers fistés à la rappe à fromage" ("ArnY: rape, possiblement"))
 ))
