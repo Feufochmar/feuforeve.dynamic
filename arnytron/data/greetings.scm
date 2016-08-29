@@ -536,4 +536,5 @@
  (#t "2016-08-23" "salut les gourmands vidangeurs de motocrotte!" ())
  (#t "2016-08-26" "salut brouteboules et machefions!" ())
  (#t "2016-08-27" "salut les membres de la loge international des fiers fistés à la rappe à fromage" ("ArnY: rape, possiblement"))
+ (#t "2016-08-29" "salut les utero-anals mal coïtés" ("ArnY: désolé pour le délais, je mangeais un dessert des plus virils, un magnum fraise chocolat blanc" "Balise: ce qui est à peu près l'équivalent d'une pina colada à la fraise avec une ombrelle" "Zluglu: alors que tout le monde sait que le plus viril, c’est le magnum 357 !"))
 ))
