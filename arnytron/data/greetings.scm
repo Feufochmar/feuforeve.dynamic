@@ -539,4 +539,5 @@
  (#t "2016-08-29" "salut les utero-anals mal coïtés" ("ArnY: désolé pour le délais, je mangeais un dessert des plus virils, un magnum fraise chocolat blanc" "Balise: ce qui est à peu près l'équivalent d'une pina colada à la fraise avec une ombrelle" "Zluglu: alors que tout le monde sait que le plus viril, c’est le magnum 357 !"))
  (#t "2016-08-30" "salut les désanusseurs communistes désannussant au marteau et à la faucille" ())
  (#t "2016-08-31" "salut fornicateurs compulsifs de tout poil!" ())
+ (#t "2016-09-01" "ArnY salut les gobés du sacaboule" ())
 ))
