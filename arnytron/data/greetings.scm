@@ -541,4 +541,5 @@
  (#t "2016-08-31" "salut fornicateurs compulsifs de tout poil!" ())
  (#t "2016-09-01" "salut les gobés du sacaboule" ())
  (#t "2016-09-05" "salut fistfions et gobeboules à piston!" ())
+ (#t "2016-09-06" "salut les fières fistules de fissures anales purulentes sur le postérieur soyeux d'un yack tibetain" ("katyucha: pouet :)" "ArnY: pouet pouet fistule!" "katyucha: la forme ?" "rbs: de fistule"))
 ))
