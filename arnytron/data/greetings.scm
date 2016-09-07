@@ -542,4 +542,5 @@
  (#t "2016-09-01" "salut les gobés du sacaboule" ())
  (#t "2016-09-05" "salut fistfions et gobeboules à piston!" ())
  (#t "2016-09-06" "salut les fières fistules de fissures anales purulentes sur le postérieur soyeux d'un yack tibetain" ("katyucha: pouet :)" "ArnY: pouet pouet fistule!" "katyucha: la forme ?" "rbs: de fistule"))
+ (#t "2016-09-07" "salut les croquemouilles branleboulantes fistueuses à réaction" ())
 ))
