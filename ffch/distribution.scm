@@ -5,7 +5,8 @@
   #:version (0 0 1)
   #:use-module (oop goops)
   #:use-module (srfi srfi-1)
-  #:export (make-distribution add-to-distribution fill-distribution pick-from check-only contains?)
+  #:export (make-distribution add-to-distribution fill-distribution pick-from check-only contains?
+            distribution->list)
 )
 
 ;;;;
@@ -99,3 +100,11 @@
 ;; Check if an item is in the distribution
 (define-method (contains? itm (dist <distribution>))
   (member itm (hash-map->list (lambda (k v) k) (items dist))))
+
+;;;;
+;; Transform a distribution to a list
+;; Takes a procedure of 2 arguments to transform the distribution into a list, like a map
+;;  - the first argument is an item of the distribution
+;;  - the second argument is the occurence
+(define-method (distribution->list (proc <procedure>) (dist <distribution>))
+  (map (lambda (x) (proc (car x) (cdr x))) (lst-items dist)))
