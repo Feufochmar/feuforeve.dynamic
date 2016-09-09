@@ -544,4 +544,5 @@
  (#t "2016-09-06" "salut les fières fistules de fissures anales purulentes sur le postérieur soyeux d'un yack tibetain" ("katyucha: pouet :)" "ArnY: pouet pouet fistule!" "katyucha: la forme ?" "rbs: de fistule"))
  (#t "2016-09-07" "salut les croquemouilles branleboulantes fistueuses à réaction" ())
  (#t "2016-09-08" "salut les folles au fion en forme de fleur fanée!" ())
+ (#t "2016-09-09" "salut les lesbiens à chambre à air et rustine fraise-sperme" ())
 ))
