@@ -545,4 +545,5 @@
  (#t "2016-09-07" "salut les croquemouilles branleboulantes fistueuses à réaction" ())
  (#t "2016-09-08" "salut les folles au fion en forme de fleur fanée!" ())
  (#t "2016-09-09" "salut les lesbiens à chambre à air et rustine fraise-sperme" ())
+ (#t "2016-09-22" "salut les hémoroïdes boursouflés sur le cul d'un bonobo" ())
 ))
