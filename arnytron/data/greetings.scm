@@ -546,4 +546,6 @@
  (#t "2016-09-08" "salut les folles au fion en forme de fleur fanée!" ())
  (#t "2016-09-09" "salut les lesbiens à chambre à air et rustine fraise-sperme" ())
  (#t "2016-09-22" "salut les hémoroïdes boursouflés sur le cul d'un bonobo" ())
+ (#t "2016-09-23" "salut vieux croutonoïdes de lombrics spamoïdaux à double anus hélicoïdaux" ())
+ (#f "2016-09-24" "salut les *PPppprooooooOOOoouuuut*" ("***ArnY se demande comment ArnYtron3000 va récupérer ca"))
 ))
