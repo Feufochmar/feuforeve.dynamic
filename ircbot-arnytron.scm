@@ -1,6 +1,7 @@
 (define-module (ircbot-arnytron)
   #:use-module (ffch ircbot)
   #:use-module (arnytron arnytron)
+  #:use-module (ffch random)
   #:export (main)
   #:duplicates (merge-generics)
 )
@@ -24,6 +25,22 @@
     (list "genere!" "genere!!" "genere!!!" "génère" "génère!" "génère!!" "génère!!!"
           "redige" "redige!" "redige!!" "redige!!!" "rédige" "rédige!" "rédige!!" "rédige!!!"
           ))
+  (add-command-handler!
+    ircbot
+    "frappe"
+    (lambda (ircbot channel asker args)
+      (let* ((slapped (if (not (null? args)) (car args) asker))
+             (msg (string-append
+                    "\u0001ACTION frappe " slapped " avec "
+                    (generate-citation
+                      ArnYtron3000
+                      (list (pick-from (vector "un" "une" "des" "le" "la" "les" "du"))))
+                    "\u0001")))
+        (send-privmsg ircbot channel msg))))
+  (add-command-alias!
+    ircbot
+    "frappe"
+    (list "frappe!" "frappe!!" "frappe!!!" "slap" "slap!" "slap!!" "slap!!!"))
   (add-command-handler!
     ircbot
     "cite"

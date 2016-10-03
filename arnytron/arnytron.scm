@@ -53,6 +53,10 @@
 (define-method (generate-citation (arny <arnytron>))
   (string-join (generate (generator arny)) " "))
 
+;; Generate a quote from a sequence
+(define-method (generate-citation (arny <arnytron>) (initial <list>))
+  (string-join (generate (generator arny) initial) " "))
+
 ;; Pick a citation
 (define-method (pick-citation (arny <arnytron>))
   (pick-from (citations arny)))
