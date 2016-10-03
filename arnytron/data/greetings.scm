@@ -549,4 +549,5 @@
  (#t "2016-09-23" "salut vieux croutonoïdes de lombrics spamoïdaux à double anus hélicoïdaux" ())
  (#f "2016-09-24" "salut les *PPppprooooooOOOoouuuut*" ("***ArnY se demande comment ArnYtron3000 va récupérer ca"))
  (#t "2016-09-30" "tirlipipon vilains petits cochons!" ())
+ (#t "2016-10-03" "salut les glandulateurs poilifiés de l'embouchure analesque" ())
 ))
