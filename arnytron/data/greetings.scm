@@ -550,4 +550,5 @@
  (#f "2016-09-24" "salut les *PPppprooooooOOOoouuuut*" ("***ArnY se demande comment ArnYtron3000 va récupérer ca"))
  (#t "2016-09-30" "tirlipipon vilains petits cochons!" ())
  (#t "2016-10-03" "salut les glandulateurs poilifiés de l'embouchure analesque" ())
+ (#t "2016-10-17" "salut lé trompes de salopes disexlics!" ())
 ))
