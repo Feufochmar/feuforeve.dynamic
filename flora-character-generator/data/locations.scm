@@ -88,21 +88,47 @@
           (region peace-quiet
                   (name "Peace & Quiet Region")
                   (places
-                    (town "Peace" "Quiet")))
-          ;; May be in Beaheaded City region
-          (region ascot
-                  (name "Ascot Region")
-                  (places
-                    (town "Ascot")
-                    (river "Miaoustok River")))) ; End of Southwest Owel
+                    (town "Peace" "Quiet")))) ; End of Southwest Owel
         ; There should be more intermediaries regions between those and Owel
-        (region mew-york
-                (name "Mew York Region")
-                (places
-                  (city "Mew York")
-                  (town "West York Harbor")
-                  (lake "Mew York Reservoir")
-                  (river "Miaoustok River")))
+        (region mew-york-territories
+                ((name "Mew York Territories")
+                 (reference-link "http://floraverse.com/comic/references/547-mew-york-territories/"))
+          (region lakeside-district
+                  (name "Lakeside")
+                  (places
+                    (town "Port Innsmouth")
+                    (lake "Lake Miaoustok")
+                    (river "Miaoustok River")))
+          (region west-district
+                  (name "West District")
+                  (places
+                    (town "Port Lemin" "Appleton" "West York Harbor" "Ascot" "Tyria")
+                    (river "Miaoustok River")))
+          (region north-district
+                  (name "North District")
+                  (places
+                    (town "Port Poppy" "Glowbug" "Foxfire")
+                    (river "Miaoustok River")))
+          (region mew-york-reservoir
+                  (name "Mew York Wildlife Reserve")
+                  (places
+                    (lake "Mew York Reservoir")))
+          (region the-terraces
+                  (name "The Terraces")
+                  (places
+                    (town "Peacock" "Suntrap")))
+          (region central-district
+                  (name "Central District")
+                  (places
+                    (city "Mew York City")))
+          (region scrump
+                  (name "Scrump")
+                  (places
+                    (town "Snitch" "Rustle")))
+          (region vandalroot-district
+                  (name "Vandalroot District")
+                  (places
+                    (town "Catkin" "Hedgetown")))) ; End of Mew York Territories
         (region althar
                 ((name "Althar Province")
                  (reference-link "http://floraverse.com/comic/references/375-althar-province/"))
@@ -184,7 +210,8 @@
                 (name "Gloam Region")
                 (places
                   (city "Gloam")
-                  (lake "Neon Lake")))
+                  (lake "Neon Lake")
+                  (forest "Fulgid Forest")))
         (region miaoustok
                 (name "Miaoustok Region")
                 (places
