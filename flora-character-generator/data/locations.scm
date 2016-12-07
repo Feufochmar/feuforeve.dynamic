@@ -150,12 +150,19 @@
                   (name "Lower Althar")
                   (places
                     (city "Lower Althar")
-                    (grassland "The Pharms")
-                    (grassland "The Hatchery")
-                    (lake "Trickle Lakes")
-                    (lake "Fickle Lakes")
-                    (grassland "Flower")
-                    (grassland "Paradise Fields"))))
+                    (grassland "The Pharms" "The Hatchery" "Flower" "Paradise Fields")
+                    (lake "Trickle Lakes" "Fickle Lakes"))))
+        (region auroria
+                (name "Auroria Territories")
+                (reference-link "http://floraverse.com/comic/references/550-auroria-territories/")
+                (places
+                  (city "Auroria")
+                  (town "Cirrus Checkpoint A" "Cirrus Checkpoint B" "Cirrus Checkpoint C"
+                        "Coraldome" "Eelgrass" "Giddy" "Frostpaw" "Season" "Mush" "Rime"
+                        "Fossil Valley")
+                  (plain "Auroria Desert" "Auroria Plains")
+                  (forest "Auroria Forest" "Auroria Taiga")
+                  (seashore "Frosty Bay")))
         ; Owel regions below are not as known as above
         (region beheaded-city
                 (name "Beheaded City Region")
@@ -298,15 +305,7 @@
         (region kadath
                 (name "Kadath Peninsula")
                 (places
-                  (city "Kadath")))
-        (region auroria
-                (name "Auroria Region")
-                (places
-                  (city "Auroria")
-                  (plain "Auroria Desert")
-                  (forest "Auroria Forest" "Auroria Taiga")
-                  (plain "Auroria Plains")
-                  (seashore "Frosty Bay")))) ; Owel End
+                  (city "Kadath")))) ; Owel End
       ; Continents cited on diverse species sheets
       (region eastar
               (name "Eastar")
