@@ -163,6 +163,14 @@
                   (plain "Auroria Desert" "Auroria Plains")
                   (forest "Auroria Forest" "Auroria Taiga")
                   (seashore "Frosty Bay")))
+        (region kadath
+                (name "Kadath Territories")
+                (reference-link "http://floraverse.com/comic/references/553-kadath-territories/")
+                (places
+                  (city "Kadath")
+                  (town "Ariathens" "Sand Fresco" "Flamebridge" "New Atlantis" "Limew" "Ria")
+                  (forest "Brittle Woods" "Shifting Woods" "Amalgamate Grotto")
+                  (seashore "Frosty Bay")))
         ; Owel regions below are not as known as above
         (region beheaded-city
                 (name "Beheaded City Region")
@@ -301,11 +309,7 @@
         (region mossy-depression
                 (name "Mossy Depression")
                 (places
-                  (swamp "Mossy Depression")))
-        (region kadath
-                (name "Kadath Peninsula")
-                (places
-                  (city "Kadath")))) ; Owel End
+                  (swamp "Mossy Depression")))) ; Owel End
       ; Continents cited on diverse species sheets
       (region eastar
               (name "Eastar")
