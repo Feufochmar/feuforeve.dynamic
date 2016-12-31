@@ -556,4 +556,5 @@
  (#t "2016-12-15" "salut les vieux caca de la veille!!" ("ArnY: +s tas de merde"))
  (#t "2016-12-27" "salut les glouglouteurs de perches anatomiques!" ())
  (#t "2016-12-27" "resalut les cassés de la boite à caca" ())
+ (#t "2016-12-31" "salut les nolife centipèdes!" ("Zluglu: salut le nolife monopède"))
 ))
