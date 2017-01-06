@@ -558,4 +558,5 @@
  (#t "2016-12-27" "resalut les cassés de la boite à caca" ())
  (#t "2016-12-31" "salut les nolife centipèdes!" ("Zluglu: salut le nolife monopède"))
  (#t "2017-01-01" "Bonne Année les lépreux désanusé au décapsuleur!" ("ArnY: sur ce, je vais pisser et me coucher!" "tripa: vaut mieux ça que l'inverse"))
+ (#t "2017-01-06" "salut les vieux nains indochinois tout frippés de la burne" ("Zluglu: c’est toi le burné de la frippe" "ArnY: tant que les frippes sentent pas la burne..."))
 ))
