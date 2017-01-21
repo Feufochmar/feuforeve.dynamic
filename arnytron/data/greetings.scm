@@ -561,4 +561,5 @@
  (#t "2017-01-06" "salut les vieux nains indochinois tout frippés de la burne" ("Zluglu: c’est toi le burné de la frippe" "ArnY: tant que les frippes sentent pas la burne..."))
  (#t "2017-01-17" "salut les vielles gronazes gondolées" ("companion_cube: enfin!" "companion_cube: le retour de l'enfant prodige" "ArnY: le retour de l'enfat porridge!" "ArnY: enfant"))
  (#t "2017-01-18" "salut pines de bigorneaux !" ("ArnY: pingorneaux!" "companion_cube: big ornés, ça veut dire qu'on en a des grosses ?" "ArnY: c'est groburné ca"))
+ (#t "2017-01-21" "salut bourrefions de broutanus!" ())
 ))
