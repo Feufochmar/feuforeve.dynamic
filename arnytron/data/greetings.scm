@@ -563,4 +563,5 @@
  (#t "2017-01-18" "salut pines de bigorneaux !" ("ArnY: pingorneaux!" "companion_cube: big ornés, ça veut dire qu'on en a des grosses ?" "ArnY: c'est groburné ca"))
  (#t "2017-01-21" "salut bourrefions de broutanus!" ())
  (#t "2017-01-22" "salut apolons membrés comme des curedents" ("rbs: mais des gros cure-dents" "ArnY: :)"))
+ (#t "2017-02-05" "salut les pedobears en tutus de pneus usés" ())
 ))
