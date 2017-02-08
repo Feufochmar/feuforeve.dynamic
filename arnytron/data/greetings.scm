@@ -564,4 +564,5 @@
  (#t "2017-01-21" "salut bourrefions de broutanus!" ())
  (#t "2017-01-22" "salut apolons membrés comme des curedents" ("rbs: mais des gros cure-dents" "ArnY: :)"))
  (#t "2017-02-05" "salut les pedobears en tutus de pneus usés" ())
+ (#t "2017-02-08" "salut les mémés lécheuses de trottoir" ())
 ))
