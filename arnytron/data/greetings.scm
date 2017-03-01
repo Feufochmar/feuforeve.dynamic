@@ -566,4 +566,5 @@
  (#t "2017-02-05" "salut les pedobears en tutus de pneus usés" ())
  (#t "2017-02-08" "salut les mémés lécheuses de trottoir" ())
  (#t "2017-02-22" "salut les vieux nazoïds tout naze dégoulinants de nazitude bien naze" ("tripa: ca fait quoi un point godwin sans le sm?" "rbs: c'est ptet une feinte pour qu'ArnYtron3000 soit banni sur Twitter"))
+ (#t "2017-03-01" "saut les ptits zizis tout rikiki de ouistitis" ("Feufochmar: saut ?" "***rbs n'avait même pas remarqué la typo, heureusement que Feufochmar pense au bo" "rbs: +t"))
 ))
