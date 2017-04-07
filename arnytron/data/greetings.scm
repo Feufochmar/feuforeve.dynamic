@@ -568,4 +568,5 @@
  (#t "2017-02-22" "salut les vieux nazoïds tout naze dégoulinants de nazitude bien naze" ("tripa: ca fait quoi un point godwin sans le sm?" "rbs: c'est ptet une feinte pour qu'ArnYtron3000 soit banni sur Twitter"))
  (#t "2017-03-01" "saut les ptits zizis tout rikiki de ouistitis" ("Feufochmar: saut ?" "***rbs n'avait même pas remarqué la typo, heureusement que Feufochmar pense au bo" "rbs: +t"))
  (#t "2017-03-31" "salut les vieilles putaclics rances!" ("rbs: ici on clique sur les putaclics, plutôt" "***ArnY clique rbs"))
+ (#t "2017-04-07" "salut patafions de branlequeue-la-prostate" ("ArnY: (sous préfécture du canton de fistule-les-glands)" "rbs: c'est pas très connu, par ici" "rbs: heureusement que t'es là pour nous cultiver sur la géographie de la Loire-Atlantique"))
 ))
