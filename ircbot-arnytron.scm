@@ -53,7 +53,7 @@
   (add-command-alias!
     ircbot
     "cite"
-    (list "cite!" "cite!!" "cite!!!"))
+    (list "cite!" "cite!!" "cite!!!" "quote" "quote!" "quote!!" "quote!!!"))
   (add-command-handler!
     ircbot
     "salut"
