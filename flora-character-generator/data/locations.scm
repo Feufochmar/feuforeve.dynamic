@@ -427,9 +427,9 @@
                     (town "The Citadel" "Bastion")
                     (river "Angel Tear River")
                     (mountain "Divine Mounts")))))) ; End of Pike, End of Blackjack Isles, End of hellside
-    ; Speculative only
-    (region heavenside
-            (name "Heavenside")
+    ; Nowhere
+    (region nowhere
+            (name "Nowhere")
             (restricted? #t)
             (places
-              (somewhere "somewhere behind the Lonely Door")))))
+              (somewhere "Nowhere")))))
