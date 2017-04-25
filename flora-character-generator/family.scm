@@ -92,16 +92,15 @@
          (gender-key (key gender))
          ;
          (famnm (lang:family-names
-                  (constraints (language-parameters bound-parameters))
-                  (language lang)
-                  (genders
-                    (character gender-key)
-                    (mother gender-mother-key)
-                    (father gender-father-key)
-                    (gmm gender-gmm-key)
-                    (gfm gender-gfm-key)
-                    (gmf gender-gmf-key)
-                    (gff gender-gff-key))))
+                  #:constraints (language-parameters bound-parameters)
+                  #:language lang
+                  #:character-gender gender-key
+                  #:mother-gender gender-mother-key
+                  #:father-gender gender-father-key
+                  #:gmm-gender gender-gmm-key
+                  #:gfm-gender gender-gfm-key
+                  #:gmf-gender gender-gmf-key
+                  #:gff-gender gender-gff-key))
          ;
          (make-individual
            (lambda (indiv namefunc)

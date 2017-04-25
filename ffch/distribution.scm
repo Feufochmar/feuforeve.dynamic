@@ -60,6 +60,12 @@
 ;; - the number of occurences for a set of items
 (define-syntax fill-distribution
   (syntax-rules (*)
+    ((_ distro item-list (* default-occurences))
+     (let ((h (make-hash-table)))
+       (map
+         (lambda (x) (hash-set! h x default-occurences))
+         item-list)
+       (hash-map->list (lambda (k v) (add-to-distribution distro k v)) h)))
     ((_ distro item-list (* default-occurences) (itm occurences) ...)
      (let ((h (make-hash-table)))
        (map

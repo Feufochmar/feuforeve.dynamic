@@ -173,6 +173,61 @@
   (gff-family-name #:getter gff-family-name #:init-keyword #:gff-family-name)
   (character-other-name #:getter character-other-name #:init-keyword #:character-other-name))
 
+(define* (family-names
+           #:key constraints language
+                 character-gender
+                 mother-gender father-gender
+                 gmm-gender gfm-gender
+                 gmf-gender gff-gender)
+  (let* ((naming (naming-rules language))
+        (mother-lang (or (bound-language (mother constraints))
+                          language))
+        (father-lang (or (bound-language (father constraints))
+                          language))
+        (gmm-lang (or (bound-language (mother (mother constraints)))
+                      mother-lang))
+        (gfm-lang (or (bound-language (father (mother constraints)))
+                      mother-lang))
+        (gmf-lang (or (bound-language (mother (father constraints)))
+                      father-lang))
+        (gff-lang (or (bound-language (father (father constraints)))
+                      father-lang)))
+    (make <family-names>
+      #:language-character language
+      #:gender-key-character character-gender
+      #:gender-key-name-character (hash-key* (full-name naming) character-gender)
+      #:character-given-names
+        (or (bound-given-name constraints)
+            (map
+              (lambda (x) (generate-word language))
+              (make-list (pick-from (given-names-min-nb naming) (given-names-max-nb naming)) #f)))
+      #:mother (and mother-gender
+                    (individual mother-lang mother-gender (bound-given-name (mother constraints))))
+      #:father (and father-gender
+                    (individual father-lang father-gender (bound-given-name (father constraints))))
+      #:gmm (and gmm-gender
+                (individual gmm-lang gmm-gender (bound-given-name (mother (mother constraints)))))
+      #:gfm (and gfm-gender
+                (individual gfm-lang gfm-gender (bound-given-name (father (mother constraints)))))
+      #:gmf (and gmf-gender
+                (individual gmf-lang gmf-gender (bound-given-name (mother (father constraints)))))
+      #:gff (and gff-gender
+                (individual gff-lang gff-gender (bound-given-name (father (father constraints)))))
+      #:gmm-family-name (and gmm-gender
+                            (or (bound-family-name (mother (mother constraints)))
+                                (generate-word gmm-lang)))
+      #:gfm-family-name (and gfm-gender
+                            (or (bound-family-name (father (mother constraints)))
+                                (generate-word gfm-lang)))
+      #:gmf-family-name (and gmf-gender
+                            (or (bound-family-name (mother (father constraints)))
+                                (generate-word gmf-lang)))
+      #:gff-family-name (and gff-gender
+                            (or (bound-family-name (father (father constraints)))
+                                (generate-word gff-lang)))
+      #:character-other-name (or (bound-other-name constraints) (generate-word language)))))
+
+#!
 (define-syntax family-names
   (syntax-rules (constraints language genders character mother father gmm gfm gmf gff)
     ((_ (constraints bound-parameters)
@@ -232,7 +287,7 @@
                                 (or (bound-family-name (father (father bound-parameters)))
                                     (generate-word gff-lang)))
          #:character-other-name (or (bound-other-name bound-parameters) (generate-word lang)))))))
-
+!#
 ; Short methods for use in language definitions
 (define-method (GiNa (names <family-names>))
   (list (car (character-given-names names))))

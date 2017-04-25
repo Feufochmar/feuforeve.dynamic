@@ -77,14 +77,16 @@
       (lambda (query)
         (article
           ((title "Archives")(author "feuforeve.fr"))
-          (section ((title "Archives"))
-            (paragraph
-              (map
-                old-island-link
-                (sort
-                  (scandir (generated-islands-path) (lambda (x) (string-suffix? ".svg" x)))
-                  string>=?)))
-          ))))))
+          (paragraph
+            (let ((islands (scandir (generated-islands-path) (lambda (x) (string-suffix? ".svg" x)))))
+              (if islands
+                  (map
+                    old-island-link
+                    (sort
+                      islands
+                      string>=?))
+                  "No archives.")))
+          )))))
 
 ;; About
 (define (load-about-daily-island wcontainer)

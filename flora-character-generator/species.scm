@@ -319,7 +319,7 @@
 (define-syntax fill-species-distributions
   (syntax-rules (affinity sex ages gender)
     ((_ sp)
-     (begin ))
+     #f)
     ((_ sp (affinity items* ...))
      (fill-specific-species-distribution sp affinity-distribution element-keys items* ...))
     ((_ sp (sex items* ...))
@@ -335,7 +335,7 @@
 (define-syntax fill-species-reproduction
   (syntax-rules (common-pattern? crossbreed-with special-cases father mother)
    ((_ key)
-    (begin))
+    #f)
    ((_ key (common-pattern? reproduction-common?))
     (if reproduction-common?
         (keep-species-combination (quote key) (quote key) (quote key))))
