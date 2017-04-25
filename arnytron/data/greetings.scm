@@ -572,4 +572,6 @@
  (#t "2017-03-31" "salut les vieilles putaclics rances!" ("rbs: ici on clique sur les putaclics, plutôt" "***ArnY clique rbs"))
  (#t "2017-04-07" "salut patafions de branlequeue-la-prostate" ("ArnY: (sous préfécture du canton de fistule-les-glands)" "rbs: c'est pas très connu, par ici" "rbs: heureusement que t'es là pour nous cultiver sur la géographie de la Loire-Atlantique"))
  (#t "2017-04-09" "salut les curés en string enduits d'huile de palme de canard!" ())
+ (#t "2017-04-14" "salut les vieux schnocks à la nouille trop cuite!" ())
+ (#t "2017-04-24" "salut les vieilles biques nazies" ())
 ))
