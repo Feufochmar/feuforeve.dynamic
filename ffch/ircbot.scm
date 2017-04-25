@@ -179,7 +179,7 @@
             (waiter
               (lambda ()
                 (lock-mutex mtx)
-                (if (unlock-mutex mtx condvar (+ timeout (time-second (current-time))))
+                (if (wait-condition-variable condvar mtx (+ timeout (time-second (current-time))))
                     (waiter) ; condition variable signaled, wait again
                     (begin
                       (display "Closing connection...\n")
