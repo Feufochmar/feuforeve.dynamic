@@ -574,4 +574,5 @@
  (#t "2017-04-09" "salut les curés en string enduits d'huile de palme de canard!" ())
  (#t "2017-04-14" "salut les vieux schnocks à la nouille trop cuite!" ())
  (#t "2017-04-24" "salut les vieilles biques nazies" ())
+ (#t "2017-28-04" "salut les faces de pet mouillé!" ())
 ))
