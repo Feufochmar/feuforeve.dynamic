@@ -11,7 +11,7 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      deathwalker bansheep bonefish nekopossum vampire-rabbat shackal tomb-tiger)
+      deathwalker bansheep bonefish nekopossum vampire-rabbat shackal tomb-tiger grisly-bearring)
     (special-cases
       ((father deathwalker) (mother bansheep)) ((father bansheep) (mother deathwalker))
       ((father deathwalker) (mother bonefish)) ((father bonefish) (mother deathwalker))
@@ -19,21 +19,28 @@
       ((father deathwalker) (mother vampire-rabbat)) ((father vampire-rabbat) (mother deathwalker))
       ((father deathwalker) (mother shackal)) ((father shackal) (mother deathwalker))
       ((father deathwalker) (mother tomb-tiger)) ((father tomb-tiger) (mother deathwalker))
+      ((father deathwalker) (mother grisly-bearring)) ((father grisly-bearring) (mother deathwalker))
       ((father bansheep) (mother bonefish)) ((father bonefish) (mother bansheep))
       ((father bansheep) (mother nekopossum)) ((father nekopossum) (mother bansheep))
       ((father bansheep) (mother vampire-rabbat)) ((father vampire-rabbat) (mother bansheep))
       ((father bansheep) (mother shackal)) ((father shackal) (mother bansheep))
       ((father bansheep) (mother tomb-tiger)) ((father tomb-tiger) (mother bansheep))
+      ((father bansheep) (mother grisly-bearring)) ((father grisly-bearring) (mother bansheep))
       ((father bonefish) (mother nekopossum)) ((father nekopossum) (mother bonefish))
       ((father bonefish) (mother vampire-rabbat)) ((father vampire-rabbat) (mother bonefish))
       ((father bonefish) (mother shackal)) ((father shackal) (mother bonefish))
       ((father bonefish) (mother tomb-tiger)) ((father tomb-tiger) (mother bonefish))
+      ((father bonefish) (mother grisly-bearring)) ((father grisly-bearring) (mother bonefish))
       ((father nekopossum) (mother vampire-rabbat)) ((father vampire-rabbat) (mother nekopossum))
       ((father nekopossum) (mother shackal)) ((father shackal) (mother nekopossum))
       ((father nekopossum) (mother tomb-tiger)) ((father tomb-tiger) (mother nekopossum))
+      ((father nekopossum) (mother grisly-bearring)) ((father grisly-bearring) (mother nekopossum))
       ((father vampire-rabbat) (mother shackal)) ((father shackal) (mother vampire-rabbat))
       ((father vampire-rabbat) (mother tomb-tiger)) ((father tomb-tiger) (mother vampire-rabbat))
+      ((father vampire-rabbat) (mother grisly-bearring)) ((father grisly-bearring) (mother vampire-rabbat))
       ((father shackal) (mother tomb-tiger)) ((father tomb-tiger) (mother shackal))
+      ((father shackal) (mother grisly-bearring)) ((father grisly-bearring) (mother shackal))
+      ((father tomb-tiger) (mother grisly-bearring)) ((father grisly-bearring) (mother tomb-tiger))
     )))
 
 ;; Deadwood

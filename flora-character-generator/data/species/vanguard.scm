@@ -13,7 +13,9 @@
     (crossbreed-with
       sea-dragon
       ;
-      bonefish surf-tiger)
+      bonefish surf-tiger sea-bearring)
     (special-cases
       ((father bonefish) (mother surf-tiger)) ((father surf-tiger) (mother bonefish))
+      ((father bonefish) (mother sea-bearring)) ((father sea-bearring) (mother bonefish))
+      ((father surf-tiger) (mother sea-bearring)) ((father sea-bearring) (mother surf-tiger))
     )))

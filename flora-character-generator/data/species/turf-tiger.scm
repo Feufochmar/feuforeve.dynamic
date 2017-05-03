@@ -10,7 +10,7 @@
     (crossbreed-with
       pygmy-tiger
       ;
-      thistle-tiger tomb-tiger surf-tiger glam-candies stripe-goat truce-tiger
+      thistle-tiger tomb-tiger surf-tiger glam-candies stripe-goat truce-tiger twinkle-tiger
       )
     (special-cases
       ((father thistle-tiger) (mother tomb-tiger)) ((father tomb-tiger) (mother thistle-tiger))
@@ -18,16 +18,23 @@
       ((father thistle-tiger) (mother glam-candies)) ((father glam-candies) (mother thistle-tiger))
       ((father thistle-tiger) (mother stripe-goat)) ((father stripe-goat) (mother thistle-tiger))
       ((father thistle-tiger) (mother truce-tiger)) ((father truce-tiger) (mother thistle-tiger))
+      ((father thistle-tiger) (mother twinkle-tiger)) ((father twinkle-tiger) (mother thistle-tiger))
       ((father tomb-tiger) (mother surf-tiger)) ((father surf-tiger) (mother tomb-tiger))
       ((father tomb-tiger) (mother glam-candies)) ((father glam-candies) (mother tomb-tiger))
       ((father tomb-tiger) (mother stripe-goat)) ((father stripe-goat) (mother tomb-tiger))
       ((father tomb-tiger) (mother truce-tiger)) ((father truce-tiger) (mother tomb-tiger))
+      ((father tomb-tiger) (mother twinkle-tiger)) ((father twinkle-tiger) (mother tomb-tiger))
       ((father surf-tiger) (mother glam-candies)) ((father glam-candies) (mother surf-tiger))
       ((father surf-tiger) (mother stripe-goat)) ((father stripe-goat) (mother surf-tiger))
       ((father surf-tiger) (mother truce-tiger)) ((father truce-tiger) (mother surf-tiger))
+      ((father surf-tiger) (mother twinkle-tiger)) ((father twinkle-tiger) (mother surf-tiger))
       ((father glam-candies) (mother stripe-goat)) ((father stripe-goat) (mother glam-candies))
       ((father glam-candies) (mother truce-tiger)) ((father truce-tiger) (mother glam-candies))
+      ((father glam-candies) (mother twinkle-tiger)) ((father twinkle-tiger) (mother glam-candies))
       ((father stripe-goat) (mother truce-tiger)) ((father truce-tiger) (mother stripe-goat))
+      ((father stripe-goat) (mother twinkle-tiger)) ((father twinkle-tiger) (mother stripe-goat))
+      ((father truce-tiger) (mother twinkle-tiger)) ((father twinkle-tiger) (mother truce-tiger))
+
     )))
 
 (species thistle-tiger

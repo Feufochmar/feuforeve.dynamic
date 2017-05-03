@@ -9,14 +9,18 @@
   (reproduction
     (common-pattern? #t)
     (crossbreed-with
-      chirping-rabbat rugarabbat vampire-rabbat satyrbun)
+      chirping-rabbat rugarabbat vampire-rabbat satyrbun singing-bearrub)
     (special-cases
       ((father chirping-rabbat) (mother rugarabbat)) ((father rugarabbat) (mother chirping-rabbat))
       ((father chirping-rabbat) (mother vampire-rabbat)) ((father vampire-rabbat) (mother chirping-rabbat))
       ((father chirping-rabbat) (mother satyrbun)) ((father satyrbun) (mother chirping-rabbat))
+      ((father chirping-rabbat) (mother singing-bearrub)) ((father singing-bearrub) (mother chirping-rabbat))
       ((father rugarabbat) (mother vampire-rabbat)) ((father vampire-rabbat) (mother rugarabbat))
       ((father rugarabbat) (mother satyrbun)) ((father satyrbun) (mother rugarabbat))
+      ((father rugarabbat) (mother singing-bearrub)) ((father singing-bearrub) (mother rugarabbat))
       ((father vampire-rabbat) (mother satyrbun)) ((father satyrbun) (mother vampire-rabbat))
+      ((father vampire-rabbat) (mother singing-bearrub)) ((father singing-bearrub) (mother vampire-rabbat))
+      ((father satyrbun) (mother singing-bearrub)) ((father singing-bearrub) (mother satyrbun))
     )))
 
 (species chirping-rabbat
