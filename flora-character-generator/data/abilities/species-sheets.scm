@@ -507,3 +507,18 @@
   (description "A person with the Spicy Cloud ability can breathe out or emit volatile and spicy oils that cause burns.")
   (restrictions
     (has-affinity acid)))
+
+(ability
+  (name "Astral Projection")
+  (category "Consciousness")
+  (description "A person with the Astral Projection ability can project their conciousness in spiritual form when they are asleep, and can explore the world around them when dreaming. When they wake up, they can remember their explorations.")
+  (restrictions
+    (is-species bearring singing-bearrub twinkle-tiger grisly-bearring)))
+
+(ability
+  ;; Same as above, but restricted on affinity
+  (name "Astral Projection")
+  (category "Consciousness")
+  (description "A person with the Astral Projection ability can project their conciousness in spiritual form when they are asleep, and can explore the world around them when dreaming. When they wake up, they can remember their explorations.")
+  (restrictions
+    (has-affinity spirit psi)))

@@ -64,3 +64,35 @@
   (description "A person with the Reflected Future ability can see how other individuals would look like at varying points in the future by looking at their reflections in a mirror. The reflections seen by the user show what would happen if the user does not intervene. The ability does not work on the user's reflection.")
   (restrictions
     (has-affinity crystal)))
+
+(ability
+  ;; original idea by SP3CT3R
+  (name "Polarize")
+  (category "Manipulation")
+  (description "A person with the Polarize ability can influence those around them to side with or against them on any controversial topic at hand. The ability only enhances the opinion somebody already has, so it won't work on someone is neutral on the matter, and won't work at all if the user is themselves sitting on the fence.")
+  (restrictions
+    (has-affinity magnet)))
+
+(ability
+  ;; original idea by SP3CT3R
+  (name "Don't Push It")
+  (category "Manipulation")
+  (description "A person with the Don't Push It ability have good luck which usually manifests itself in the form of bad things not happening to them, like surviving a natural disaster, or recovering from an illness. However, this luck disappears whenever they do something dangerous or risky thinking that their ability will protect them.")
+  (restrictions
+    (has-affinity clay)))
+
+(ability
+  ;; original idea by SP3CT3R
+  (name "Cassandra Was Right")
+  (category "Manipulation")
+  (description "A person with the Cassandra Was Right ability can imbue their voice with the effect of others disbelieving or opposing what they say. Most people with it tend to be skilled in the application of reverse psychology.")
+  (restrictions
+    (has-affinity poison)))
+
+(ability
+  ;; original idea by SP3CT3R
+  (name "Let's Get Physical")
+  (category "Elemental")
+  (description "A person with the Let's Get Physical ability can interact with certain substances, related to their affinity, as though they were physical solids.")
+  (restrictions
+    (has-affinity water fire air plasma acid light lava cloud poison)))
