@@ -11,5 +11,5 @@ Type=oneshot
 # guile-oauth is needed. If installed on the system, remove it from GUILE_LOAD_PATH.
 Environment="GUILE_LOAD_PATH=.:../guile-oauth"
 # You should modify the script to change the keys and secrets
-ExecStart=/usr/bin/guile arnytron-postbot.scm
+ExecStart=/usr/bin/guile2.0 arnytron-postbot.scm
 

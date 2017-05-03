@@ -10,7 +10,7 @@ WorkingDirectory=/opt/feuforeve-fr
 # guile-irc is needed. If installed on the system, remove it from GUILE_LOAD_PATH.
 Environment="GUILE_LOAD_PATH=.:../guile-irc"
 # Replace the variables $IRC-SERVER $IRC-PORT $NICK $CHANNEL $NICK-PASSWD $LOGDIR with the parameters the bot must use
-ExecStart=/usr/bin/guile -e "(@ (ircbot-floraverse) main)" -- --server $IRC-SERVER --port $IRC-PORT --nick $NICK --channels $CHANNEL --command-prefix : --nick-password $NICK-PASSWD --log-file $LOGDIR/floraverse.log
+ExecStart=/usr/bin/guile2.0 -e "(@ (ircbot-floraverse) main)" -- --server $IRC-SERVER --port $IRC-PORT --nick $NICK --channels $CHANNEL --command-prefix : --nick-password $NICK-PASSWD --log-file $LOGDIR/floraverse.log
 
 [Install]
 WantedBy=multi-user.target
