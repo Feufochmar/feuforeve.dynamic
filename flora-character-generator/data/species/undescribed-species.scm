@@ -77,6 +77,8 @@
 (species jackal
   (name "Jackal")
   (reference-link "http://floraverse.com")
+  (distributions
+    (affinity (* 44) (psi 112))) ; Spirit/PSI is at 11.2 % according to the bearrings species sheet
   (reproduction
     (common-pattern? #t)))
 
