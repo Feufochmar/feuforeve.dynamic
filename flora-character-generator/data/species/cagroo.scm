@@ -41,19 +41,6 @@
     (common-pattern? #t)
     (crossbreed-with cagroo)))
 
-(species shagroo
-  (name "Shagroo")
-  (reference-link "http://floraverse.com/comic/flora/page/204-cagroo-species/")
-  (pet? #t)
-  (tamable? #t)
-  (wild? #t)
-  (common-regions owel)
-  (distributions
-    (affinity (* 1) (water 40) (earth 40)))
-  (reproduction
-    (common-pattern? #t)
-    (crossbreed-with cagroo)))
-
 (species cagrugong
   (name "Cagrugong")
   (reference-link "http://floraverse.com/comic/flora/page/204-cagroo-species/")
