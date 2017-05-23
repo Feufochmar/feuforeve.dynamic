@@ -575,4 +575,6 @@
  (#t "2017-04-14" "salut les vieux schnocks à la nouille trop cuite!" ())
  (#t "2017-04-24" "salut les vieilles biques nazies" ())
  (#t "2017-28-04" "salut les faces de pet mouillé!" ())
+ (#t "2017-05-08" "salut les vieilles biques en spandex rose" ())
+ (#t "2017-05-12" "salut les brasseurs de diarhée de nonnes vermifugées" ("rbs: y en a qui mangent ici, aucun respect !" "ArnY: :)"))
 ))
